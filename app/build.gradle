@@ -6,6 +6,14 @@ plugins {
 android {
     compileSdk 32
 
+    buildFeatures {
+        dataBinding = true
+    }
+
+    viewBinding {
+        enabled = true
+    }
+
     defaultConfig {
         applicationId "com.esteel4u.realtimeauctionapp"
         minSdk 28
@@ -15,7 +23,11 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-
+    buildscript {
+        repositories {
+            jcenter() // this line need
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -31,11 +43,17 @@ android {
     }
 }
 
+
+
 dependencies {
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.2'
     implementation 'com.google.android.material:material:1.6.1'
+
+    implementation 'com.airbnb.android:lottie:5.2.0'
+    implementation 'com.gauravk.bubblenavigation:bubblenavigation:1.0.7'
+
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
