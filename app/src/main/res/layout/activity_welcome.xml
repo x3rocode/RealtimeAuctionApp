@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
 <androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -64,10 +66,9 @@
         android:layout_height="0dp"
         android:fontFamily="@font/noto_sans"
         android:gravity="center"
-        android:text="Create an account and access thousand \nof cool stuffs"
-        android:textColor="@color/material_dynamic_neutral70"
+        android:text="Create an account and access thousand of cool stuffs"
+        android:textColor="@color/material_dynamic_neutral60"
         android:textSize="20sp"
-        android:textStyle="bold"
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -94,3 +95,4 @@
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
