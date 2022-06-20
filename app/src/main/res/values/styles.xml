@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="OutlinedRoundedBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="shapeAppearanceOverlay">
+            @style/MyTextboxShapeRounded
+        </item>
+        <item name="materialThemeOverlay">@style/MyThemeOverlayOutlinedDense</item>
+        <item name="boxStrokeColor">@color/material_dynamic_neutral70</item>
+        <item name="colorControlNormal">@color/material_dynamic_neutral70</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="errorTextAppearance">@style/ErrorTextAppearance</item>
+    </style>
+
+    <style name="MyTextboxShapeRounded" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+
+    <style name="MyThemeOverlayOutlinedDense">
+        <item name="editTextStyle">@style/MyTextInputEditText_outlinedBox_dense_h
+        </item>
+    </style>
+
+    <style name="ErrorTextAppearance">
+        <item name="android:textStyle">normal</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="MyTextInputEditText_outlinedBox_dense_h" parent="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox.Dense">
+        <item name="android:paddingTop">20dp</item>
+        <item name="android:paddingBottom">20dp</item>
+    </style>
+
+    <style name="ThemeOverlay.TextInputLayout.TextView" parent="">
+        <item name="android:textViewStyle">@style/Widget.TextView.SingleLineEllipsized</item>
+    </style>
+
+    <style name="Widget.TextView.SingleLineEllipsized" parent="">
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+
+    <style name="OutlinedRoundedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="shapeAppearanceOverlay">@style/MyButtonShapeRounded</item>
+        <item name="boxStrokeColor">@color/eblue80</item>
+        <item name="colorControlNormal">@color/eblue80</item>
+        <item name="boxStrokeWidth">1dp</item>
+    </style>
+    <style name="MyButtonShapeRounded" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+
+</resources>
