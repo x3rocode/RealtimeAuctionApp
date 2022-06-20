@@ -1,13 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <resources>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="BaseAppTheme" parent="android:Theme.Material">
+        <!-- enable window content transitions -->
+        <item name="android:windowActivityTransitions">true</item>
+
+
+    </style>
+
+    <style name="HintTextStyle" parent="TextAppearance.Design.Hint">
+        <item name="android:textSize">16sp</item>
+    </style>
 
     <style name="OutlinedRoundedBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="shapeAppearanceOverlay">
             @style/MyTextboxShapeRounded
         </item>
         <item name="materialThemeOverlay">@style/MyThemeOverlayOutlinedDense</item>
-        <item name="boxStrokeColor">@color/material_dynamic_neutral70</item>
-        <item name="colorControlNormal">@color/material_dynamic_neutral70</item>
+        <item name="boxStrokeColor">@color/egray70</item>
+        <item name="colorControlNormal">@color/egray70</item>
         <item name="boxStrokeWidth">1dp</item>
         <item name="errorTextAppearance">@style/ErrorTextAppearance</item>
     </style>
@@ -15,21 +28,6 @@
     <style name="MyTextboxShapeRounded" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">8dp</item>
-    </style>
-
-    <style name="MyThemeOverlayOutlinedDense">
-        <item name="editTextStyle">@style/MyTextInputEditText_outlinedBox_dense_h
-        </item>
-    </style>
-
-    <style name="ErrorTextAppearance">
-        <item name="android:textStyle">normal</item>
-        <item name="android:includeFontPadding">false</item>
-    </style>
-
-    <style name="MyTextInputEditText_outlinedBox_dense_h" parent="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox.Dense">
-        <item name="android:paddingTop">20dp</item>
-        <item name="android:paddingBottom">20dp</item>
     </style>
 
     <style name="ThemeOverlay.TextInputLayout.TextView" parent="">
@@ -41,6 +39,11 @@
         <item name="android:ellipsize">end</item>
     </style>
 
+    <style name="ErrorTextAppearance">
+        <item name="android:textStyle">normal</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:textSize">8sp</item>
+    </style>
 
     <style name="OutlinedRoundedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="shapeAppearanceOverlay">@style/MyButtonShapeRounded</item>
@@ -51,6 +54,16 @@
     <style name="MyButtonShapeRounded" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">8dp</item>
+    </style>
+
+    <style name="MyThemeOverlayOutlinedDense">
+        <item name="editTextStyle">@style/MyTextInputEditText_outlinedBox_dense_h
+        </item>
+    </style>
+
+    <style name="MyTextInputEditText_outlinedBox_dense_h" parent="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox.Dense">
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:paddingBottom">0dp</item>
     </style>
 
 </resources>

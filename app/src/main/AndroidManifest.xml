@@ -13,8 +13,7 @@
         android:theme="@style/Theme.RealtimeAuctionApp">
         <activity
             android:name=".view.ui.WelcomeActivity"
-            android:exported="true"
-            android:theme="@style/Theme.RealtimeAuctionApp.NoActionBar" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
