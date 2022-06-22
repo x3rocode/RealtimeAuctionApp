@@ -3,6 +3,11 @@
 <resources>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <style name="ShapeAppearanceOverlay.MyApp.Button.Circle" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
     <style name="BaseAppTheme" parent="android:Theme.Material">
         <!-- enable window content transitions -->
         <item name="android:windowActivityTransitions">true</item>

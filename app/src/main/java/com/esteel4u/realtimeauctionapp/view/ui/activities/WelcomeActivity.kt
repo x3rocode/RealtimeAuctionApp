@@ -1,4 +1,4 @@
-package com.esteel4u.realtimeauctionapp.view.ui
+package com.esteel4u.realtimeauctionapp.view.ui.activities
 
 import android.content.Intent
 import android.os.Bundle

@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RealtimeAuctionApp">
         <activity
-            android:name=".view.ui.WelcomeActivity"
+            android:name=".view.ui.activities.OnboardActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".view.ui.LoginActivity" />
+        <activity android:name=".view.ui.activities.LoginActivity" />
     </application>
 
 </manifest>

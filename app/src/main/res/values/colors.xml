@@ -20,4 +20,15 @@
     <color name="egray70">#515151</color>
     <color name="egray80">#303030</color>
     <color name="egray90">#101010</color>
+
+    <color name="lblue10">#DDE5FD</color>
+    <color name="lblue20">#BBC8FF</color>
+    <color name="lblue30">#768BFF</color>
+    <color name="lblue40">#2E5EF4</color>
+    <color name="lblue50">#0035C0</color>
+    <color name="lblue60">#212E55</color>
+    <color name="lmint10">#52C4C0</color>
+
+
+
 </resources>
