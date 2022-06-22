@@ -7,6 +7,8 @@
     <style name="ShapeAppearanceOverlay.MyApp.Button.Circle" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
+        <item name="android:shadowColor">@color/lblue60</item>
+        <item name="elevation">30dp</item>
     </style>
     <style name="BaseAppTheme" parent="android:Theme.Material">
         <!-- enable window content transitions -->

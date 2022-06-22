@@ -8,6 +8,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.esteel4u.realtimeauctionapp.R
 import com.esteel4u.realtimeauctionapp.view.adapter.OnboardingViewPagerAdapter
 import com.esteel4u.realtimeauctionapp.view.utils.Animatoo
+import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_onboarding.*
 
 
@@ -22,7 +23,7 @@ class OnboardActivity: AppCompatActivity() {
 
         mViewPager = viewPager
         mViewPager.adapter = OnboardingViewPagerAdapter(this, this)
-//        TabLayoutMediator(pageIndicator, mViewPager) { _, _ -> }.attach()
+        TabLayoutMediator(pageIndicator, mViewPager) { _, _ -> }.attach()
 //        textSkip = findViewById(R.id.skip_btn)
 //        textSkip.setOnClickListener {
 //            finish()

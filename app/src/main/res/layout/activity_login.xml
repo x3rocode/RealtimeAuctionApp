@@ -9,38 +9,90 @@
     android:focusableInTouchMode="true">
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
+        android:id="@+id/guideline_top"
         android:layout_width="wrap_content"
         android:layout_height="1dp"
         android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".12"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_top2"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".7"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_top3"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="-.2"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".8"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_right"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".73"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_right2"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".9"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_left1"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="-.9"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_left"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".1"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_left2"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:orientation="vertical"
         app:layout_constraintGuide_percent=".25"/>
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline1"
+        android:id="@+id/guideline_center"
         android:layout_width="wrap_content"
         android:layout_height="1dp"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".05"/>
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".65"/>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="1dp"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".85"/>
 
-    <ImageView
-        android:src ="@drawable/big_logo"
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/image_onboarding"
         android:layout_width="0dp"
         android:layout_height="0dp"
 
-        android:scaleType="fitXY"
+        android:scaleType="fitCenter"
+        app:lottie_rawRes="@raw/lottie_sucess_person"
+        app:lottie_loop="true"
+        app:lottie_autoPlay="true"
 
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/guideline1"
-        app:layout_constraintBottom_toTopOf="@id/guideline"
+        app:layout_constraintTop_toTopOf="@id/guideline_top"
+        app:layout_constraintStart_toStartOf="@id/guideline_left"
+        app:layout_constraintEnd_toEndOf="@id/guideline_right2"
+        app:layout_constraintBottom_toTopOf="@id/guideline_top2"
         />
 
     <TextView
@@ -61,7 +113,6 @@
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline"
         app:layout_constraintBottom_toTopOf="@id/txt2"/>
 
     <TextView
@@ -241,7 +292,6 @@
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/guideline2"
         app:layout_constraintTop_toBottomOf="@id/login_btn" />
 
 
