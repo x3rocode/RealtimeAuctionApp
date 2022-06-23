@@ -93,7 +93,7 @@
         android:autoSizeTextType="uniform"
         android:autoSizeMaxTextSize="17sp"
         android:autoSizeMinTextSize="10sp"
-        android:textColor="@color/egray50"
+        android:textColor="@color/egray40"
         android:fontFamily="@font/lexend_deca"
         android:gravity="top"
 

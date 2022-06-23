@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "647966395053",
+    "project_id": "poscoict-esteel4u-app",
+    "storage_bucket": "poscoict-esteel4u-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:647966395053:android:feec33fe135fd4a98ed424",
+        "android_client_info": {
+          "package_name": "com.esteel4u.realtimeauctionapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "647966395053-vt8hrlrhkuq445jc37qvhdvc8u21i7j8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCp-KOVy4T4lL1bFLijMLZbaaSmUkBeNts"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "647966395053-vt8hrlrhkuq445jc37qvhdvc8u21i7j8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

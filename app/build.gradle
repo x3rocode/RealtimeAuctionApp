@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-android-extensions'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -62,6 +63,9 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.4.2'
     implementation 'com.github.markushi:circlebutton:1.1'
     implementation 'com.jaeger.statusbarutil:library:1.5.1'
+    implementation platform('com.google.firebase:firebase-bom:30.1.0')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation "com.github.ptrbrynt:FirestoreLiveData:1.1.1"
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

@@ -3,298 +3,295 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:focusableInTouchMode="true">
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_top"
-        android:layout_width="wrap_content"
-        android:layout_height="1dp"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".12"/>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_top2"
-        android:layout_width="wrap_content"
-        android:layout_height="1dp"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".7"/>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_top3"
-        android:layout_width="wrap_content"
-        android:layout_height="1dp"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="-.2"/>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_bottom"
-        android:layout_width="wrap_content"
-        android:layout_height="1dp"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".8"/>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_right"
-        android:layout_width="wrap_content"
-        android:layout_height="1dp"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent=".73"/>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_right2"
-        android:layout_width="wrap_content"
-        android:layout_height="1dp"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent=".9"/>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_left1"
-        android:layout_width="wrap_content"
-        android:layout_height="1dp"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="-.9"/>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_left"
-        android:layout_width="wrap_content"
-        android:layout_height="1dp"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent=".1"/>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_left2"
-        android:layout_width="wrap_content"
-        android:layout_height="1dp"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent=".25"/>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_center"
-        android:layout_width="wrap_content"
-        android:layout_height="1dp"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent=".65"/>
-
-
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/image_onboarding"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-
-        android:scaleType="fitCenter"
-        app:lottie_rawRes="@raw/lottie_sucess_person"
-        app:lottie_loop="true"
-        app:lottie_autoPlay="true"
-
-        app:layout_constraintTop_toTopOf="@id/guideline_top"
-        app:layout_constraintStart_toStartOf="@id/guideline_left"
-        app:layout_constraintEnd_toEndOf="@id/guideline_right2"
-        app:layout_constraintBottom_toTopOf="@id/guideline_top2"
-        />
-
-    <TextView
-        android:id="@+id/txt1"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:fontFamily="@font/noto_sans_bold"
-        android:gravity="center"
-        android:text="Log In Now"
-        android:textColor="@color/black"
-        android:autoSizeMaxTextSize="30sp"
-        android:autoSizeMinTextSize="20sp"
-        android:autoSizeTextType="uniform"
-        app:layout_constraintWidth_percent="0.70"
-        app:layout_constraintHeight_percent="0.06"
-
-
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/txt2"/>
-
-    <TextView
-        android:id="@+id/txt2"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginBottom="30dp"
-        android:autoSizeMaxTextSize="15sp"
-        android:autoSizeTextType="uniform"
-        android:fontFamily="@font/noto_sans"
-        android:foregroundGravity="top"
-        android:gravity="center_horizontal"
-        android:text="Please login to continue our app"
+        android:layout_height="match_parent"
+        android:focusableInTouchMode="true">
 
-        android:textColor="@color/egray50"
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_top"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent=".1"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_top1"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent=".55"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_top2"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent=".7"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_top3"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="-.2"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent=".8"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_right"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".73"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_right2"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".9"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_left1"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="-.9"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_left"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".1"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_left2"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".25"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_center"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".65"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_center1"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".5"/>
 
 
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@id/input_code_lay"
-
-        app:layout_constraintEnd_toEndOf="parent"
-
-        app:layout_constraintHeight_percent="0.03"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt1"
-        app:layout_constraintWidth_percent="0.75" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/input_code_lay"
-        app:counterMaxLength="10"
-        style="@style/OutlinedRoundedBox"
-        android:theme="@style/ThemeOverlay.TextInputLayout.TextView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:hintAnimationEnabled="true"
-        app:errorEnabled="false"
-
-        android:textColorHint="@color/egray40"
-
-        app:layout_constraintWidth_percent="0.75"
-        app:layout_constraintHeight_percent="0.07"
-
-        android:layout_marginBottom="5dp"
 
 
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt2"
-        app:layout_constraintBottom_toTopOf="@id/input_id_lay"
-        >
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/input_code"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fontFamily="@font/noto_sans"
-            android:hint="회원사 코드"
-            android:singleLine="true"
-            android:autoSizeTextType="uniform" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/input_id_lay"
-        app:counterMaxLength="10"
-        style="@style/OutlinedRoundedBox"
-        android:theme="@style/ThemeOverlay.TextInputLayout.TextView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:hintAnimationEnabled="true"
-        app:errorEnabled="false"
-        android:textColorHint="@color/egray40"
-        app:layout_constraintWidth_percent="0.75"
-        app:layout_constraintHeight_percent="0.07"
-
-        android:layout_marginBottom="5dp"
-
-
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/input_code_lay"
-        app:layout_constraintBottom_toTopOf="@id/input_pw_lay"
-        >
-
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/input_id"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fontFamily="@font/noto_sans"
-            android:hint="아이디"
+        <TextView
+            android:id="@+id/txt1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fontFamily="@font/lexend_deca"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:text="Sign In."
+            android:textColor="@color/lblue60"
+            android:autoSizeMaxTextSize="60sp"
+            android:autoSizeMinTextSize="20sp"
             android:autoSizeTextType="uniform"
-            android:singleLine="true" />
 
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/input_pw_lay"
-        app:counterMaxLength="10"
-        style="@style/OutlinedRoundedBox"
-        android:theme="@style/ThemeOverlay.TextInputLayout.TextView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:hintAnimationEnabled="true"
-        app:errorEnabled="false"
-        android:textColorHint="@color/egray40"
-        app:layout_constraintWidth_percent="0.75"
-        app:layout_constraintHeight_percent="0.07"
-
-        android:layout_marginBottom="5dp"
-
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/input_id_lay"
-        app:layout_constraintBottom_toTopOf="@id/login_btn"
-        >
+            app:layout_constraintHeight_percent="0.08"
 
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/input_pw"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fontFamily="@font/noto_sans"
-            android:hint="비밀번호"
-            android:inputType="textPassword"
-            android:singleLine="true"
-            android:autoSizeTextType="uniform"/>
+            app:layout_constraintTop_toTopOf="@+id/guideline_top"
+            app:layout_constraintStart_toStartOf="@id/guideline_left"
+            app:layout_constraintEnd_toEndOf="@id/guideline_center1"/>
 
-    </com.google.android.material.textfield.TextInputLayout>
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
 
+            android:scaleType="fitCenter"
+            app:lottie_rawRes="@raw/lottie_sucess_person"
+            app:lottie_loop="true"
+            app:lottie_autoPlay="true"
+            android:layout_marginBottom="30dp"
 
-    <com.google.android.material.button.MaterialButton
-        style="@style/OutlinedRoundedButton"
-        android:id="@+id/login_btn"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="로그인"
-        android:textAllCaps="false"
-        android:backgroundTint="@color/eblue60"
-        android:insetBottom="0dp"
-        android:insetTop="0dp"
-        android:autoSizeTextType="uniform"
-        android:autoSizeMaxTextSize="18sp"
-        android:textColor="@color/white"
-        android:fontFamily="@font/noto_sans"
-        app:layout_constraintWidth_percent="0.75"
-        app:layout_constraintHeight_percent="0.065"
-
-        android:layout_marginTop="40dp"
+            app:layout_constraintTop_toBottomOf="@id/txt1"
+            app:layout_constraintStart_toStartOf="@id/guideline_left"
+            app:layout_constraintEnd_toEndOf="@id/guideline_right2"
+            app:layout_constraintBottom_toTopOf="@id/guideline_top1"
+            />
 
 
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_pw_lay"
-        app:layout_constraintBottom_toTopOf="@id/description"
-        app:strokeWidth="0dp"
-        />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_code_lay"
+            app:counterMaxLength="10"
+            style="@style/OutlinedRoundedBox"
+            android:theme="@style/ThemeOverlay.TextInputLayout.TextView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:hintAnimationEnabled="true"
+            app:errorEnabled="false"
 
-    <TextView
-        android:id="@+id/description"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:fontFamily="@font/noto_sans"
-        android:gravity="center"
-        android:layout_marginHorizontal="60dp"
-        android:maxLines="1"
-        android:text="회원가입 및 관련 문의는 PC버전에서만 가능합니다."
-        android:textColor="@color/egray50"
-        android:autoSizeTextType="uniform"
-        android:autoSizeMaxTextSize="13sp"
-        android:autoSizeMinTextSize="10sp"
+            android:textColorHint="@color/egray40"
 
-        app:layout_constraintWidth_percent="0.7"
-        app:layout_constraintHeight_percent="0.03"
+            app:layout_constraintWidth_percent="0.75"
+            app:layout_constraintHeight_percent="0.07"
 
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/login_btn" />
+            android:layout_marginBottom="5dp"
+            app:boxStrokeWidthFocused=".5dp"
+
+            app:hintTextColor="@color/lblue30"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guideline_top1"
+            app:layout_constraintBottom_toTopOf="@id/input_id_lay"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/input_code"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/noto_sans"
+                android:hint="회원사 코드"
+                android:singleLine="true"
+                android:autoSizeTextType="uniform" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_id_lay"
+            app:counterMaxLength="10"
+            style="@style/OutlinedRoundedBox"
+            android:theme="@style/ThemeOverlay.TextInputLayout.TextView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:hintAnimationEnabled="true"
+            app:errorEnabled="false"
+            android:textColorHint="@color/egray40"
+            app:layout_constraintWidth_percent="0.75"
+            app:layout_constraintHeight_percent="0.07"
+
+            android:layout_marginBottom="5dp"
+            app:boxStrokeWidthFocused=".5dp"
+
+            app:hintTextColor="@color/lblue30"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/input_code_lay"
+            app:layout_constraintBottom_toTopOf="@id/input_pw_lay"
+            >
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/input_id"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/noto_sans"
+                android:hint="아이디"
+                android:autoSizeTextType="uniform"
+                android:singleLine="true" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_pw_lay"
+            app:counterMaxLength="10"
+            style="@style/OutlinedRoundedBox"
+            android:theme="@style/ThemeOverlay.TextInputLayout.TextView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:hintAnimationEnabled="true"
+            app:errorEnabled="false"
+            android:textColorHint="@color/egray40"
+            app:layout_constraintWidth_percent="0.75"
+            app:layout_constraintHeight_percent="0.07"
+
+            android:layout_marginBottom="5dp"
+            app:boxStrokeWidthFocused=".5dp"
+            app:hintTextColor="@color/lblue30"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/input_id_lay"
+            app:layout_constraintBottom_toTopOf="@id/login_btn"
+            >
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/input_pw"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/lexend_deca"
+                android:hint="비밀번호"
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:autoSizeTextType="uniform"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/OutlinedRoundedButton"
+            android:id="@+id/login_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Sign In"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/lblue60"
+            android:insetBottom="0dp"
+            android:insetTop="0dp"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMaxTextSize="20sp"
+            android:autoSizeMinTextSize="18sp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/lexend_deca"
+            app:layout_constraintWidth_percent="0.75"
+            android:gravity="center"
+
+            android:layout_marginTop="30dp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/input_pw_lay"
+            app:layout_constraintBottom_toTopOf="@id/description"
+            app:strokeWidth="0dp"
+            />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fontFamily="@font/lexend_deca"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="회원가입 및 관련 문의는 PC버전에서만 가능합니다."
+            android:textColor="@color/egray40"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMaxTextSize="10sp"
+            android:autoSizeMinTextSize="8sp"
+
+            app:layout_constraintWidth_percent="0.7"
+            app:layout_constraintHeight_percent="0.04"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/login_btn" />
 
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

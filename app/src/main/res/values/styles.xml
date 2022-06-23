@@ -26,15 +26,17 @@
             @style/MyTextboxShapeRounded
         </item>
         <item name="materialThemeOverlay">@style/MyThemeOverlayOutlinedDense</item>
-        <item name="boxStrokeColor">@color/egray70</item>
-        <item name="colorControlNormal">@color/egray70</item>
-        <item name="boxStrokeWidth">1dp</item>
+        <item name="boxStrokeColor">@color/lblue30</item>
+        <item name="colorControlNormal">@color/lblue40</item>
+
+        <item name="boxStrokeWidth">.5dp</item>
         <item name="errorTextAppearance">@style/ErrorTextAppearance</item>
+
     </style>
 
     <style name="MyTextboxShapeRounded" parent="">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">8dp</item>
+        <item name="cornerSize">15dp</item>
     </style>
 
     <style name="ThemeOverlay.TextInputLayout.TextView" parent="">
@@ -52,15 +54,22 @@
         <item name="android:textSize">8sp</item>
     </style>
 
+    <style name="HintTextAppearance">
+        <item name="android:fontFamily">@font/lexend_deca</item>
+        <item name="android:textColor">@color/lblue30</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
     <style name="OutlinedRoundedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="shapeAppearanceOverlay">@style/MyButtonShapeRounded</item>
-        <item name="boxStrokeColor">@color/eblue80</item>
-        <item name="colorControlNormal">@color/eblue80</item>
-        <item name="boxStrokeWidth">1dp</item>
+        <item name="boxStrokeColor">@color/lblue40</item>
+        <item name="hintTextColor">@color/lblue40</item>
+        <item name="colorControlNormal">@color/lblue60</item>
+        <item name="boxStrokeWidth">0dp</item>
     </style>
     <style name="MyButtonShapeRounded" parent="">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">8dp</item>
+        <item name="cornerSize">15dp</item>
     </style>
 
     <style name="MyThemeOverlayOutlinedDense">

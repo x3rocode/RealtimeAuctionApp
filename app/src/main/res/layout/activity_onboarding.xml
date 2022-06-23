@@ -220,7 +220,7 @@
         app:iconSize="@android:dimen/app_icon_size"
         app:iconPadding="0dp"
 
-        android:backgroundTint="@color/lblue30"
+        android:backgroundTint="@color/lblue60"
         android:insetLeft="0dp"
         android:insetTop="0dp"
         android:insetRight="0dp"
