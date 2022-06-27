@@ -1,9 +1,11 @@
-package com.esteel4u.realtimeauctionapp.model
+package com.esteel4u.realtimeauctionapp.data.model
 
 import com.ptrbrynt.firestorelivedata.FirestoreModel
+import lombok.Data
 import java.sql.Timestamp
 
-data class Auction(
+@Data
+data class AuctionData(
     var productId: String,
     var bidPrice: Int,
     var buyUserId: String,
