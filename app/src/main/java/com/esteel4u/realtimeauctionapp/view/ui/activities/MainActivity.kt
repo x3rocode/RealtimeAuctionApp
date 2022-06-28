@@ -1,6 +1,7 @@
 package com.esteel4u.realtimeauctionapp.view.ui.activities
 
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
@@ -11,6 +12,8 @@ import com.esteel4u.realtimeauctionapp.data.repository.UserRepository
 import com.esteel4u.realtimeauctionapp.utils.AuthUtil
 import com.esteel4u.realtimeauctionapp.view.adapter.OnboardingViewPagerAdapter
 import com.esteel4u.realtimeauctionapp.view.utils.Animatoo
+import com.gauravk.bubblenavigation.BubbleNavigationConstraintView
+import com.gauravk.bubblenavigation.BubbleNavigationLinearView
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -26,12 +29,15 @@ class MainActivity: AppCompatActivity() {
         var userInfo = MutableLiveData<UserData>()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val db = FirebaseFirestore.getInstance()
-        val name = db.collection("users").document(AuthUtil.getAuthId()).asLiveData<UserData>()
 
-        name.observe(this, Observer{
-            resources: FirestoreResource<UserData> ->
-            idtxt.setText(resources.data?.userName)
-        })
+        var bubbleNavigationConstraintView: BubbleNavigationConstraintView = findViewById(R.id.equal_navigation_bar)
+        //bubbleNavigationConstraintView.setTypeface(Typeface.createFromAsset(assets, "lexend_deca.ttf"))
+//        val db = FirebaseFirestore.getInstance()
+//        val name = db.collection("users").document(AuthUtil.getAuthId()).asLiveData<UserData>()
+//
+//        name.observe(this, Observer{
+//            resources: FirestoreResource<UserData> ->
+//            idtxt.setText(resources.data?.userName)
+//        })
     }
 }

@@ -202,6 +202,7 @@
                 android:layout_height="match_parent"
                 android:fontFamily="@font/noto_sans"
                 android:hint="아이디"
+                android:text="admin1"
                 android:autoSizeTextType="uniform"
                 android:singleLine="true" />
 
@@ -239,6 +240,7 @@
                 android:layout_height="match_parent"
                 android:fontFamily="@font/lexend_deca"
                 android:hint="비밀번호"
+                android:text="emarket123"
                 android:inputType="textPassword"
                 android:singleLine="true"
                 android:autoSizeTextType="uniform"/>

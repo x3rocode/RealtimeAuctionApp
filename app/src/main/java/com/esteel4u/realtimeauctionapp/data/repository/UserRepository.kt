@@ -38,6 +38,7 @@ class UserRepository {
                     document?.let {
                         userInfo.value = UserData(
                             user.uid,
+                            document.get("userId")as String,
                             document.get("gcsCompCode") as String,
                             document.get("userName") as String
                         )

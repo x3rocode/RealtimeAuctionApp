@@ -6,6 +6,7 @@ import lombok.Data
 @Data
 data class UserData(
     var uid: String? = null,
+    var userId: String? = null,
     var gcsCompCode: String? = null,
     var userName: String? = null
 ): FirestoreModel()

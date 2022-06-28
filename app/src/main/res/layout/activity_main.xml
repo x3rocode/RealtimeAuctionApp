@@ -5,23 +5,73 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
-
-    <TextView
-        android:id="@+id/idtxt"
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:fontFamily="@font/lexend_deca"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:textColor="@color/lblue60"
-        android:autoSizeMaxTextSize="60sp"
-        android:autoSizeMinTextSize="20sp"
-        android:autoSizeTextType="uniform"
-
-        app:layout_constraintHeight_percent="0.08"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.gauravk.bubblenavigation.BubbleNavigationConstraintView
+        android:id="@+id/equal_navigation_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/default_background_rounded_rect"
+        android:elevation="5dp"
+        android:padding="12dp"
+        app:bnc_mode="packed"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.gauravk.bubblenavigation.BubbleToggleView
+            android:id="@+id/m_item_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:bt_active="true"
+            app:bt_showShapeAlways="true"
+            app:bt_shapeColor="@color/white"
+            app:bt_colorActive="@color/lblue60"
+            app:bt_colorInactive="@color/lgray10"
+            app:bt_icon="@drawable/ic_round_home_24"
+            app:bt_title="Home" />
+
+        <com.gauravk.bubblenavigation.BubbleToggleView
+            android:id="@+id/m_item_favorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:bt_colorActive="@color/lblue60"
+            app:bt_colorInactive="@color/lblue10"
+            app:bt_icon="@drawable/ic_round_favorite_24"
+            app:bt_title="Like" />
+
+        <com.gauravk.bubblenavigation.BubbleToggleView
+            android:id="@+id/m_item_shop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:bt_colorActive="@color/lblue60"
+            app:bt_colorInactive="@color/lblue10"
+            app:bt_icon="@drawable/ic_round_shopping_cart_24"
+            app:bt_title="MyAuctoin" />
+
+
+        <com.gauravk.bubblenavigation.BubbleToggleView
+            android:id="@+id/m_item_mypage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:bt_colorActive="@color/lblue60"
+            app:bt_colorInactive="@color/lblue10"
+            app:bt_icon="@drawable/ic_round_person_24"
+            app:bt_title="Mypage" />
+
+    </com.gauravk.bubblenavigation.BubbleNavigationConstraintView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
