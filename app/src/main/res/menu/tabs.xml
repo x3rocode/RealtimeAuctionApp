@@ -1,0 +1,22 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/tab_home"
+        android:icon="@drawable/icons8_home150"
+        android:title="Home"
+        android:enabled="true" />
+    <item
+        android:id="@+id/tab_like"
+        android:icon="@drawable/ic_heart_115"
+        android:title="Like"
+        android:enabled="true" />
+    <item
+        android:id="@+id/tab_cart"
+        android:icon="@drawable/shopping_cart"
+        android:title="Cart"
+        android:enabled="true" />
+    <item
+        android:id="@+id/tab_mypage"
+        android:icon="@drawable/ic_my_home_page_1"
+        android:title="MyPage"
+        android:enabled="true" />
+</menu>

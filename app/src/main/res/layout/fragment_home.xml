@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/hello_txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+
+        />
+
+
+
+    <com.example.moeidbannerlibrary.banner.BannerLayout
+        android:id="@+id/Banner"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        app:autoPlaying="true"
+        app:centerScale="1.6"
+        app:itemSpace="0"
+        app:moveSpeed="0.5"
+        app:showIndicator="true"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
