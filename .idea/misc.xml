@@ -21,9 +21,22 @@
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/item_slide_mode.xml" value="0.21547669944420692" />
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/item_slide_model.xml" value="0.15391192817443353" />
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/test.xml" value="0.15519452757588714" />
+        <entry key="..\:/Users/z3roc/AndroidStudioProjects/RealtimeAuctionApp/app/src/main/res/drawable/banner_indicator_focus.xml" value="0.169" />
+        <entry key="..\:/Users/z3roc/AndroidStudioProjects/RealtimeAuctionApp/app/src/main/res/drawable/banner_indicator_nornal.xml" value="0.169" />
+        <entry key="..\:/Users/z3roc/AndroidStudioProjects/RealtimeAuctionApp/app/src/main/res/drawable/ic_round_check_circle_24.xml" value="0.113" />
+        <entry key="..\:/Users/z3roc/AndroidStudioProjects/RealtimeAuctionApp/app/src/main/res/drawable/onboarding_selected_dot_blue.xml" value="0.113" />
+        <entry key="..\:/Users/z3roc/AndroidStudioProjects/RealtimeAuctionApp/app/src/main/res/drawable/onboarding_unselected_dot_blue.xml" value="0.113" />
+        <entry key="..\:/Users/z3roc/AndroidStudioProjects/RealtimeAuctionApp/app/src/main/res/drawable/onboarding_viewpager_selector_blue.xml" value="0.113" />
+        <entry key="..\:/Users/z3roc/AndroidStudioProjects/RealtimeAuctionApp/app/src/main/res/layout/activity_main.xml" value="0.17806484295845998" />
+        <entry key="..\:/Users/z3roc/AndroidStudioProjects/RealtimeAuctionApp/app/src/main/res/layout/activity_onboarding.xml" value="0.18" />
+        <entry key="..\:/Users/z3roc/AndroidStudioProjects/RealtimeAuctionApp/app/src/main/res/layout/fragment_cart.xml" value="0.3482789855072464" />
+        <entry key="..\:/Users/z3roc/AndroidStudioProjects/RealtimeAuctionApp/app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="..\:/Users/z3roc/AndroidStudioProjects/RealtimeAuctionApp/app/src/main/res/layout/fragment_like.xml" value="0.1522289766970618" />
+        <entry key="..\:/Users/z3roc/AndroidStudioProjects/RealtimeAuctionApp/app/src/main/res/layout/fragment_onboarding.xml" value="0.1308876811594203" />
+        <entry key="..\:/Users/z3roc/AndroidStudioProjects/RealtimeAuctionApp/app/src/main/res/layout/item_slide_model.xml" value="0.22" />
       </map>
     </option>
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_14" project-jdk-name="11" project-jdk-type="JavaSDK" />
 </project>

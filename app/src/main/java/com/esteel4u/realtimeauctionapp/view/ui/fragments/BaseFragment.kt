@@ -19,11 +19,6 @@ abstract class BaseFragment : RxFragment() {
 
   private var mPictureList: MutableList<Int> = ArrayList()
 
-  /**
-   * 获取当前Activity的UI布局
-   *
-   * @return 布局id
-   */
   protected abstract val layout: Int
 
   override fun onAttach(context: Context) {
@@ -64,17 +59,8 @@ abstract class BaseFragment : RxFragment() {
     return ContextCompat.getColor(requireContext(), colorRes)
   }
 
-
-
-
-  /**
-   * 初始化标题
-   */
   protected abstract fun initTitle()
 
-  /**
-   * 初始化数据
-   */
   protected abstract fun initView(
     savedInstanceState: Bundle?,
     view: View

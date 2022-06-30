@@ -10,12 +10,12 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/hello_txt"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintHeight_percent=".1"
         android:text="응애응애"
         app:autoSizeTextType="uniform"
-        android:autoSizeMaxTextSize="30dp"
+        android:autoSizeMaxTextSize="20sp"
+        android:autoSizeMinTextSize="10sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -27,13 +27,21 @@
         android:layout_height="@dimen/dp_185"
         android:layout_marginTop="@dimen/dp_16"
         app:bvp_indicator_slide_mode="worm"
-        app:bvp_indicator_style="circle"
-        app:bvp_indicator_checked_color="@color/lblue30"
-        app:bvp_indicator_normal_color="@color/egray30"
-        app:bvp_indicator_visibility="visible"
-        app:bvp_page_style="multi_page"
+        app:bvp_indicator_radius="@dimen/dp_6"
+        app:bvp_indicator_style="round_rect"
         app:layout_constraintTop_toBottomOf="@id/hello_txt"
         app:layout_constraintBottom_toTopOf="@id/type_txt"/>
+
+<!--    <com.zhpan.indicator.IndicatorView-->
+<!--        android:id="@+id/indicator_view"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/banner_view"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/banner_view"-->
+<!--        app:layout_constraintBottom_toTopOf="@id/type_txt"/>-->
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/type_txt"
