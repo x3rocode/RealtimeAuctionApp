@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+  <com.esteel4u.realtimeauctionapp.view.utils.CornerImageView
+      android:id="@+id/banner_image"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:contentDescription="sdfsdf"
+      android:scaleType="centerCrop" />
+
+</layout>

@@ -7,11 +7,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.esteel4u.realtimeauctionapp.R
 import com.esteel4u.realtimeauctionapp.view.ui.fragments.OnboardingFragment
 
-class OnboardingViewPagerAdapter(
-    fragmentActivity: FragmentActivity,
-    private val context: Context
-) :
-    FragmentStateAdapter(fragmentActivity) {
+class OnboardingViewPagerAdapter(fragmentActivity: FragmentActivity, private val context: Context) : FragmentStateAdapter(fragmentActivity) {
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {

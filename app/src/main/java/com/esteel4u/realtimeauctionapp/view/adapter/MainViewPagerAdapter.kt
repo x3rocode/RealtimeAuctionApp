@@ -5,7 +5,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.esteel4u.realtimeauctionapp.view.ui.fragments.CartFragment
-import com.esteel4u.realtimeauctionapp.view.ui.fragments.HomeFragment
+import com.esteel4u.realtimeauctionapp.view.ui.fragments.HomeBannerFragment
 import com.esteel4u.realtimeauctionapp.view.ui.fragments.LikeFragment
 import com.esteel4u.realtimeauctionapp.view.ui.fragments.MyPageFragment
 
@@ -23,7 +23,7 @@ class MainViewPagerAdapter(
 
     override fun createFragment(position: Int): Fragment {
         when(position) {
-            0 -> return HomeFragment()
+            0 -> return HomeBannerFragment()
             1 -> return LikeFragment()
             2 -> return CartFragment()
             3 -> return MyPageFragment()
