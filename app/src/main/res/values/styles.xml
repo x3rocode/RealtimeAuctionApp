@@ -85,7 +85,7 @@
 
     <style name="BottomNavigationTextStyle">
         <item name="android:textAllCaps">false</item>
-        <item name="android:fontFamily">lexend_deca</item>
+        <item name="android:fontFamily">@font/lexend_deca</item>
         <item name="android:textStyle">normal</item>
     </style>
 

@@ -10,16 +10,18 @@
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/drawable/bg_card2.xml" value="0.225" />
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/activity_login.xml" value="0.22231722958529285" />
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/activity_main.xml" value="0.22" />
-        <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/activity_onboarding.xml" value="0.21547669944420692" />
-        <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/fragment_home.xml" value="0.22" />
+        <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/activity_onboarding.xml" value="0.2" />
+        <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/fragment_home.xml" value="0.14" />
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/fragment_like.xml" value="0.22231722958529285" />
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/fragment_mypage.xml" value="0.22231722958529285" />
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/fragment_onboarding.xml" value="0.15519452757588714" />
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/item_carousel.xml" value="0.196875" />
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/item_custom_view.xml" value="0.1791363830696879" />
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/item_home_banner.xml" value="0.22231722958529285" />
+        <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/item_home_banner_model.xml" value="0.30055579307396324" />
+        <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/item_home_type_slider_model.xml" value="0.16" />
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/item_slide_mode.xml" value="0.21547669944420692" />
-        <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/item_slide_model.xml" value="0.15391192817443353" />
+        <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/item_slide_model.xml" value="0.25" />
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/test.xml" value="0.15519452757588714" />
         <entry key="..\:/Users/z3roc/AndroidStudioProjects/RealtimeAuctionApp/app/src/main/res/drawable/banner_indicator_focus.xml" value="0.169" />
         <entry key="..\:/Users/z3roc/AndroidStudioProjects/RealtimeAuctionApp/app/src/main/res/drawable/banner_indicator_nornal.xml" value="0.169" />

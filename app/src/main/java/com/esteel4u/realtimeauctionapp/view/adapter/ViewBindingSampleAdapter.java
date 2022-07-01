@@ -2,7 +2,7 @@ package com.esteel4u.realtimeauctionapp.view.adapter;
 
 
 import com.esteel4u.realtimeauctionapp.R;
-import com.esteel4u.realtimeauctionapp.databinding.ItemSlideModelBinding;
+import com.esteel4u.realtimeauctionapp.databinding.ItemHomeBannerModelBinding;
 import com.zhpan.bannerview.BaseBannerAdapter;
 import com.zhpan.bannerview.BaseViewHolder;
 
@@ -13,24 +13,24 @@ import com.zhpan.bannerview.BaseViewHolder;
  */
 public class ViewBindingSampleAdapter extends BaseBannerAdapter<Integer> {
 
-  private final int mRoundCorner;
+  private final int mSliderModel;
 
-  public ViewBindingSampleAdapter(int roundCorner) {
-    mRoundCorner = roundCorner;
+  public ViewBindingSampleAdapter(int sliderModel) {
+    mSliderModel = sliderModel;
   }
 
   @Override
   protected void bindData(BaseViewHolder<Integer> holder, Integer data, int position,
       int pageSize) {
     //示例使用ViewBinding
-    ItemSlideModelBinding viewBinding = ItemSlideModelBinding.bind(holder.itemView);
+    ItemHomeBannerModelBinding viewBinding = ItemHomeBannerModelBinding.bind(holder.itemView);
 //    viewBinding.bannerImage.setRoundCorner(mRoundCorner);
 //    viewBinding.bannerImage.setImageResource(data);
   }
 
   @Override
   public int getLayoutId(int viewType) {
-    return R.layout.item_slide_model;
+    return mSliderModel;
   }
 }
 

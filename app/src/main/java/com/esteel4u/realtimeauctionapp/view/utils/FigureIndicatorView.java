@@ -61,7 +61,7 @@ public class FigureIndicatorView extends BaseIndicatorView {
       int textWidth = (int) mPaint.measureText(text);
       Paint.FontMetricsInt fontMetricsInt = mPaint.getFontMetricsInt();
       int baseline = (getMeasuredHeight() - fontMetricsInt.bottom + fontMetricsInt.top) / 2
-          - fontMetricsInt.top;
+          - fontMetricsInt.top ;
       canvas.drawText(text, (getWidth() - textWidth) / 2f, baseline, mPaint);
     }
   }

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.view.View.GONE
 import com.esteel4u.realtimeauctionapp.R
 import com.esteel4u.realtimeauctionapp.view.adapter.ViewBindingSampleAdapter
 import com.esteel4u.realtimeauctionapp.view.utils.FigureIndicatorView
@@ -16,45 +17,62 @@ import com.zhpan.bannerview.utils.BannerUtils
 import com.zhpan.indicator.IndicatorView
 import com.zhpan.indicator.base.IIndicator
 import com.zhpan.indicator.enums.IndicatorSlideMode
+import com.zhpan.indicator.enums.IndicatorStyle
 import java.util.*
 
 class HomeFragment  : BaseFragment() {
-    private lateinit var mViewPager: BannerViewPager<Int>
-    private var mIndicatorView: IndicatorView? = null
+    private lateinit var mbannerViewPager: BannerViewPager<Int>
+    private lateinit var mtypeSliderViewPager: BannerViewPager<Int>
     override val layout: Int
         get() = R.layout.fragment_home
 
     override fun initTitle() {}
     override fun initView(savedInstanceState: Bundle?, view: View) {
-        mViewPager = view.findViewById(R.id.banner_view)
-       // mIndicatorView = view.findViewById(R.id.indicator_view)
+        mbannerViewPager = view.findViewById(R.id.banner_view)
+        mtypeSliderViewPager = view.findViewById(R.id.types_card_view)
         initBVP()
+        initSPN()
 //        setupBanner(
 //            PageStyle.MULTI_PAGE_OVERLAP,
 //            resources.getDimensionPixelOffset(R.dimen.dp_100)
 //        )
        // setDrawableIndicator(getDrawableIndicator()!!)
         setQQMusicStyle()
-
+        setupRightPageReveal()
     }
 
     private fun initBVP() {
-        mViewPager.apply {
+        mbannerViewPager.apply {
             setLifecycleRegistry(lifecycle)
-            adapter = ViewBindingSampleAdapter(resources.getDimensionPixelOffset(R.dimen.dp_8))
+            adapter = ViewBindingSampleAdapter(R.layout.item_home_banner_model)
             setIndicatorSliderColor(
                 getColor(R.color.egray30),
-                getColor(R.color.lblue30)
+                getColor(R.color.lblue60)
             )
-//            setIndicatorSliderRadius(
-//                resources.getDimensionPixelOffset(R.dimen.dp_4),
-//                resources.getDimensionPixelOffset(R.dimen.dp_5)
-//            )
+            setIndicatorSliderRadius(
+                resources.getDimensionPixelOffset(R.dimen.dp_4),
+                resources.getDimensionPixelOffset(R.dimen.dp_4)
+            )
+            setIndicatorStyle(IndicatorStyle.ROUND_RECT)
             setOnPageClickListener { _: View, position: Int -> itemClick(position) }
             setInterval(5000)
+            setOffScreenPageLimit(4)
+
         }
+
+
     }
 
+    private fun initSPN() {
+        mtypeSliderViewPager.apply {
+            setLifecycleRegistry(lifecycle)
+            adapter = ViewBindingSampleAdapter(R.layout.item_home_type_slider_model)
+            setIndicatorVisibility(GONE)
+            setOnPageClickListener { _: View, position: Int -> itemClick(position) }
+            setInterval(5000)
+            setScrollDuration(0)
+        }
+    }
 
 
     /**
@@ -69,7 +87,7 @@ class HomeFragment  : BaseFragment() {
     }
 
     private fun setupBanner(@APageStyle pageStyle: Int, leftRevealWidth: Int, rightRevealWidth: Int) {
-        mViewPager
+        mbannerViewPager
             .setPageMargin(resources.getDimensionPixelOffset(R.dimen.dp_15))
             .setScrollDuration(800)
             .setRevealWidth(leftRevealWidth, rightRevealWidth)
@@ -77,9 +95,19 @@ class HomeFragment  : BaseFragment() {
             .create(getPicList(4))
     }
 
+    private fun setupTypeSlider(@APageStyle pageStyle: Int, leftRevealWidth: Int, rightRevealWidth: Int){
+        mtypeSliderViewPager
+            .setPageMargin(resources.getDimensionPixelOffset(R.dimen.dp_15))
+            .setScrollDuration(800)
+            .setPageStyle(pageStyle)
+            .setRevealWidth(leftRevealWidth, rightRevealWidth)
+            .create(getPicList(4))
+    }
+
+
+
     private fun setDrawableIndicator(indicator: IIndicator) {
-        mIndicatorView?.setVisibility(View.INVISIBLE)
-        mViewPager
+        mbannerViewPager
             .setIndicatorView(indicator)
             .setIndicatorSlideMode(IndicatorSlideMode.NORMAL)
             .setIndicatorVisibility(View.VISIBLE)
@@ -96,22 +124,27 @@ class HomeFragment  : BaseFragment() {
      * Multi Page Style 1
      */
     private fun setupMultiPageBanner() {
-        mViewPager
+        mbannerViewPager
             .setPageMargin(resources.getDimensionPixelOffset(R.dimen.dp_10))
             .setRevealWidth(resources.getDimensionPixelOffset(R.dimen.dp_10))
             .create(getPicList(4))
-        mViewPager.removeDefaultPageTransformer()
+        mbannerViewPager.removeDefaultPageTransformer()
     }
 
     /**
      * Multi Page Style 2
      */
     private fun setupRightPageReveal() {
-        mViewPager
-            .setPageMargin(resources.getDimensionPixelOffset(R.dimen.dp_10))
-            .setRevealWidth(0, resources.getDimensionPixelOffset(R.dimen.dp_30))
+        mtypeSliderViewPager
+            .setPageMargin(resources.getDimensionPixelOffset(R.dimen.dp_3 )   )
+            .setRevealWidth(resources.getDimensionPixelOffset(R.dimen.dp_7), resources.getDimensionPixelOffset(R.dimen.dp_210) )
+            .setInterval(5000)
+            .setAutoPlay(false)
+            .setOffScreenPageLimit(1)
+
+
             .create(getPicList(4))
-        mViewPager.removeDefaultPageTransformer()
+        mtypeSliderViewPager.removeDefaultPageTransformer()
     }
 
     /**
@@ -119,14 +152,16 @@ class HomeFragment  : BaseFragment() {
      */
     @SuppressLint("ResourceAsColor")
     private fun setNetEaseMusicStyle() {
-        mViewPager
+        mbannerViewPager
             .setPageMargin(resources.getDimensionPixelOffset(R.dimen.dp_20))
+            .setIndicatorMargin(0,0,0,60)
             .setRevealWidth(resources.getDimensionPixelOffset(R.dimen.dp_m_10))
             .setIndicatorSliderColor(
-                R.color.egray40,
-                R.color.lblue40)
+                R.color.egray30,
+                R.color.lblue50)
             .setInterval(5000).create(getPicList(4))
-        mViewPager.removeDefaultPageTransformer()
+
+        mbannerViewPager.removeDefaultPageTransformer()
     }
 
     /**
@@ -134,13 +169,15 @@ class HomeFragment  : BaseFragment() {
      */
     @SuppressLint("ResourceAsColor")
     private fun setQQMusicStyle() {
-        mViewPager
-            .setPageMargin(resources.getDimensionPixelOffset(R.dimen.dp_15))
+        mbannerViewPager
+            .setPageMargin(resources.getDimensionPixelOffset(R.dimen.dp_10))
             .setRevealWidth(BannerUtils.dp2px(0f))
+            .setIndicatorMargin(0,0,0,resources.getDimensionPixelOffset(R.dimen.dp_40))
+            .setInterval(5000)
+            .stopLoopWhenDetachedFromWindow(true)
+            .create(getPicList(4))
 
-            .setInterval(5000).create(getPicList(4))
-
-        mViewPager.removeDefaultPageTransformer()
+        mbannerViewPager.removeDefaultPageTransformer()
     }
 
     /**
@@ -155,12 +192,12 @@ class HomeFragment  : BaseFragment() {
 //    }
 
     private fun updateData() {
-        mViewPager.refreshData(getPicList(Random().nextInt(5) - 1))
+        mbannerViewPager.refreshData(getPicList(Random().nextInt(5) - 1))
     }
 
     private fun itemClick(position: Int) {
-        if (position != mViewPager.currentItem) {
-            mViewPager.setCurrentItem(position, true)
+        if (position != mbannerViewPager.currentItem) {
+            mbannerViewPager.setCurrentItem(position, true)
         }
     }
 
