@@ -14,6 +14,8 @@ import com.esteel4u.realtimeauctionapp.utils.AuthUtil
 import com.esteel4u.realtimeauctionapp.view.adapter.MainViewPagerAdapter
 import com.esteel4u.realtimeauctionapp.view.adapter.OnboardingViewPagerAdapter
 import com.esteel4u.realtimeauctionapp.view.utils.Animatoo
+import com.esteel4u.realtimeauctionapp.viewmodel.MainViewModel
+import com.esteel4u.realtimeauctionapp.viewmodel.ProductViewModel
 import com.gauravk.bubblenavigation.BubbleNavigationConstraintView
 import com.gauravk.bubblenavigation.BubbleNavigationLinearView
 import com.google.android.material.tabs.TabLayoutMediator
@@ -29,7 +31,6 @@ import kotlinx.android.synthetic.main.activity_onboarding.*
 class MainActivity: AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)

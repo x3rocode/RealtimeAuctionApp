@@ -1,0 +1,68 @@
+package com.esteel4u.realtimeauctionapp.view.ui.fragments
+
+import android.content.Context
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
+import androidx.core.content.ContextCompat
+import com.trello.rxlifecycle2.components.support.RxFragment
+
+/**
+ * MVC模式的Base fragment
+ */
+abstract class BaseFragment : RxFragment() {
+    private var mDrawableList: MutableList<Int> = ArrayList()
+    protected lateinit var mContext: Context
+
+    private var mPictureList: MutableList<Int> = ArrayList()
+
+    protected abstract val layout: Int
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        this.mContext = context.applicationContext
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val view = inflater.inflate(layout, container, false)
+        initData(3)
+        initTitle()
+        initView(savedInstanceState, view)
+        return view
+    }
+
+    protected fun getPicList(count: Int): MutableList<Int> {
+        mPictureList.clear()
+        for (i in 0..count) {
+            val drawable = resources.getIdentifier("advertise$i", "drawable", mContext.packageName)
+            mPictureList.add(drawable)
+        }
+        return mPictureList;
+    }
+
+    private fun initData(j: Int) {
+        mDrawableList.clear()
+        for (i in 0..j) {
+            val drawable = resources.getIdentifier("bg_card$i", "drawable", mContext.packageName)
+            mDrawableList.add(drawable)
+        }
+    }
+    @ColorInt
+    protected fun getColor(@ColorRes colorRes: Int): Int {
+        return ContextCompat.getColor(requireContext(), colorRes)
+    }
+
+    protected abstract fun initTitle()
+
+    protected abstract fun initView(
+        savedInstanceState: Bundle?,
+        view: View
+    )
+}

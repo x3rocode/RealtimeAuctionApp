@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+FrameLayout is used as top level layout because when the CardView is getting
+animated, it needs to stay centered. Otherwise we need to animate x and y values
+too. layout_gravity="center_horizontal" is a lot simpler.
+-->
+
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="prdlist"
+            type="com.esteel4u.realtimeauctionapp.data.model.ProductData"/>
+    </data>
+
+    <FrameLayout
+        android:id="@+id/root_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp"
+            app:cardMaxElevation="0dp"
+            tools:layout_marginLeft="20dp"
+            tools:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
+
+            <FrameLayout
+                android:id="@+id/card_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!--
+                scale_container is used to scale down the item when the scale down
+                animation happens. card_container re-sizes height and width while
+                scale_container scales the inside views to make it look natural
+                -->
+                <RelativeLayout
+                    android:id="@+id/scale_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="@dimen/list_item_horizontal_padding"
+                    android:paddingTop="@dimen/list_item_vertical_padding"
+                    android:paddingRight="@dimen/list_item_horizontal_padding"
+                    android:paddingBottom="@dimen/list_item_vertical_padding">
+
+                    <ImageView
+                        android:id="@+id/chevron"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/prd_auction_type"
+                        android:layout_alignBottom="@+id/prd_totseqNm"
+                        android:layout_marginEnd="16dp"
+                        app:srcCompat="@drawable/ic_round_keyboard_arrow_left_24"
+                        app:tint="@color/lblue60" />
+
+                    <TextView
+                        android:id="@+id/prd_auction_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/chevron"
+                        android:fontFamily="@font/lexend_deca"
+                        android:text="Primium"
+                        android:textSize="13dp" />
+
+                    <TextView
+                        android:id="@+id/prd_totseqNm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/prd_auction_type"
+                        android:layout_marginTop="8dp"
+                        android:layout_toEndOf="@id/chevron"
+                        android:fontFamily="@font/lexend_deca"
+                        android:text="@{prdlist.prdTotClsSeqNm}"
+                        android:textSize="10dp" />
+
+                    <TextView
+                        android:id="@+id/prd_status"
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/prd_auction_type"
+                        android:layout_alignParentRight="true"
+                        android:text="진행중"
+                        android:textSize="10dp" />
+
+                    <TextView
+                        android:id="@+id/prd_time"
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/prd_auction_type"
+                        android:layout_alignParentRight="true"
+                        android:text="10:00:00"
+                        android:textSize="10dp" />
+
+                    <LinearLayout
+                        android:id="@+id/expand_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/prd_status"
+                        android:layout_alignStart="@id/prd_auction_type"
+                        android:layout_marginTop="20dp"
+                        android:dividerPadding="1dp"
+                        android:showDividers="middle"
+                        android:orientation="vertical"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="14dp">
+
+                            <LinearLayout
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="제품 번호 : "
+                                    android:fontFamily="@font/lexend_deca"
+                                    android:textSize="13dp" />
+
+                                <TextView
+                                    android:id="@+id/material_lotno"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@{prdlist.prdNo}"
+                                    android:fontFamily="@font/lexend_deca"
+                                    android:textSize="13dp"/>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="14dp">
+
+                            <LinearLayout
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="품명 : "
+                                    android:fontFamily="@font/lexend_deca"
+                                    android:textSize="13dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@{prdlist.prdName}"
+                                    android:fontFamily="@font/lexend_deca"
+                                    android:textSize="13dp"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="규격 : "
+                                    android:fontFamily="@font/lexend_deca"
+                                    android:textSize="13dp"/>
+
+                                <TextView
+                                    android:id="@+id/prd_substspec"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/lexend_deca"
+                                    android:text="@{prdlist.substSpec}"
+                                    android:textSize="13dp" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="14dp">
+
+                            <LinearLayout
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="두께 : "
+                                    android:fontFamily="@font/lexend_deca"
+                                    android:textSize="13dp" />
+
+                                <TextView
+                                    android:id="@+id/prd_prdthk"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@{prdlist.prdThk.toString()}"
+                                    android:fontFamily="@font/lexend_deca"
+                                    android:textSize="13dp"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="폭 : "
+                                    android:fontFamily="@font/lexend_deca"
+                                    android:textSize="13dp"/>
+
+                                <TextView
+                                    android:id="@+id/prd_prdwth"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/lexend_deca"
+                                    android:text="@{prdlist.prdWth.toString()}"
+                                    android:textSize="13dp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="중량 : "
+                                    android:fontFamily="@font/lexend_deca"
+                                    android:textSize="13dp"/>
+
+                                <TextView
+                                    android:id="@+id/prd_prdwgt"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/lexend_deca"
+                                    android:text="@{prdlist.prdWgt.toString()}"
+                                    android:textSize="13dp" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+
+
+
+
+                    </LinearLayout>
+                </RelativeLayout>
+            </FrameLayout>
+        </androidx.cardview.widget.CardView>
+    </FrameLayout>
+</layout>
