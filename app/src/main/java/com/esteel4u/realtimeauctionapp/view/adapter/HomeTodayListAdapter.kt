@@ -122,6 +122,7 @@ class HomeTodayListAdapter(context: Context
 
     //expand
     private fun expandItem(holder: MyViewHolder, expand: Boolean, animate: Boolean) {
+        notifyDataSetChanged()
         if (animate) {
             val animator = getValueAnimator(
                 expand, listItemExpandDuration, AccelerateDecelerateInterpolator()

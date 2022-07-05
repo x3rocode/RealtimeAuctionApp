@@ -26,10 +26,8 @@ import com.esteel4u.realtimeauctionapp.utils.FirestoreUtil
 import com.esteel4u.realtimeauctionapp.view.adapter.HomeTodayListAdapter
 import com.esteel4u.realtimeauctionapp.view.adapter.ViewBindingSampleAdapter
 import com.esteel4u.realtimeauctionapp.view.adapter.animationPlaybackSpeed
-import com.esteel4u.realtimeauctionapp.view.utils.FigureIndicatorView
-import com.esteel4u.realtimeauctionapp.viewmodel.LoginViewModel
-import com.esteel4u.realtimeauctionapp.viewmodel.MainViewModel
 import com.esteel4u.realtimeauctionapp.viewmodel.ProductViewModel
+
 import com.google.firebase.Timestamp
 import com.google.firebase.Timestamp.now
 import com.google.firebase.firestore.FirebaseFirestore
@@ -63,7 +61,7 @@ import java.util.concurrent.CopyOnWriteArrayList
 class HomeFragment  : Fragment(){
     private lateinit var mbannerViewPager: BannerViewPager<Int>
     //private lateinit var mtypeSliderViewPager: BannerViewPager<Int>
-//    private val viewModel: ProductViewModel  by activityViewModels()
+    private val viewModel: ProductViewModel by activityViewModels { ProductViewModel.Factory(viewLifecycleOwner) }
     private val db = FirebaseFirestore.getInstance()
     private var _binding : FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -93,45 +91,8 @@ class HomeFragment  : Fragment(){
             layoutManager = LinearLayoutManager(activity)
             adapter = HomeTodayListAdapter(this.context)
         }
-
-
-
-        val myQuery = db.collection("products").asLiveData<ProductData>()
-        myQuery.observe(viewLifecycleOwner, Observer { resource: FirestoreResource<List<ProductData>> ->
-
-            if(resource.data !== null){
-                val data: MutableList<ProductData>? = resource.data!!.toMutableList()
-                var  date = Date()
-                resource.data?.forEach{
-                    //대기
-                    if (DateUtils.isToday(it.startDate!!.toDate().time)
-                        && it.startDate!!.toDate().after(Date())){
-                        Log.d(ContentValues.TAG, "dgggggggggg " + it.toString())
-                        it.auctionProgressStatus = 1
-
-                        val myDocu = db.collection("products").document(it.prdId!!).asLiveData<ProductData>()
-                        myDocu.update("auctionProgressStatus", 1)
-                    }
-                    //진행중
-                    else if(it.startDate!!.toDate().before(Date())
-                        && it.endDate!!.toDate().after(Date())){
-                        it.auctionProgressStatus = 2
-                        Log.d(ContentValues.TAG, "d111111gggggggggg " + it.toString())
-
-                        val myDocu = db.collection("products").document(it.prdId!!).asLiveData<ProductData>()
-                        myDocu.update("auctionProgressStatus", 2)
-                    }
-                    else if(DateUtils.isToday(it.endDate!!.toDate().time)
-                        && it.endDate!!.toDate().before(Date())){
-                        Log.d(ContentValues.TAG, "d12222gggggggggg " + it.toString())
-                        it.auctionProgressStatus = 3
-
-                        val myDocu = db.collection("products").document(it.prdId!!).asLiveData<ProductData>()
-                        myDocu.update("auctionProgressStatus", 3)
-                    }
-                }
-                (binding.todayRecyclerView.adapter as HomeTodayListAdapter).setData(data!!)
-            }
+        viewModel.getTodayPrdList().observe(viewLifecycleOwner, Observer{
+            (binding.todayRecyclerView.adapter as HomeTodayListAdapter).setData(it!!)
         })
 
     }

@@ -64,6 +64,8 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.4.2'
     implementation 'com.github.markushi:circlebutton:1.1'
     implementation 'com.jaeger.statusbarutil:library:1.5.1'
+
+
     implementation platform('com.google.firebase:firebase-bom:30.1.0')
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation "com.github.ptrbrynt:FirestoreLiveData:1.1.1"
@@ -73,6 +75,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-database-ktx:20.0.5'
     implementation 'com.google.firebase:firebase-database:20.0.5'
     implementation 'com.firebaseui:firebase-ui-firestore:4.3.1'
+    implementation 'com.google.firebase:firebase-messaging'
+    implementation 'com.google.firebase:firebase-analytics'
+
+
     implementation 'com.github.MoeidHeidari:banner:1.04'
     implementation 'nl.joery.animatedbottombar:library:1.1.0'
     implementation 'com.gauravk.bubblenavigation:bubblenavigation:1.0.7'
@@ -88,6 +94,7 @@ dependencies {
 
     implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0'
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0'
+    implementation 'androidx.work:work-runtime-ktx:2.7.1'
 
     compileOnly 'org.projectlombok:lombok:1.18.12'
     annotationProcessor 'org.projectlombok:lombok:1.18.12'

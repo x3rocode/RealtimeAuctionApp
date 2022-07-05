@@ -7,11 +7,13 @@ import android.provider.SimPhonebookContract.SimRecords.PHONE_NUMBER
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.esteel4u.realtimeauctionapp.data.model.UserData
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.analytics.FirebaseAnalytics.Event.SIGN_UP
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.auth.User
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessaging
 
 class UserRepository {
 
@@ -26,6 +28,7 @@ class UserRepository {
 
             isSignIn.value = task.isSuccessful
         }
+
     }
 
 
