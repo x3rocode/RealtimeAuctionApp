@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.graphics.Color
 import android.os.Bundle
+import android.text.format.DateUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -21,6 +22,7 @@ import com.esteel4u.realtimeauctionapp.R
 import com.esteel4u.realtimeauctionapp.data.model.ProductData
 import com.esteel4u.realtimeauctionapp.data.model.TestData
 import com.esteel4u.realtimeauctionapp.databinding.FragmentHomeBinding
+import com.esteel4u.realtimeauctionapp.utils.FirestoreUtil
 import com.esteel4u.realtimeauctionapp.view.adapter.HomeTodayListAdapter
 import com.esteel4u.realtimeauctionapp.view.adapter.ViewBindingSampleAdapter
 import com.esteel4u.realtimeauctionapp.view.adapter.animationPlaybackSpeed
@@ -28,7 +30,11 @@ import com.esteel4u.realtimeauctionapp.view.utils.FigureIndicatorView
 import com.esteel4u.realtimeauctionapp.viewmodel.LoginViewModel
 import com.esteel4u.realtimeauctionapp.viewmodel.MainViewModel
 import com.esteel4u.realtimeauctionapp.viewmodel.ProductViewModel
+import com.google.firebase.Timestamp
+import com.google.firebase.Timestamp.now
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
+import com.google.type.DateTime
 import com.ptrbrynt.firestorelivedata.FirestoreResource
 import com.ptrbrynt.firestorelivedata.asLiveData
 import com.ptrbrynt.firestorelivedata.observe
@@ -43,7 +49,16 @@ import com.zhpan.indicator.base.IIndicator
 import com.zhpan.indicator.enums.IndicatorSlideMode
 import com.zhpan.indicator.enums.IndicatorStyle
 import kotlinx.android.synthetic.main.fragment_home.*
+import org.checkerframework.common.value.qual.IntVal
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.LocalDate.now
+import java.time.LocalDateTime
+import java.time.ZonedDateTime
+import java.time.chrono.ChronoLocalDateTime
+
 import java.util.*
+import java.util.concurrent.CopyOnWriteArrayList
 
 class HomeFragment  : Fragment(){
     private lateinit var mbannerViewPager: BannerViewPager<Int>
@@ -72,20 +87,53 @@ class HomeFragment  : Fragment(){
         mbannerViewPager = view.findViewById(R.id.banner_view)
         initBVP()
         setQQMusicStyle()
+
+
         binding.todayRecyclerView.apply {
             layoutManager = LinearLayoutManager(activity)
             adapter = HomeTodayListAdapter(this.context)
         }
 
+
+
         val myQuery = db.collection("products").asLiveData<ProductData>()
         myQuery.observe(viewLifecycleOwner, Observer { resource: FirestoreResource<List<ProductData>> ->
-            val data: List<ProductData>? = resource.data // The result of your query or reference, when status is SUCCESS
-            Log.d(ContentValues.TAG, "ddfasdfasdfasdf f fdfdf " + data.toString())
-            if(data !== null){
+
+            if(resource.data !== null){
+                val data: MutableList<ProductData>? = resource.data!!.toMutableList()
+                var  date = Date()
+                resource.data?.forEach{
+                    //대기
+                    if (DateUtils.isToday(it.startDate!!.toDate().time)
+                        && it.startDate!!.toDate().after(Date())){
+                        Log.d(ContentValues.TAG, "dgggggggggg " + it.toString())
+                        it.auctionProgressStatus = 1
+
+                        val myDocu = db.collection("products").document(it.prdId!!).asLiveData<ProductData>()
+                        myDocu.update("auctionProgressStatus", 1)
+                    }
+                    //진행중
+                    else if(it.startDate!!.toDate().before(Date())
+                        && it.endDate!!.toDate().after(Date())){
+                        it.auctionProgressStatus = 2
+                        Log.d(ContentValues.TAG, "d111111gggggggggg " + it.toString())
+
+                        val myDocu = db.collection("products").document(it.prdId!!).asLiveData<ProductData>()
+                        myDocu.update("auctionProgressStatus", 2)
+                    }
+                    else if(DateUtils.isToday(it.endDate!!.toDate().time)
+                        && it.endDate!!.toDate().before(Date())){
+                        Log.d(ContentValues.TAG, "d12222gggggggggg " + it.toString())
+                        it.auctionProgressStatus = 3
+
+                        val myDocu = db.collection("products").document(it.prdId!!).asLiveData<ProductData>()
+                        myDocu.update("auctionProgressStatus", 3)
+                    }
+                }
                 (binding.todayRecyclerView.adapter as HomeTodayListAdapter).setData(data!!)
             }
-
         })
+
     }
 
     override fun onDestroyView() {

@@ -62,6 +62,13 @@ class HomeTodayListAdapter(context: Context
         val product = productList[position]
         holder.bind(productList[position])
 
+
+        when (holder.binding.prdlist?.auctionProgressStatus){
+            1 -> holder.binding.prdStatus.text = "진행 예정"
+            2 -> holder.binding.prdStatus.text = "진행중"
+            3 -> holder.binding.prdStatus.text = "종료"
+        }
+
         expandItem(holder, product == expandedModel, animate = false)
         scaleDownItem(holder, position, isScaledDown)
 
