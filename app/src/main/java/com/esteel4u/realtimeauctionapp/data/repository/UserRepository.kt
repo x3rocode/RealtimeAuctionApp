@@ -5,6 +5,7 @@ import android.os.Build.ID
 import android.provider.ContactsContract.DisplayNameSources.NICKNAME
 import android.provider.SimPhonebookContract.SimRecords.PHONE_NUMBER
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.esteel4u.realtimeauctionapp.data.model.UserData
 import com.google.android.gms.tasks.OnCompleteListener
@@ -27,12 +28,13 @@ class UserRepository {
         auth.signInWithEmailAndPassword(eMail, password).addOnCompleteListener { task ->
 
             isSignIn.value = task.isSuccessful
+
         }
 
     }
 
 
-    fun getUserInfo() {
+    fun getUserInfo():LiveData<UserData> {
         auth.currentUser?.let { user ->
 
             val docRef = db.collection("users").document(user.uid)
@@ -45,12 +47,14 @@ class UserRepository {
                             document.get("gcsCompCode") as String,
                             document.get("userName") as String
                         )
+                        //UserData.getInstance(user.uid, document.get("userId")as String,  document.get("gcsCompCode") as String,   document.get("userName") as String)
                     }
                 }
                 .addOnFailureListener { exception ->
                     Log.d(ContentValues.TAG, "get failed with ", exception)
                 }
         }
+        return userInfo
     }
 
     fun signOut() {

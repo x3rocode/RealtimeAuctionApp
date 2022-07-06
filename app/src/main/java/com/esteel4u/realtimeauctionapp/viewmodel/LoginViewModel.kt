@@ -32,8 +32,8 @@ class LoginViewModel(val context: Context): ViewModel() {
         repository.signIn(eMail, password)
     }
 
-    fun getLoggedInUserInfo(){
-        repository.getUserInfo()
+    fun getLoggedInUserInfo(): LiveData<UserData>{
+        return repository.getUserInfo()
     }
 
     class Factory(val context: Context) : ViewModelProvider.NewInstanceFactory() {

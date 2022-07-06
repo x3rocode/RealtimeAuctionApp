@@ -1,33 +1,25 @@
 package com.esteel4u.realtimeauctionapp.data.repository
 
 import android.content.ContentValues
-import android.content.Context
-import android.os.Build.ID
-import android.provider.ContactsContract.DisplayNameSources.NICKNAME
-import android.provider.SimPhonebookContract.SimRecords.PHONE_NUMBER
 import android.text.format.DateUtils
 import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.esteel4u.realtimeauctionapp.data.model.ProductData
-import com.esteel4u.realtimeauctionapp.data.model.UserData
-import com.esteel4u.realtimeauctionapp.view.ui.fragments.HomeFragment
-import com.google.api.ResourceProto.resource
-import com.google.firebase.analytics.FirebaseAnalytics.Event.SIGN_UP
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.auth.User
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.ptrbrynt.firestorelivedata.FirestoreResource
-import com.ptrbrynt.firestorelivedata.TaskStatus
 import com.ptrbrynt.firestorelivedata.asLiveData
-import com.ptrbrynt.firestorelivedata.observe
 import java.util.*
 
 class ProductRepository(val lifecycleOwner: LifecycleOwner) {
 
-    private var productList = MutableLiveData<List<ProductData>>()
+    private var productAllList = MutableLiveData<List<ProductData>>()
+    private var productTodayList = MutableLiveData<List<ProductData>>()
+    private var productUserLikeList = MutableLiveData<List<ProductData>>()
+    private var auth = Firebase.auth
     private val db = Firebase.firestore
 
 
@@ -36,13 +28,14 @@ class ProductRepository(val lifecycleOwner: LifecycleOwner) {
         myQuery.observe(lifecycleOwner, Observer { resource: FirestoreResource<List<ProductData>> ->
             if(resource.data !== null) {
 
-                productList.postValue(resource.data!!)
+                productAllList.postValue(resource.data!!)
             }
         })
-        return productList
+        return productAllList
     }
 
     fun getTodayAuctionList(): MutableLiveData<List<ProductData>> {
+
         val myQuery = db.collection("products").orderBy("auctionProgressStatus") .asLiveData<ProductData>()
         var status = 0
         myQuery.observe(lifecycleOwner, Observer { resource: FirestoreResource<List<ProductData>> ->
@@ -77,9 +70,28 @@ class ProductRepository(val lifecycleOwner: LifecycleOwner) {
                     })
 
                 }
+                productTodayList.postValue(resource.data!!)
             }
         })
-        return productList
+        return productTodayList
+    }
+
+    fun getUserLikePrdList(): MutableLiveData<List<ProductData>> {
+
+        val myQuery = db.collection("products").orderBy("auctionProgressStatus") .asLiveData<ProductData>()
+        myQuery.observe(lifecycleOwner, Observer { resource: FirestoreResource<List<ProductData>> ->
+            if(resource.data !== null) {
+                val data: MutableList<ProductData>? = resource.data!!.toMutableList()
+
+                resource.data?.forEach {
+                    if(!it.notifyOnUserId!!.contains(auth.uid!!)){
+                        data!!.remove(it)
+                    }
+                }
+                productUserLikeList.postValue(data!!)
+            }
+        })
+        return productUserLikeList
     }
 
     fun updateAuctionStatus(status: Int, prdId: String){

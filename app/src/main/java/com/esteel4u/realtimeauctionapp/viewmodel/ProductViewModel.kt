@@ -26,6 +26,10 @@ class ProductViewModel (val lifecycleOwner: LifecycleOwner): ViewModel() {
         return repository.getTodayAuctionList()
     }
 
+    fun getUserLikePrdList():MutableLiveData<List<ProductData>> {
+        return repository.getUserLikePrdList()
+    }
+
     class Factory(val lifecycleOwner: LifecycleOwner) : ViewModelProvider.NewInstanceFactory() {
 
         override fun <T : ViewModel> create(modelClass: Class<T>): T {

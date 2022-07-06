@@ -1,7 +1,9 @@
 package com.esteel4u.realtimeauctionapp.view.adapter
 
 import android.animation.ValueAnimator
+import android.content.ContentValues
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,20 +18,30 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.esteel4u.realtimeauctionapp.R
 import com.esteel4u.realtimeauctionapp.data.model.ProductData
-import com.esteel4u.realtimeauctionapp.databinding.ItemHomeTodayListBinding
+import com.esteel4u.realtimeauctionapp.data.model.UserData
+import com.esteel4u.realtimeauctionapp.databinding.ItemProductListBinding
 import com.esteel4u.realtimeauctionapp.view.utils.*
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.auth.User
+import com.returnz3ro.messystem.service.model.datastore.DataStoreModule
+import com.returnz3ro.messystem.service.model.datastore.DataStoreModule.Companion.uid
+import com.returnz3ro.messystem.service.model.datastore.DataStoreModule.Companion.userName
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.lang.Math.log
 
 var animationPlaybackSpeed: Double = 0.8
 
-class HomeTodayListAdapter(context: Context
-): RecyclerView.Adapter<HomeTodayListAdapter.MyViewHolder>()  {
+class ProductListAdapter(context: Context
+): RecyclerView.Adapter<ProductListAdapter.MyViewHolder>()  {
 
     var productList = mutableListOf<ProductData>()
     private val context = context
     private val originalBg: Int by bindColor(context, R.color.white)
     private val expandedBg: Int by bindColor(context, R.color.white)
+    private lateinit var dataStore: DataStoreModule
+    private var userId: String = ""
 
     private val listItemHorizontalPadding: Float by bindDimen(context, R.dimen.list_item_vertical_padding)
     private val listItemVerticalPadding: Float by bindDimen(context, R.dimen.list_item_vertical_padding)
@@ -46,13 +58,25 @@ class HomeTodayListAdapter(context: Context
     private var isScaledDown = false
 
     // Method #5
-    class MyViewHolder(val binding: ItemHomeTodayListBinding) : RecyclerView.ViewHolder(binding.root) {
+    class MyViewHolder(val binding: ItemProductListBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(currentPrd : ProductData) {
             binding.prdlist = currentPrd
         }
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-            val binding = ItemHomeTodayListBinding.inflate(LayoutInflater.from(parent.context),  parent, false)
+
+            // get userinfo from data store
+        dataStore = DataStoreModule(parent.context)
+        CoroutineScope(Dispatchers.Default).launch {
+            dataStore.user.collect{
+                userId = it.uid!!
+                Log.d(ContentValues.TAG, "uid11 " + it.uid)
+                Log.d(ContentValues.TAG, "uid11 " + userId)
+            }
+        }
+
+
+        val binding = ItemProductListBinding.inflate(LayoutInflater.from(parent.context),  parent, false)
             return MyViewHolder(binding)
     }
 
@@ -67,6 +91,10 @@ class HomeTodayListAdapter(context: Context
             1 -> holder.binding.prdStatus.text = "진행 예정"
             2 -> holder.binding.prdStatus.text = "진행중"
             3 -> holder.binding.prdStatus.text = "종료"
+        }
+
+        if(holder.binding.prdlist?.notifyOnUserId!!.contains(userId)){
+            holder.binding.sparkButton.isChecked = true
         }
 
         expandItem(holder, product == expandedModel, animate = false)
@@ -122,12 +150,12 @@ class HomeTodayListAdapter(context: Context
 
     //expand
     private fun expandItem(holder: MyViewHolder, expand: Boolean, animate: Boolean) {
-        notifyDataSetChanged()
+
         if (animate) {
             val animator = getValueAnimator(
                 expand, listItemExpandDuration, AccelerateDecelerateInterpolator()
             ) { progress -> setExpandProgress(holder, progress) }
-
+            holder.binding.expandView.isVisible = true
             if (expand) animator.doOnStart { holder.binding.expandView.isVisible = true }
             else animator.doOnEnd { holder.binding.expandView.isVisible = false }
 
@@ -154,7 +182,6 @@ class HomeTodayListAdapter(context: Context
             holder.binding.cardContainer.doOnLayout { view ->
                 originalHeight = view.height
 
-                holder.binding.expandView.isVisible = true
                 view.doOnPreDraw {
                     expandedHeight = view.height
                     holder.binding.expandView.isVisible = false
@@ -178,7 +205,7 @@ class HomeTodayListAdapter(context: Context
 //            holder.binding.cardContainer.setBackgroundColor(blendColors(emergencyBg, expandedBg, progress))
 
         holder.binding.cardContainer.requestLayout()
-        holder.binding.chevron.rotation = 90 * progress
+        //holder.binding.chevron.rotation = 90 * progress
     }
 
     private inline val LinearLayoutManager.visibleItemsRange: IntRange
@@ -216,7 +243,7 @@ class HomeTodayListAdapter(context: Context
         holder.binding.cardContainer.layoutParams.apply {
             width = ((if (itemExpanded) expandedWidth else originalWidth) * (1 - 0.1f * progress)).toInt()
             height = ((if (itemExpanded) expandedHeight else originalHeight) * (1 - 0.1f * progress)).toInt()
-//            log("width=$width, height=$height [${"%.2f".format(progress)}]")
+            //log("width=$width, height=$height [${"%.2f".format(progress)}]")
         }
         holder.binding.cardContainer.requestLayout()
 
