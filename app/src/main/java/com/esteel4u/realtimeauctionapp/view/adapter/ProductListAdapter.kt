@@ -65,13 +65,13 @@ class ProductListAdapter(context: Context
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
 
+        Log.d(ContentValues.TAG, "-------------------ada create viewholder " + parent.context)
             // get userinfo from data store
         dataStore = DataStoreModule(parent.context)
         CoroutineScope(Dispatchers.Default).launch {
             dataStore.user.collect{
                 userId = it.uid!!
-                Log.d(ContentValues.TAG, "uid11 " + it.uid)
-                Log.d(ContentValues.TAG, "uid11 " + userId)
+
             }
         }
 
@@ -83,6 +83,7 @@ class ProductListAdapter(context: Context
 
     // 뷰 홀더에 데이터 바인딩
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        Log.d(ContentValues.TAG, "-------------------ada onbind viewholder " + context)
         val product = productList[position]
         holder.bind(productList[position])
 
@@ -155,7 +156,7 @@ class ProductListAdapter(context: Context
             val animator = getValueAnimator(
                 expand, listItemExpandDuration, AccelerateDecelerateInterpolator()
             ) { progress -> setExpandProgress(holder, progress) }
-            holder.binding.expandView.isVisible = true
+
             if (expand) animator.doOnStart { holder.binding.expandView.isVisible = true }
             else animator.doOnEnd { holder.binding.expandView.isVisible = false }
 
@@ -182,6 +183,7 @@ class ProductListAdapter(context: Context
             holder.binding.cardContainer.doOnLayout { view ->
                 originalHeight = view.height
 
+                holder.binding.expandView.isVisible = true
                 view.doOnPreDraw {
                     expandedHeight = view.height
                     holder.binding.expandView.isVisible = false
@@ -256,7 +258,7 @@ class ProductListAdapter(context: Context
             (listItemHorizontalPadding * (1 - 0.2f * progress)).toInt(),
             (listItemVerticalPadding * (1 - 0.2f * progress)).toInt()
         )
-
+        holder.binding.listItemFg.alpha = progress
     }
 
     private fun scaleDownItem(holder: MyViewHolder, position: Int, isScaleDown: Boolean) {

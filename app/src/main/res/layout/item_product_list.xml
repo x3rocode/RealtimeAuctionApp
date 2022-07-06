@@ -292,7 +292,14 @@ too. layout_gravity="center_horizontal" is a lot simpler.
                     </LinearLayout>
 
                 </RelativeLayout>
-
+                <View
+                    android:id="@+id/list_item_fg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:alpha="100"
+                    android:background="@color/lblue30"
+                    android:visibility="visible"
+                    tools:visibility="gone" />
 
             </FrameLayout>
 

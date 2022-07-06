@@ -1,7 +1,9 @@
 package com.esteel4u.realtimeauctionapp.view.ui.fragments
 
 import android.animation.ValueAnimator
+import android.content.ContentValues
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,9 +20,9 @@ import com.esteel4u.realtimeauctionapp.view.adapter.animationPlaybackSpeed
 import com.esteel4u.realtimeauctionapp.viewmodel.ProductViewModel
 
 class LikeFragment : Fragment() {
+    private val viewModel: ProductViewModel by activityViewModels { ProductViewModel.Factory(viewLifecycleOwner) }
     private var _binding : FragmentLikeBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: ProductViewModel by activityViewModels { ProductViewModel.Factory(viewLifecycleOwner) }
     private lateinit var todayAdapter : ProductListAdapter
 
     private val loadingDuration: Long
@@ -31,11 +33,13 @@ class LikeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Log.d(ContentValues.TAG, "-------------------oncreateview like " )
         _binding = FragmentLikeBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        Log.d(ContentValues.TAG, "-------------------onviewcreated like " )
         todayAdapter = ProductListAdapter(view.context)
 
         binding.likeRecyclerView.apply {

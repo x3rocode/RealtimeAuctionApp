@@ -26,6 +26,7 @@ import com.esteel4u.realtimeauctionapp.R
 import com.esteel4u.realtimeauctionapp.data.model.ProductData
 import com.esteel4u.realtimeauctionapp.data.model.TestData
 import com.esteel4u.realtimeauctionapp.databinding.FragmentHomeBinding
+import com.esteel4u.realtimeauctionapp.databinding.FragmentLikeBinding
 import com.esteel4u.realtimeauctionapp.view.adapter.ProductListAdapter
 import com.esteel4u.realtimeauctionapp.view.adapter.ViewBindingSampleAdapter
 import com.esteel4u.realtimeauctionapp.view.adapter.animationPlaybackSpeed
@@ -81,12 +82,13 @@ class HomeFragment  : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
+        Log.d(ContentValues.TAG, "-------------------oncreateview home " )
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        Log.d(ContentValues.TAG, "-------------------onviewcreated home " )
         initBVP()
         setQQMusicStyle()
         todayAdapter = ProductListAdapter(view.context)
