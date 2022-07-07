@@ -51,6 +51,5 @@ class MainActivity: AppCompatActivity() {
         view_pager.offscreenPageLimit = 5
         bottom_bar.setupWithViewPager2(view_pager)
 
-
     }
 }

@@ -7,11 +7,16 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.esteel4u.realtimeauctionapp.data.model.ProductData
+import com.google.android.gms.common.util.DataUtils
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.ptrbrynt.firestorelivedata.FirestoreResource
 import com.ptrbrynt.firestorelivedata.asLiveData
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.LocalTime
+import java.time.ZoneId
 import java.util.*
 
 class ProductRepository(val lifecycleOwner: LifecycleOwner) {
@@ -38,39 +43,49 @@ class ProductRepository(val lifecycleOwner: LifecycleOwner) {
 
         val myQuery = db.collection("products").orderBy("auctionProgressStatus") .asLiveData<ProductData>()
         var status = 0
+        var alllist: MutableList<ProductData>
+
         myQuery.observe(lifecycleOwner, Observer { resource: FirestoreResource<List<ProductData>> ->
             if(resource.data !== null) {
+                alllist = resource.data!!.toMutableList()
                 resource.data?.forEach {
 
                     val myDocu = db.collection("products").document(it.prdId!!).asLiveData<ProductData>()
+                    val localDateTime: LocalDateTime =
+                        LocalDateTime.of(LocalDate.now(), LocalTime.MIDNIGHT)
+                    val todaymidnight =
+                        Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant())
 
-                    //대기
-                    if (DateUtils.isToday(it.startDate!!.toDate().time )
+                    val localDateTime1: LocalDateTime =
+                        LocalDateTime.of(LocalDate.now().plusDays(1), LocalTime.MIDNIGHT)
+                    val tomorrowmidnight =
+                        Date.from(localDateTime1.atZone(ZoneId.systemDefault()).toInstant())
+
+                    //check is today
+                    if((it.startDate!!.toDate().before(todaymidnight) && it.endDate!!.toDate().before(todaymidnight)) ||
+                        (it.startDate!!.toDate().after(tomorrowmidnight) && it.endDate!!.toDate().after(tomorrowmidnight))){
+                        alllist!!.remove(it)
+                    }
+                    //진행중
+                    else  if (DateUtils.isToday(it.startDate!!.toDate().time )
                         && it.startDate!!.toDate().after(Date())) {
-
                         status = 1
-
-                    } //진행중
+                    }
+                    //진행예정
                     else if (it.startDate!!.toDate().before(Date())
                         && it.endDate!!.toDate().after(Date())) {
                         status = 2
-                        //완료
-                    } else if (DateUtils.isToday(it.endDate!!.toDate().time)
+
+                    }
+                    //완료
+                    else if (DateUtils.isToday(it.endDate!!.toDate().time)
                         && it.endDate!!.toDate().before(Date())) {
                         status = 3
                     }
 
-                    val task = myDocu.update( "auctionProgressStatus" , status)
-                    task.observe(lifecycleOwner, Observer { taskResult ->
-
-                        Log.d(ContentValues.TAG, "aa " + it.prdName)
-                        Log.d(ContentValues.TAG, "1111 " +taskResult.data)
-                        Log.d(ContentValues.TAG, "1111222 " +taskResult.exception)
-                        Log.d(ContentValues.TAG, "111331 " +taskResult.status)
-                    })
-
+                    myDocu.update( "auctionProgressStatus" , status)
                 }
-                productTodayList.postValue(resource.data!!)
+                productTodayList.postValue(alllist)
             }
         })
         return productTodayList
@@ -94,16 +109,20 @@ class ProductRepository(val lifecycleOwner: LifecycleOwner) {
         return productUserLikeList
     }
 
-    fun updateUserLikePrdList(isButtonActive: Boolean, productData: ProductData){
+    fun updateUserLikePrdList(productData: ProductData){
         var oldList = productData.notifyOnUserId
         var newList = oldList!!.toMutableList()
 
-
-        if(isButtonActive){
+        if(oldList.contains(auth.uid)){
             newList.remove(auth.uid)
         }else{
             newList.add(auth.uid!!)
         }
+//        if(isButtonActive){
+//            newList.remove(auth.uid)
+//        }else{
+//            newList.add(auth.uid!!)
+//        }
 
         val myDocu = db.collection("products").document(productData.prdId!!).asLiveData<ProductData>()
         myDocu.update("notifyOnUserId", newList)

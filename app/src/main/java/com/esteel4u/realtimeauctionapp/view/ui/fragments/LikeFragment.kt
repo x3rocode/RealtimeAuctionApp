@@ -95,7 +95,7 @@ class LikeFragment : Fragment(),
         todayAdapter.getScaleDownAnimator(isScaledDown)
 
     override fun OnLikeButtonClickListener(v: View, prd: ProductData) {
-        viewModel.updateUserLikePrdList(v.spark_button.isChecked, prd);
+        viewModel.updateUserLikePrdList(prd);
     }
 
 }

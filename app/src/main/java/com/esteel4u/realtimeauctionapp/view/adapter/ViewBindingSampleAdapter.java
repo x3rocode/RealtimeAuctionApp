@@ -6,11 +6,6 @@ import com.esteel4u.realtimeauctionapp.databinding.ItemHomeBannerModelBinding;
 import com.zhpan.bannerview.BaseBannerAdapter;
 import com.zhpan.bannerview.BaseViewHolder;
 
-/**
- * @author DBoy
- * @date 2020/12/11
- * Class 描述 : 使用ViewBinding示例
- */
 public class ViewBindingSampleAdapter extends BaseBannerAdapter<Integer> {
 
   private final int mSliderModel;

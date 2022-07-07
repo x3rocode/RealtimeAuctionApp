@@ -12,7 +12,7 @@ data class ProductData(
     var prdThk: Double? = null,  //두께
     var prdWth: Double? = null,  //폭
     var prdWgt: Double? = null,  //무게
-    var prdTotClsSeqNm: String? = null,  //등급 주문외1
+    var prdTotClsSeqNm: Int? = 1,  //등급 1 주문외1급 2주문외2급
     var worksCode: String? = null,  //광양, 판교
     var startDate: Timestamp? = null,  //경매시작일
     var endDate: Timestamp? = null,    //경매종료일

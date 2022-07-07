@@ -94,7 +94,7 @@ too. layout_gravity="center_horizontal" is a lot simpler.
                         android:layout_below="@id/prd_auction_type"
                         android:layout_marginTop="8dp"
                         android:fontFamily="@font/lexend_deca"
-                        android:text="@{prdlist.prdTotClsSeqNm}"
+                        android:text="주무뇌"
                         android:textSize="10dp" />
 
                     <TextView

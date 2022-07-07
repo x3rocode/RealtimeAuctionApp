@@ -3,11 +3,13 @@ package com.esteel4u.realtimeauctionapp.view.adapter
 import android.animation.ValueAnimator
 import android.content.ContentValues
 import android.content.Context
+import android.service.autofill.Validators.not
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
+import android.widget.ImageView
 import androidx.core.animation.doOnEnd
 import androidx.core.animation.doOnStart
 import androidx.core.view.doOnLayout
@@ -51,24 +53,23 @@ class ProductListAdapter(
 
     private val originalBg: Int by bindColor(context, R.color.white)
     private val expandedBg: Int by bindColor(context, R.color.white)
-    private lateinit var dataStore: DataStoreModule
-    private var userId: String = ""
+
 
     private val listItemHorizontalPadding: Float by bindDimen(context, R.dimen.list_item_vertical_padding)
     private val listItemVerticalPadding: Float by bindDimen(context, R.dimen.list_item_vertical_padding)
     private val originalWidth = context.screenWidth - 48.dp
     private val expandedWidth = context.screenWidth - 24.dp
-    private var originalHeight = -1 // will be calculated dynamically
-    private var expandedHeight = -1 // will be calculated dynamically
-
+    private var originalHeight = -1
+    private var expandedHeight = -1
     private val listItemExpandDuration: Long get() = (300L / animationPlaybackSpeed).toLong()
-    private val inflater: LayoutInflater = LayoutInflater.from(context)
-
-    private lateinit var recyclerView: RecyclerView
     private var expandedModel: ProductData? = null
     private var isScaledDown = false
 
-    // Method #5
+    private lateinit var dataStore: DataStoreModule
+    private var userId: String = ""
+    private lateinit var recyclerView: RecyclerView
+
+
     class MyViewHolder(
         val binding: ItemProductListBinding,
         private val interaction: Interaction?
@@ -77,19 +78,17 @@ class ProductListAdapter(
 
         fun bind(currentPrd : ProductData) {
             binding.prdlist = currentPrd
-
             binding.sparkButton.setOnClickListener{
                 interaction?.OnLikeButtonClickListener(binding.root, currentPrd)
             }
+            binding.executePendingBindings()
         }
-
     }
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
 
-        Log.d(ContentValues.TAG, "-------------------ada create viewholder " + parent.context)
-            // get userinfo from data store
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductListAdapter.MyViewHolder {
+        // get userinfo from data store
         dataStore = DataStoreModule(parent.context)
         CoroutineScope(Dispatchers.Default).launch {
             dataStore.user.collect{
@@ -97,23 +96,25 @@ class ProductListAdapter(
 
             }
         }
-
-
         val binding = ItemProductListBinding.inflate(LayoutInflater.from(parent.context),  parent, false)
             return MyViewHolder(binding, interaction)
     }
 
 
-    // 뷰 홀더에 데이터 바인딩
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+
         val product = productList[position]
         holder.bind(productList[position])
 
-
         when (holder.binding.prdlist?.auctionProgressStatus){
-            1 -> holder.binding.prdStatus.text = "진행 예정"
-            2 -> holder.binding.prdStatus.text = "진행중"
+            1 -> holder.binding.prdStatus.text = "진행중"
+            2 -> holder.binding.prdStatus.text = "진행 예정"
             3 -> holder.binding.prdStatus.text = "종료"
+        }
+
+        when (holder.binding.prdlist?.prdTotClsSeqNm){
+            1 -> holder.binding.prdTotseqNm?.text = "주문외 1급"
+            2 -> holder.binding.prdTotseqNm?.text = "주문외 2급"
         }
 
         if(holder.binding.prdlist?.notifyOnUserId!!.contains(userId)){
@@ -124,46 +125,41 @@ class ProductListAdapter(
         scaleDownItem(holder, position, isScaledDown)
 
         holder.binding.cardContainer.setOnClickListener {
-            if (expandedModel == null) {
+            when (expandedModel) {
+                null -> {
+                    // expand clicked view
+                    expandItem(holder, expand = true, animate = true)
+                    expandedModel = product
+                }
+                product -> {
+                    // collapse clicked view
+                    expandItem(holder, expand = false, animate = true)
+                    expandedModel = null
+                }
+                else -> {
+                    // collapse previously expanded view
+                    val expandedModelPosition = productList.indexOf(expandedModel!!)
+                    val oldViewHolder =
+                        recyclerView.findViewHolderForAdapterPosition(expandedModelPosition) as? ProductListAdapter.MyViewHolder
+                    if (oldViewHolder != null) expandItem(oldViewHolder, expand = false, animate = true)
 
-                // expand clicked view
-                expandItem(holder, expand = true, animate = true)
-                expandedModel = product
-            } else if (expandedModel == product) {
-
-                // collapse clicked view
-                expandItem(holder, expand = false, animate = true)
-                expandedModel = null
-            } else {
-
-                // collapse previously expanded view
-                val expandedModelPosition = productList.indexOf(expandedModel!!)
-
-                val oldViewHolder =
-                    recyclerView.findViewHolderForAdapterPosition(expandedModelPosition) as? MyViewHolder
-                if (oldViewHolder != null) expandItem(oldViewHolder, expand = false, animate = true)
-
-                // expand clicked view
-                expandItem(holder, expand = true, animate = true)
-                expandedModel = product
+                    // expand clicked view
+                    expandItem(holder, expand = true, animate = true)
+                    expandedModel = product
+                }
             }
         }
         holder.binding.executePendingBindings()
     }
 
-    // 뷰 홀더의 개수 리턴
     override fun getItemCount(): Int {
-        Log.d(ContentValues.TAG, "----------size000000000000000000000* " + productList.size)
         return productList.size
     }
 
-    // Method #7
     interface Interaction {
         fun OnLikeButtonClickListener(v:View, p: ProductData)
     }
 
-
-    // Method #4
     fun setData(prdData: List<ProductData>) {
         val diffCallback = DiffCallback(this.productList, prdData)
         val diffResult = DiffUtil.calculateDiff(diffCallback)
@@ -171,15 +167,10 @@ class ProductListAdapter(
         this.productList.clear()
         this.productList.addAll(prdData)
         diffResult.dispatchUpdatesTo(this)
-
-        //notifyDataSetChanged()
     }
 
-
-
-
     //expand
-    private fun expandItem(holder: MyViewHolder, expand: Boolean, animate: Boolean) {
+    private fun expandItem(holder: ProductListAdapter.MyViewHolder, expand: Boolean, animate: Boolean) {
 
         if (animate) {
             val animator = getValueAnimator(
@@ -202,7 +193,7 @@ class ProductListAdapter(
         super.onAttachedToRecyclerView(recyclerView)
         this.recyclerView = recyclerView
     }
-    override fun onViewAttachedToWindow(holder: MyViewHolder) {
+    override fun onViewAttachedToWindow(holder: ProductListAdapter.MyViewHolder) {
         super.onViewAttachedToWindow(holder)
 
         // get originalHeight & expandedHeight if not gotten before
@@ -222,21 +213,14 @@ class ProductListAdapter(
         }
     }
 
-    private fun setExpandProgress(holder: MyViewHolder, progress: Float) {
+    private fun setExpandProgress(holder: ProductListAdapter.MyViewHolder, progress: Float) {
         if (expandedHeight > 0 && originalHeight > 0) {
             holder.binding.cardContainer.layoutParams.height =
                 (originalHeight + (expandedHeight - originalHeight) * progress).toInt()
         }
         holder.binding.cardContainer.layoutParams.width =
             (originalWidth + (expandedWidth - originalWidth) * progress).toInt()
-
-//        if(holder.binding.joborder?.joborderEmg == 0)
-//            holder.binding.cardContainer.setBackgroundColor(blendColors(originalBg, expandedBg, progress))
-//        else if(holder.binding.joborder?.joborderEmg == 1)
-//            holder.binding.cardContainer.setBackgroundColor(blendColors(emergencyBg, expandedBg, progress))
-
         holder.binding.cardContainer.requestLayout()
-        //holder.binding.chevron.rotation = 90 * progress
     }
 
     private inline val LinearLayoutManager.visibleItemsRange: IntRange
@@ -251,17 +235,11 @@ class ProductListAdapter(
 
             // Get viewHolder for all visible items and animate attributes
             for (i in lm.visibleItemsRange) {
-                val holder = recyclerView.findViewHolderForLayoutPosition(i) as MyViewHolder
+                val holder = recyclerView.findViewHolderForLayoutPosition(i) as ProductListAdapter.MyViewHolder
                 setScaleDownProgress(holder, i, progress)
             }
         }
-
-        // Set adapter variable when animation starts so that newly binded views in
-        // onBindViewHolder will respect the new size when they come into the screen
         animator.doOnStart { this.isScaledDown = isScaledDown }
-
-        // For all the non visible items in the layout manager, notify them to adjust the
-        // view to the new size
         animator.doOnEnd {
             repeat(lm.itemCount) { if (it !in lm.visibleItemsRange) notifyItemChanged(it) }
         }
@@ -269,12 +247,11 @@ class ProductListAdapter(
     }
 
 
-    private fun setScaleDownProgress(holder: MyViewHolder, position: Int, progress: Float) {
+    private fun setScaleDownProgress(holder: ProductListAdapter.MyViewHolder, position: Int, progress: Float) {
         val itemExpanded = position >= 0 && productList[position] == expandedModel
         holder.binding.cardContainer.layoutParams.apply {
             width = ((if (itemExpanded) expandedWidth else originalWidth) * (1 - 0.1f * progress)).toInt()
             height = ((if (itemExpanded) expandedHeight else originalHeight) * (1 - 0.1f * progress)).toInt()
-            //log("width=$width, height=$height [${"%.2f".format(progress)}]")
         }
         holder.binding.cardContainer.requestLayout()
 
@@ -290,7 +267,7 @@ class ProductListAdapter(
         holder.binding.listItemFg.alpha = progress
     }
 
-    private fun scaleDownItem(holder: MyViewHolder, position: Int, isScaleDown: Boolean) {
+    private fun scaleDownItem(holder: ProductListAdapter.MyViewHolder, position: Int, isScaleDown: Boolean) {
         setScaleDownProgress(holder, position, if (isScaleDown) 1f else 0f)
     }
 
