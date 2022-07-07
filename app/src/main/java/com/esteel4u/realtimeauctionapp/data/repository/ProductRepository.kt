@@ -94,6 +94,22 @@ class ProductRepository(val lifecycleOwner: LifecycleOwner) {
         return productUserLikeList
     }
 
+    fun updateUserLikePrdList(isButtonActive: Boolean, productData: ProductData){
+        var oldList = productData.notifyOnUserId
+        var newList = oldList!!.toMutableList()
+
+
+        if(isButtonActive){
+            newList.remove(auth.uid)
+        }else{
+            newList.add(auth.uid!!)
+        }
+
+        val myDocu = db.collection("products").document(productData.prdId!!).asLiveData<ProductData>()
+        myDocu.update("notifyOnUserId", newList)
+    }
+
+
     fun updateAuctionStatus(status: Int, prdId: String){
 //        val myDocu = db.collection("products").document(prdId!!).asLiveData<ProductData>()
 //        myDocu.update("auctionProgressStatus", status)

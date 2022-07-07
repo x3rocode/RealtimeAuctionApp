@@ -20,12 +20,16 @@ import com.esteel4u.realtimeauctionapp.R
 import com.esteel4u.realtimeauctionapp.data.model.ProductData
 import com.esteel4u.realtimeauctionapp.data.model.UserData
 import com.esteel4u.realtimeauctionapp.databinding.ItemProductListBinding
+import com.esteel4u.realtimeauctionapp.view.ui.fragments.HomeFragment
 import com.esteel4u.realtimeauctionapp.view.utils.*
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.auth.User
 import com.returnz3ro.messystem.service.model.datastore.DataStoreModule
 import com.returnz3ro.messystem.service.model.datastore.DataStoreModule.Companion.uid
+import com.returnz3ro.messystem.service.model.datastore.DataStoreModule.Companion.userId
 import com.returnz3ro.messystem.service.model.datastore.DataStoreModule.Companion.userName
+import com.varunest.sparkbutton.SparkButton
+import com.varunest.sparkbutton.SparkEventListener
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -33,11 +37,18 @@ import java.lang.Math.log
 
 var animationPlaybackSpeed: Double = 0.8
 
-class ProductListAdapter(context: Context
+class ProductListAdapter(
+    products: List<ProductData>,
+    private val interaction: Interaction? = null,
+    context: Context
 ): RecyclerView.Adapter<ProductListAdapter.MyViewHolder>()  {
 
     var productList = mutableListOf<ProductData>()
-    private val context = context
+
+    init {
+        productList.addAll(products)
+    }
+
     private val originalBg: Int by bindColor(context, R.color.white)
     private val expandedBg: Int by bindColor(context, R.color.white)
     private lateinit var dataStore: DataStoreModule
@@ -58,11 +69,23 @@ class ProductListAdapter(context: Context
     private var isScaledDown = false
 
     // Method #5
-    class MyViewHolder(val binding: ItemProductListBinding) : RecyclerView.ViewHolder(binding.root) {
+    class MyViewHolder(
+        val binding: ItemProductListBinding,
+        private val interaction: Interaction?
+        ) : RecyclerView.ViewHolder(binding.root) {
+
+
         fun bind(currentPrd : ProductData) {
             binding.prdlist = currentPrd
+
+            binding.sparkButton.setOnClickListener{
+                interaction?.OnLikeButtonClickListener(binding.root, currentPrd)
+            }
         }
+
     }
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
 
         Log.d(ContentValues.TAG, "-------------------ada create viewholder " + parent.context)
@@ -77,13 +100,12 @@ class ProductListAdapter(context: Context
 
 
         val binding = ItemProductListBinding.inflate(LayoutInflater.from(parent.context),  parent, false)
-            return MyViewHolder(binding)
+            return MyViewHolder(binding, interaction)
     }
 
 
     // 뷰 홀더에 데이터 바인딩
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        Log.d(ContentValues.TAG, "-------------------ada onbind viewholder " + context)
         val product = productList[position]
         holder.bind(productList[position])
 
@@ -131,19 +153,26 @@ class ProductListAdapter(context: Context
 
     // 뷰 홀더의 개수 리턴
     override fun getItemCount(): Int {
+        Log.d(ContentValues.TAG, "----------size000000000000000000000* " + productList.size)
         return productList.size
     }
 
     // Method #7
     interface Interaction {
-        fun onItemSelected(position: Int, item: ProductData)
+        fun OnLikeButtonClickListener(v:View, p: ProductData)
     }
+
+
     // Method #4
     fun setData(prdData: List<ProductData>) {
+        val diffCallback = DiffCallback(this.productList, prdData)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+
         this.productList.clear()
         this.productList.addAll(prdData)
+        diffResult.dispatchUpdatesTo(this)
 
-        notifyDataSetChanged()
+        //notifyDataSetChanged()
     }
 
 

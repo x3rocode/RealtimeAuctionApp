@@ -10,6 +10,17 @@ import com.esteel4u.realtimeauctionapp.databinding.FragmentLikeBinding
 import com.esteel4u.realtimeauctionapp.databinding.FragmentListBinding
 
 class ListFragment : Fragment() {
+    companion object {
+        fun newInstance(position: Int): ListFragment {
+            val instance =
+                ListFragment()
+            val args = Bundle()
+            args.putInt("position", position)
+            instance.arguments = args
+            return instance
+        }
+    }
+
     private lateinit var binding: FragmentListBinding
 
     override fun onCreateView(

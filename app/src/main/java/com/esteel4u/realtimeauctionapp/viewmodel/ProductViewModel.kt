@@ -30,6 +30,10 @@ class ProductViewModel (val lifecycleOwner: LifecycleOwner): ViewModel() {
         return repository.getUserLikePrdList()
     }
 
+    fun updateUserLikePrdList(isButtonActive: Boolean, productData: ProductData){
+        repository.updateUserLikePrdList(isButtonActive, productData)
+    }
+
     class Factory(val lifecycleOwner: LifecycleOwner) : ViewModelProvider.NewInstanceFactory() {
 
         override fun <T : ViewModel> create(modelClass: Class<T>): T {

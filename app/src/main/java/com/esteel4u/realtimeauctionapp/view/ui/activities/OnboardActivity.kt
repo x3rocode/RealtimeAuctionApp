@@ -35,9 +35,8 @@ class OnboardActivity: AppCompatActivity() {
             Animatoo.animateSlideLeft(this)
         }
 
-        val btnNextStep: Button = findViewById(com.esteel4u.realtimeauctionapp.R.id.next_btn)
 
-        btnNextStep.setOnClickListener {
+        next_btn.setOnClickListener {
             if (getItem() > mViewPager.childCount) {
                 finish()
                 val intent =

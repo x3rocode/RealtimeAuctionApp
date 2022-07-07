@@ -20,11 +20,11 @@ class MainViewPagerAdapter(
 
     override fun createFragment(position: Int): Fragment {
         when(position) {
-            0 -> return ListFragment()
-            1 -> return HomeFragment()
-            2 -> return CartFragment()
-            3 -> return LikeFragment()
-            4 -> return MyPageFragment()
+            0 -> return HomeFragment.newInstance(position)
+            1 -> return ListFragment.newInstance(position)
+            2 -> return CartFragment.newInstance(position)
+            3 -> return LikeFragment.newInstance(position)
+            4 -> return MyPageFragment.newInstance(position)
         }
 
         return MyPageFragment()

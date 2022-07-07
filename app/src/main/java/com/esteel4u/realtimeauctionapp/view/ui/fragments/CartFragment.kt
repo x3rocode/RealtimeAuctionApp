@@ -9,6 +9,16 @@ import com.esteel4u.realtimeauctionapp.databinding.FragmentCartBinding
 import com.esteel4u.realtimeauctionapp.databinding.FragmentHomeBinding
 
 class CartFragment: Fragment() {
+    companion object {
+        fun newInstance(position: Int): CartFragment {
+            val instance =
+                CartFragment()
+            val args = Bundle()
+            args.putInt("position", position)
+            instance.arguments = args
+            return instance
+        }
+    }
     private lateinit var binding: FragmentCartBinding
 
     override fun onCreateView(

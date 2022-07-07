@@ -1,8 +1,10 @@
 package com.esteel4u.realtimeauctionapp.view.ui.activities
 
+import android.content.ContentValues
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
@@ -38,7 +40,7 @@ class MainActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
 
-
+        Log.d(ContentValues.TAG, "*********mainactivity create***********" )
         setContentView(binding.root)
 
         view_pager.adapter =
@@ -46,17 +48,9 @@ class MainActivity: AppCompatActivity() {
                 supportFragmentManager,
                 lifecycle
             )
+        view_pager.offscreenPageLimit = 5
         bottom_bar.setupWithViewPager2(view_pager)
 
 
-        //var bubbleNavigationConstraintView: BubbleNavigationConstraintView = findViewById(R.id.equal_navigation_bar)
-        //bubbleNavigationConstraintView.setTypeface(Typeface.createFromAsset(assets, "lexend_deca.ttf"))
-//        val db = FirebaseFirestore.getInstance()
-//        val name = db.collection("users").document(AuthUtil.getAuthId()).asLiveData<UserData>()
-//
-//        name.observe(this, Observer{
-//            resources: FirestoreResource<UserData> ->
-//            idtxt.setText(resources.data?.userName)
-//        })
     }
 }

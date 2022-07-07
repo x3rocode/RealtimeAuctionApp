@@ -3,28 +3,22 @@ package com.esteel4u.realtimeauctionapp.view.ui.fragments
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.ContentValues
-import android.graphics.Color
 import android.os.Bundle
-import android.text.format.DateUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.GONE
 import android.view.ViewGroup
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.*
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.esteel4u.realtimeauctionapp.R
 import com.esteel4u.realtimeauctionapp.data.model.ProductData
-import com.esteel4u.realtimeauctionapp.data.model.TestData
+import com.esteel4u.realtimeauctionapp.data.model.UserData
 import com.esteel4u.realtimeauctionapp.databinding.FragmentHomeBinding
 import com.esteel4u.realtimeauctionapp.databinding.FragmentLikeBinding
 import com.esteel4u.realtimeauctionapp.view.adapter.ProductListAdapter
@@ -53,6 +47,7 @@ import com.zhpan.indicator.base.IIndicator
 import com.zhpan.indicator.enums.IndicatorSlideMode
 import com.zhpan.indicator.enums.IndicatorStyle
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.item_product_list.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -67,13 +62,24 @@ import java.time.chrono.ChronoLocalDateTime
 import java.util.*
 import java.util.concurrent.CopyOnWriteArrayList
 
-class HomeFragment  : Fragment(){
+class HomeFragment  : Fragment(),
+    ProductListAdapter.Interaction {
+    companion object {
+        fun newInstance(position: Int): HomeFragment {
+            val instance =
+                HomeFragment()
+            val args = Bundle()
+            args.putInt("position", position)
+            instance.arguments = args
+            return instance
+        }
+    }
     private val viewModel: ProductViewModel by activityViewModels { ProductViewModel.Factory(viewLifecycleOwner) }
     private var _binding : FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private lateinit var todayAdapter : ProductListAdapter
     private lateinit var dataStore: DataStoreModule
-
+    lateinit var prdList: List<ProductData>
     private val loadingDuration: Long
         get() = (resources.getInteger(R.integer.loadingAnimDuration)  / animationPlaybackSpeed).toLong()
 
@@ -83,16 +89,18 @@ class HomeFragment  : Fragment(){
         savedInstanceState: Bundle?
     ): View? {
         Log.d(ContentValues.TAG, "-------------------oncreateview home " )
+        prdList = arrayListOf()
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        Log.d(ContentValues.TAG, "-------------------onviewcreated home " )
-        initBVP()
-        setQQMusicStyle()
-        todayAdapter = ProductListAdapter(view.context)
-        // get userinfo from data store
+        super.onViewCreated(view, savedInstanceState)
+
+
+        setBanner()
+        initRecyclerView()
 
         dataStore = DataStoreModule(view.context)
         CoroutineScope(Dispatchers.Main).launch {
@@ -101,19 +109,16 @@ class HomeFragment  : Fragment(){
             }
         }
 
-        binding.todayRecyclerView.apply {
-            layoutManager = LinearLayoutManager(activity)
-            adapter = todayAdapter
-        }
-
-
         viewModel.getTodayPrdList().observe(viewLifecycleOwner, Observer{
-            (binding.todayRecyclerView.adapter as ProductListAdapter).setData(it!!)
+            todayAdapter.setData(it!!)
         })
 
     }
 
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
     //Update RecyclerView Item Animation Durations
     private fun updateRecyclerViewAnimDuration() = binding.todayRecyclerView.itemAnimator?.run {
         removeDuration = loadingDuration * 60 / 100
@@ -124,19 +129,21 @@ class HomeFragment  : Fragment(){
     fun getAdapterScaleDownAnimator(isScaledDown: Boolean): ValueAnimator =
         todayAdapter.getScaleDownAnimator(isScaledDown)
 
-//    override fun initTitle() {}
-//    override fun initView(savedInstanceState: Bundle?, view: View) {
-//        mbannerViewPager = view.findViewById(R.id.banner_view)
-//       // mtypeSliderViewPager = view.findViewById(R.id.types_card_view)
-//
-//        initBVP()
-//        //initSPN()
-//        setQQMusicStyle()
-//        //setupRightPageReveal()
-//
-//    }
+    // Method #4
+    private fun initRecyclerView() {
 
-    private fun initBVP() {
+        binding.todayRecyclerView.apply {
+            todayAdapter = ProductListAdapter(
+                prdList,
+                this@HomeFragment,
+                 this.context
+            )
+            layoutManager = LinearLayoutManager( this@HomeFragment.context)
+            adapter = todayAdapter
+        }
+    }
+
+    private fun setBanner() {
         banner_view.apply {
             setLifecycleRegistry(lifecycle)
             adapter = ViewBindingSampleAdapter(R.layout.item_home_banner_model)
@@ -148,124 +155,14 @@ class HomeFragment  : Fragment(){
             setOnPageClickListener { _: View, position: Int -> itemClick(position) }
             setInterval(5000)
             setOffScreenPageLimit(4)
-
+            setPageMargin(resources.getDimensionPixelOffset(R.dimen.dp_10))
+            setRevealWidth(BannerUtils.dp2px(0f))
+            setIndicatorMargin(0,0,0,resources.getDimensionPixelOffset(R.dimen.dp_40))
+            stopLoopWhenDetachedFromWindow(true)
+            create(getPicList(4) as List<Nothing>?)
         }
 
 
-    }
-
-//    private fun initSPN() {
-//        mtypeSliderViewPager.apply {
-//            setLifecycleRegistry(lifecycle)
-//            adapter = ViewBindingSampleAdapter(R.layout.item_home_type_slider_model)
-//            setIndicatorVisibility(GONE)
-//            setOnPageClickListener { _: View, position: Int -> itemClick(position) }
-//            setInterval(5000)
-//            setScrollDuration(0)
-//        }
-//    }
-
-
-    /**
-     * Different page styles can be implement by use [BannerViewPager.setPageStyle] and
-     * [BannerViewPager.setRevealWidth]
-     *
-     * @param pageStyle Optional params [PageStyle.MULTI_PAGE_SCALE] and [PageStyle.MULTI_PAGE_OVERLAP]
-     * @param revealWidth In the multi-page mode, The exposed width of the items on the left and right sides
-     */
-    private fun setupBanner(@APageStyle pageStyle: Int, revealWidth: Int) {
-        setupBanner(pageStyle, revealWidth, revealWidth)
-    }
-
-    private fun setupBanner(@APageStyle pageStyle: Int, leftRevealWidth: Int, rightRevealWidth: Int) {
-        banner_view
-            .setPageMargin(resources.getDimensionPixelOffset(R.dimen.dp_15))
-            .setScrollDuration(800)
-            .setRevealWidth(leftRevealWidth, rightRevealWidth)
-            .setPageStyle(pageStyle)
-    }
-
-//    private fun setupTypeSlider(@APageStyle pageStyle: Int, leftRevealWidth: Int, rightRevealWidth: Int){
-//        mtypeSliderViewPager
-//            .setPageMargin(resources.getDimensionPixelOffset(R.dimen.dp_15))
-//            .setScrollDuration(800)
-//            .setPageStyle(pageStyle)
-//            .setRevealWidth(leftRevealWidth, rightRevealWidth)
-//            .create(getPicList(4))
-//    }
-
-
-
-    private fun setDrawableIndicator(indicator: IIndicator) {
-        banner_view
-            .setIndicatorView(indicator)
-            .setIndicatorSlideMode(IndicatorSlideMode.NORMAL)
-            .setIndicatorVisibility(View.VISIBLE)
-            .setIndicatorGravity(IndicatorGravity.CENTER)
-    }
-    private fun getDrawableIndicator(): IIndicator? {
-        val dp10 = resources.getDimensionPixelOffset(R.dimen.dp_10)
-        return DrawableIndicator(context)
-            .setIndicatorGap(resources.getDimensionPixelOffset(R.dimen.dp_2_5))
-            .setIndicatorDrawable(R.drawable.onboarding_selected_dot_blue, R.drawable.onboarding_unselected_dot_blue)
-
-    }
-    /**
-     * Multi Page Style 1
-     */
-    private fun setupMultiPageBanner() {
-        banner_view
-            .setPageMargin(resources.getDimensionPixelOffset(R.dimen.dp_10))
-            .setRevealWidth(resources.getDimensionPixelOffset(R.dimen.dp_10))
-        banner_view.removeDefaultPageTransformer()
-    }
-
-    /**
-     * Multi Page Style 2
-     */
-//    private fun setupRightPageReveal() {
-//        mtypeSliderViewPager
-//            .setPageMargin(resources.getDimensionPixelOffset(R.dimen.dp_3 )   )
-//            .setRevealWidth(resources.getDimensionPixelOffset(R.dimen.dp_7), resources.getDimensionPixelOffset(R.dimen.dp_210) )
-//            .setInterval(5000)
-//            .setAutoPlay(false)
-//            .setOffScreenPageLimit(1)
-//
-//
-//            .create(getPicList(4))
-//        mtypeSliderViewPager.removeDefaultPageTransformer()
-//    }
-
-    /**
-     * QQ Music Banner Style
-     */
-    @SuppressLint("ResourceAsColor")
-    private fun setNetEaseMusicStyle() {
-        banner_view
-            .setPageMargin(resources.getDimensionPixelOffset(R.dimen.dp_20))
-            .setIndicatorMargin(0,0,0,60)
-            .setRevealWidth(resources.getDimensionPixelOffset(R.dimen.dp_m_10))
-            .setIndicatorSliderColor(
-                R.color.egray30,
-                R.color.lblue50)
-
-        banner_view.removeDefaultPageTransformer()
-    }
-
-    /**
-     * NetEase Music Banner Style
-     */
-
-    private fun setQQMusicStyle() {
-        banner_view
-            .setPageMargin(resources.getDimensionPixelOffset(R.dimen.dp_10))
-            .setRevealWidth(BannerUtils.dp2px(0f))
-            .setIndicatorMargin(0,0,0,resources.getDimensionPixelOffset(R.dimen.dp_40))
-            .setInterval(5000)
-            .stopLoopWhenDetachedFromWindow(true)
-            .setIndicatorSliderColor(getColor(R.color.egray30),getColor(R.color.lblue60))
-            .create(getPicList(4) as List<Nothing>?)
-        banner_view.removeDefaultPageTransformer()
     }
 
     private var mPictureList: MutableList<Int> = ArrayList()
@@ -277,27 +174,22 @@ class HomeFragment  : Fragment(){
         }
         return mPictureList;
     }
+
     @ColorInt
     protected fun getColor(@ColorRes colorRes: Int): Int {
         return ContextCompat.getColor(requireContext(), colorRes)
     }
-    /**
-     * 这里可以是自定义的Indicator，需要继承BaseIndicatorView或者实现IIndicator接口;
-     */
-//    private fun setupIndicatorView(): IIndicator? {
-//        val indicatorView = FigureIndicatorView(getMContext())
-//        indicatorView.setRadius(resources.getDimensionPixelOffset(R.dimen.dp_18))
-//        indicatorView.setTextSize(resources.getDimensionPixelSize(R.dimen.sp_13))
-//        indicatorView.setBackgroundColor(Color.parseColor("#aa118EEA"))
-//        return indicatorView
-//    }
-
 
 
     private fun itemClick(position: Int) {
         if (position != banner_view.currentItem) {
             banner_view.setCurrentItem(position, true)
         }
+    }
+
+
+    override fun OnLikeButtonClickListener(v: View, prd: ProductData) {
+        viewModel.updateUserLikePrdList(v.spark_button.isChecked, prd);
     }
 
 }

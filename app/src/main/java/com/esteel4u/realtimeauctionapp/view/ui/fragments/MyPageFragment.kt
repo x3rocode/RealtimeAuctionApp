@@ -9,6 +9,16 @@ import com.esteel4u.realtimeauctionapp.databinding.FragmentLikeBinding
 import com.esteel4u.realtimeauctionapp.databinding.FragmentMypageBinding
 
 class MyPageFragment : Fragment() {
+    companion object {
+        fun newInstance(position: Int): MyPageFragment {
+            val instance =
+                MyPageFragment()
+            val args = Bundle()
+            args.putInt("position", position)
+            instance.arguments = args
+            return instance
+        }
+    }
     private lateinit var binding: FragmentMypageBinding
 
     override fun onCreateView(
