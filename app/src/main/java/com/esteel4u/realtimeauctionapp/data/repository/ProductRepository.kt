@@ -26,7 +26,7 @@ class ProductRepository(val lifecycleOwner: LifecycleOwner) {
     private var productUserLikeList = MutableLiveData<List<ProductData>>()
     private var auth = Firebase.auth
     private val db = Firebase.firestore
-
+    private val udb = Firebase.firestore
 
     fun getAllPrdList(): MutableLiveData<List<ProductData>> {
         val myQuery = db.collection("products").orderBy("auctionProgressStatus") .asLiveData<ProductData>()
@@ -42,25 +42,25 @@ class ProductRepository(val lifecycleOwner: LifecycleOwner) {
     fun getTodayAuctionList(): MutableLiveData<List<ProductData>> {
 
         val myQuery = db.collection("products").orderBy("auctionProgressStatus") .asLiveData<ProductData>()
-        var status = 0
+
         var alllist: MutableList<ProductData>
+
+        val localDateTime: LocalDateTime =
+            LocalDateTime.of(LocalDate.now(), LocalTime.MIDNIGHT)
+        val todaymidnight =
+            Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant())
+
+        val localDateTime1: LocalDateTime =
+            LocalDateTime.of(LocalDate.now().plusDays(1), LocalTime.MIDNIGHT)
+        val tomorrowmidnight =
+            Date.from(localDateTime1.atZone(ZoneId.systemDefault()).toInstant())
 
         myQuery.observe(lifecycleOwner, Observer { resource: FirestoreResource<List<ProductData>> ->
             if(resource.data !== null) {
                 alllist = resource.data!!.toMutableList()
-                resource.data?.forEach {
 
-                    val myDocu = db.collection("products").document(it.prdId!!).asLiveData<ProductData>()
-                    val localDateTime: LocalDateTime =
-                        LocalDateTime.of(LocalDate.now(), LocalTime.MIDNIGHT)
-                    val todaymidnight =
-                        Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant())
-
-                    val localDateTime1: LocalDateTime =
-                        LocalDateTime.of(LocalDate.now().plusDays(1), LocalTime.MIDNIGHT)
-                    val tomorrowmidnight =
-                        Date.from(localDateTime1.atZone(ZoneId.systemDefault()).toInstant())
-
+                Log.d(ContentValues.TAG, "aa      " + alllist.toString())
+                alllist?.forEach {
                     //check is today
                     if((it.startDate!!.toDate().before(todaymidnight) && it.endDate!!.toDate().before(todaymidnight)) ||
                         (it.startDate!!.toDate().after(tomorrowmidnight) && it.endDate!!.toDate().after(tomorrowmidnight))){
@@ -69,21 +69,25 @@ class ProductRepository(val lifecycleOwner: LifecycleOwner) {
                     //진행중
                     else  if (DateUtils.isToday(it.startDate!!.toDate().time )
                         && it.startDate!!.toDate().after(Date())) {
-                        status = 1
+                        it.auctionProgressStatus = 1
+
                     }
                     //진행예정
                     else if (it.startDate!!.toDate().before(Date())
                         && it.endDate!!.toDate().after(Date())) {
-                        status = 2
+                        it.auctionProgressStatus = 2
+
 
                     }
                     //완료
                     else if (DateUtils.isToday(it.endDate!!.toDate().time)
                         && it.endDate!!.toDate().before(Date())) {
-                        status = 3
-                    }
+                        it.auctionProgressStatus = 3
 
-                    myDocu.update( "auctionProgressStatus" , status)
+                    }
+                    Log.d(ContentValues.TAG, "aa bb     " + alllist.toString())
+                    updateAuctionStatus(it.auctionProgressStatus!! , it.prdId!!)
+                    //udb.collection("products").document(it.prdId!!).update(mapOf("auctionProgressStatus" to status))
                 }
                 productTodayList.postValue(alllist)
             }
@@ -109,31 +113,51 @@ class ProductRepository(val lifecycleOwner: LifecycleOwner) {
         return productUserLikeList
     }
 
-    fun updateUserLikePrdList(productData: ProductData){
+    fun updateUserLikePrdList(isButtonActive: Boolean, productData: ProductData){
         var oldList = productData.notifyOnUserId
         var newList = oldList!!.toMutableList()
 
-        if(oldList.contains(auth.uid)){
+
+        if(isButtonActive){
             newList.remove(auth.uid)
         }else{
             newList.add(auth.uid!!)
         }
-//        if(isButtonActive){
-//            newList.remove(auth.uid)
-//        }else{
-//            newList.add(auth.uid!!)
-//        }
 
         val myDocu = db.collection("products").document(productData.prdId!!).asLiveData<ProductData>()
         myDocu.update("notifyOnUserId", newList)
     }
 
+//    fun updateUserLikePrdList(productData: ProductData){
+//        var oldList = productData.notifyOnUserId
+//        var newList = oldList!!.toMutableList()
+//
+//        if(oldList.contains(auth.uid)){
+//            newList.remove(auth.uid)
+//        }else{
+//            newList.add(auth.uid!!)
+//        }
+////        if(isButtonActive){
+////            newList.remove(auth.uid)
+////        }else{
+////            newList.add(auth.uid!!)
+////        }
+//
+//        val myDocu = db.collection("products").document(productData.prdId!!).asLiveData<ProductData>()
+//        myDocu.update("notifyOnUserId", newList)
+//    }
+
 
     fun updateAuctionStatus(status: Int, prdId: String){
-//        val myDocu = db.collection("products").document(prdId!!).asLiveData<ProductData>()
-//        myDocu.update("auctionProgressStatus", status)
+        val myDocu = db.collection("products").document(prdId!!).asLiveData<ProductData>()
+        val task = myDocu.update( "auctionProgressStatus" , status)
+        task.observe(lifecycleOwner, Observer { taskResult ->
 
-
+            Log.d(ContentValues.TAG, "aa      " + prdId)
+            Log.d(ContentValues.TAG, "1111 " +taskResult.data)
+            Log.d(ContentValues.TAG, "1111222 " +taskResult.exception)
+            Log.d(ContentValues.TAG, "111331 " +taskResult.status)
+        })
     }
 
 }

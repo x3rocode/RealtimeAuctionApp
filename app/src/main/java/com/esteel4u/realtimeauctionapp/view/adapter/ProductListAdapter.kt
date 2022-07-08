@@ -70,21 +70,22 @@ class ProductListAdapter(
     private lateinit var recyclerView: RecyclerView
 
 
+    // Method #5
     class MyViewHolder(
         val binding: ItemProductListBinding,
         private val interaction: Interaction?
-        ) : RecyclerView.ViewHolder(binding.root) {
+    ) : RecyclerView.ViewHolder(binding.root) {
 
 
         fun bind(currentPrd : ProductData) {
             binding.prdlist = currentPrd
+
             binding.sparkButton.setOnClickListener{
                 interaction?.OnLikeButtonClickListener(binding.root, currentPrd)
             }
-            binding.executePendingBindings()
         }
-    }
 
+    }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductListAdapter.MyViewHolder {

@@ -48,7 +48,7 @@ class MainActivity: AppCompatActivity() {
                 supportFragmentManager,
                 lifecycle
             )
-        view_pager.offscreenPageLimit = 5
+        view_pager.offscreenPageLimit = 3
         bottom_bar.setupWithViewPager2(view_pager)
 
     }
