@@ -57,17 +57,12 @@ class ProductRepository(val lifecycleOwner: LifecycleOwner) {
 
         myQuery.observe(lifecycleOwner, Observer { resource: FirestoreResource<List<ProductData>> ->
             if(resource.data !== null) {
-                alllist = resource.data!!.toMutableList()
+               // alllist = resource.data!!.toMutableList()
 
-                Log.d(ContentValues.TAG, "aa      " + alllist.toString())
-                alllist?.forEach {
-                    //check is today
-                    if((it.startDate!!.toDate().before(todaymidnight) && it.endDate!!.toDate().before(todaymidnight)) ||
-                        (it.startDate!!.toDate().after(tomorrowmidnight) && it.endDate!!.toDate().after(tomorrowmidnight))){
-                        alllist!!.remove(it)
-                    }
+               // Log.d(ContentValues.TAG, "aa      " + alllist.toString())
+                resource.data?.forEach {
                     //진행중
-                    else  if (DateUtils.isToday(it.startDate!!.toDate().time )
+                    if (DateUtils.isToday(it.startDate!!.toDate().time )
                         && it.startDate!!.toDate().after(Date())) {
                         it.auctionProgressStatus = 1
 
@@ -85,11 +80,18 @@ class ProductRepository(val lifecycleOwner: LifecycleOwner) {
                         it.auctionProgressStatus = 3
 
                     }
-                    Log.d(ContentValues.TAG, "aa bb     " + alllist.toString())
+
+                   // Log.d(ContentValues.TAG, "aa bb     " + alllist.toString())
                     updateAuctionStatus(it.auctionProgressStatus!! , it.prdId!!)
                     //udb.collection("products").document(it.prdId!!).update(mapOf("auctionProgressStatus" to status))
                 }
-                productTodayList.postValue(alllist)
+
+                //https://developer.android.com/topic/libraries/architecture/livedata?hl=ko
+                resource.data!!.filter { productData: ProductData ->
+                    (productData.startDate!!.toDate().before(todaymidnight) && productData.endDate!!.toDate().before(todaymidnight)) ||
+                            (productData.startDate!!.toDate().after(tomorrowmidnight) && productData.endDate!!.toDate().after(tomorrowmidnight))
+                }
+                productTodayList.postValue(resource.data!!)
             }
         })
         return productTodayList
