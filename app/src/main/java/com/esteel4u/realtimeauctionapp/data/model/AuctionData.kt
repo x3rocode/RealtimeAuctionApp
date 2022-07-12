@@ -6,8 +6,7 @@ import java.sql.Timestamp
 
 @Data
 data class AuctionData(
-    var productId: String,
-    var bidPrice: Int,
-    var buyUserId: String,
-    var bidTimeStamp: Timestamp
+    var productId: String? = null,
+    var bidPrice: Int? = 0, //입찰금액
+    var buyUserId: String? = null
 ): FirestoreModel()

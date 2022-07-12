@@ -12,12 +12,13 @@
       android:layout_marginHorizontal="10dp"
       android:layout_marginBottom="30dp"
       app:cardElevation="2dp"
-      app:cardBackgroundColor="@color/lblue10"
+      app:cardBackgroundColor="@color/lblue60"
       app:cardCornerRadius="20dp">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="응애애"
+        android:text="배너입니다"
+        android:textColor="@color/white"
         android:gravity="center"
         android:textSize="@dimen/dp_20"/>
 

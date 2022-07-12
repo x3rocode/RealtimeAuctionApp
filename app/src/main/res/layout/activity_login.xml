@@ -247,7 +247,6 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-
         <com.google.android.material.button.MaterialButton
             style="@style/OutlinedRoundedButton"
             android:id="@+id/login_btn"

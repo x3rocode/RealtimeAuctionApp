@@ -69,6 +69,8 @@ too. layout_gravity="center_horizontal" is a lot simpler.
                     android:paddingRight="@dimen/list_item_horizontal_padding"
                     android:paddingBottom="@dimen/list_item_vertical_padding">
 
+
+
 <!--                    <ImageView-->
 <!--                        android:id="@+id/chevron"-->
 <!--                        android:layout_width="wrap_content"-->
@@ -88,14 +90,28 @@ too. layout_gravity="center_horizontal" is a lot simpler.
                         android:textSize="13dp" />
 
                     <TextView
-                        android:id="@+id/prd_totseqNm"
+                        android:id="@+id/prd_id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/prd_auction_type"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="3dp"
+                        android:fontFamily="@font/lexend_deca"
+
+                        android:text="@{prdlist.prdId}"
+                        android:textSize="10dp" />
+
+                    <TextView
+                        android:id="@+id/prd_totseqNm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/prd_auction_type"
+                        android:layout_alignBottom="@id/prd_auction_type"
+                        android:layout_marginLeft="@dimen/dp_5"
                         android:fontFamily="@font/lexend_deca"
                         android:text="주무뇌"
                         android:textSize="10dp" />
+
+
 
                     <TextView
                         android:id="@+id/prd_status"
@@ -288,6 +304,45 @@ too. layout_gravity="center_horizontal" is a lot simpler.
                                     android:textSize="13dp" />
                             </LinearLayout>
                         </LinearLayout>
+
+
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="14dp">
+
+
+                            <LinearLayout
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center">
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/bid_button"
+                                    android:layout_height="wrap_content"
+                                    android:layout_width="@dimen/dp_250"
+                                    android:text="Place a Bid"
+                                    android:fontFamily="@font/lexend_deca"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/white"
+                                    style="@style/MyButtonShapeRounded"
+                                    app:cornerRadius="30dp"
+                                    android:insetBottom="2dp"
+                                    android:insetTop="3dp"
+                                    android:textAllCaps="false"
+                                    android:backgroundTint="@color/lblue60"
+                                    android:gravity="center"/>
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+
+
 
                     </LinearLayout>
 

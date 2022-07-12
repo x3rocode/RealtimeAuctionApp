@@ -13,6 +13,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.ptrbrynt.firestorelivedata.FirestoreResource
 import com.ptrbrynt.firestorelivedata.asLiveData
+import com.ptrbrynt.firestorelivedata.observe
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
@@ -24,6 +25,7 @@ class ProductRepository(val lifecycleOwner: LifecycleOwner) {
     private var productAllList = MutableLiveData<List<ProductData>>()
     private var productTodayList = MutableLiveData<List<ProductData>>()
     private var productUserLikeList = MutableLiveData<List<ProductData>>()
+    private var productPidData = MutableLiveData<ProductData>()
     private var auth = Firebase.auth
     private val db = Firebase.firestore
     private val udb = Firebase.firestore
@@ -62,36 +64,31 @@ class ProductRepository(val lifecycleOwner: LifecycleOwner) {
                // Log.d(ContentValues.TAG, "aa      " + alllist.toString())
                 resource.data?.forEach {
                     //진행중
-                    if (DateUtils.isToday(it.startDate!!.toDate().time )
-                        && it.startDate!!.toDate().after(Date())) {
+                    if (it.startDate!!.toDate().before(Date())
+                        && it.endDate!!.toDate().after(Date())) {
                         it.auctionProgressStatus = 1
 
                     }
                     //진행예정
-                    else if (it.startDate!!.toDate().before(Date())
+                    else if (it.startDate!!.toDate().after(Date())
                         && it.endDate!!.toDate().after(Date())) {
                         it.auctionProgressStatus = 2
 
 
                     }
                     //완료
-                    else if (DateUtils.isToday(it.endDate!!.toDate().time)
+                    else if (it.startDate!!.toDate().before(Date())
                         && it.endDate!!.toDate().before(Date())) {
                         it.auctionProgressStatus = 3
-
                     }
-
-                   // Log.d(ContentValues.TAG, "aa bb     " + alllist.toString())
                     updateAuctionStatus(it.auctionProgressStatus!! , it.prdId!!)
-                    //udb.collection("products").document(it.prdId!!).update(mapOf("auctionProgressStatus" to status))
                 }
-
                 //https://developer.android.com/topic/libraries/architecture/livedata?hl=ko
-                resource.data!!.filter { productData: ProductData ->
+
+                productTodayList.postValue(resource.data!!.filterNot { productData: ProductData ->
                     (productData.startDate!!.toDate().before(todaymidnight) && productData.endDate!!.toDate().before(todaymidnight)) ||
                             (productData.startDate!!.toDate().after(tomorrowmidnight) && productData.endDate!!.toDate().after(tomorrowmidnight))
-                }
-                productTodayList.postValue(resource.data!!)
+                })
             }
         })
         return productTodayList
@@ -160,6 +157,16 @@ class ProductRepository(val lifecycleOwner: LifecycleOwner) {
             Log.d(ContentValues.TAG, "1111222 " +taskResult.exception)
             Log.d(ContentValues.TAG, "111331 " +taskResult.status)
         })
+    }
+
+    fun getPrdDataByPid(pid: String) : MutableLiveData<ProductData>{
+        val myQuery = db.collection("products").document(pid) .asLiveData<ProductData>()
+        myQuery.observe(lifecycleOwner, Observer { resource: FirestoreResource<ProductData> ->
+            if(resource.data !== null) {
+                productPidData.postValue(resource.data!!)
+            }
+        })
+        return productPidData
     }
 
 }

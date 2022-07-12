@@ -34,6 +34,10 @@ class ProductViewModel (val lifecycleOwner: LifecycleOwner): ViewModel() {
         repository.updateUserLikePrdList(isButtonActive, productData)
     }
 
+    fun getPrdDataByPid(pid: String): MutableLiveData<ProductData>{
+        return repository.getPrdDataByPid(pid)
+    }
+
 //    fun updateUserLikePrdList(productData: ProductData){
 //        repository.updateUserLikePrdList( productData)
 //    }

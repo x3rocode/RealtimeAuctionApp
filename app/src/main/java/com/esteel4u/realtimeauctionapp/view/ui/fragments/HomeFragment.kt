@@ -3,6 +3,7 @@ package com.esteel4u.realtimeauctionapp.view.ui.fragments
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.ContentValues
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -25,6 +26,8 @@ import com.esteel4u.realtimeauctionapp.databinding.FragmentLikeBinding
 import com.esteel4u.realtimeauctionapp.view.adapter.ProductListAdapter
 import com.esteel4u.realtimeauctionapp.view.adapter.ViewBindingSampleAdapter
 import com.esteel4u.realtimeauctionapp.view.adapter.animationPlaybackSpeed
+import com.esteel4u.realtimeauctionapp.view.ui.activities.BidActivity
+import com.esteel4u.realtimeauctionapp.view.ui.activities.MainActivity
 import com.esteel4u.realtimeauctionapp.viewmodel.ProductViewModel
 
 import com.google.firebase.Timestamp
@@ -120,7 +123,7 @@ class HomeFragment  : Fragment(),
         banner_view.apply {
             setLifecycleRegistry(lifecycle)
             adapter = ViewBindingSampleAdapter(R.layout.item_home_banner_model)
-            setIndicatorSliderColor(getColor(R.color.egray30),getColor(R.color.lblue60))
+            setIndicatorSliderColor(getColor(R.color.egray30),getColor(R.color.lmint10))
             setIndicatorSliderRadius(
                 resources.getDimensionPixelOffset(R.dimen.dp_4),
                 resources.getDimensionPixelOffset(R.dimen.dp_4))
@@ -189,7 +192,13 @@ class HomeFragment  : Fragment(),
 
 
     override fun OnLikeButtonClickListener(v: View, prd: ProductData) {
-        viewModel.updateUserLikePrdList(v.spark_button.isChecked, prd);
+        viewModel.updateUserLikePrdList(v.spark_button.isChecked, prd)
+    }
+
+    override fun OnBidButtonClickListener(v: View, p: ProductData) {
+        val intent = Intent(activity, BidActivity::class.java)
+        intent.putExtra("prddata", p.prdId)
+        startActivity(intent)
     }
 
 //    override fun OnLikeButtonClickListener(v: View, prd: ProductData) {

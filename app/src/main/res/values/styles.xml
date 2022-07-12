@@ -69,7 +69,7 @@
     </style>
     <style name="MyButtonShapeRounded" parent="">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">15dp</item>
+        <item name="cornerSize">30dp</item>
     </style>
 
     <style name="MyThemeOverlayOutlinedDense">

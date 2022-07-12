@@ -1,7 +1,10 @@
 package com.esteel4u.realtimeauctionapp.data.model
 
+import android.os.Parcel
+import android.os.Parcelable
 import com.google.firebase.Timestamp
 import com.ptrbrynt.firestorelivedata.FirestoreModel
+import java.io.Serializable
 
 data class ProductData(
     var auctionType: Int? = 1,  //1 프리미엄 2 옥션 3 아울랫 4 패키지
@@ -17,6 +20,55 @@ data class ProductData(
     var startDate: Timestamp? = null,  //경매시작일
     var endDate: Timestamp? = null,    //경매종료일
     var auctionProgressStatus: Int? = 1,// 경매진행구분 1대기 2진행중 3종료
-    var notifyOnUserId: List<String>? = null   //경매알림설정 유저아이디 리스트
+    var notifyOnUserId: List<String>?  = null   //경매알림설정 유저아이디 리스트
 
-): FirestoreModel()
+): FirestoreModel(),  Parcelable {
+    constructor(parcel: Parcel) : this(
+        parcel.readValue(Int::class.java.classLoader) as? Int,
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readValue(Double::class.java.classLoader) as? Double,
+        parcel.readValue(Double::class.java.classLoader) as? Double,
+        parcel.readValue(Double::class.java.classLoader) as? Double,
+        parcel.readValue(Int::class.java.classLoader) as? Int,
+        parcel.readString(),
+        parcel.readParcelable(Timestamp::class.java.classLoader),
+        parcel.readParcelable(Timestamp::class.java.classLoader),
+        parcel.readValue(Int::class.java.classLoader) as? Int,
+        parcel.createStringArrayList()
+    ) {
+    }
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeValue(auctionType)
+        parcel.writeString(prdId)
+        parcel.writeString(prdNo)
+        parcel.writeString(prdName)
+        parcel.writeString(substSpec)
+        parcel.writeValue(prdThk)
+        parcel.writeValue(prdWth)
+        parcel.writeValue(prdWgt)
+        parcel.writeValue(prdTotClsSeqNm)
+        parcel.writeString(worksCode)
+        parcel.writeParcelable(startDate, flags)
+        parcel.writeParcelable(endDate, flags)
+        parcel.writeValue(auctionProgressStatus)
+        parcel.writeStringList(notifyOnUserId)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<ProductData> {
+        override fun createFromParcel(parcel: Parcel): ProductData {
+            return ProductData(parcel)
+        }
+
+        override fun newArray(size: Int): Array<ProductData?> {
+            return arrayOfNulls(size)
+        }
+    }
+}

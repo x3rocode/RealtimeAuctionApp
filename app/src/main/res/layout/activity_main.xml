@@ -25,6 +25,7 @@
         android:background="#FFF"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:elevation="@dimen/dp_10"
         app:abb_selectedTabType="text"
         app:abb_indicatorAppearance="round"
         app:abb_indicatorMargin="16dp"

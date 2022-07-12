@@ -2,6 +2,7 @@ package com.esteel4u.realtimeauctionapp.view.ui.fragments
 
 import android.animation.ValueAnimator
 import android.content.ContentValues
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -18,6 +19,7 @@ import com.esteel4u.realtimeauctionapp.databinding.FragmentLikeBinding
 import com.esteel4u.realtimeauctionapp.databinding.FragmentListBinding
 import com.esteel4u.realtimeauctionapp.view.adapter.ProductListAdapter
 import com.esteel4u.realtimeauctionapp.view.adapter.animationPlaybackSpeed
+import com.esteel4u.realtimeauctionapp.view.ui.activities.BidActivity
 import com.esteel4u.realtimeauctionapp.viewmodel.ProductViewModel
 import kotlinx.android.synthetic.main.item_product_list.view.*
 
@@ -97,6 +99,11 @@ class LikeFragment : Fragment(),
 
     override fun OnLikeButtonClickListener(v: View, prd: ProductData) {
         viewModel.updateUserLikePrdList(v.spark_button.isChecked, prd);
+    }
+
+    override fun OnBidButtonClickListener(v: View, p: ProductData) {
+        val intent = Intent(activity, BidActivity::class.java)
+        startActivity(intent)
     }
 
 //    override fun OnLikeButtonClickListener(v: View, prd: ProductData) {

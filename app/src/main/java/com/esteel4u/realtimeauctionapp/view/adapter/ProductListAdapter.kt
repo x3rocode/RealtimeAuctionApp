@@ -3,6 +3,7 @@ package com.esteel4u.realtimeauctionapp.view.adapter
 import android.animation.ValueAnimator
 import android.content.ContentValues
 import android.content.Context
+import android.opengl.Visibility
 import android.service.autofill.Validators.not
 import android.util.Log
 import android.view.LayoutInflater
@@ -82,6 +83,10 @@ class ProductListAdapter(
 
             binding.sparkButton.setOnClickListener{
                 interaction?.OnLikeButtonClickListener(binding.root, currentPrd)
+                binding.sparkButton.playAnimation()
+            }
+            binding.bidButton.setOnClickListener{
+                interaction?.OnBidButtonClickListener(binding.root, currentPrd)
             }
         }
 
@@ -108,15 +113,26 @@ class ProductListAdapter(
         holder.bind(productList[position])
 
         when (holder.binding.prdlist?.auctionProgressStatus){
-            1 -> holder.binding.prdStatus.text = "진행중"
-            2 -> holder.binding.prdStatus.text = "진행 예정"
-            3 -> holder.binding.prdStatus.text = "종료"
+            1 -> {holder.binding.prdStatus.text = "진행중"
+                holder.binding.bidButton.visibility = View.VISIBLE}
+            2 -> {holder.binding.prdStatus.text = "진행 예정"
+                holder.binding.bidButton.visibility = View.GONE}
+            3 -> {holder.binding.prdStatus.text = "종료"
+                holder.binding.bidButton.visibility = View.GONE}
         }
 
         when (holder.binding.prdlist?.prdTotClsSeqNm){
             1 -> holder.binding.prdTotseqNm?.text = "주문외 1급"
             2 -> holder.binding.prdTotseqNm?.text = "주문외 2급"
         }
+
+        when(holder.binding.prdlist?.auctionType){
+            1 -> holder.binding.prdAuctionType.text = "Premium"
+            2 -> holder.binding.prdAuctionType.text = "Auction"
+            3 -> holder.binding.prdAuctionType.text = "Outlet"
+            4 -> holder.binding.prdAuctionType.text = "Package"
+        }
+
 
         if(holder.binding.prdlist?.notifyOnUserId!!.contains(userId)){
             holder.binding.sparkButton.isChecked = true
@@ -159,6 +175,7 @@ class ProductListAdapter(
 
     interface Interaction {
         fun OnLikeButtonClickListener(v:View, p: ProductData)
+        fun OnBidButtonClickListener(v:View, p: ProductData)
     }
 
     fun setData(prdData: List<ProductData>) {

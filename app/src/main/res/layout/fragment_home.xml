@@ -90,175 +90,78 @@
             android:padding="8dp">
 
             <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/dp_170"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 app:cardCornerRadius="15dp"
+                app:cardPreventCornerOverlap="true"
                 app:cardElevation="2dp"
-                android:backgroundTint="@color/lblue60"
-                app:cardUseCompatPadding="true"
-                app:contentPadding="12dp">
+                app:cardUseCompatPadding="true">
 
-                <LinearLayout
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="36dp"
-                        android:layout_height="36dp" />
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp">
-
-                        <TextView
-                            android:id="@+id/hellll"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/lexend_deca"
-                            android:text="Primium"
-                            android:textColor="@color/lgray10"
-                            android:textSize="16sp" />
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentTop="true"
-                            android:layout_alignParentEnd="true"/>
-                    </RelativeLayout>
-
-                </LinearLayout>
+                <ImageView
+                    android:id="@+id/premium_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/premiumbg_n" />
 
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/dp_170"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 app:cardCornerRadius="15dp"
+                app:cardPreventCornerOverlap="true"
                 app:cardElevation="2dp"
-                app:cardBackgroundColor="@color/lblue60"
-                app:cardUseCompatPadding="true"
-                app:contentPadding="12dp">
+                app:cardUseCompatPadding="true">
 
-                <LinearLayout
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="36dp"
-                        android:layout_height="36dp" />
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/lexend_deca"
-                            android:text="Auction"
-                            android:textColor="@color/lgray10"
-                            android:textSize="16sp" />
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentTop="true"
-                            android:layout_alignParentEnd="true" />
-                    </RelativeLayout>
-
-                </LinearLayout>
+                <ImageView
+                    android:id="@+id/auction_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/auctionbg_n" />
 
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/dp_140"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 app:cardCornerRadius="15dp"
+                app:cardPreventCornerOverlap="true"
                 app:cardElevation="2dp"
-                app:cardBackgroundColor="@color/lblue60"
-                app:cardUseCompatPadding="true"
-                app:contentPadding="12dp">
+                app:cardUseCompatPadding="true">
 
-                <LinearLayout
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="36dp"
-                        android:layout_height="36dp" />
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/lexend_deca"
-                            android:text="Outlet"
-                            android:textColor="@color/lgray10"
-                            android:textSize="16sp" />
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentTop="true"
-                            android:layout_alignParentEnd="true" />
-                    </RelativeLayout>
-
-                </LinearLayout>
+                <ImageView
+                    android:id="@+id/outlet_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/outletbg" />
 
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/dp_140"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 app:cardCornerRadius="15dp"
+                app:cardPreventCornerOverlap="true"
                 app:cardElevation="2dp"
-                app:cardBackgroundColor="@color/lblue60"
-                app:cardUseCompatPadding="true"
-                app:contentPadding="12dp">
+                app:cardUseCompatPadding="true">
 
-                <LinearLayout
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="36dp"
-                        android:layout_height="36dp" />
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/lexend_deca"
-                            android:text="Package"
-                            android:textColor="@color/lgray10"
-                            android:textSize="16sp" />
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentTop="true"
-                            android:layout_alignParentEnd="true" />
-                    </RelativeLayout>
-
-                </LinearLayout>
+                <ImageView
+                    android:id="@+id/package_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/packagebg" />
 
             </androidx.cardview.widget.CardView>
 
