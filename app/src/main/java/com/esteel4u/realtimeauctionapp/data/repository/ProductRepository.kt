@@ -112,6 +112,25 @@ class ProductRepository(val lifecycleOwner: LifecycleOwner) {
         return productUserLikeList
     }
 
+    fun getUserBuyPrdList(): MutableLiveData<List<ProductData>> {
+
+        var a : String = ""
+        val myQuery = db.collection("products").whereEqualTo("prdId",a )  .asLiveData<ProductData>()
+        myQuery.observe(lifecycleOwner, Observer { resource: FirestoreResource<List<ProductData>> ->
+            if(resource.data !== null) {
+                val data: MutableList<ProductData>? = resource.data!!.toMutableList()
+
+                resource.data?.forEach {
+                    if(!it.notifyOnUserId!!.contains(auth.uid!!)){
+                        data!!.remove(it)
+                    }
+                }
+                productUserLikeList.postValue(data!!)
+            }
+        })
+        return productUserLikeList
+    }
+
     fun updateUserLikePrdList(isButtonActive: Boolean, productData: ProductData){
         var oldList = productData.notifyOnUserId
         var newList = oldList!!.toMutableList()
