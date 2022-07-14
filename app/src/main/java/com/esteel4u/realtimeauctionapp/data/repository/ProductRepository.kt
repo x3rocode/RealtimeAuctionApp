@@ -1,5 +1,6 @@
 package com.esteel4u.realtimeauctionapp.data.repository
 
+import android.app.AlarmManager
 import android.content.ContentValues
 import android.text.format.DateUtils
 import android.util.Log
@@ -7,10 +8,10 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.esteel4u.realtimeauctionapp.data.model.ProductData
-import com.google.android.gms.common.util.DataUtils
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessaging
 import com.ptrbrynt.firestorelivedata.FirestoreResource
 import com.ptrbrynt.firestorelivedata.asLiveData
 import com.ptrbrynt.firestorelivedata.observe
@@ -34,6 +35,8 @@ class ProductRepository(val lifecycleOwner: LifecycleOwner) {
         val myQuery = db.collection("products").orderBy("auctionProgressStatus") .asLiveData<ProductData>()
         myQuery.observe(lifecycleOwner, Observer { resource: FirestoreResource<List<ProductData>> ->
             if(resource.data !== null) {
+
+
 
                 productAllList.postValue(resource.data!!)
             }
@@ -85,10 +88,19 @@ class ProductRepository(val lifecycleOwner: LifecycleOwner) {
                 }
                 //https://developer.android.com/topic/libraries/architecture/livedata?hl=ko
 
+                //post
                 productTodayList.postValue(resource.data!!.filterNot { productData: ProductData ->
                     (productData.startDate!!.toDate().before(todaymidnight) && productData.endDate!!.toDate().before(todaymidnight)) ||
                             (productData.startDate!!.toDate().after(tomorrowmidnight) && productData.endDate!!.toDate().after(tomorrowmidnight))
                 })
+
+                //subscribe
+                resource.data?.forEach {
+                    if(it.notifyOnUserId!!.contains(auth.uid!!)){
+                        FirebaseMessaging.getInstance().subscribeToTopic(it.prdId!!);
+                    }
+                }
+
             }
         })
         return productTodayList
@@ -106,29 +118,16 @@ class ProductRepository(val lifecycleOwner: LifecycleOwner) {
                         data!!.remove(it)
                     }
                 }
+
                 productUserLikeList.postValue(data!!)
             }
         })
         return productUserLikeList
     }
 
-    fun getUserBuyPrdList(): MutableLiveData<List<ProductData>> {
-
-        var a : String = ""
-        val myQuery = db.collection("products").whereEqualTo("prdId",a )  .asLiveData<ProductData>()
-        myQuery.observe(lifecycleOwner, Observer { resource: FirestoreResource<List<ProductData>> ->
-            if(resource.data !== null) {
-                val data: MutableList<ProductData>? = resource.data!!.toMutableList()
-
-                resource.data?.forEach {
-                    if(!it.notifyOnUserId!!.contains(auth.uid!!)){
-                        data!!.remove(it)
-                    }
-                }
-                productUserLikeList.postValue(data!!)
-            }
-        })
-        return productUserLikeList
+    fun setBuyUser(prdId: String) {
+        val myDocu = db.collection("products").document(prdId!!).asLiveData<ProductData>()
+        val task = myDocu.update( "buyUserId" , auth.uid!!)
     }
 
     fun updateUserLikePrdList(isButtonActive: Boolean, productData: ProductData){

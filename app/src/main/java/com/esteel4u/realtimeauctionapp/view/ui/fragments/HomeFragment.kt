@@ -1,71 +1,42 @@
 package com.esteel4u.realtimeauctionapp.view.ui.fragments
 
 import android.animation.ValueAnimator
-import android.annotation.SuppressLint
+import android.app.AlarmManager
+import android.app.PendingIntent
 import android.content.ContentValues
+import android.content.Context.ALARM_SERVICE
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.esteel4u.realtimeauctionapp.R
 import com.esteel4u.realtimeauctionapp.data.model.ProductData
-import com.esteel4u.realtimeauctionapp.data.model.UserData
 import com.esteel4u.realtimeauctionapp.databinding.FragmentHomeBinding
-import com.esteel4u.realtimeauctionapp.databinding.FragmentLikeBinding
 import com.esteel4u.realtimeauctionapp.view.adapter.ProductListAdapter
 import com.esteel4u.realtimeauctionapp.view.adapter.ViewBindingSampleAdapter
 import com.esteel4u.realtimeauctionapp.view.adapter.animationPlaybackSpeed
 import com.esteel4u.realtimeauctionapp.view.ui.activities.BidActivity
 import com.esteel4u.realtimeauctionapp.view.ui.activities.MainActivity
 import com.esteel4u.realtimeauctionapp.viewmodel.ProductViewModel
-
-import com.google.firebase.Timestamp
-import com.google.firebase.Timestamp.now
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.ktx.Firebase
-import com.google.type.DateTime
-import com.ptrbrynt.firestorelivedata.FirestoreResource
-import com.ptrbrynt.firestorelivedata.asLiveData
-import com.ptrbrynt.firestorelivedata.observe
 import com.returnz3ro.messystem.service.model.datastore.DataStoreModule
-import com.returnz3ro.messystem.service.model.datastore.DataStoreModule.Companion.userName
-import com.varunest.sparkbutton.SparkEventListener
-import com.zhpan.bannerview.BannerViewPager
-import com.zhpan.bannerview.annotation.APageStyle
-import com.zhpan.bannerview.constants.IndicatorGravity
-import com.zhpan.bannerview.constants.PageStyle
-import com.zhpan.bannerview.indicator.DrawableIndicator
 import com.zhpan.bannerview.utils.BannerUtils
-import com.zhpan.indicator.IndicatorView
-import com.zhpan.indicator.base.IIndicator
-import com.zhpan.indicator.enums.IndicatorSlideMode
 import com.zhpan.indicator.enums.IndicatorStyle
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.item_product_list.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.checkerframework.common.value.qual.IntVal
-import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.LocalDate.now
-import java.time.LocalDateTime
-import java.time.ZonedDateTime
-import java.time.chrono.ChronoLocalDateTime
-
 import java.util.*
-import java.util.concurrent.CopyOnWriteArrayList
 
 class HomeFragment  : Fragment(),
     ProductListAdapter.Interaction {
@@ -83,6 +54,7 @@ class HomeFragment  : Fragment(),
     private val viewModel: ProductViewModel by activityViewModels { ProductViewModel.Factory(viewLifecycleOwner) }
     private var _binding : FragmentHomeBinding? = null
     private val binding get() = _binding!!
+
     private lateinit var todayAdapter : ProductListAdapter
     private lateinit var dataStore: DataStoreModule
     lateinit var prdList: List<ProductData>
@@ -117,6 +89,8 @@ class HomeFragment  : Fragment(),
         viewModel.getTodayPrdList().observe(viewLifecycleOwner, Observer{
             todayAdapter.setData(it!!)
         })
+
+
     }
 
     private fun setBanner() {

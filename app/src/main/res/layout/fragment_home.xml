@@ -128,7 +128,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:layout_width="@dimen/dp_140"
+                android:layout_width="@dimen/dp_170"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 app:cardCornerRadius="15dp"
@@ -142,12 +142,12 @@
                     android:layout_height="match_parent"
                     android:adjustViewBounds="true"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/outletbg" />
+                    android:src="@drawable/outletbg_n" />
 
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:layout_width="@dimen/dp_140"
+                android:layout_width="@dimen/dp_170"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 app:cardCornerRadius="15dp"
@@ -161,7 +161,7 @@
                     android:layout_height="match_parent"
                     android:adjustViewBounds="true"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/packagebg" />
+                    android:src="@drawable/packagebg_n" />
 
             </androidx.cardview.widget.CardView>
 

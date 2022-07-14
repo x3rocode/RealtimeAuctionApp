@@ -20,7 +20,8 @@ data class ProductData(
     var startDate: Timestamp? = null,  //경매시작일
     var endDate: Timestamp? = null,    //경매종료일
     var auctionProgressStatus: Int? = 1,// 경매진행구분 1대기 2진행중 3종료
-    var notifyOnUserId: List<String>?  = null   //경매알림설정 유저아이디 리스트
+    var notifyOnUserId: List<String>?  = null,   //경매알림설정 유저아이디 리스트
+    var buyUserId: String? = null
 
 ): FirestoreModel(),  Parcelable {
     constructor(parcel: Parcel) : this(
@@ -37,7 +38,8 @@ data class ProductData(
         parcel.readParcelable(Timestamp::class.java.classLoader),
         parcel.readParcelable(Timestamp::class.java.classLoader),
         parcel.readValue(Int::class.java.classLoader) as? Int,
-        parcel.createStringArrayList()
+        parcel.createStringArrayList(),
+        parcel.readString()
     ) {
     }
 
@@ -56,6 +58,7 @@ data class ProductData(
         parcel.writeParcelable(endDate, flags)
         parcel.writeValue(auctionProgressStatus)
         parcel.writeStringList(notifyOnUserId)
+        parcel.writeString(buyUserId)
     }
 
     override fun describeContents(): Int {
