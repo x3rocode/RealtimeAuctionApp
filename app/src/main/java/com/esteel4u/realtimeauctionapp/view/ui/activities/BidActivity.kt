@@ -71,23 +71,34 @@ class BidActivity: AppCompatActivity() {
             var mInputMethodManager: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             mInputMethodManager.hideSoftInputFromWindow(binding.bidButton.getWindowToken(), 0);
 
-            //입력한 값이 더 클경우
-            if(binding.inputBid.text.toString().toInt() >= binding.bidinfo!!.bidPrice!!){
-                auctionViewModel!!.setBid(binding.inputBid.text.toString().toInt(), pid)
-            } else {
+            //이전에 입찰햇던 살람이 나야
+            if(binding.bidinfo.buyUserId == FirebaseAuth.getInstance().uid){
                 val sd = SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
                 sd.setTitleText("Oops...")
-                sd.setContentText("입찰 금액은 현재 금액보다 커야합니다.")
+                sd.setContentText("현재 최고가 입찰자는 you")
                 sd.setCancelable(true)
                 sd.setConfirmText("Retry")
 
                 sd.setCanceledOnTouchOutside(true);
                 sd.show()
+            } else {
+                //이전에 입찰햇던 살람이 나가 아니야
+                //입력한 값이 더 클경우
+                if(binding.inputBid.text.toString().toInt() >= binding.bidinfo!!.bidPrice!!){
+                    auctionViewModel!!.setBid(binding.inputBid.text.toString().toInt(), pid, binding.bidinfo!!.buyUserToken!!)
+                } else {
+                    val sd = SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                    sd.setTitleText("Oops...")
+                    sd.setContentText("입찰 금액은 현재 금액보다 커야합니다.")
+                    sd.setCancelable(true)
+                    sd.setConfirmText("Retry")
+
+                    sd.setCanceledOnTouchOutside(true);
+                    sd.show()
+                }
             }
             binding.inputBid.text?.clear()
         }
-
-
         binding.prevBtn.setOnClickListener{
             finish()
         }

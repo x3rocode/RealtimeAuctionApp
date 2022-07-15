@@ -16,8 +16,8 @@ class AuctionViewModel (val lifecycleOwner: LifecycleOwner): ViewModel() {
     private var _actData = MutableLiveData<List<AuctionData>>()
     val actData: MutableLiveData<List<AuctionData>> get() = _actData
 
-    fun setBid(price: Int, prdId: String) {
-        return repository.setBid(price, prdId)
+    fun setBid(price: Int, prdId: String, currentBuyUserToken: String) {
+        return repository.setBid(price, prdId, currentBuyUserToken)
     }
 
     fun getAuctionInfo(prdId: String):MutableLiveData<AuctionData> {

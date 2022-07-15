@@ -1,8 +1,6 @@
 package com.esteel4u.realtimeauctionapp.data.repository
 
-import android.app.AlarmManager
 import android.content.ContentValues
-import android.text.format.DateUtils
 import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
@@ -14,7 +12,6 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
 import com.ptrbrynt.firestorelivedata.FirestoreResource
 import com.ptrbrynt.firestorelivedata.asLiveData
-import com.ptrbrynt.firestorelivedata.observe
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
@@ -62,9 +59,6 @@ class ProductRepository(val lifecycleOwner: LifecycleOwner) {
 
         myQuery.observe(lifecycleOwner, Observer { resource: FirestoreResource<List<ProductData>> ->
             if(resource.data !== null) {
-               // alllist = resource.data!!.toMutableList()
-
-               // Log.d(ContentValues.TAG, "aa      " + alllist.toString())
                 resource.data?.forEach {
                     //진행중
                     if (it.startDate!!.toDate().before(Date())
@@ -86,7 +80,6 @@ class ProductRepository(val lifecycleOwner: LifecycleOwner) {
                     }
                     updateAuctionStatus(it.auctionProgressStatus!! , it.prdId!!)
                 }
-                //https://developer.android.com/topic/libraries/architecture/livedata?hl=ko
 
                 //post
                 productTodayList.postValue(resource.data!!.filterNot { productData: ProductData ->
@@ -100,7 +93,6 @@ class ProductRepository(val lifecycleOwner: LifecycleOwner) {
                         FirebaseMessaging.getInstance().subscribeToTopic(it.prdId!!);
                     }
                 }
-
             }
         })
         return productTodayList
@@ -137,8 +129,10 @@ class ProductRepository(val lifecycleOwner: LifecycleOwner) {
 
         if(isButtonActive){
             newList.remove(auth.uid)
+            FirebaseMessaging.getInstance().unsubscribeFromTopic(productData.prdId!!);
         }else{
             newList.add(auth.uid!!)
+            FirebaseMessaging.getInstance().subscribeToTopic(productData.prdId!!);
         }
 
         val myDocu = db.collection("products").document(productData.prdId!!).asLiveData<ProductData>()

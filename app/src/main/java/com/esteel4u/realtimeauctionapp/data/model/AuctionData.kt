@@ -8,5 +8,6 @@ import java.sql.Timestamp
 data class AuctionData(
     var productId: String? = null,
     var bidPrice: Int? = 0, //입찰금액
-    var buyUserId: String? = null
+    var buyUserId: String? = null,
+    var buyUserToken: String? = null
 ): FirestoreModel()

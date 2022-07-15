@@ -36,13 +36,12 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                 Log.d(TAG, "`Automatic Date and Time` is not enabled")
                 return
             }
-            val scheduledTime = remoteMessage.data["scheduledTime"]
-            scheduleAlarm(scheduledTime, title, message)
             val isScheduled = remoteMessage.data["isScheduled"]?.toBoolean()
             isScheduled?.let {
                 if (it) {
                     // This is Scheduled Notification, Schedule it
-
+                    val scheduledTime = remoteMessage.data["scheduledTime"]
+                    scheduleAlarm(scheduledTime, title, message)
                 } else {
                     // This is not scheduled notification, show it now
                     Log.d(TAG, "앵애ㅐㅐㅐdhodhodhodho")
@@ -62,7 +61,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             Intent(applicationContext, NotificationBroadcastReceiver::class.java).let { intent ->
                 intent.putExtra(NOTIFICATION_TITLE, title)
                 intent.putExtra(NOTIFICATION_MESSAGE, message)
-                PendingIntent.getBroadcast(applicationContext, 0, intent, 0)
+                PendingIntent.getActivity(this, 0, /* Request code */ intent, PendingIntent.FLAG_ONE_SHOT)
             }
 
         val scheduledTime = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.esteel4u.realtimeauctionapp">
+    package="com.esteel4u.realtimeauctionapp"
+    android:installLocation="preferExternal">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
