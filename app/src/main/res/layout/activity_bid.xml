@@ -160,6 +160,7 @@
                 app:isShowMinute="true"
                 app:isShowSecond="true"
                 app:isHideTimeBackground="true"
+
                 />
 
         </LinearLayout>

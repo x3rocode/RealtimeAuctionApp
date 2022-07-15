@@ -56,9 +56,21 @@ class BidActivity: AppCompatActivity() {
 
         var pid = intent.getStringExtra("prddata")
 
-
+        binding.timmer.setOnCountdownEndListener {
+            val sd = SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+            sd.setTitleText("Oops...")
+            sd.setContentText("경매가 종료되었어요")
+            sd.setCancelable(false)
+            sd.setConfirmText("OK")
+            sd.setCanceledOnTouchOutside(false)
+            sd.setConfirmClickListener {
+                finish()
+            }
+            sd.show()
+        }
         viewModel!!.getPrdDataByPid(pid!!).observe(this, Observer{
             binding.timmer.start(it!!.endDate!!.toDate().time - Date().time)
+
             binding.prdlist = it
         })
 
@@ -71,8 +83,9 @@ class BidActivity: AppCompatActivity() {
             var mInputMethodManager: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             mInputMethodManager.hideSoftInputFromWindow(binding.bidButton.getWindowToken(), 0);
 
+
             //이전에 입찰햇던 살람이 나야
-            if(binding.bidinfo.buyUserId == FirebaseAuth.getInstance().uid){
+            if(binding.bidinfo!!.buyUserId!! == FirebaseAuth.getInstance().uid){
                 val sd = SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
                 sd.setTitleText("Oops...")
                 sd.setContentText("현재 최고가 입찰자는 you")
