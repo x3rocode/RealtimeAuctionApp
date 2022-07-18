@@ -6,6 +6,8 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+    <string name="channel_name">channel</string>
+    <string name="channel_description">description</string>
 
     <string name="title_onboarding_1">Welcome to Realtime Auction App!</string>
     <string name="description_onboarding_1">Here is an open-source project which shows sweet &amp; original onboarding ViewPagers that follows Material Design Guidelines</string>

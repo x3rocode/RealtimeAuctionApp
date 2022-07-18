@@ -24,7 +24,7 @@ class NotificationUtil(private val context: Context) {
             PendingIntent.FLAG_ONE_SHOT
         )
 
-        val channelId ="chanel_id"
+        val channelId = context.getString(R.string.channel_name)
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val notificationBuilder = NotificationCompat.Builder(context, channelId)
             .setColor(ContextCompat.getColor(context, android.R.color.holo_red_dark))
@@ -39,6 +39,19 @@ class NotificationUtil(private val context: Context) {
         val notificationManager =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
+
+        // Since android Oreo notification channel is needed.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                channelId,
+                "Default Channel",
+                NotificationManager.IMPORTANCE_HIGH
+            )
+            notificationManager.createNotificationChannel(channel)
+        }
+
+
         notificationManager.notify(Random.nextInt(), notificationBuilder.build())
     }
+
 }
