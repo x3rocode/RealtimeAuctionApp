@@ -69,6 +69,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             .parse(scheduledTimeString!!)
 
         scheduledTime?.let {
+            if(it.after(Date()))
             alarmMgr.setExact(
                 AlarmManager.RTC_WAKEUP,
                 it.time,

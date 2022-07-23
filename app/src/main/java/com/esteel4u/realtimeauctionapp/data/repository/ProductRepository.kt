@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import com.esteel4u.realtimeauctionapp.data.model.AuctionData
 import com.esteel4u.realtimeauctionapp.data.model.ProductData
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
@@ -122,6 +123,11 @@ class ProductRepository(val lifecycleOwner: LifecycleOwner) {
         val task = myDocu.update( "buyUserId" , auth.uid!!)
     }
 
+    fun setBidPrice(prdId: String) {
+        val myDocu = db.collection("products").document(prdId!!).asLiveData<ProductData>()
+        myDocu.update( "buyUserId" , auth.uid!!)
+    }
+
     fun updateUserLikePrdList(isButtonActive: Boolean, productData: ProductData){
         var oldList = productData.notifyOnUserId
         var newList = oldList!!.toMutableList()
@@ -179,6 +185,26 @@ class ProductRepository(val lifecycleOwner: LifecycleOwner) {
             }
         })
         return productPidData
+    }
+
+    fun getPurchasePrdList(): MutableLiveData<List<ProductData>> {
+
+        val myQuery = db.collection("products").orderBy("auctionProgressStatus") .asLiveData<ProductData>()
+        myQuery.observe(lifecycleOwner, Observer { resource: FirestoreResource<List<ProductData>> ->
+            if(resource.data !== null) {
+                val data: MutableList<ProductData>? = resource.data!!.toMutableList()
+
+                resource.data?.forEach {
+                    if(!it.buyUserId!!.contains(auth.uid!!)){
+                        data!!.remove(it)
+                    }
+                }
+
+                productUserLikeList.postValue(data!!)
+            }
+        })
+        return productUserLikeList
+
     }
 
 }

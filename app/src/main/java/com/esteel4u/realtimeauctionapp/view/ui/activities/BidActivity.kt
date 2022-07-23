@@ -64,6 +64,10 @@ class BidActivity: AppCompatActivity() {
             sd.setConfirmText("OK")
             sd.setCanceledOnTouchOutside(false)
             sd.setConfirmClickListener {
+
+                viewModel!!.setBidPrice(pid!!)
+                viewModel!!.setBuyUser(pid!!)
+
                 finish()
             }
             sd.show()
@@ -110,7 +114,7 @@ class BidActivity: AppCompatActivity() {
                     sd.show()
                 }
             }
-            binding.inputBid.text?.clear()
+            binding.inputBid.text!!.clear()
         }
         binding.prevBtn.setOnClickListener{
             finish()

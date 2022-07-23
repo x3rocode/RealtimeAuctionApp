@@ -20,11 +20,12 @@ class NotificationUtil(private val context: Context) {
         val intent = Intent(context, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(
-            context, 0, intent,
-            PendingIntent.FLAG_ONE_SHOT
+            context, (System.currentTimeMillis()).toInt(), intent,
+            PendingIntent.FLAG_NO_CREATE
         )
 
-        val channelId = context.getString(R.string.channel_name)
+        //context.getString(R.string.channel_name)
+        val channelId = message
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val notificationBuilder = NotificationCompat.Builder(context, channelId)
             .setColor(ContextCompat.getColor(context, android.R.color.holo_red_dark))
@@ -51,7 +52,7 @@ class NotificationUtil(private val context: Context) {
         }
 
 
-        notificationManager.notify(Random.nextInt(), notificationBuilder.build())
+        notificationManager.notify(message.hashCode(), notificationBuilder.build())
     }
 
 }

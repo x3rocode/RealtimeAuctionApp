@@ -35,9 +35,48 @@
     <color name="lgray10">#EFF5FF</color>
     <color name="lgray20">#A8A5C0</color>
 
-    <color name="bgray">#FBFCFE</color>
+    <color name="bgray">#F7F7F7</color>
 
 
+    <color name="bg">#f5f5f5</color>
+    <color name="bgnew">#464756</color>
+
+    <color name="filtersfab">#3f51b5</color>
+    <color name="filters_header">#303f9f</color>
+    <color name="filters_buttons">#ff4081</color>
+    <color name="filters_buttons_selected">#c2185b</color>
+    <color name="filters_chips">#b3e5fc</color>
+
+    <color name="orange">#ff5722</color>
+    <color name="brown">#795548</color>
+
+
+    <color name="colorAccent">#FF6284</color>
+    <color name="windowBackground">#51D1E2</color>
+
+    <color name="tab_bg_color">#084A6E</color>
+    <color name="bottom_bar_color">#33779C</color>
+
+    <color name="toolbar_title_color">#5FD5E1</color>
+
+    <color name="title_color">#84D6DE</color>
+    <color name="subtitle_color">#B0E7EF</color>
+
+    <color name="filter_pill_color">#297195</color>
+    <color name="filter_pill_selected_color">@color/windowBackground</color>
+
+    <color name="filter_seek_bar_color">#1C6690</color>
+    <color name="filter_seek_bar_selected_color">#359CBA</color>
+
+    <color name="filter_icon_color">#89AFC2</color>
+    <color name="filter_icon_active_color">@android:color/white</color>
+
+    <color name="list_item_bg_collapsed">#E2FAFF</color>
+    <color name="list_item_bg_expanded">@android:color/white</color>
+    <color name="list_item_fg">#aa7CDDE7</color>
+
+    <color name="tab_unselected_color">#356E8C</color>
+    <color name="tab_selected_color">@android:color/white</color>
 
 
 </resources>

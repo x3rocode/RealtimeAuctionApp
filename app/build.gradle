@@ -66,6 +66,9 @@ dependencies {
     implementation 'com.github.markushi:circlebutton:1.1'
     implementation 'com.jaeger.statusbarutil:library:1.5.1'
     implementation 'com.allattentionhere:fabulousfilter:0.0.5'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'com.crystal:crystalrangeseekbar:1.0.0'
+    implementation 'io.github.sangcomz:StickyTimeLine:1.0.0'
 
     //holy fucking firebase
     implementation platform('com.google.firebase:firebase-bom:30.1.0')

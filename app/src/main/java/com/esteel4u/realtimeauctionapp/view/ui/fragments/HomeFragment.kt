@@ -82,7 +82,7 @@ class HomeFragment  : Fragment(),
         dataStore = DataStoreModule(view.context)
         CoroutineScope(Dispatchers.Main).launch {
             dataStore.user.collect{
-                hello_txt.setText("Hi, "+ it.userName)
+               // hello_txt.setText("Hi, "+ it.userName)
             }
         }
 

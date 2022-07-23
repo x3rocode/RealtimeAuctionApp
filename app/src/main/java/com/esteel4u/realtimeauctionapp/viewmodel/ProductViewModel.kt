@@ -38,8 +38,16 @@ class ProductViewModel (val lifecycleOwner: LifecycleOwner): ViewModel() {
         return repository.getPrdDataByPid(pid)
     }
 
+    fun getPurchasePrdList():MutableLiveData<List<ProductData>> {
+        return repository.getPurchasePrdList()
+    }
+
     fun setBuyUser(prdId: String){
         repository.setBuyUser(prdId)
+    }
+
+    fun setBidPrice(prdId: String){
+        repository.setBidPrice(prdId)
     }
 
 //    fun updateUserLikePrdList(productData: ProductData){
