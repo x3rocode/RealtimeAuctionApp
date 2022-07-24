@@ -20,7 +20,7 @@
     <dimen name="fab_elevation_2">32dp</dimen>
     <dimen name="fab_pressed_elevation">8dp</dimen>
 
-    <dimen name="list_item_vertical_padding">24dp</dimen>
+    <dimen name="list_item_vertical_padding">20dp</dimen>
     <dimen name="list_item_horizontal_padding">16dp</dimen>
 
     <dimen name="filter_layout_padding">32dp</dimen>

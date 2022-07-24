@@ -37,6 +37,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.lang.Math.log
+import java.text.SimpleDateFormat
 
 var animationPlaybackSpeed: Double = 0.8
 
@@ -127,11 +128,17 @@ class ProductListAdapter(
         }
 
         when(holder.binding.prdlist?.auctionType){
-            1 -> holder.binding.prdAuctionType.text = "Premium"
-            2 -> holder.binding.prdAuctionType.text = "Auction"
-            3 -> holder.binding.prdAuctionType.text = "Outlet"
-            4 -> holder.binding.prdAuctionType.text = "Package"
+            1 -> holder.binding.prdAuctionType.text = "프리미엄"
+            2 -> holder.binding.prdAuctionType.text = "옥션"
+            3 -> holder.binding.prdAuctionType.text = "아울렛"
+            4 -> holder.binding.prdAuctionType.text = "패키지"
         }
+
+        var dateFormat = SimpleDateFormat("HH:mm")
+
+        var startTime = dateFormat.format(holder.binding.prdlist?.startDate?.toDate())
+        var endTime = dateFormat.format(holder.binding.prdlist?.endDate?.toDate())
+        holder.binding.prdTime.text = "${startTime}~${endTime}"
 
 
         if(holder.binding.prdlist?.notifyOnUserId!!.contains(userId)){

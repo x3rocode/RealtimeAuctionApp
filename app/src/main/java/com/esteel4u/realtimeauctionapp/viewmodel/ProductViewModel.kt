@@ -8,6 +8,8 @@ import com.esteel4u.realtimeauctionapp.data.model.ProductData
 import com.esteel4u.realtimeauctionapp.data.model.UserData
 import com.esteel4u.realtimeauctionapp.data.repository.ProductRepository
 import com.esteel4u.realtimeauctionapp.data.repository.UserRepository
+import org.joda.time.DateTime
+
 
 class ProductViewModel (val lifecycleOwner: LifecycleOwner): ViewModel() {
     private val repository = ProductRepository(lifecycleOwner)
@@ -48,6 +50,10 @@ class ProductViewModel (val lifecycleOwner: LifecycleOwner): ViewModel() {
 
     fun setBidPrice(prdId: String){
         repository.setBidPrice(prdId)
+    }
+
+    fun getPrdListByDate(dateTime: DateTime):MutableLiveData<List<ProductData>>  {
+        return repository.getPrdlistByDate(dateTime)
     }
 
 //    fun updateUserLikePrdList(productData: ProductData){

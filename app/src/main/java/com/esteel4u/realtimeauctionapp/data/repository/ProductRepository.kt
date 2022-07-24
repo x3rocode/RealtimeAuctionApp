@@ -5,7 +5,6 @@ import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.esteel4u.realtimeauctionapp.data.model.AuctionData
 import com.esteel4u.realtimeauctionapp.data.model.ProductData
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
@@ -13,6 +12,8 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
 import com.ptrbrynt.firestorelivedata.FirestoreResource
 import com.ptrbrynt.firestorelivedata.asLiveData
+import org.joda.time.DateTime
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
@@ -24,6 +25,7 @@ class ProductRepository(val lifecycleOwner: LifecycleOwner) {
     private var productAllList = MutableLiveData<List<ProductData>>()
     private var productTodayList = MutableLiveData<List<ProductData>>()
     private var productUserLikeList = MutableLiveData<List<ProductData>>()
+    private var productListByDate = MutableLiveData<List<ProductData>>()
     private var productPidData = MutableLiveData<ProductData>()
     private var auth = Firebase.auth
     private val db = Firebase.firestore
@@ -99,6 +101,22 @@ class ProductRepository(val lifecycleOwner: LifecycleOwner) {
         return productTodayList
     }
 
+    fun getPrdlistByDate(dateTime: DateTime) : MutableLiveData<List<ProductData>> {
+        val format = SimpleDateFormat("yyyyMMdd")
+        var a = format.format(dateTime.toDate())
+
+        val myQuery = db.collection("products").orderBy("auctionProgressStatus") .asLiveData<ProductData>()
+        myQuery.observe(lifecycleOwner, Observer { resource: FirestoreResource<List<ProductData>> ->
+            if(resource.data !== null){
+                productListByDate.postValue(resource.data!!.filter { productData :ProductData  ->
+                    var b = format.format(productData.startDate!!.toDate())
+                    a == b
+                })
+            }
+        })
+        return  productListByDate
+    }
+
     fun getUserLikePrdList(): MutableLiveData<List<ProductData>> {
 
         val myQuery = db.collection("products").orderBy("auctionProgressStatus") .asLiveData<ProductData>()
@@ -163,6 +181,7 @@ class ProductRepository(val lifecycleOwner: LifecycleOwner) {
 //        val myDocu = db.collection("products").document(productData.prdId!!).asLiveData<ProductData>()
 //        myDocu.update("notifyOnUserId", newList)
 //    }
+
 
 
     fun updateAuctionStatus(status: Int, prdId: String){

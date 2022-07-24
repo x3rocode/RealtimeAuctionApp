@@ -28,9 +28,9 @@ too. layout_gravity="center_horizontal" is a lot simpler.
             android:layout_gravity="center_horizontal"
             android:orientation="vertical"
             app:cardCornerRadius="10dp"
-            app:cardElevation="0dp"
-            app:cardMaxElevation="0dp"
-            app:cardBackgroundColor="@android:color/transparent"
+            app:cardElevation=".5dp"
+            app:cardMaxElevation="5dp"
+            app:cardBackgroundColor="@android:color/white"
             tools:layout_marginLeft="20dp"
             tools:layout_marginRight="20dp"
             android:layout_marginTop="10dp"
@@ -47,11 +47,11 @@ too. layout_gravity="center_horizontal" is a lot simpler.
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:sparkbutton_activeImage="@drawable/ic_heart_on"
-                    app:sparkbutton_iconSize="@dimen/dp_15"
+                    app:sparkbutton_iconSize="@dimen/dp_18"
                     app:sparkbutton_inActiveImage="@drawable/ic_heart_off"
                     android:layout_gravity="right"
 
-                    android:layout_marginTop="@dimen/dp_8"
+                    android:layout_marginTop="@dimen/dp_13"
                     app:sparkbutton_primaryColor="@color/lmint10"
                     app:sparkbutton_secondaryColor="@color/lblue30" />
                 <!--
@@ -66,7 +66,7 @@ too. layout_gravity="center_horizontal" is a lot simpler.
                     android:paddingLeft="@dimen/list_item_horizontal_padding"
                     android:paddingTop="@dimen/list_item_vertical_padding"
                     android:paddingRight="@dimen/list_item_horizontal_padding"
-                    android:paddingBottom="@dimen/list_item_vertical_padding">
+                    android:paddingBottom="10dp">
 
 
 
@@ -86,51 +86,43 @@ too. layout_gravity="center_horizontal" is a lot simpler.
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/nanum_barun_gothic"
                         android:text="프리미엄"
-                        android:textSize="13dp" />
-
-                    <TextView
-                        android:id="@+id/prd_id"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/prd_auction_type"
-                        android:layout_marginTop="3dp"
-                        android:fontFamily="@font/lexend_deca"
-
-                        android:text="@{prdlist.prdId}"
-                        android:textSize="10dp" />
+                        android:textSize="15dp" />
 
                     <TextView
                         android:id="@+id/prd_totseqNm"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignBottom="@id/prd_auction_type"
-                        android:layout_marginLeft="@dimen/dp_5"
-                        android:layout_toRightOf="@id/prd_auction_type"
-                        android:fontFamily="@font/lexend_deca"
+                        android:layout_below="@id/prd_auction_type"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/nanum_barun_gothic"
                         android:text="주무뇌"
-                        android:textSize="10dp" />
-
+                        android:textSize="12dp" />
 
 
                     <TextView
                         android:id="@+id/prd_status"
-                        android:layout_width="40dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignTop="@+id/prd_auction_type"
                         android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/dp_15"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="@dimen/dp_30"
+                        android:fontFamily="@font/nanum_barun_gothic"
                         android:text="진행중"
-                        android:textSize="10dp" />
+                        android:textSize="12dp" />
 
                     <TextView
                         android:id="@+id/prd_time"
-                        android:layout_width="40dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/prd_auction_type"
+                        android:layout_alignTop="@id/prd_totseqNm"
+                        android:layout_alignBottom="@id/prd_totseqNm"
                         android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/dp_15"
+                        android:layout_marginRight="@dimen/dp_30"
+                        android:fontFamily="@font/lexend_deca"
                         android:text="10:00:00"
-                        android:textSize="10dp" />
+                        android:textSize="12dp" />
 
 
 
@@ -138,13 +130,44 @@ too. layout_gravity="center_horizontal" is a lot simpler.
                         android:id="@+id/expand_view"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/prd_status"
+                        android:layout_below="@id/prd_totseqNm"
                         android:layout_alignStart="@id/prd_auction_type"
                         android:layout_marginTop="20dp"
                         android:dividerPadding="1dp"
                         android:showDividers="middle"
                         android:orientation="vertical"
                         >
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="14dp">
+
+                            <LinearLayout
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="제품 ID : "
+                                    android:fontFamily="@font/nanum_barun_gothic"
+                                    android:textSize="12dp" />
+
+                                <TextView
+                                    android:id="@+id/prd_id"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@{prdlist.prdId}"
+                                    android:fontFamily="@font/nanum_barun_gothic"
+                                    android:textSize="12dp"/>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -162,16 +185,16 @@ too. layout_gravity="center_horizontal" is a lot simpler.
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="제품 번호 : "
-                                    android:fontFamily="@font/lexend_deca"
-                                    android:textSize="13dp" />
+                                    android:fontFamily="@font/nanum_barun_gothic"
+                                    android:textSize="12dp" />
 
                                 <TextView
                                     android:id="@+id/material_lotno"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@{prdlist.prdNo}"
-                                    android:fontFamily="@font/lexend_deca"
-                                    android:textSize="13dp"/>
+                                    android:fontFamily="@font/nanum_barun_gothic"
+                                    android:textSize="12dp"/>
 
                             </LinearLayout>
 
@@ -193,15 +216,15 @@ too. layout_gravity="center_horizontal" is a lot simpler.
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="품명 : "
-                                    android:fontFamily="@font/lexend_deca"
-                                    android:textSize="13dp" />
+                                    android:fontFamily="@font/nanum_barun_gothic"
+                                    android:textSize="12dp" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@{prdlist.prdName}"
-                                    android:fontFamily="@font/lexend_deca"
-                                    android:textSize="13dp"/>
+                                    android:fontFamily="@font/nanum_barun_gothic"
+                                    android:textSize="12dp"/>
 
                             </LinearLayout>
 
@@ -215,16 +238,16 @@ too. layout_gravity="center_horizontal" is a lot simpler.
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="규격 : "
-                                    android:fontFamily="@font/lexend_deca"
-                                    android:textSize="13dp"/>
+                                    android:fontFamily="@font/nanum_barun_gothic"
+                                    android:textSize="12dp"/>
 
                                 <TextView
                                     android:id="@+id/prd_substspec"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:fontFamily="@font/lexend_deca"
+                                    android:fontFamily="@font/nanum_barun_gothic"
                                     android:text="@{prdlist.substSpec}"
-                                    android:textSize="13dp" />
+                                    android:textSize="12dp" />
                             </LinearLayout>
                         </LinearLayout>
 
@@ -246,16 +269,16 @@ too. layout_gravity="center_horizontal" is a lot simpler.
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="두께 : "
-                                    android:fontFamily="@font/lexend_deca"
-                                    android:textSize="13dp" />
+                                    android:fontFamily="@font/nanum_barun_gothic"
+                                    android:textSize="12dp" />
 
                                 <TextView
                                     android:id="@+id/prd_prdthk"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@{prdlist.prdThk.toString()}"
-                                    android:fontFamily="@font/lexend_deca"
-                                    android:textSize="13dp"/>
+                                    android:fontFamily="@font/nanum_barun_gothic"
+                                    android:textSize="12dp"/>
 
                             </LinearLayout>
 
@@ -269,16 +292,16 @@ too. layout_gravity="center_horizontal" is a lot simpler.
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="폭 : "
-                                    android:fontFamily="@font/lexend_deca"
-                                    android:textSize="13dp"/>
+                                    android:fontFamily="@font/nanum_barun_gothic"
+                                    android:textSize="12dp"/>
 
                                 <TextView
                                     android:id="@+id/prd_prdwth"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:fontFamily="@font/lexend_deca"
+                                    android:fontFamily="@font/nanum_barun_gothic"
                                     android:text="@{prdlist.prdWth.toString()}"
-                                    android:textSize="13dp" />
+                                    android:textSize="12dp" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -291,16 +314,16 @@ too. layout_gravity="center_horizontal" is a lot simpler.
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="중량 : "
-                                    android:fontFamily="@font/lexend_deca"
-                                    android:textSize="13dp"/>
+                                    android:fontFamily="@font/nanum_barun_gothic"
+                                    android:textSize="12dp"/>
 
                                 <TextView
                                     android:id="@+id/prd_prdwgt"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:fontFamily="@font/lexend_deca"
+                                    android:fontFamily="@font/nanum_barun_gothic"
                                     android:text="@{prdlist.prdWgt.toString()}"
-                                    android:textSize="13dp" />
+                                    android:textSize="12dp" />
                             </LinearLayout>
                         </LinearLayout>
 
@@ -352,7 +375,7 @@ too. layout_gravity="center_horizontal" is a lot simpler.
                     android:layout_height="match_parent"
                     android:alpha="100"
                     android:background="@color/lblue30"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     tools:visibility="gone" />
 
             </FrameLayout>

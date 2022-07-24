@@ -72,7 +72,8 @@ dependencies {
     implementation 'me.rishabhkhanna:CustomToggle:1.0.0'
     implementation 'nl.bryanderidder:themed-toggle-button-group:1.4.1'
     implementation 'com.michalsvec:single-row-calednar:1.0.0'
-    implementation 'com.haibin:calendarview:3.7.1'
+    implementation 'com.github.jhonnyx2012:horizontal-picker:1.0.6'
+    implementation 'io.github.sangcomz:StickyTimeLine:1.0.0'
 
     //holy fucking firebase
     implementation platform('com.google.firebase:firebase-bom:30.1.0')

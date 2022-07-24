@@ -1,30 +1,32 @@
 package com.esteel4u.realtimeauctionapp.view.ui.fragments
 
+import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.esteel4u.realtimeauctionapp.R
-import com.esteel4u.realtimeauctionapp.databinding.FragmentHomeBinding
-import com.esteel4u.realtimeauctionapp.databinding.FragmentLikeBinding
+import com.esteel4u.realtimeauctionapp.data.model.ProductData
 import com.esteel4u.realtimeauctionapp.databinding.FragmentListBinding
-import com.michalsvec.singlerowcalendar.calendar.CalendarChangesObserver
-import com.michalsvec.singlerowcalendar.calendar.CalendarViewManager
-import com.michalsvec.singlerowcalendar.calendar.SingleRowCalendarAdapter
-import com.michalsvec.singlerowcalendar.selection.CalendarSelectionManager
-import com.michalsvec.singlerowcalendar.utils.DateUtils
-import com.returnz3ro.messystem.service.model.datastore.DataStoreModule
-import kotlinx.android.synthetic.main.calendar_item.view.*
+import com.esteel4u.realtimeauctionapp.view.adapter.ProductListAdapter
+import com.esteel4u.realtimeauctionapp.view.ui.activities.BidActivity
+import com.esteel4u.realtimeauctionapp.viewmodel.ProductViewModel
+import com.github.jhonnyx2012.horizontalpicker.DatePickerListener
+import com.github.jhonnyx2012.horizontalpicker.HorizontalPicker
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_list.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+import kotlinx.android.synthetic.main.item_product_list.view.*
+import org.joda.time.DateTime
 import java.util.*
 
-class ListFragment : Fragment() {
+class ListFragment : Fragment() , DatePickerListener
+    , ProductListAdapter.Interaction{
     companion object {
         fun newInstance(position: Int): ListFragment {
             val instance =
@@ -36,16 +38,24 @@ class ListFragment : Fragment() {
         }
     }
 
-    private lateinit var binding: FragmentListBinding
+    private val viewModel: ProductViewModel by activityViewModels { ProductViewModel.Factory(viewLifecycleOwner) }
+    private var _binding : FragmentListBinding? = null
+    private val binding get() = _binding!!
+
+
+    private lateinit var alladapter : ProductListAdapter
+    private lateinit var prdList: List<ProductData>
     private val calendar = Calendar.getInstance()
     private var currentMonth = 0
+    private lateinit var picker: HorizontalPicker
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentListBinding.inflate(inflater, container, false)
+        prdList = arrayListOf()
+        _binding = FragmentListBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -53,87 +63,45 @@ class ListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        calendar.time = Date()
-        currentMonth = calendar[Calendar.MONTH]
+        initRecyclerView()
 
 
-        // calendar view manager is responsible for our displaying logic
-        val myCalendarViewManager = object :
-            CalendarViewManager {
-            override fun setCalendarViewResourceId(
-                position: Int,
-                date: Date,
-                isSelected: Boolean
-            ): Int {
-                // set date to calendar according to position where we are
-                val cal = Calendar.getInstance()
-                cal.time = date
-                // if item is selected we return this layout items
-                // in this example. monday, wednesday and friday will have special item views and other days
-                // will be using basic item view
-                return if (isSelected)
-                    R.layout.selected_calendar_item
-                else
-                // here we return items which are not selected
-                    R.layout.calendar_item
+        picker =  binding.calendarView
+        picker
+            .setListener(this)
+            .setDateSelectedColor(getColor(R.color.lblue60))
+            .setDateSelectedTextColor(Color.WHITE)
+            .setMonthAndYearTextColor(Color.DKGRAY)
+            .setTodayButtonTextColor(getColor(R.color.egray70))
+            .setTodayDateTextColor(getColor(R.color.white))
+            .setTodayDateBackgroundColor(getColor(R.color.egray40))
+            .setUnselectedDayTextColor(getColor(R.color.egray70))
+            .setDayOfWeekTextColor(getColor(R.color.egray70))
+            .showTodayButton(true)
+            .init()
 
-                // NOTE: if we don't want to do it this way, we can simply change color of background
-                // in bindDataToCalendarView method
-            }
+        picker.setDate(DateTime().plusDays(0))
 
-            override fun bindDataToCalendarView(
-                holder: SingleRowCalendarAdapter.CalendarViewHolder,
-                date: Date,
-                position: Int,
-                isSelected: Boolean
-            ) {
-                holder.itemView.tv_date_calendar_item.text = DateUtils.getDayNumber(date)
-                holder.itemView.tv_day_calendar_item.text = DateUtils.getDay3LettersName(date)
-
-            }
-        }
-
-            // using calendar changes observer we can track changes in calendar
-            val myCalendarChangesObserver = object :
-                CalendarChangesObserver {
-                // you can override more methods, in this example we need only this one
-                override fun whenSelectionChanged(isSelected: Boolean, position: Int, date: Date) {
-                    tvDate.text = "${DateUtils.getMonthName(date)}"
-
-                    //TODO: recyclerview update
-
-                    super.whenSelectionChanged(isSelected, position, date)
-                }
-
-
-            }
-
-            // selection manager is responsible for managing selection
-            val mySelectionManager = object : CalendarSelectionManager {
-                override fun canBeItemSelected(position: Int, date: Date): Boolean {
-                    return true
-                }
-            }
-
-
-        // here we init our calendar, also you can set more properties if you haven't specified in XML layout
-        main_single_row_calendar.apply {
-            calendarViewManager = myCalendarViewManager
-            calendarChangesObserver = myCalendarChangesObserver
-            calendarSelectionManager = mySelectionManager
-            setDates(getFutureDatesOfCurrentMonth())
-            init()
-        }
-        btnRight.setOnClickListener {
-            main_single_row_calendar.setDates(getDatesOfNextMonth())
-        }
-
-        btnLeft.setOnClickListener {
-            main_single_row_calendar.setDates(getDatesOfPreviousMonth())
-        }
-
+        viewModel.getPrdListByDate(DateTime.now()).observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            prdList = it
+            alladapter.setData(prdList!!)
+        })
     }
 
+
+    // Method #4
+    private fun initRecyclerView() {
+
+        binding.likeRecyclerView.apply {
+            alladapter = ProductListAdapter(
+                prdList,
+                this@ListFragment,
+                this.context
+            )
+            layoutManager = LinearLayoutManager( this@ListFragment.context)
+            adapter = alladapter
+        }
+    }
 
     private fun getDatesOfNextMonth(): List<Date> {
         currentMonth++ // + because we want next month
@@ -186,4 +154,25 @@ class ListFragment : Fragment() {
         return list
     }
 
+    override fun onDateSelected(dateSelected: DateTime?) {
+       // picker.setBackgroundResource(R.drawable.selected_calendar_item_background)
+        viewModel.getPrdListByDate(dateSelected!!).observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            prdList = it
+            alladapter.setData(prdList!!)
+        })
+    }
+
+    @ColorInt
+    fun getColor(@ColorRes colorRes: Int): Int {
+        return ContextCompat.getColor(requireContext(), colorRes)
+    }
+
+    override fun OnLikeButtonClickListener(v: View, prd: ProductData) {
+        viewModel.updateUserLikePrdList(v.spark_button.isChecked, prd);
+    }
+
+    override fun OnBidButtonClickListener(v: View, p: ProductData) {
+        val intent = Intent(activity, BidActivity::class.java)
+        startActivity(intent)
+    }
 }
