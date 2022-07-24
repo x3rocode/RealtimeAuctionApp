@@ -35,6 +35,8 @@
     <color name="lgray10">#EFF5FF</color>
     <color name="lgray20">#A8A5C0</color>
 
+    <color name="lgray30">#EBEBEB</color>
+
     <color name="bgray">#F7F7F7</color>
 
 
@@ -77,6 +79,10 @@
 
     <color name="tab_unselected_color">#356E8C</color>
     <color name="tab_selected_color">@android:color/white</color>
-
+    <color name="grey">#7a7a7a</color>
+    <color name="lightGrey">#aaaaaa</color>
+    <color name="veryLightGrey">#f0f0f0</color>
+    <color name="purple">#7d64e6</color>
+    <color name="yellow">#ffee00</color>
 
 </resources>

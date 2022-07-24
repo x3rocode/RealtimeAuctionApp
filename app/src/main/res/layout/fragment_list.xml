@@ -24,22 +24,76 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent=".9"/>
 
-
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/my_favorite_txt"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_80"
+        android:fontFamily="@font/nanum_barun_gothic"
         android:textSize="@dimen/dp_28"
-        android:text="전체 목록"
+        android:text="앵앵"
         android:textColor="@color/egray80"
-        android:layout_marginTop="@dimen/dp_50"
-        android:fontFamily="@font/nanum_barun_gothic_bold"
-        app:autoSizeTextType="uniform"
+        android:textStyle="bold"
         app:autoSizeMaxTextSize="34sp"
         app:autoSizeMinTextSize="20sp"
+        app:autoSizeTextType="uniform"
         app:layout_constraintStart_toStartOf="@id/guideline_left"
         app:layout_constraintEnd_toEndOf="@id/guideline_right"
         app:layout_constraintTop_toTopOf="parent"/>
+
+
+    <com.michalsvec.singlerowcalendar.calendar.SingleRowCalendar
+        android:id="@+id/main_single_row_calendar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:deselection="false"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDate"
+        app:longPress="false"
+        app:multiSelection="false" />
+
+    <TextView
+        android:id="@+id/tvDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/nanum_barun_gothic"
+
+        android:text="SELECT A DATE"
+        android:textColor="@color/grey"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@id/guideline_left"
+        app:layout_constraintEnd_toEndOf="@id/guideline_right"
+        app:layout_constraintTop_toBottomOf="@id/my_favorite_txt"/>
+
+
+    <Button
+        android:id="@+id/btnRight"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:background="@drawable/ic_arrow_right_24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvDate"
+        app:layout_constraintStart_toEndOf="@id/tvDate"
+        app:layout_constraintTop_toTopOf="@+id/tvDate" />
+
+    <Button
+        android:id="@+id/btnLeft"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginRight="@dimen/dp_20"
+        android:background="@drawable/ic_arrow_left_24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnRight"
+        app:layout_constraintEnd_toStartOf="@id/tvDate"
+        app:layout_constraintTop_toTopOf="@+id/btnRight" />
+
+
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/like_recycler_view"
@@ -51,7 +105,7 @@
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:layout_marginBottom="300dp"
-        app:layout_constraintTop_toBottomOf="@id/my_favorite_txt"
+        app:layout_constraintTop_toBottomOf="@id/main_single_row_calendar"
         tools:listitem="@layout/item_product_list"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

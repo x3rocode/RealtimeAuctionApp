@@ -36,6 +36,7 @@ import kotlinx.android.synthetic.main.item_product_list.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import nl.bryanderidder.themedtogglebuttongroup.ThemedButton
 import java.util.*
 
 class HomeFragment  : Fragment(),
@@ -86,10 +87,35 @@ class HomeFragment  : Fragment(),
             }
         }
 
-        viewModel.getTodayPrdList().observe(viewLifecycleOwner, Observer{
-            todayAdapter.setData(it!!)
+
+        viewModel.getALlPrdList().observe(viewLifecycleOwner, Observer{
+            prdList = it
+            todayAdapter.setData(prdList!!)
         })
 
+
+        binding.buttongroup.setOnSelectListener { button: ThemedButton ->
+            if(button.isSelected){
+                when(button.id){
+                    primium_btn.id -> todayAdapter.setData(prdList.filter {
+                        it.auctionType == 1
+                    })
+                    auction_btn.id -> todayAdapter.setData(prdList.filter {
+                        it.auctionType == 2
+                    })
+                    outlet_btn.id -> todayAdapter.setData(prdList.filter {
+                        it.auctionType == 3
+                    })
+                    package_btn.id -> todayAdapter.setData(prdList.filter {
+                        it.auctionType == 4
+                    })
+                }
+            }
+            else{
+                todayAdapter.setData(prdList)
+            }
+
+        }
 
     }
 
