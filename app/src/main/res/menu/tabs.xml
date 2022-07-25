@@ -22,9 +22,9 @@
         android:title="Like"
         android:enabled="true" />
 
-    <item
-        android:id="@+id/tab_mypage"
-        android:icon="@drawable/ic_my_home_page_1"
-        android:title="MyPage"
-        android:enabled="true" />
+<!--    <item-->
+<!--        android:id="@+id/tab_mypage"-->
+<!--        android:icon="@drawable/ic_my_home_page_1"-->
+<!--        android:title="MyPage"-->
+<!--        android:enabled="true" />-->
 </menu>

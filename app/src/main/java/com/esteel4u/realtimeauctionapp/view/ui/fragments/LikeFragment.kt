@@ -21,6 +21,10 @@ import com.esteel4u.realtimeauctionapp.view.adapter.ProductListAdapter
 import com.esteel4u.realtimeauctionapp.view.adapter.animationPlaybackSpeed
 import com.esteel4u.realtimeauctionapp.view.ui.activities.BidActivity
 import com.esteel4u.realtimeauctionapp.viewmodel.ProductViewModel
+import kotlinx.android.synthetic.main.fragment_cart.*
+import kotlinx.android.synthetic.main.fragment_cart.lottie_img
+import kotlinx.android.synthetic.main.fragment_cart.sad_txt
+import kotlinx.android.synthetic.main.fragment_like.*
 import kotlinx.android.synthetic.main.item_product_list.view.*
 
 class LikeFragment : Fragment(),
@@ -65,7 +69,17 @@ class LikeFragment : Fragment(),
 
 
         viewModel.getUserLikePrdList().observe(viewLifecycleOwner, Observer{
-            (binding.likeRecyclerView.adapter as ProductListAdapter).setData(it!!)
+            if(it.isNotEmpty()){
+                todayAdapter.setData(it!!)
+                sad_txt.visibility = View.GONE
+                lottie_img.visibility = View.GONE
+                like_recycler_view.visibility = View.VISIBLE
+            }else{
+                sad_txt.visibility = View.VISIBLE
+                lottie_img.visibility = View.VISIBLE
+                like_recycler_view.visibility = View.GONE
+            }
+
         })
     }
     // Method #4

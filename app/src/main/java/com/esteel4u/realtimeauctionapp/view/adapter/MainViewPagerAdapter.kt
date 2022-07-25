@@ -24,7 +24,6 @@ class MainViewPagerAdapter(
             1 -> return ListFragment.newInstance(position)
             2 -> return CartFragment.newInstance(position)
             3 -> return LikeFragment.newInstance(position)
-            4 -> return MyPageFragment.newInstance(position)
         }
 
         return MyPageFragment()

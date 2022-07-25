@@ -15,6 +15,7 @@ import com.esteel4u.realtimeauctionapp.view.adapter.CartListAdapter
 import com.esteel4u.realtimeauctionapp.view.adapter.ProductListAdapter
 import com.esteel4u.realtimeauctionapp.viewmodel.ProductViewModel
 import com.returnz3ro.messystem.service.model.datastore.DataStoreModule
+import kotlinx.android.synthetic.main.fragment_cart.*
 
 class CartFragment: Fragment() {
     companion object {
@@ -50,7 +51,16 @@ class CartFragment: Fragment() {
         initRecyclerView()
 
         viewModel.getPurchasePrdList().observe(viewLifecycleOwner, Observer {
-            madapter.setData(it!!)
+            if(it.isNotEmpty()) {
+                madapter.setData(it!!)
+                sad_txt.visibility = View.GONE
+                lottie_img.visibility = View.GONE
+                today_recycler_view.visibility = View.VISIBLE
+            }else{
+                sad_txt.visibility = View.VISIBLE
+                lottie_img.visibility = View.VISIBLE
+                today_recycler_view.visibility = View.GONE
+            }
         })
     }
 

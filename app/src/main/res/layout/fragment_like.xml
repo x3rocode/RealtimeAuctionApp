@@ -28,17 +28,69 @@
                 android:id="@+id/my_favorite_txt"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_80"
+                android:fontFamily="@font/nanum_barun_gothic"
                 android:textSize="@dimen/dp_28"
                 android:text="관심 목록"
                 android:textColor="@color/egray80"
-                android:layout_marginTop="@dimen/dp_50"
-                android:fontFamily="@font/nanum_barun_gothic_bold"
-                app:autoSizeTextType="uniform"
+                android:textStyle="bold"
                 app:autoSizeMaxTextSize="34sp"
                 app:autoSizeMinTextSize="20sp"
+                app:autoSizeTextType="uniform"
                 app:layout_constraintStart_toStartOf="@id/guideline_left"
                 app:layout_constraintEnd_toEndOf="@id/guideline_right"
                 app:layout_constraintTop_toTopOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/type_txt_desc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/dp_12"
+                android:text="찜해놓은 제품들은 경매가 시작되면 알림을 받을 수 있어요."
+                android:fontFamily="@font/nanum_barun_gothic"
+                android:layout_marginTop="@dimen/dp_5"
+                android:textColor="@color/egray60"
+                app:autoSizeTextType="uniform"
+                app:autoSizeMaxTextSize="28sp"
+                app:autoSizeMinTextSize="12sp"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintEnd_toEndOf="@id/guideline_right"
+                app:layout_constraintTop_toBottomOf="@id/my_favorite_txt"
+                />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lottie_img"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:scaleType="fitCenter"
+                app:lottie_rawRes="@raw/lottie_shopping"
+                app:lottie_loop="true"
+                app:lottie_autoPlay="true"
+
+                app:layout_constraintTop_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintEnd_toEndOf="@id/guideline_right"
+                />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/sad_txt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/dp_15"
+                android:text="아직 아무것도 찜하지 않았어요. \n 관심있는 상품의 '❤'를 눌러보세요!"
+                android:fontFamily="@font/nanum_barun_gothic"
+                android:layout_marginTop="@dimen/dp_5"
+                android:textColor="@color/egray60"
+                android:textAlignment="center"
+                app:autoSizeTextType="uniform"
+                app:autoSizeMaxTextSize="20sp"
+                app:autoSizeMinTextSize="12sp"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintEnd_toEndOf="@id/guideline_right"
+                app:layout_constraintTop_toBottomOf="@id/lottie_img"
+                />
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/like_recycler_view"
@@ -49,9 +101,11 @@
                 android:clipToPadding="true"
                 android:paddingTop="10dp"
 
+                android:visibility="gone"
+
                 android:paddingBottom="10dp"
                 android:layout_marginBottom="300dp"
-                app:layout_constraintTop_toBottomOf="@id/my_favorite_txt"
+                app:layout_constraintTop_toBottomOf="@id/type_txt_desc"
                 tools:listitem="@layout/item_product_list"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
