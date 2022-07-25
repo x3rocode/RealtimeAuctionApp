@@ -151,6 +151,7 @@ class ProductRepository(val lifecycleOwner: LifecycleOwner) {
         var newList = oldList!!.toMutableList()
 
 
+
         if(isButtonActive){
             newList.remove(auth.uid)
             FirebaseMessaging.getInstance().unsubscribeFromTopic(productData.prdId!!);
@@ -187,13 +188,13 @@ class ProductRepository(val lifecycleOwner: LifecycleOwner) {
     fun updateAuctionStatus(status: Int, prdId: String){
         val myDocu = db.collection("products").document(prdId!!).asLiveData<ProductData>()
         val task = myDocu.update( "auctionProgressStatus" , status)
-        task.observe(lifecycleOwner, Observer { taskResult ->
-
-            Log.d(ContentValues.TAG, "aa      " + prdId)
-            Log.d(ContentValues.TAG, "1111 " +taskResult.data)
-            Log.d(ContentValues.TAG, "1111222 " +taskResult.exception)
-            Log.d(ContentValues.TAG, "111331 " +taskResult.status)
-        })
+//        task.observe(lifecycleOwner, Observer { taskResult ->
+//
+//            Log.d(ContentValues.TAG, "aa      " + prdId)
+//            Log.d(ContentValues.TAG, "1111 " +taskResult.data)
+//            Log.d(ContentValues.TAG, "1111222 " +taskResult.exception)
+//            Log.d(ContentValues.TAG, "111331 " +taskResult.status)
+//        })
     }
 
     fun getPrdDataByPid(pid: String) : MutableLiveData<ProductData>{

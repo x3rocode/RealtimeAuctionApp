@@ -90,8 +90,10 @@
         android:layout_marginTop="@dimen/dp_20"
         app:bvp_indicator_radius="@dimen/dp_4"
         app:bvp_indicator_slide_mode="worm"
-        app:bvp_indicator_style="round_rect"
+        app:bvp_indicator_style="circle"
         app:bvp_indicator_visibility="visible"
+        app:layout_constraintStart_toStartOf="@id/guideline_left"
+        app:layout_constraintEnd_toEndOf="@id/guideline_right"
         app:layout_constraintTop_toBottomOf="@id/hello_txt_desc"
         tools:layout_editor_absoluteX="125dp" />
 

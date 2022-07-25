@@ -19,8 +19,8 @@ public class ViewBindingSampleAdapter extends BaseBannerAdapter<Integer> {
       int pageSize) {
     //示例使用ViewBinding
     ItemHomeBannerModelBinding viewBinding = ItemHomeBannerModelBinding.bind(holder.itemView);
-//    viewBinding.bannerImage.setRoundCorner(mRoundCorner);
-//    viewBinding.bannerImage.setImageResource(data);
+    viewBinding.bannerImage.setRoundCorner(30);
+    viewBinding.bannerImage.setImageResource(data);
   }
 
   @Override

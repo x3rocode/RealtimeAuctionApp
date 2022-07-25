@@ -20,8 +20,8 @@ class NotificationUtil(private val context: Context) {
         val intent = Intent(context, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(
-            context, (System.currentTimeMillis()).toInt(), intent,
-            PendingIntent.FLAG_NO_CREATE
+            context, message.hashCode(), intent,
+            PendingIntent.FLAG_UPDATE_CURRENT
         )
 
         //context.getString(R.string.channel_name)
@@ -52,7 +52,7 @@ class NotificationUtil(private val context: Context) {
         }
 
 
-        notificationManager.notify(message.hashCode(), notificationBuilder.build())
+        notificationManager.notify( message.hashCode(), notificationBuilder.build())
     }
 
 }

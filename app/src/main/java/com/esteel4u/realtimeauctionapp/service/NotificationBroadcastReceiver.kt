@@ -7,8 +7,12 @@ import android.util.Log
 import androidx.work.Data
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
+import com.esteel4u.realtimeauctionapp.data.model.ProductData
 import com.esteel4u.realtimeauctionapp.service.ScheduledWorker.Companion.NOTIFICATION_MESSAGE
 import com.esteel4u.realtimeauctionapp.service.ScheduledWorker.Companion.NOTIFICATION_TITLE
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import com.ptrbrynt.firestorelivedata.asLiveData
 
 class NotificationBroadcastReceiver : BroadcastReceiver() {
 
@@ -28,8 +32,13 @@ class NotificationBroadcastReceiver : BroadcastReceiver() {
                 .setInputData(notificationData)
                 .build()
 
+            val db = Firebase.firestore
+            val myDocu = db.collection("products").document(message!!).asLiveData<ProductData>()
+            myDocu.update( "auctionProgressStatus" , 1)
+
             // Start Worker
             WorkManager.getInstance().beginWith(work).enqueue()
+
 
             Log.d(javaClass.name, "WorkManager is Enqueued.")
         }

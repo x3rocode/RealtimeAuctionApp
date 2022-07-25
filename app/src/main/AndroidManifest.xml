@@ -51,7 +51,7 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
+        <receiver android:name=".service.AlarmService"/>
         <receiver android:name=".service.NotificationBroadcastReceiver" />
     </application>
 

@@ -140,10 +140,8 @@ class ProductListAdapter(
         var endTime = dateFormat.format(holder.binding.prdlist?.endDate?.toDate())
         holder.binding.prdTime.text = "${startTime}~${endTime}"
 
-
-        if(holder.binding.prdlist?.notifyOnUserId!!.contains(userId)){
-            holder.binding.sparkButton.isChecked = true
-        }
+        //like button on off
+        holder.binding.sparkButton.isChecked = holder.binding.prdlist?.notifyOnUserId!!.contains(userId)
 
         expandItem(holder, product == expandedModel, animate = false)
         scaleDownItem(holder, position, isScaledDown)
