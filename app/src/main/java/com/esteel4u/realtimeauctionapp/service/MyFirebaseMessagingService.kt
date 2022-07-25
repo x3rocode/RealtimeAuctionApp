@@ -62,7 +62,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             Intent(applicationContext, NotificationBroadcastReceiver::class.java).let { intent ->
                 intent.putExtra(NOTIFICATION_TITLE, title)
                 intent.putExtra(NOTIFICATION_MESSAGE, message)
-                PendingIntent.getBroadcast(applicationContext, message.hashCode() , intent, 0)
+                PendingIntent.getBroadcast(applicationContext, message.hashCode() , intent, PendingIntent.FLAG_MUTABLE)
             }
 
         val scheduledTime = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())

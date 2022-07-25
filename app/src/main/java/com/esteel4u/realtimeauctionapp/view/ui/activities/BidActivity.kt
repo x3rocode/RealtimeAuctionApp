@@ -65,7 +65,7 @@ class BidActivity: AppCompatActivity() {
             sd.setCanceledOnTouchOutside(false)
             sd.setConfirmClickListener {
 
-                viewModel!!.setBidPrice(pid!!)
+                viewModel!!.setBidPrice(binding.bidinfo!!.bidPrice!!, pid!!)
                 viewModel!!.setBuyUser(pid!!)
 
                 finish()
@@ -81,6 +81,8 @@ class BidActivity: AppCompatActivity() {
         auctionViewModel!!.getAuctionInfo(pid!!).observe(this, Observer{
             binding.bidinfo = it
         })
+
+
 
         binding.bidButton.setOnClickListener{
 
@@ -103,6 +105,8 @@ class BidActivity: AppCompatActivity() {
                 //입력한 값이 더 클경우
                 if(binding.inputBid.text.toString().toInt() >= binding.bidinfo!!.bidPrice!!){
                     auctionViewModel!!.setBid(binding.inputBid.text.toString().toInt(), pid, binding.bidinfo!!.buyUserToken!!)
+                    viewModel!!.setBidPrice(binding.bidinfo!!.bidPrice!!, pid!!)
+                    viewModel!!.setBuyUser(pid!!)
                 } else {
                     val sd = SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
                     sd.setTitleText("Oops...")

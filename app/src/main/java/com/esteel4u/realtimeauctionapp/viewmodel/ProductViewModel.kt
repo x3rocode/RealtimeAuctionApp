@@ -48,8 +48,8 @@ class ProductViewModel (val lifecycleOwner: LifecycleOwner): ViewModel() {
         repository.setBuyUser(prdId)
     }
 
-    fun setBidPrice(prdId: String){
-        repository.setBidPrice(prdId)
+    fun setBidPrice(bidPrice: Int, prdId:String){
+        repository.setBidPrice(bidPrice, prdId)
     }
 
     fun getPrdListByDate(dateTime: DateTime):MutableLiveData<List<ProductData>>  {

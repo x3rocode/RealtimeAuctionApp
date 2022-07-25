@@ -144,7 +144,7 @@ class HomeFragment  : Fragment(),
         var intent = Intent(this.requireContext(), AlarmService::class.java)
         intent.putExtra(ScheduledWorker.NOTIFICATION_MESSAGE, id)
         intent.putExtra(ScheduledWorker.NOTIFICATION_TITLE, code)
-        var pIntent = PendingIntent.getBroadcast(this.requireContext(), if(code === "s") id.hashCode() + 1 else id.hashCode() + 2 , intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        var pIntent = PendingIntent.getBroadcast(this.requireContext(), if(code === "s") id.hashCode() + 1 else id.hashCode() + 2 , intent, PendingIntent.FLAG_MUTABLE)
         Log.d(ContentValues.TAG, " kkkkkkkkkkkkkkkkkkkkkkkkk " )
         val cal = Calendar.getInstance()
         var nowCalendar = Calendar.getInstance()

@@ -24,7 +24,6 @@ import com.esteel4u.realtimeauctionapp.data.model.AuctionData
 import com.esteel4u.realtimeauctionapp.data.model.ProductData
 import com.esteel4u.realtimeauctionapp.data.model.UserData
 import com.esteel4u.realtimeauctionapp.databinding.ItemCartListBinding
-import com.esteel4u.realtimeauctionapp.databinding.ItemProductListBinding
 import com.esteel4u.realtimeauctionapp.view.ui.fragments.HomeFragment
 import com.esteel4u.realtimeauctionapp.view.utils.*
 import com.google.firebase.firestore.DocumentSnapshot
@@ -109,10 +108,10 @@ class CartListAdapter(
         }
 
         when(holder.binding.prdlist?.auctionType){
-            1 -> holder.binding.prdAuctionType.text = "Premium"
-            2 -> holder.binding.prdAuctionType.text = "Auction"
-            3 -> holder.binding.prdAuctionType.text = "Outlet"
-            4 -> holder.binding.prdAuctionType.text = "Package"
+            1 -> holder.binding.prdAuctionType.text = "프리미엄"
+            2 -> holder.binding.prdAuctionType.text = "옥션"
+            3 -> holder.binding.prdAuctionType.text = "아울렛"
+            4 -> holder.binding.prdAuctionType.text = "패키지"
         }
 
 

@@ -141,9 +141,9 @@ class ProductRepository(val lifecycleOwner: LifecycleOwner) {
         val task = myDocu.update( "buyUserId" , auth.uid!!)
     }
 
-    fun setBidPrice(prdId: String) {
+    fun setBidPrice(bidPrice: Int, prdId:String) {
         val myDocu = db.collection("products").document(prdId!!).asLiveData<ProductData>()
-        myDocu.update( "buyUserId" , auth.uid!!)
+        myDocu.update( "bidPrice" , bidPrice)
     }
 
     fun updateUserLikePrdList(isButtonActive: Boolean, productData: ProductData){
