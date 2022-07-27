@@ -117,9 +117,9 @@ class ProductListAdapter(
             1 -> {holder.binding.prdStatus.text = "진행중"
                 holder.binding.bidButton.visibility = View.VISIBLE}
             2 -> {holder.binding.prdStatus.text = "진행 예정"
-                holder.binding.bidButton.visibility = View.GONE}
+                holder.binding.bidButton.visibility = View.INVISIBLE}
             3 -> {holder.binding.prdStatus.text = "종료"
-                holder.binding.bidButton.visibility = View.GONE}
+                holder.binding.bidButton.visibility = View.INVISIBLE}
         }
 
         when (holder.binding.prdlist?.prdTotClsSeqNm){

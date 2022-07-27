@@ -7,6 +7,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.esteel4u.realtimeauctionapp.data.model.AuctionData
+import com.esteel4u.realtimeauctionapp.data.model.BidUserList
 import com.esteel4u.realtimeauctionapp.data.model.NotificationData
 import com.esteel4u.realtimeauctionapp.data.model.PushNotificationData
 import com.esteel4u.realtimeauctionapp.network.ApiInterface
@@ -35,19 +36,40 @@ class AuctionRepository(val lifecycleOwner: LifecycleOwner) {
     fun setBid(price: Int, prdId: String, currentBuyUserToken: String){
         val myDocu = db.collection("auctions").document(prdId!!).asLiveData<AuctionData>()
 
+        //subscrib -> message is sended by server when auction is done
+        FirebaseMessaging.getInstance().subscribeToTopic(prdId!! + "bid")
 
+        //update highest price, userid, token
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             var token = task.result
-            myDocu.update(mapOf(Pair("buyUserId", auth.uid!!), Pair("bidPrice", price), Pair("buyUserToken", token!!)))
+            myDocu.update(mapOf(Pair("highestBuyUserId", auth.uid!!), Pair("bidPrice", price), Pair("buyUserToken", token!!)))
         })
 
+        //add in list
+        val userListDoc = db.collection("auctions").document(prdId!!).collection("bidUserList").asLiveData<BidUserList>()
+        userListDoc.add(BidUserList(price, auth.uid))
+
         //send message to current user
+        if(currentBuyUserToken.isNotEmpty()){
+            var senddata = PushNotificationData(
+                NotificationData("내가 참여한 경매에 더 높은 금액이 입찰되었어요.", "이대로 당하고 있을건가요?", false),
+                currentBuyUserToken)
+            sendNotification(senddata)
+        }
 
-        var senddata = PushNotificationData(
-            NotificationData("heyhey", "you are loser", false),
-            currentBuyUserToken)
+    }
 
-        sendNotification(senddata)
+    fun setBidFirst(price: Int, prdId: String){
+        val myDocu = db.collection("auctions").document(prdId!!).asLiveData<AuctionData>()
+        //add highest price, userid, token
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            var token = task.result
+            myDocu.update(mapOf(Pair("highestBuyUserId", auth.uid!!), Pair("bidPrice", price), Pair("buyUserToken", token!!)))
+        })
+
+        //add in list
+        val userListDoc = db.collection("auctions").document(prdId!!).collection("bidUserList").asLiveData<BidUserList>()
+        userListDoc.add(BidUserList(price, auth.uid))
     }
 
     fun getAuctionInfo(prdId: String): MutableLiveData<AuctionData> {

@@ -27,7 +27,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                 Log.d(TAG, "ssssssss: ${remoteMessage.notification!!.body}")
             }
 
-
             val title = remoteMessage.data["title"]
             val message = remoteMessage.data["message"]
 
@@ -62,7 +61,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             Intent(applicationContext, NotificationBroadcastReceiver::class.java).let { intent ->
                 intent.putExtra(NOTIFICATION_TITLE, title)
                 intent.putExtra(NOTIFICATION_MESSAGE, message)
-                PendingIntent.getBroadcast(applicationContext, message.hashCode() , intent, PendingIntent.FLAG_MUTABLE)
+                PendingIntent.getBroadcast(applicationContext, message.hashCode() , intent,
+                    PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE)
             }
 
         val scheduledTime = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())

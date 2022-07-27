@@ -8,7 +8,7 @@
     <item
         android:id="@+id/tab_list"
         android:icon="@drawable/ic_icons8_uncheck_all_500"
-        android:title="List"
+        android:title="Products"
         android:enabled="true" />
     <item
         android:id="@+id/tab_cart"

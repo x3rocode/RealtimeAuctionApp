@@ -11,25 +11,24 @@ import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import com.esteel4u.realtimeauctionapp.R
 import com.esteel4u.realtimeauctionapp.view.ui.activities.MainActivity
-import java.util.*
-import kotlin.random.Random
 
 class NotificationUtil(private val context: Context) {
 
     fun showNotification(title: String, message: String) {
         val intent = Intent(context, MainActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        intent.putExtra("key", "a")
         val pendingIntent = PendingIntent.getActivity(
             context, message.hashCode(), intent,
-            PendingIntent.FLAG_UPDATE_CURRENT
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE
         )
 
         //context.getString(R.string.channel_name)
         val channelId = message
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val notificationBuilder = NotificationCompat.Builder(context, channelId)
-            .setColor(ContextCompat.getColor(context, android.R.color.holo_red_dark))
-            .setSmallIcon(R.drawable.android_icon)
+            .setColor(ContextCompat.getColor(context, android.R.color.black))
+            .setSmallIcon(R.drawable.logon)
             .setContentTitle(title)
             .setContentText(message)
             .setAutoCancel(true)

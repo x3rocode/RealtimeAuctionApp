@@ -3,10 +3,8 @@ package com.esteel4u.realtimeauctionapp.view.ui.fragments
 import android.animation.ValueAnimator
 import android.app.AlarmManager
 import android.app.PendingIntent
-import android.content.BroadcastReceiver
 import android.content.ContentValues
 import android.content.Context
-import android.content.Context.ALARM_SERVICE
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -17,7 +15,6 @@ import android.view.ViewGroup
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -26,17 +23,12 @@ import com.esteel4u.realtimeauctionapp.R
 import com.esteel4u.realtimeauctionapp.data.model.ProductData
 import com.esteel4u.realtimeauctionapp.databinding.FragmentHomeBinding
 import com.esteel4u.realtimeauctionapp.service.AlarmService
-import com.esteel4u.realtimeauctionapp.service.NotificationBroadcastReceiver
 import com.esteel4u.realtimeauctionapp.service.ScheduledWorker
 import com.esteel4u.realtimeauctionapp.view.adapter.ProductListAdapter
 import com.esteel4u.realtimeauctionapp.view.adapter.ViewBindingSampleAdapter
 import com.esteel4u.realtimeauctionapp.view.adapter.animationPlaybackSpeed
 import com.esteel4u.realtimeauctionapp.view.ui.activities.BidActivity
-import com.esteel4u.realtimeauctionapp.view.ui.activities.MainActivity
 import com.esteel4u.realtimeauctionapp.viewmodel.ProductViewModel
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
-import com.ptrbrynt.firestorelivedata.asLiveData
 import com.returnz3ro.messystem.service.model.datastore.DataStoreModule
 import com.zhpan.bannerview.constants.PageStyle
 import com.zhpan.bannerview.utils.BannerUtils
@@ -47,8 +39,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import nl.bryanderidder.themedtogglebuttongroup.ThemedButton
-import org.checkerframework.checker.units.qual.s
-import java.text.SimpleDateFormat
 import java.util.*
 
 class HomeFragment  : Fragment(),
@@ -89,7 +79,6 @@ class HomeFragment  : Fragment(),
         return binding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -112,6 +101,10 @@ class HomeFragment  : Fragment(),
                 addAlarm(it.endDate!!.toDate(), it.prdId!!, "e")
             }
         })
+
+
+
+
 
 
         binding.buttongroup.setOnSelectListener { button: ThemedButton ->
@@ -144,8 +137,9 @@ class HomeFragment  : Fragment(),
         var intent = Intent(this.requireContext(), AlarmService::class.java)
         intent.putExtra(ScheduledWorker.NOTIFICATION_MESSAGE, id)
         intent.putExtra(ScheduledWorker.NOTIFICATION_TITLE, code)
-        var pIntent = PendingIntent.getBroadcast(this.requireContext(), if(code === "s") id.hashCode() + 1 else id.hashCode() + 2 , intent, PendingIntent.FLAG_MUTABLE)
-        Log.d(ContentValues.TAG, " kkkkkkkkkkkkkkkkkkkkkkkkk " )
+        var pIntent = PendingIntent.getBroadcast(this.requireContext(), if(code === "s") id.hashCode() + 1 else id.hashCode() + 2 , intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE)
+
         val cal = Calendar.getInstance()
         var nowCalendar = Calendar.getInstance()
         cal.time = date
@@ -163,37 +157,12 @@ class HomeFragment  : Fragment(),
         }
 
     }
-    private fun scheduleAlarm(
-        scheduledTimeString: String?,
-        title: String?,
-        message: String?
-    ) {
-        val alarmMgr = this.requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val alarmIntent =
-            Intent(this.requireContext(), NotificationBroadcastReceiver::class.java).let { intent ->
-                intent.putExtra(ScheduledWorker.NOTIFICATION_TITLE, title)
-                intent.putExtra(ScheduledWorker.NOTIFICATION_MESSAGE, message)
-                PendingIntent.getBroadcast(this.requireContext(), message.hashCode() , intent, 0)
-            }
-
-        val scheduledTime = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
-            .parse(scheduledTimeString!!)
-
-        scheduledTime?.let {
-            if(it.after(Date()))
-                alarmMgr.setExact(
-                    AlarmManager.RTC_WAKEUP,
-                    it.time,
-                    alarmIntent
-                )
-        }
-    }
 
     private fun setBanner() {
         banner_view.apply {
             setLifecycleRegistry(lifecycle)
             adapter = ViewBindingSampleAdapter(R.layout.item_home_banner_model)
-            setIndicatorSliderColor(getColor(R.color.egray20),getColor(R.color.egray80))
+            setIndicatorSliderColor(getColor(R.color.egray20),getColor(R.color.lblue30))
             setIndicatorSliderRadius(
                 resources.getDimensionPixelOffset(R.dimen.dp_3),
                 resources.getDimensionPixelOffset(R.dimen.dp_3))

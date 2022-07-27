@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.transition.Slide
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -114,5 +115,17 @@ class LoginActivity : AppCompatActivity() {
         slide.duration = 1000
         window.enterTransition = slide
     }
+    override fun onNewIntent(intent: Intent?) {
+        var a = intent!!.getStringExtra("a")
+        Log.d("dfdfd", a + "asdfffffffffffffffffffff")
+        val sd = SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
+        sd.setTitleText("Congratulation!")
+        sd.setContentText("구매에 성공했어요")
+        sd.setCancelable(true)
+        sd.setConfirmText("OK")
 
+        sd.setCanceledOnTouchOutside(true);
+        sd.show()
+        super.onNewIntent(intent)
+    }
 }

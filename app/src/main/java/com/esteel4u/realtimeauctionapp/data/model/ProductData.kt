@@ -21,7 +21,7 @@ data class ProductData(
     var endDate: Timestamp? = null,    //경매종료일
     var auctionProgressStatus: Int? = 1,// 경매진행구분 1진행중 2진행예정 3종료
     var notifyOnUserId: List<String>?  = null,   //경매알림설정 유저아이디 리스트
-    var buyUserId: String? = null,
+    var highestBuyUserId: String? = null,
     var bidPrice: Int? = null
 
 ): FirestoreModel(),  Parcelable {
@@ -60,7 +60,7 @@ data class ProductData(
         parcel.writeParcelable(endDate, flags)
         parcel.writeValue(auctionProgressStatus)
         parcel.writeStringList(notifyOnUserId)
-        parcel.writeString(buyUserId)
+        parcel.writeString(highestBuyUserId)
         parcel.writeValue(bidPrice)
     }
 

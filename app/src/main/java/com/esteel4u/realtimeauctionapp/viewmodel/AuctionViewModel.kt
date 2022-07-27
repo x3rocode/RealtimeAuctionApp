@@ -20,6 +20,10 @@ class AuctionViewModel (val lifecycleOwner: LifecycleOwner): ViewModel() {
         return repository.setBid(price, prdId, currentBuyUserToken)
     }
 
+    fun setBidFirst(price: Int, prdId: String) {
+        return repository.setBidFirst(price, prdId)
+    }
+
     fun getAuctionInfo(prdId: String):MutableLiveData<AuctionData> {
         return repository.getAuctionInfo(prdId)
     }

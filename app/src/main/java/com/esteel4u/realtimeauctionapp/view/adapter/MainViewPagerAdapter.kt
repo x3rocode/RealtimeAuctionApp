@@ -7,7 +7,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.esteel4u.realtimeauctionapp.view.ui.fragments.*
 
 
-private const val NUM_TABS = 5
+private const val NUM_TABS = 4
 
 class MainViewPagerAdapter(
     fragmentManager: FragmentManager,
@@ -28,4 +28,5 @@ class MainViewPagerAdapter(
 
         return MyPageFragment()
     }
+
 }

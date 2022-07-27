@@ -25,6 +25,7 @@ class ProductRepository(val lifecycleOwner: LifecycleOwner) {
     private var productAllList = MutableLiveData<List<ProductData>>()
     private var productTodayList = MutableLiveData<List<ProductData>>()
     private var productUserLikeList = MutableLiveData<List<ProductData>>()
+    private var productUserPurchaseList = MutableLiveData<List<ProductData>>()
     private var productListByDate = MutableLiveData<List<ProductData>>()
     private var productPidData = MutableLiveData<ProductData>()
     private var auth = Firebase.auth
@@ -138,7 +139,7 @@ class ProductRepository(val lifecycleOwner: LifecycleOwner) {
 
     fun setBuyUser(prdId: String) {
         val myDocu = db.collection("products").document(prdId!!).asLiveData<ProductData>()
-        val task = myDocu.update( "buyUserId" , auth.uid!!)
+        val task = myDocu.update( "highestBuyUserId" , auth.uid!!)
     }
 
     fun setBidPrice(bidPrice: Int, prdId:String) {
@@ -149,8 +150,6 @@ class ProductRepository(val lifecycleOwner: LifecycleOwner) {
     fun updateUserLikePrdList(isButtonActive: Boolean, productData: ProductData){
         var oldList = productData.notifyOnUserId
         var newList = oldList!!.toMutableList()
-
-
 
         if(isButtonActive){
             newList.remove(auth.uid)
@@ -198,9 +197,12 @@ class ProductRepository(val lifecycleOwner: LifecycleOwner) {
     }
 
     fun getPrdDataByPid(pid: String) : MutableLiveData<ProductData>{
-        val myQuery = db.collection("products").document(pid) .asLiveData<ProductData>()
+        val myQuery = db.collection("products").document(pid).asLiveData<ProductData>()
         myQuery.observe(lifecycleOwner, Observer { resource: FirestoreResource<ProductData> ->
             if(resource.data !== null) {
+
+                Log.d(ContentValues.TAG, "dfdfdfffffffffffffffff " + resource.data!!.prdId)
+
                 productPidData.postValue(resource.data!!)
             }
         })
@@ -215,15 +217,17 @@ class ProductRepository(val lifecycleOwner: LifecycleOwner) {
                 val data: MutableList<ProductData>? = resource.data!!.toMutableList()
 
                 resource.data?.forEach {
-                    if(!it.buyUserId!!.contains(auth.uid!!)){
+                    if(!it.highestBuyUserId!!.contains(auth.uid!!)){
                         data!!.remove(it)
                     }
                 }
 
-                productUserLikeList.postValue(data!!)
+                productUserPurchaseList.postValue(data!!.filter {
+                    it.auctionProgressStatus == 3
+                })
             }
         })
-        return productUserLikeList
+        return productUserPurchaseList
 
     }
 

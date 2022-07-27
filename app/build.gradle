@@ -74,6 +74,7 @@ dependencies {
     implementation 'com.michalsvec:single-row-calednar:1.0.0'
     implementation 'com.github.jhonnyx2012:horizontal-picker:1.0.6'
     implementation 'io.github.sangcomz:StickyTimeLine:1.0.0'
+    implementation 'com.github.andrefrsousa:SuperToolbar:1.3.0'
 
     //holy fucking firebase
     implementation platform('com.google.firebase:firebase-bom:30.1.0')

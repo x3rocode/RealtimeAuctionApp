@@ -150,7 +150,7 @@
                 app:autoSizeTextType="uniform"
                 app:autoSizeMaxTextSize="15dp"
                 app:autoSizeMinTextSize="12dp"
-                app:textAllCaps="false"
+                app:textAllCaps="true"
                 android:gravity="center_vertical"
                 android:textColor="@color/egray40"
                 android:fontFamily="@font/lexend_deca"

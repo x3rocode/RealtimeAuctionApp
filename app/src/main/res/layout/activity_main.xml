@@ -1,24 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@drawable/main_gradient_background"
 
     >
 
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinator"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.andrefrsousa.supertoolbar.SuperToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize"
+            android:background="@android:color/white"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:superToolbar_centerTitle="true"
+            app:superToolbar_useLightFont="true">
+
+
+<!--            <androidx.appcompat.widget.AppCompatImageButton-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="@dimen/dp_50"-->
+<!--                android:id="@+id/prev_btn"-->
+<!--                android:backgroundTint="@android:color/transparent"-->
+<!--                android:layout_marginVertical="@dimen/dp_10"-->
+<!--                android:adjustViewBounds="true"-->
+<!--                android:scaleType="centerCrop"-->
+<!--                android:src ="@drawable/ic_round_keyboard_arrow_left_24"-->
+<!--                />-->
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_55"
+                android:id="@+id/logo"
+                android:layout_gravity="right"
+                android:backgroundTint="@android:color/transparent"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:layout_marginVertical="@dimen/dp_5"
+                android:src ="@drawable/logon"
+                />
+
+        </com.andrefrsousa.supertoolbar.SuperToolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintVertical_weight=".8"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/bottom_bar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
-
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <nl.joery.animatedbottombar.AnimatedBottomBar
         android:id="@+id/bottom_bar"
@@ -46,4 +95,4 @@
         app:layout_constraintBottom_toBottomOf="parent"/>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
