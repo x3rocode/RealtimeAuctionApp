@@ -44,8 +44,9 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                     Log.d(TAG, "앵애ㅐㅐㅐdhodhodhodh12121212o")
                 } else {
                     // This is not scheduled notification, show it now
-                    Log.d(TAG, "앵애ㅐㅐㅐdhodhodhodho")
-                    showNotification(title!!, message!!)
+                    val id = remoteMessage.data["buyuserid"]
+                    Log.d(TAG, "------------------------------------------dmddo" + id)
+                    showNotification(title!!, message!!, id!!)
                 }
             }
         }
@@ -78,8 +79,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         }
     }
 
-    private fun showNotification(title: String, message: String) {
-        NotificationUtil(applicationContext).showNotification(title, message)
+    private fun showNotification(title: String, message: String, id: String) {
+        NotificationUtil(applicationContext).showNotification(title, message, id)
     }
 
     override fun onNewToken(token: String) {

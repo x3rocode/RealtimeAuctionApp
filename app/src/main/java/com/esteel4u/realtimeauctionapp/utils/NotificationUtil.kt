@@ -10,14 +10,17 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import com.esteel4u.realtimeauctionapp.R
+import com.esteel4u.realtimeauctionapp.view.ui.activities.BidActivity
+import com.esteel4u.realtimeauctionapp.view.ui.activities.LoginActivity
 import com.esteel4u.realtimeauctionapp.view.ui.activities.MainActivity
+import com.esteel4u.realtimeauctionapp.view.ui.activities.OnboardActivity
 
 class NotificationUtil(private val context: Context) {
 
-    fun showNotification(title: String, message: String) {
+    fun showNotification(title: String, message: String, id: String) {
         val intent = Intent(context, MainActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-        intent.putExtra("key", "a")
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        if(id.isNotEmpty()) intent.putExtra("buyuserid", id)
         val pendingIntent = PendingIntent.getActivity(
             context, message.hashCode(), intent,
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE

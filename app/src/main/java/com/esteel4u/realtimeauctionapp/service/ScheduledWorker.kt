@@ -23,7 +23,7 @@ class ScheduledWorker(appContext: Context, workerParams: WorkerParameters) :
         val message = inputData.getString(NOTIFICATION_MESSAGE)
 
         // Show Notification
-        NotificationUtil(applicationContext).showNotification(title!!, message!!)
+        NotificationUtil(applicationContext).showNotification(title!!, message!!, "")
 
         // TODO Do your other Background Processing
 

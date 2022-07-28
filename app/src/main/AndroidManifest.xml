@@ -41,8 +41,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".view.ui.activities.LoginActivity" />
-        <activity android:name=".view.ui.activities.MainActivity" />
+        <activity android:name=".view.ui.activities.MainActivity" android:launchMode="singleTask"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="FCM_EXE_ACTIVITY" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity android:name=".view.ui.activities.BidActivity" />
 
         <service

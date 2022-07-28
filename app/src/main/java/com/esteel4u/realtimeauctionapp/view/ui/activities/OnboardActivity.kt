@@ -3,10 +3,12 @@ package com.esteel4u.realtimeauctionapp.view.ui.activities
 import android.content.Intent
 import android.os.Bundle
 import android.transition.Slide
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.esteel4u.realtimeauctionapp.view.adapter.OnboardingViewPagerAdapter
 import com.esteel4u.realtimeauctionapp.view.utils.Animatoo
 import com.google.android.material.tabs.TabLayoutMediator
@@ -48,6 +50,20 @@ class OnboardActivity: AppCompatActivity() {
             }
         }
 
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        var a = intent!!.getStringExtra("a")
+        Log.d("dfdfd", a + "asdfffffffffffffffffffff")
+        val sd = SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
+        sd.setTitleText("Congratulation!")
+        sd.setContentText("구매에 성공했어요")
+        sd.setCancelable(true)
+        sd.setConfirmText("OK")
+
+        sd.setCanceledOnTouchOutside(true);
+        sd.show()
+        super.onNewIntent(intent)
     }
 
     private fun getItem(): Int {
