@@ -115,17 +115,4 @@ class LoginActivity : AppCompatActivity() {
         slide.duration = 1000
         window.enterTransition = slide
     }
-    override fun onNewIntent(intent: Intent?) {
-        var a = intent!!.getStringExtra("a")
-        Log.d("dfdfd", a + "asdfffffffffffffffffffff")
-        val sd = SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
-        sd.setTitleText("Congratulation!")
-        sd.setContentText("구매에 성공했어요")
-        sd.setCancelable(true)
-        sd.setConfirmText("OK")
-
-        sd.setCanceledOnTouchOutside(true);
-        sd.show()
-        super.onNewIntent(intent)
-    }
 }

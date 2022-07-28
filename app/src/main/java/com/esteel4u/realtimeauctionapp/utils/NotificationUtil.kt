@@ -17,10 +17,18 @@ import com.esteel4u.realtimeauctionapp.view.ui.activities.OnboardActivity
 
 class NotificationUtil(private val context: Context) {
 
-    fun showNotification(title: String, message: String, id: String) {
+    fun showNotification(title: String, message: String, id: String, tag: String) {
         val intent = Intent(context, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-        if(id.isNotEmpty()) intent.putExtra("buyuserid", id)
+
+
+        //TODO : 여기서 조건써서 인텐트 비드 ㅇ.ㅇ..
+        if(tag == "end"){
+            if(id.isNotEmpty()) intent.putExtra("buyuserid", id)
+        }else if(tag == "loser"){
+            if(id.isNotEmpty()) intent.putExtra("prdId", id)
+        }
+
         val pendingIntent = PendingIntent.getActivity(
             context, message.hashCode(), intent,
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE

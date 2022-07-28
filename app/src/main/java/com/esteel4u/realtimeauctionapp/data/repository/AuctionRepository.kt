@@ -52,7 +52,7 @@ class AuctionRepository(val lifecycleOwner: LifecycleOwner) {
         //send message to current user
         if(currentBuyUserToken.isNotEmpty()){
             var senddata = PushNotificationData(
-                NotificationData("내가 참여한 경매에 더 높은 금액이 입찰되었어요.", "이대로 당하고 있을건가요?", false),
+                NotificationData("내가 참여한 경매에 더 높은 금액이 입찰되었어요.", "이대로 당하고 있을건가요?", "loser", prdId!!),
                 currentBuyUserToken)
             sendNotification(senddata)
         }

@@ -29,24 +29,26 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
             val title = remoteMessage.data["title"]
             val message = remoteMessage.data["message"]
+            val tag = remoteMessage.data["tag"]
 
             if (!isTimeAutomatic(applicationContext)) {
                 Log.d(TAG, "`Automatic Date and Time` is not enabled")
                 return
             }
 
-            val isScheduled = remoteMessage.data["isScheduled"]?.toBoolean()
-            isScheduled?.let {
-                if (it) {
-                    // This is Scheduled Notification, Schedule it
+            when(tag){
+                "start" -> {
+                    val isScheduled = remoteMessage.data["isScheduled"]?.toBoolean()
                     val scheduledTime = remoteMessage.data["scheduledTime"]
                     scheduleAlarm(scheduledTime, title, message)
-                    Log.d(TAG, "앵애ㅐㅐㅐdhodhodhodh12121212o")
-                } else {
-                    // This is not scheduled notification, show it now
+                }
+                "end" -> {
                     val id = remoteMessage.data["buyuserid"]
-                    Log.d(TAG, "------------------------------------------dmddo" + id)
-                    showNotification(title!!, message!!, id!!)
+                    showNotification(title!!, message!!, id!!, tag)
+                }
+                "loser" -> {
+                    val id = remoteMessage.data["prdId"]
+                    showNotification(title!!, message!!, id!!, tag)
                 }
             }
         }
@@ -79,8 +81,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         }
     }
 
-    private fun showNotification(title: String, message: String, id: String) {
-        NotificationUtil(applicationContext).showNotification(title, message, id)
+    private fun showNotification(title: String, message: String, id: String, tag: String) {
+        NotificationUtil(applicationContext).showNotification(title, message, id, tag)
     }
 
     override fun onNewToken(token: String) {

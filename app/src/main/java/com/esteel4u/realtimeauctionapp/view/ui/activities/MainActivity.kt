@@ -55,15 +55,44 @@ class MainActivity: AppCompatActivity() {
 
         val extras = intent.extras
         if (extras != null) {
-            val id = extras.getString("buyuserid")
-            reciveInput(id!!)
+            val tag = extras.getString("tag")
+
+            when(tag){
+                "start" -> {}
+                "end" -> {
+                    val id = extras.getString("buyuserid")
+                    reciveInput(id!!)
+                }
+                "loser" -> {
+                    val prdId = extras.getString("prdId")
+                    val intent = Intent( this, BidActivity::class.java)
+                    intent.putExtra("prddata", prdId)
+                    startActivity(intent)
+                    finish()
+                }
+            }
+
         }
     }
 
 
     override fun onNewIntent(intent: Intent?) {
-        var id = intent!!.getStringExtra("buyuserid")
-        reciveInput(id!!)
+        val tag = intent!!.getStringExtra("tag")
+
+        when(tag){
+            "start" -> {}
+            "end" -> {
+                val id = intent!!.getStringExtra("buyuserid")
+                reciveInput(id!!)
+            }
+            "loser" -> {
+                val prdId = intent!!.getStringExtra("prdId")
+                val intent = Intent( this, BidActivity::class.java)
+                intent.putExtra("prddata", prdId)
+                startActivity(intent)
+                finish()
+            }
+        }
 
         super.onNewIntent(intent)
     }
@@ -98,7 +127,7 @@ class MainActivity: AppCompatActivity() {
             }
         })
         Log.d(ContentValues.TAG, id + "ㅏㅓㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ" )
-        if(id == auth.uid){
+        if( id == auth.uid){
             sd = SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
             sd.setTitleText("Congratulation!")
             sd.setContentText("구매에 성공했어요")

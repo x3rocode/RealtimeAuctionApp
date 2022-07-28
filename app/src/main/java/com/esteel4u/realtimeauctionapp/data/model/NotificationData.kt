@@ -6,7 +6,8 @@ import lombok.Data
 data class NotificationData(
     val title: String,
     val message: String,
-    val isScheduled: Boolean
+    val tag: String,
+    val prdId: String
 )
 
 @Data

@@ -55,6 +55,7 @@ class BidActivity: AppCompatActivity() {
         auctionViewModel = ViewModelProvider(this, AuctionViewModel.Factory(this)).get(AuctionViewModel::class.java)
 
         var pid = intent.getStringExtra("prddata")
+        Log.d("d", "aaaaaaaaaaaaaaaaa" + pid!!)
 
         binding.timmer.setOnCountdownEndListener {
             val sd = SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
