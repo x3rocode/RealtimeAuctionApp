@@ -13,6 +13,10 @@ too. layout_gravity="center_horizontal" is a lot simpler.
             name="prdlist"
             type="com.esteel4u.realtimeauctionapp.data.model.ProductData"/>
 
+        <variable
+            name="biduserlist"
+            type="com.esteel4u.realtimeauctionapp.data.model.BidUserList"/>
+
     </data>
 
     <FrameLayout
@@ -99,7 +103,7 @@ too. layout_gravity="center_horizontal" is a lot simpler.
                         android:layout_marginTop="5dp"
                         android:layout_marginRight="@dimen/dp_30"
                         android:fontFamily="@font/nanum_barun_gothic"
-                        android:text="낙찰가"
+                        android:text="현재 최고 입찰가"
                         android:textSize="12dp" />
 
                     <TextView

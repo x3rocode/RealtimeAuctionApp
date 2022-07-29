@@ -1,16 +1,11 @@
 package com.esteel4u.realtimeauctionapp.view.adapter
 
 import android.animation.ValueAnimator
-import android.content.ContentValues
 import android.content.Context
-import android.opengl.Visibility
-import android.service.autofill.Validators.not
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
-import android.widget.ImageView
 import androidx.core.animation.doOnEnd
 import androidx.core.animation.doOnStart
 import androidx.core.view.doOnLayout
@@ -21,22 +16,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.esteel4u.realtimeauctionapp.R
 import com.esteel4u.realtimeauctionapp.data.model.ProductData
-import com.esteel4u.realtimeauctionapp.data.model.UserData
 import com.esteel4u.realtimeauctionapp.databinding.ItemProductListBinding
-import com.esteel4u.realtimeauctionapp.view.ui.fragments.HomeFragment
 import com.esteel4u.realtimeauctionapp.view.utils.*
-import com.google.firebase.firestore.DocumentSnapshot
-import com.google.firebase.firestore.auth.User
 import com.returnz3ro.messystem.service.model.datastore.DataStoreModule
-import com.returnz3ro.messystem.service.model.datastore.DataStoreModule.Companion.uid
-import com.returnz3ro.messystem.service.model.datastore.DataStoreModule.Companion.userId
-import com.returnz3ro.messystem.service.model.datastore.DataStoreModule.Companion.userName
-import com.varunest.sparkbutton.SparkButton
-import com.varunest.sparkbutton.SparkEventListener
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.lang.Math.log
+import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 
 var animationPlaybackSpeed: Double = 0.8
@@ -133,6 +119,14 @@ class ProductListAdapter(
             3 -> holder.binding.prdAuctionType.text = "아울렛"
             4 -> holder.binding.prdAuctionType.text = "패키지"
         }
+
+        val myFormatter = DecimalFormat("###,###")
+        val formattedWgt: String = myFormatter.format(holder.binding.prdlist!!.prdWgt) + "Kg"
+        val formattedWth: String = myFormatter.format(holder.binding.prdlist!!.prdWth)
+
+        holder.binding.prdPrdwth.text = formattedWth
+        holder.binding.prdPrdwgt.text = formattedWgt
+
 
         var dateFormat = SimpleDateFormat("HH:mm")
 

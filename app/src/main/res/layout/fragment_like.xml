@@ -31,7 +31,7 @@
                 android:layout_marginTop="@dimen/dp_20"
                 android:fontFamily="@font/lexend_deca"
                 android:textSize="@dimen/dp_28"
-                android:text="Wish List"
+                android:text="위시리스트"
                 android:textColor="@color/egray80"
                 android:textStyle="bold"
                 app:autoSizeMaxTextSize="34sp"

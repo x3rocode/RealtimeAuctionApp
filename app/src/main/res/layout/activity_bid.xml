@@ -232,7 +232,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="right"
-                        android:fontFamily="@font/lexend_deca"
+                        android:fontFamily="@font/nanum_barun_gothic"
                         android:textSize="@dimen/dp_12"
                         android:textColor="@color/egray70"
                         android:text="@{prdlist.prdNo}"/>
@@ -263,7 +263,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="6"
                         android:gravity="right"
-                        android:fontFamily="@font/lexend_deca"
+                        android:fontFamily="@font/nanum_barun_gothic"
                         android:textSize="@dimen/dp_12"
                         android:textColor="@color/egray70"
                         android:text="@{prdlist.prdId}"/>
@@ -294,7 +294,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="right"
-                        android:fontFamily="@font/lexend_deca"
+                        android:fontFamily="@font/nanum_barun_gothic"
                         android:textSize="@dimen/dp_12"
                         android:textColor="@color/egray70"
                         android:text="@{prdlist.prdName}"/>
@@ -324,7 +324,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="6"
                         android:gravity="right"
-                        android:fontFamily="@font/lexend_deca"
+                        android:fontFamily="@font/nanum_barun_gothic"
                         android:textSize="@dimen/dp_12"
                         android:textColor="@color/egray70"
                         android:text="@{prdlist.substSpec}"/>
@@ -355,7 +355,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="6"
                         android:gravity="right"
-                        android:fontFamily="@font/lexend_deca"
+                        android:fontFamily="@font/nanum_barun_gothic"
                         android:textSize="@dimen/dp_12"
                         android:textColor="@color/egray70"
                         android:text="@{prdlist.prdThk.toString()}"/>
@@ -385,7 +385,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="6"
                         android:gravity="right"
-                        android:fontFamily="@font/lexend_deca"
+                        android:fontFamily="@font/nanum_barun_gothic"
                         android:textSize="@dimen/dp_12"
                         android:textColor="@color/egray70"
                         android:text="@{prdlist.prdWth.toString()}"/>
@@ -415,7 +415,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="6"
                         android:gravity="right"
-                        android:fontFamily="@font/lexend_deca"
+                        android:fontFamily="@font/nanum_barun_gothic"
                         android:textSize="@dimen/dp_12"
                         android:textColor="@color/egray70"
                         android:text="@{prdlist.prdWgt.toString()}"/>
@@ -445,7 +445,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="6"
                         android:gravity="right"
-                        android:fontFamily="@font/lexend_deca"
+                        android:fontFamily="@font/nanum_barun_gothic"
                         android:textSize="@dimen/dp_12"
                         android:textColor="@color/egray70"
                         android:text="@{prdlist.worksCode}"/>
@@ -476,7 +476,6 @@
 
         android:layout_marginBottom="@dimen/dp_28"
         >
-
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/input_bid"

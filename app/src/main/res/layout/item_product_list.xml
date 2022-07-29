@@ -300,7 +300,6 @@ too. layout_gravity="center_horizontal" is a lot simpler.
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/nanum_barun_gothic"
-                                    android:text="@{prdlist.prdWth.toString()}"
                                     android:textSize="12dp" />
                             </LinearLayout>
 
@@ -322,7 +321,6 @@ too. layout_gravity="center_horizontal" is a lot simpler.
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/nanum_barun_gothic"
-                                    android:text="@{prdlist.prdWgt.toString()}"
                                     android:textSize="12dp" />
                             </LinearLayout>
                         </LinearLayout>

@@ -13,8 +13,8 @@ data class ProductData(
     var prdName: String? = null,  //품명
     var substSpec: String? = null,  //규격
     var prdThk: Double? = null,  //두께
-    var prdWth: Double? = null,  //폭
-    var prdWgt: Double? = null,  //무게
+    var prdWth: Int? = null,  //폭
+    var prdWgt: Int? = null,  //무게
     var prdTotClsSeqNm: Int? = 1,  //등급 1 주문외1급 2주문외2급
     var worksCode: String? = null,  //광양, 판교
     var startDate: Timestamp? = null,  //경매시작일
@@ -32,8 +32,8 @@ data class ProductData(
         parcel.readString(),
         parcel.readString(),
         parcel.readValue(Double::class.java.classLoader) as? Double,
-        parcel.readValue(Double::class.java.classLoader) as? Double,
-        parcel.readValue(Double::class.java.classLoader) as? Double,
+        parcel.readValue(Double::class.java.classLoader) as? Int,
+        parcel.readValue(Double::class.java.classLoader) as? Int,
         parcel.readValue(Int::class.java.classLoader) as? Int,
         parcel.readString(),
         parcel.readParcelable(Timestamp::class.java.classLoader),

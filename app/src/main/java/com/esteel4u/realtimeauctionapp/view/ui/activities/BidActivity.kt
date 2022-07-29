@@ -96,7 +96,7 @@ class BidActivity: AppCompatActivity() {
 
             if(binding.bidinfo!!.highestBuyUserId?.isEmpty() == true){
                 //내가 첫 입찰자
-                auctionViewModel!!.setBid(binding.inputBid.text.toString().toInt(), pid, binding.bidinfo!!.buyUserToken!!)
+                auctionViewModel!!.setBidFirst(binding.inputBid.text.toString().toInt(), pid)
             }else{
 
                 //이전에 입찰햇던 살람이 나야

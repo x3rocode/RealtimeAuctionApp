@@ -11,11 +11,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.esteel4u.realtimeauctionapp.data.model.ProductData
 import com.esteel4u.realtimeauctionapp.databinding.FragmentCartBinding
 import com.esteel4u.realtimeauctionapp.databinding.FragmentHomeBinding
+import com.esteel4u.realtimeauctionapp.view.adapter.CartBidSuccessAdapter
 import com.esteel4u.realtimeauctionapp.view.adapter.CartListAdapter
 import com.esteel4u.realtimeauctionapp.view.adapter.ProductListAdapter
 import com.esteel4u.realtimeauctionapp.viewmodel.ProductViewModel
 import com.returnz3ro.messystem.service.model.datastore.DataStoreModule
 import kotlinx.android.synthetic.main.fragment_cart.*
+import kotlinx.android.synthetic.main.fragment_home.*
 
 class CartFragment: Fragment() {
     companion object {
@@ -32,7 +34,8 @@ class CartFragment: Fragment() {
     private var _binding : FragmentCartBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var madapter : CartListAdapter
+    private lateinit var madapter : CartBidSuccessAdapter
+    private lateinit var cartAdapter: CartListAdapter
     lateinit var prdList: List<ProductData>
 
     override fun onCreateView(
@@ -53,26 +56,47 @@ class CartFragment: Fragment() {
         viewModel.getPurchasePrdList().observe(viewLifecycleOwner, Observer {
             if(it.isNotEmpty()) {
                 madapter.setData(it!!)
+                cartAdapter.setData(it!!)
                 sad_txt.visibility = View.GONE
                 lottie_img.visibility = View.GONE
-                today_recycler_view.visibility = View.VISIBLE
+                cart_recycler_view.visibility = View.VISIBLE
+                bid_success_recview.visibility = View.VISIBLE
+                my_bid_txt.visibility = View.VISIBLE
+                bid_txt_desc.visibility = View.VISIBLE
+                my_cart_txt.visibility = View.VISIBLE
+                cart_txt_desc.visibility = View.VISIBLE
+
             }else{
                 sad_txt.visibility = View.VISIBLE
                 lottie_img.visibility = View.VISIBLE
-                today_recycler_view.visibility = View.GONE
+                cart_recycler_view.visibility = View.GONE
+                bid_success_recview.visibility = View.GONE
+                my_bid_txt.visibility = View.GONE
+                bid_txt_desc.visibility = View.GONE
+                my_cart_txt.visibility = View.GONE
+                cart_txt_desc.visibility = View.GONE
             }
         })
     }
 
     private fun initRecyclerView() {
 
-        binding.todayRecyclerView.apply {
-            madapter = CartListAdapter(
+        binding.bidSuccessRecview.apply {
+            madapter = CartBidSuccessAdapter(
+                prdList,
+                this.context
+            )
+            layoutManager = LinearLayoutManager( this@CartFragment.context, LinearLayoutManager.HORIZONTAL, false)
+            adapter = madapter
+        }
+
+        binding.cartRecyclerView.apply {
+            cartAdapter = CartListAdapter(
                 prdList,
                 this.context
             )
             layoutManager = LinearLayoutManager( this@CartFragment.context)
-            adapter = madapter
+            adapter = cartAdapter
         }
     }
 
