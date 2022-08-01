@@ -5,13 +5,17 @@ import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import com.esteel4u.realtimeauctionapp.data.model.AuctionData
+import com.esteel4u.realtimeauctionapp.data.model.BidUserList
 import com.esteel4u.realtimeauctionapp.data.model.ProductData
+import com.google.api.ResourceProto.resource
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
 import com.ptrbrynt.firestorelivedata.FirestoreResource
 import com.ptrbrynt.firestorelivedata.asLiveData
+import com.ptrbrynt.firestorelivedata.observe
 import org.joda.time.DateTime
 import java.text.SimpleDateFormat
 import java.time.LocalDate
@@ -28,6 +32,7 @@ class ProductRepository(val lifecycleOwner: LifecycleOwner) {
     private var productUserPurchaseList = MutableLiveData<List<ProductData>>()
     private var productListByDate = MutableLiveData<List<ProductData>>()
     private var productPidData = MutableLiveData<ProductData>()
+    private var productUserBidList = MutableLiveData<List<ProductData>>()
     private var auth = Firebase.auth
     private val db = Firebase.firestore
     private val udb = Firebase.firestore
@@ -229,6 +234,42 @@ class ProductRepository(val lifecycleOwner: LifecycleOwner) {
         })
         return productUserPurchaseList
 
+    }
+
+    fun getUserBidPrdList(): MutableLiveData<List<ProductData>> {
+        val myPrdQuery = db.collection("products").asLiveData<ProductData>()
+        myPrdQuery.observe(lifecycleOwner, Observer{ resource: FirestoreResource<List<ProductData>> ->
+            if(resource.data !== null) {
+                val prddata: MutableList<ProductData>? = resource.data!!.toMutableList()
+
+                resource.data?.forEach { prd: ProductData ->
+
+                    val myQuery = db.collection("auctions").document(prd.prdId!!).collection("bidUserList").asLiveData<BidUserList>()
+
+                    myQuery.observe(lifecycleOwner, Observer { resource: FirestoreResource<List<BidUserList>> ->
+                        if(resource.data !== null){
+                            val biddata: MutableList<BidUserList>? = resource.data!!.toMutableList()
+
+                            biddata?.filter {
+                                it.bidUserId == auth.uid
+                            }
+
+                            if(biddata.isNullOrEmpty()){
+                                prddata!!.remove(prd!!)
+                                Log.d("ddddddddddd", prd.prdId.toString())
+                            }
+
+                        }
+                        //prddata!!.remove(prd!!)
+                    })
+                    Log.d("ccccccccc", prddata!!.size.toString())
+                }
+
+                 productUserBidList.postValue(prddata)
+            }
+        })
+
+        return productUserBidList
     }
 
 }

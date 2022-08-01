@@ -56,6 +56,10 @@ class ProductViewModel (val lifecycleOwner: LifecycleOwner): ViewModel() {
         return repository.getPrdlistByDate(dateTime)
     }
 
+    fun getUserBidPrdList():MutableLiveData<List<ProductData>> {
+        return repository.getUserBidPrdList()
+    }
+
 //    fun updateUserLikePrdList(productData: ProductData){
 //        repository.updateUserLikePrdList( productData)
 //    }

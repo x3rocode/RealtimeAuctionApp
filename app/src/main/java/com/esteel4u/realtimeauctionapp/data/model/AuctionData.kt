@@ -10,7 +10,7 @@ data class AuctionData(
     var bidPrice: Int? = 0, //입찰금액
     var highestBuyUserId: String? = null,
     var buyUserToken: String? = null,
-    //var bidUserList: MutableList<BidUserList>? = null
+    var bidUserList: MutableList<BidUserList>? = null
 ): FirestoreModel()
 
 @Data
@@ -18,3 +18,5 @@ data class BidUserList(
     var bidPrice: Int? = 0,
     var bidUserId: String? = null
 ): FirestoreModel()
+
+

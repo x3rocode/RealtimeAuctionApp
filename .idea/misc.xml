@@ -20,7 +20,7 @@
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/activity_onboarding.xml" value="0.2" />
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/calendar_item.xml" value="0.1042611060743427" />
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/first_special_selected_calendar_item.xml" value="0.1042611060743427" />
-        <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/fragment_cart.xml" value="0.15" />
+        <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/fragment_cart.xml" value="0.25" />
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/fragment_home.xml" value="0.22" />
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/fragment_like.xml" value="0.25" />
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/fragment_list.xml" value="0.1" />
@@ -37,6 +37,7 @@
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/item_product_list.xml" value="0.25" />
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/item_slide_mode.xml" value="0.21547669944420692" />
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/item_slide_model.xml" value="0.25" />
+        <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/layout_filter_view.xml" value="0.2877297990594271" />
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/test.xml" value="0.15519452757588714" />
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/menu/tabs.xml" value="0.1875" />
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1685" />

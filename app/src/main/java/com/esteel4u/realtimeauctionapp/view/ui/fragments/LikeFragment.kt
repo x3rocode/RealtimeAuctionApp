@@ -21,9 +21,6 @@ import com.esteel4u.realtimeauctionapp.view.adapter.ProductListAdapter
 import com.esteel4u.realtimeauctionapp.view.adapter.animationPlaybackSpeed
 import com.esteel4u.realtimeauctionapp.view.ui.activities.BidActivity
 import com.esteel4u.realtimeauctionapp.viewmodel.ProductViewModel
-import kotlinx.android.synthetic.main.fragment_cart.*
-import kotlinx.android.synthetic.main.fragment_cart.lottie_img
-import kotlinx.android.synthetic.main.fragment_cart.sad_txt
 import kotlinx.android.synthetic.main.fragment_like.*
 import kotlinx.android.synthetic.main.item_product_list.view.*
 

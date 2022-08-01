@@ -6,10 +6,7 @@ import android.widget.Toast
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.esteel4u.realtimeauctionapp.data.model.AuctionData
-import com.esteel4u.realtimeauctionapp.data.model.BidUserList
-import com.esteel4u.realtimeauctionapp.data.model.NotificationData
-import com.esteel4u.realtimeauctionapp.data.model.PushNotificationData
+import com.esteel4u.realtimeauctionapp.data.model.*
 import com.esteel4u.realtimeauctionapp.network.ApiInterface
 import com.esteel4u.realtimeauctionapp.network.RetrofitInstance
 import com.google.android.gms.tasks.OnCompleteListener
@@ -48,6 +45,7 @@ class AuctionRepository(val lifecycleOwner: LifecycleOwner) {
         //add in list
         val userListDoc = db.collection("auctions").document(prdId!!).collection("bidUserList").asLiveData<BidUserList>()
         userListDoc.add(BidUserList(price, auth.uid))
+
 
         //send message to current user
         if(currentBuyUserToken.isNotEmpty()){

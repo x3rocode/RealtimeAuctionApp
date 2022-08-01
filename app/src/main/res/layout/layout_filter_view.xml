@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup
+        android:id="@+id/buttongroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:justifyContent="center"
+        app:toggle_requiredAmount="0"
+        app:toggle_selectAnimation="circular_reveal"
+        app:toggle_selectableAmount="1"> <!-- this attribute is from the underlying FlexboxLayout -->
+
+        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+            android:id="@+id/primium_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_38"
+            app:toggle_backgroundColor="@color/lgray30"
+            app:toggle_btnCornerRadius="@dimen/dp_20"
+            app:toggle_selectedBackgroundColor="@color/lblue60"
+            app:toggle_selectedTextColor="@color/white"
+            app:toggle_text="진행중"
+            app:toggle_textPaddingVertical="@dimen/dp_12"
+            app:toggle_textSize="@dimen/dp_12" />
+
+        <nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+            android:id="@+id/auction_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            app:toggle_backgroundColor="@color/lgray30"
+            app:toggle_btnCornerRadius="@dimen/dp_20"
+            app:toggle_selectedBackgroundColor="@color/lblue60"
+            app:toggle_selectedTextColor="@color/white"
+            app:toggle_text="진행완료"
+            app:toggle_textPaddingVertical="@dimen/dp_12"
+            app:toggle_textSize="@dimen/dp_12" />
+
+
+    </nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup>
+
+</RelativeLayout>
