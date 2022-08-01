@@ -37,6 +37,7 @@ class CartFragment: Fragment() {
     private lateinit var madapter : CartBidSuccessAdapter
     private lateinit var cartAdapter: CartListAdapter
     lateinit var prdList: List<ProductData>
+    lateinit var prdList1: List<ProductData>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,6 +45,7 @@ class CartFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         prdList = arrayListOf()
+        prdList1 = arrayListOf()
         _binding = FragmentCartBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -96,7 +98,7 @@ class CartFragment: Fragment() {
 
         binding.cartRecyclerView.apply {
             cartAdapter = CartListAdapter(
-                prdList,
+                prdList1,
                 this.context
             )
             layoutManager = LinearLayoutManager( this@CartFragment.context)

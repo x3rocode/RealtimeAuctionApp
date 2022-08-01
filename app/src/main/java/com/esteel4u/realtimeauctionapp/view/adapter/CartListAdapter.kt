@@ -109,8 +109,8 @@ class CartListAdapter(
             4 -> holder.binding.prdAuctionType.text = "패키지"
         }
 
-        var price = holder.binding.prdlist?.bidPrice!! * holder.binding.prdlist?.prdWgt!!
-        holder.binding.aucBid.text = "₩$price"
+
+        //holder.binding.aucBid.text = "₩" + holder.binding.prdlist?.bidPrice!!
 
         expandItem(holder, product == expandedModel, animate = false)
         scaleDownItem(holder, position, isScaledDown)

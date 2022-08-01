@@ -87,7 +87,8 @@
         <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/fragment_mypage.xml" value="0.1" />
         <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/fragment_onboarding.xml" value="0.161328125" />
         <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/ic_pill.xml" value="0.140625" />
-        <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/item_cart_list.xml" value="0.1" />
+        <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/item_cart_bid_success_list.xml" value="0.20108695652173914" />
+        <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/item_cart_list.xml" value="0.33" />
         <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/item_filter_tab.xml" value="0.140625" />
         <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/item_product_list.xml" value="0.33" />
         <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/second_special_calendar_item.xml" value="0.19900271985494106" />
@@ -99,5 +100,5 @@
     </option>
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_14" project-jdk-name="11" project-jdk-type="JavaSDK" />
 </project>

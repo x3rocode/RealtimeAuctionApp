@@ -60,9 +60,6 @@ class ProductViewModel (val lifecycleOwner: LifecycleOwner): ViewModel() {
         return repository.getUserBidPrdList()
     }
 
-//    fun updateUserLikePrdList(productData: ProductData){
-//        repository.updateUserLikePrdList( productData)
-//    }
 
     class Factory(val lifecycleOwner: LifecycleOwner) : ViewModelProvider.NewInstanceFactory() {
 

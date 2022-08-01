@@ -237,35 +237,37 @@ class ProductRepository(val lifecycleOwner: LifecycleOwner) {
     }
 
     fun getUserBidPrdList(): MutableLiveData<List<ProductData>> {
+
+
         val myPrdQuery = db.collection("products").asLiveData<ProductData>()
         myPrdQuery.observe(lifecycleOwner, Observer{ resource: FirestoreResource<List<ProductData>> ->
             if(resource.data !== null) {
-                val prddata: MutableList<ProductData>? = resource.data!!.toMutableList()
+                var prddata: MutableList<ProductData>? = resource.data!!.toMutableList()
 
-                resource.data?.forEach { prd: ProductData ->
+                productUserBidList.postValue(prddata!!)
+//                resource.data?.forEach { prd: ProductData ->
+//
+//                    val myQuery = db.collection("auctions")
+//                        .document(prd.prdId!!)
+//                        .collection("bidUserList")
+//                        .asLiveData<BidUserList>()
+//                    myQuery.observe(lifecycleOwner, Observer { bidlist: FirestoreResource<List<BidUserList>> ->
+//                        if(!bidlist.data.isNullOrEmpty()){
+////                            var a= bidlist!!.data!!.filter {
+////                                it.bidUserId == auth.uid
+////                            }
+////                            if(a.isEmpty()){
+////                                prddata!!.remove(prd)
+////                                Log.d("sibal inseng feel like jot", prd!!.prdId.toString())
+////                            }
+//
+//
+//                        }
+//
+//                    })
+//
+//                }
 
-                    val myQuery = db.collection("auctions").document(prd.prdId!!).collection("bidUserList").asLiveData<BidUserList>()
-
-                    myQuery.observe(lifecycleOwner, Observer { resource: FirestoreResource<List<BidUserList>> ->
-                        if(resource.data !== null){
-                            val biddata: MutableList<BidUserList>? = resource.data!!.toMutableList()
-
-                            biddata?.filter {
-                                it.bidUserId == auth.uid
-                            }
-
-                            if(biddata.isNullOrEmpty()){
-                                prddata!!.remove(prd!!)
-                                Log.d("ddddddddddd", prd.prdId.toString())
-                            }
-
-                        }
-                        //prddata!!.remove(prd!!)
-                    })
-                    Log.d("ccccccccc", prddata!!.size.toString())
-                }
-
-                 productUserBidList.postValue(prddata)
             }
         })
 
