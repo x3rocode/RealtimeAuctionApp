@@ -1,22 +1,16 @@
 package com.esteel4u.realtimeauctionapp.view.ui.activities
 
 import android.content.Intent
-import android.graphics.Color
 import android.graphics.Rect
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.transition.Slide
-import android.util.Log
 import android.view.MotionEvent
-import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import cn.pedant.SweetAlert.SweetAlertDialog
-import com.esteel4u.realtimeauctionapp.data.model.UserData
 import com.esteel4u.realtimeauctionapp.databinding.ActivityLoginBinding
 import com.esteel4u.realtimeauctionapp.viewmodel.LoginViewModel
 import com.google.firebase.auth.FirebaseUser

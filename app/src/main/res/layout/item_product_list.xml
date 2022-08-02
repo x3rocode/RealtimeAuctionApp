@@ -11,7 +11,7 @@ too. layout_gravity="center_horizontal" is a lot simpler.
     <data>
         <variable
             name="prdlist"
-            type="com.esteel4u.realtimeauctionapp.data.model.ProductData"/>
+            type="com.esteel4u.realtimeauctionapp.model.data.ProductData"/>
     </data>
 
     <FrameLayout
@@ -84,8 +84,9 @@ too. layout_gravity="center_horizontal" is a lot simpler.
                         android:id="@+id/prd_auction_type"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/nanum_barun_gothic"
+                        android:fontFamily="@font/lexend_deca"
                         android:text="프리미엄"
+                        android:textColor="@color/egray80"
                         android:textSize="15dp" />
 
                     <TextView
@@ -94,18 +95,52 @@ too. layout_gravity="center_horizontal" is a lot simpler.
                         android:layout_height="wrap_content"
                         android:layout_below="@id/prd_auction_type"
                         android:layout_marginTop="5dp"
-                        android:fontFamily="@font/nanum_barun_gothic"
+                        android:fontFamily="@font/lexend_deca"
                         android:text="주무뇌"
-                        android:textSize="12dp" />
+                        android:textSize="10dp" />
 
+                    <TextView
+                        android:id="@+id/line"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/prd_auction_type"
+                        android:layout_marginTop="5dp"
+                        android:layout_toRightOf="@id/prd_totseqNm"
+                        android:fontFamily="@font/lexend_deca"
+                        android:text=" | "
+                        android:textSize="10dp" />
+
+                    <TextView
+                        android:id="@+id/prd_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/prd_auction_type"
+                        android:layout_marginTop="5dp"
+                        android:layout_toRightOf="@id/line"
+                        android:fontFamily="@font/lexend_deca"
+                        android:text="@{prdlist.prdNo.toString()}"
+                        android:textSize="10dp" />
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/lottie_live"
+                        android:layout_width="40dp"
+                        android:layout_height="0dp"
+                        android:adjustViewBounds="true"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true"
+                        android:layout_alignTop="@id/prd_auction_type"
+                        android:layout_alignBottom="@id/prd_status"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/dp_30"
+                        app:lottie_rawRes="@raw/lottie_live"
+                        />
 
                     <TextView
                         android:id="@+id/prd_status"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignTop="@+id/prd_auction_type"
+                        android:layout_alignTop="@id/prd_auction_type"
                         android:layout_alignParentRight="true"
-                        android:layout_marginTop="5dp"
                         android:layout_marginRight="@dimen/dp_30"
                         android:fontFamily="@font/nanum_barun_gothic"
                         android:text="진행중"
@@ -115,8 +150,7 @@ too. layout_gravity="center_horizontal" is a lot simpler.
                         android:id="@+id/prd_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/prd_auction_type"
-                        android:layout_alignTop="@id/prd_totseqNm"
+                        android:layout_below="@id/prd_status"
                         android:layout_alignBottom="@id/prd_totseqNm"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="@dimen/dp_30"

@@ -1,22 +1,14 @@
-package com.esteel4u.realtimeauctionapp.data.repository
+package com.esteel4u.realtimeauctionapp.model.repository
 
 import android.content.ContentValues
-import android.os.Build.ID
-import android.provider.ContactsContract.DisplayNameSources.NICKNAME
-import android.provider.SimPhonebookContract.SimRecords.PHONE_NUMBER
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.esteel4u.realtimeauctionapp.data.model.ProductData
-import com.esteel4u.realtimeauctionapp.data.model.UserData
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.Timestamp
-import com.google.firebase.analytics.FirebaseAnalytics.Event.SIGN_UP
+import com.esteel4u.realtimeauctionapp.model.data.ProductData
+import com.esteel4u.realtimeauctionapp.model.data.UserData
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.auth.User
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.messaging.FirebaseMessaging
 import com.ptrbrynt.firestorelivedata.asLiveData
 
 class UserRepository {

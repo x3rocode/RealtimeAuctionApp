@@ -7,8 +7,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.esteel4u.realtimeauctionapp.data.model.UserData
-import com.esteel4u.realtimeauctionapp.data.repository.UserRepository
+import com.esteel4u.realtimeauctionapp.model.data.UserData
+import com.esteel4u.realtimeauctionapp.model.repository.UserRepository
 
 class LoginViewModel(val context: Context): ViewModel() {
     private val repository = UserRepository()

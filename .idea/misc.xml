@@ -13,7 +13,7 @@
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/drawable/login_rounded_shape.xml" value="0.2555" />
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/drawable/main_gradient_background.xml" value="0.2555" />
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/drawable/roundedsquare.xml" value="0.2555" />
-        <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/activity_bid.xml" value="0.18" />
+        <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/activity_bid.xml" value="0.2803442028985507" />
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/activity_full_anim.xml" value="0.19709277469003847" />
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/activity_login.xml" value="0.22231722958529285" />
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/activity_main.xml" value="0.25" />
@@ -34,7 +34,7 @@
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/item_home_banner_model.xml" value="0.30055579307396324" />
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/item_home_today_list.xml" value="0.25" />
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/item_home_type_slider_model.xml" value="0.16" />
-        <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/item_product_list.xml" value="0.25" />
+        <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/item_product_list.xml" value="0.5" />
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/item_slide_mode.xml" value="0.21547669944420692" />
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/item_slide_model.xml" value="0.25" />
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/layout_filter_view.xml" value="0.2877297990594271" />
@@ -100,5 +100,5 @@
     </option>
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_14" project-jdk-name="11" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" project-jdk-name="11" project-jdk-type="JavaSDK" />
 </project>

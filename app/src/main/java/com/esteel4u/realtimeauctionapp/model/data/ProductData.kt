@@ -1,10 +1,9 @@
-package com.esteel4u.realtimeauctionapp.data.model
+package com.esteel4u.realtimeauctionapp.model.data
 
 import android.os.Parcel
 import android.os.Parcelable
 import com.google.firebase.Timestamp
 import com.ptrbrynt.firestorelivedata.FirestoreModel
-import java.io.Serializable
 
 data class ProductData(
     var auctionType: Int? = 1,  //1 프리미엄 2 옥션 3 아울랫 4 패키지

@@ -1,16 +1,12 @@
 package com.esteel4u.realtimeauctionapp.view.adapter
 
 import android.animation.ValueAnimator
-import android.content.ContentValues
 import android.content.Context
-import android.opengl.Visibility
-import android.service.autofill.Validators.not
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
-import android.widget.ImageView
 import androidx.core.animation.doOnEnd
 import androidx.core.animation.doOnStart
 import androidx.core.view.doOnLayout
@@ -20,30 +16,33 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.esteel4u.realtimeauctionapp.R
-import com.esteel4u.realtimeauctionapp.data.model.ProductData
+import com.esteel4u.realtimeauctionapp.model.data.ProductData
 import com.esteel4u.realtimeauctionapp.databinding.ItemCartListBinding
-import com.esteel4u.realtimeauctionapp.view.ui.fragments.HomeFragment
+import com.esteel4u.realtimeauctionapp.model.data.AuctionData
 import com.esteel4u.realtimeauctionapp.view.utils.*
-import com.google.firebase.firestore.DocumentSnapshot
-import com.google.firebase.firestore.auth.User
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.returnz3ro.messystem.service.model.datastore.DataStoreModule
-import com.varunest.sparkbutton.SparkButton
-import com.varunest.sparkbutton.SparkEventListener
+import kotlinx.android.synthetic.main.activity_login.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.lang.Math.log
+import java.text.DecimalFormat
 
 
 class CartListAdapter(
     products: List<ProductData>,
+    auctions: List<AuctionData>,
+    private val interaction: Interaction? = null,
     context: Context
 ): RecyclerView.Adapter<CartListAdapter.MyViewHolder>()  {
 
     var productList = mutableListOf<ProductData>()
+    var auctionList = mutableListOf<AuctionData>()
 
     init {
         productList.addAll(products)
+        auctionList.addAll(auctions)
     }
 
     private val originalBg: Int by bindColor(context, R.color.white)
@@ -59,6 +58,7 @@ class CartListAdapter(
     private val listItemExpandDuration: Long get() = (300L / animationPlaybackSpeed).toLong()
     private var expandedModel: ProductData? = null
     private var isScaledDown = false
+    private var auth = Firebase.auth
 
     private lateinit var dataStore: DataStoreModule
     private var userId: String = ""
@@ -67,12 +67,20 @@ class CartListAdapter(
 
     // Method #5
     class MyViewHolder(
-        val binding: ItemCartListBinding
+        val binding: ItemCartListBinding,
+        private val interaction: Interaction?
     ) : RecyclerView.ViewHolder(binding.root) {
 
 
         fun bind(currentPrd : ProductData) {
             binding.prdlist = currentPrd
+
+            binding.bidButton.setOnClickListener{
+                interaction?.OnBidButtonClickListener(binding.root, currentPrd)
+            }
+        }
+        fun bindauc(currentAuc : AuctionData) {
+            binding.auctiondata = currentAuc
         }
     }
 
@@ -87,7 +95,7 @@ class CartListAdapter(
             }
         }
         val binding = ItemCartListBinding.inflate(LayoutInflater.from(parent.context),  parent, false)
-            return MyViewHolder(binding)
+            return MyViewHolder(binding, interaction)
     }
 
 
@@ -96,6 +104,27 @@ class CartListAdapter(
         val product = productList[position]
         holder.bind(productList[position])
 
+        auctionList.find {
+            it.productId.equals(product.prdId)
+        }?.let {
+            holder.bindauc(it)
+            Log.d("zzzzzzzzzzzzzzzzzzzzzz", it.productId.toString() + "  // " + product.prdId + "  //  " + auctionList.indexOf(it))
+        }
+
+        when (holder.binding.prdlist?.auctionProgressStatus){
+            1 -> holder.binding.bidButton.visibility = View.VISIBLE
+            2 -> holder.binding.bidButton.visibility = View.INVISIBLE
+            3 -> holder.binding.bidButton.visibility = View.INVISIBLE
+        }
+
+        holder.binding.aucBid.text = holder.binding.auctiondata?.bidPrice.toString()
+
+        //최고입찰자가 나야
+        if(holder.binding.auctiondata!!.highestBuyUserId == auth.uid){
+            holder.binding.statusImg.setAnimation(R.raw.lottie_hearteyeface)
+        }else{
+            holder.binding.statusImg.setAnimation(R.raw.lottie_cryingface)
+        }
 
         when (holder.binding.prdlist?.prdTotClsSeqNm){
             1 -> holder.binding.prdTotseqNm?.text = "주문외 1급"
@@ -108,7 +137,12 @@ class CartListAdapter(
             3 -> holder.binding.prdAuctionType.text = "아울렛"
             4 -> holder.binding.prdAuctionType.text = "패키지"
         }
+        val myFormatter = DecimalFormat("###,###")
+        val formattedWgt: String = myFormatter.format(holder.binding.prdlist!!.prdWgt) + "Kg"
+        val formattedWth: String = myFormatter.format(holder.binding.prdlist!!.prdWth)
 
+        holder.binding.prdPrdwth.text = formattedWth
+        holder.binding.prdPrdwgt.text = formattedWgt
 
         //holder.binding.aucBid.text = "₩" + holder.binding.prdlist?.bidPrice!!
 
@@ -147,6 +181,10 @@ class CartListAdapter(
         return productList.size
     }
 
+    interface Interaction {
+        fun OnBidButtonClickListener(v:View, p: ProductData)
+    }
+
 
     fun setData(prdData: List<ProductData>) {
         val diffCallback = DiffCallback(this.productList, prdData)
@@ -154,6 +192,14 @@ class CartListAdapter(
 
         this.productList.clear()
         this.productList.addAll(prdData)
+        diffResult.dispatchUpdatesTo(this)
+    }
+    fun setAuctionData(auctionData: List<AuctionData>) {
+        val diffCallback = DiffCallbackAuction(this.auctionList, auctionData)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+
+        this.auctionList.clear()
+        this.auctionList.addAll(auctionData)
         diffResult.dispatchUpdatesTo(this)
     }
 

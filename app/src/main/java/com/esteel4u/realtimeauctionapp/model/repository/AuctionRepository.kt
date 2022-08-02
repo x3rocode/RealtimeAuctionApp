@@ -1,32 +1,31 @@
-package com.esteel4u.realtimeauctionapp.data.repository
+package com.esteel4u.realtimeauctionapp.model.repository
 
 import android.content.ContentValues.TAG
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.esteel4u.realtimeauctionapp.data.model.*
+import com.esteel4u.realtimeauctionapp.model.data.*
 import com.esteel4u.realtimeauctionapp.network.ApiInterface
 import com.esteel4u.realtimeauctionapp.network.RetrofitInstance
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.api.ResourceProto.resource
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
 import com.ptrbrynt.firestorelivedata.FirestoreResource
 import com.ptrbrynt.firestorelivedata.asLiveData
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.*
 
 class AuctionRepository(val lifecycleOwner: LifecycleOwner) {
     private var auctioninfo = MutableLiveData<AuctionData>()
+    private var allAuctionList = MutableLiveData<List<AuctionData>>()
+    private var userAttendAuctionList = MutableLiveData<List<AuctionData>>()
     private var auth = Firebase.auth
     private val db = Firebase.firestore
 
@@ -45,6 +44,26 @@ class AuctionRepository(val lifecycleOwner: LifecycleOwner) {
         //add in list
         val userListDoc = db.collection("auctions").document(prdId!!).collection("bidUserList").asLiveData<BidUserList>()
         userListDoc.add(BidUserList(price, auth.uid))
+
+        //check user doc
+        val userDoc = db.collection("users").document(auth.uid!!).asLiveData<UserData>()
+        userDoc.observe(lifecycleOwner, Observer{
+            if(it.data !== null){
+                if(it.data!!.attendAuctionList !== null){
+                    var data = it.data!!.attendAuctionList!!.filter {
+                        it == prdId
+                    }
+                    Log.d("앵애ㅐㅐㅐㅐㅐㅐ", data.toString())
+                    if(data == null){
+                        userDoc.update("attendAuctionList", FieldValue.arrayUnion(prdId))
+                    }
+                }else{
+                    userDoc.update("attendAuctionList", FieldValue.arrayUnion(prdId))
+                }
+
+            }
+        })
+
 
 
         //send message to current user
@@ -65,6 +84,10 @@ class AuctionRepository(val lifecycleOwner: LifecycleOwner) {
             myDocu.update(mapOf(Pair("highestBuyUserId", auth.uid!!), Pair("bidPrice", price), Pair("buyUserToken", token!!)))
         })
 
+        //add user attend auction list array
+        val userDoc = db.collection("users").document(auth.uid!!).asLiveData<UserData>()
+        userDoc.update("attendAuctionList", FieldValue.arrayUnion(prdId))
+
         //add in list
         val userListDoc = db.collection("auctions").document(prdId!!).collection("bidUserList").asLiveData<BidUserList>()
         userListDoc.add(BidUserList(price, auth.uid))
@@ -78,6 +101,52 @@ class AuctionRepository(val lifecycleOwner: LifecycleOwner) {
             }
         })
         return auctioninfo
+    }
+
+    fun getAllAuctionList(): MutableLiveData<List<AuctionData>> {
+        val myQuery = db.collection("auctions").asLiveData<AuctionData>()
+        myQuery.observe(lifecycleOwner, Observer { resource: FirestoreResource<List<AuctionData>> ->
+            if(resource.data !== null) {
+                allAuctionList.postValue(resource.data!!)
+            }
+        })
+        return allAuctionList
+    }
+
+    fun getUserAttendAuctionList(): MutableLiveData<List<AuctionData>> {
+
+        val myAucQuery = db.collection("auctions").asLiveData<AuctionData>()
+        myAucQuery.observe(lifecycleOwner, Observer { resource: FirestoreResource<List<AuctionData>> ->
+
+            if (resource.data !== null) {
+                var auctiondata: MutableList<AuctionData>? = resource.data!!.toMutableList()
+                auctiondata!!.forEach {
+
+                    val userDoc = db.collection("users").document(auth.uid!!).asLiveData<UserData>()
+                    userDoc.observe(lifecycleOwner, Observer{ resource: FirestoreResource<UserData> ->
+                        if(resource.data !== null){
+                            if(resource.data!!.attendAuctionList !== null){
+
+                                resource.data!!.attendAuctionList!!.forEach{ prdid ->
+                                    if(it.productId !== prdid){
+                                        auctiondata!!.remove(it)
+                                    }
+                                }
+                                Log.d("aaaaaaaa", auctiondata.toString())
+                                userAttendAuctionList.postValue(auctiondata)
+                            }
+                        }
+                    })
+
+
+                }
+
+
+            }
+        })
+
+
+        return userAttendAuctionList
     }
 
     private fun sendNotification(notification: PushNotificationData){

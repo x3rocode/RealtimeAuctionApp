@@ -1,513 +1,516 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="prdlist"
-            type="com.esteel4u.realtimeauctionapp.data.model.ProductData"/>
+            type="com.esteel4u.realtimeauctionapp.model.data.ProductData" />
 
         <variable
             name="bidinfo"
-            type="com.esteel4u.realtimeauctionapp.data.model.AuctionData"/>
+            type="com.esteel4u.realtimeauctionapp.model.data.AuctionData" />
     </data>
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_top"
-        android:layout_width="wrap_content"
-        android:layout_height="1dp"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".1"/>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_bottom"
-        android:layout_width="wrap_content"
-        android:layout_height="1dp"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".9"/>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_right"
-        android:layout_width="wrap_content"
-        android:layout_height="1dp"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent=".9"/>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_left"
-        android:layout_width="wrap_content"
-        android:layout_height="1dp"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent=".1"/>
-
-
-        <ImageButton
-            android:id="@+id/prev_btn"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-
-            app:layout_constraintHorizontal_bias="0.02"
-            app:layout_constraintVertical_bias=".8"
-            app:layout_constraintWidth_percent=".15"
-            app:layout_constraintHeight_percent=".07"
-
-            android:scaleType="centerCrop"
-            android:adjustViewBounds="true"
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/guideline_top"
-            android:src ="@drawable/ic_round_keyboard_arrow_left_24"
-            android:backgroundTint="@android:color/transparent"
-            app:tint="@color/lblue60"/>
-
-    <TextView
-        android:id="@+id/detail_txt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/dp_30"
-        android:fontFamily="@font/lexend_deca"
-        android:textStyle="bold"
-        android:textColor="@color/egray80"
-        android:text="Details"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/prev_btn"
-        app:layout_constraintBottom_toTopOf="@id/guideline_top"/>
-
-
-
-
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/logoimg"
-        android:layout_width="@dimen/dp_300"
-        android:layout_height="@dimen/dp_150"
-        android:layout_marginStart="4dp"
-        app:cardCornerRadius="15dp"
-        app:cardPreventCornerOverlap="true"
-        app:cardElevation="3dp"
-        android:backgroundTint="@color/egray20"
-        app:cardUseCompatPadding="true"
-        app:layout_constraintTop_toTopOf="@id/guideline_top"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{bidinfo.bidPrice + `₩ / KG`}"
-            android:textSize="@dimen/dp_30"
-            android:fontFamily="@font/lexend_deca"
-            android:textStyle="bold"
-            android:textColor="@color/egray80"
-            android:layout_gravity="center"
-            />
-<!--        <ImageView-->
-<!--            android:id="@+id/premium_img"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:adjustViewBounds="true"-->
-<!--            android:scaleType="centerCrop"-->
-<!--            android:src="@drawable/premiumbg" />-->
-
-    </androidx.cardview.widget.CardView>
-
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/time_card"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/dp_30"
-        app:cardElevation="@dimen/dp_3"
-        app:cardCornerRadius="@dimen/dp_28"
-        android:layout_marginTop="@dimen/dp_m_30"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/logoimg">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:paddingHorizontal="@dimen/dp_20"
-            android:layout_gravity="center_vertical">
-
-            <com.airbnb.lottie.LottieAnimationView
-                android:layout_width="@dimen/dp_20"
-                android:layout_height="wrap_content"
-                android:scaleType="centerCrop"
-                android:layout_gravity="center_vertical"
-                app:lottie_rawRes="@raw/lottie_hourglass"
-                app:lottie_loop="true"
-                app:lottie_autoPlay="true"
-                android:clipToOutline="false"
-                android:layout_marginRight="@dimen/dp_8"/>
-
-            <cn.iwgang.countdownview.CountdownView
-                android:id="@+id/timmer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                app:timeTextSize="@dimen/dp_15"
-                app:isShowHour="true"
-                app:isShowMinute="true"
-                app:isShowSecond="true"
-                app:isHideTimeBackground="true"
-
-                />
-
-        </LinearLayout>
-
-
-    </androidx.cardview.widget.CardView>
-
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/product_info"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_20"
-        app:cardElevation="0dp"
-        android:backgroundTint="@color/egray20"
-        app:layout_constraintTop_toBottomOf="@id/time_card"
-        app:layout_constraintStart_toStartOf="@id/guideline_left"
-        app:layout_constraintEnd_toEndOf="@id/guideline_right"
-        app:contentPadding="@dimen/dp_20"
-        app:cardCornerRadius="@dimen/dp_28">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_top"
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent=".1" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_bottom"
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent=".9" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_right"
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent=".9" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_left"
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent=".1" />
+
+
+            <ImageButton
+                android:id="@+id/prev_btn"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+
+                android:adjustViewBounds="true"
+                android:backgroundTint="@android:color/transparent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_round_keyboard_arrow_left_24"
+
+                app:layout_constraintBottom_toTopOf="@id/guideline_top"
+                app:layout_constraintEnd_toEndOf="parent"
+
+                app:layout_constraintHeight_percent=".07"
+                app:layout_constraintHorizontal_bias="0.02"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias=".8"
+                app:layout_constraintWidth_percent=".15"
+                app:tint="@color/lblue60" />
 
             <TextView
-                android:id="@+id/title_txt"
+                android:id="@+id/detail_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/dp_25"
                 android:fontFamily="@font/lexend_deca"
-                android:textStyle="bold"
+                android:text="입찰하기"
                 android:textColor="@color/egray80"
-                android:text="Product info"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
+                android:textSize="@dimen/dp_25"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/guideline_top"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/prev_btn" />
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/logoimg"
+                android:layout_width="@dimen/dp_300"
+                android:layout_height="@dimen/dp_150"
+                android:layout_marginStart="4dp"
+                android:backgroundTint="@color/egray20"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="3dp"
+                app:cardPreventCornerOverlap="true"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/guideline_top">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/lexend_deca"
+                    android:text="@{bidinfo.bidPrice + `₩ / KG`}"
+                    android:textColor="@color/egray80"
+                    android:textSize="@dimen/dp_30"
+                    android:textStyle="bold" />
+                <!--        <ImageView-->
+                <!--            android:id="@+id/premium_img"-->
+                <!--            android:layout_width="match_parent"-->
+                <!--            android:layout_height="match_parent"-->
+                <!--            android:adjustViewBounds="true"-->
+                <!--            android:scaleType="centerCrop"-->
+                <!--            android:src="@drawable/premiumbg" />-->
+
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/time_card"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_30"
+                android:layout_marginTop="@dimen/dp_m_30"
+                app:cardCornerRadius="@dimen/dp_28"
+                app:cardElevation="@dimen/dp_3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/logoimg">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="@dimen/dp_20">
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:layout_width="@dimen/dp_20"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="@dimen/dp_8"
+                        android:clipToOutline="false"
+                        android:scaleType="centerCrop"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true"
+                        app:lottie_rawRes="@raw/lottie_hourglass" />
+
+                    <cn.iwgang.countdownview.CountdownView
+                        android:id="@+id/timmer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        app:isHideTimeBackground="true"
+                        app:isShowHour="true"
+                        app:isShowMinute="true"
+                        app:isShowSecond="true"
+                        app:timeTextSize="@dimen/dp_15"
+
+                        />
+
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/product_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_20"
+                android:backgroundTint="@color/egray20"
+                app:cardCornerRadius="@dimen/dp_28"
+                app:cardElevation="0dp"
+                app:contentPadding="@dimen/dp_20"
+                app:layout_constraintEnd_toEndOf="@id/guideline_right"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintTop_toBottomOf="@id/time_card">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/title_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lexend_deca"
+                        android:text="상세 정보"
+                        android:textColor="@color/egray80"
+                        android:textSize="@dimen/dp_25"
+                        android:textStyle="bold" />
+
+                    //제품번호
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_28"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:background="@drawable/bottomline"
+                        android:gravity="center_vertical"
+
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/lexend_deca"
+                            android:text="제품 번호"
+                            android:textColor="@color/egray50"
+                            android:textSize="@dimen/dp_12" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/nanum_barun_gothic"
+                            android:gravity="right"
+                            android:text="@{prdlist.prdNo}"
+                            android:textColor="@color/egray80"
+                            android:textSize="@dimen/dp_12" />
+
+                    </LinearLayout>
+
+
+                    //제품Id
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_28"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:background="@drawable/bottomline"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="4"
+                            android:fontFamily="@font/lexend_deca"
+                            android:text="제품 ID"
+                            android:textColor="@color/egray50"
+                            android:textSize="@dimen/dp_12" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="6"
+                            android:fontFamily="@font/nanum_barun_gothic"
+                            android:gravity="right"
+                            android:text="@{prdlist.prdId}"
+                            android:textColor="@color/egray80"
+                            android:textSize="@dimen/dp_12" />
+
+                    </LinearLayout>
+
+
+                    //품명
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_28"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:background="@drawable/bottomline"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/lexend_deca"
+                            android:text="품명"
+                            android:textColor="@color/egray50"
+                            android:textSize="@dimen/dp_12" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/nanum_barun_gothic"
+                            android:gravity="right"
+                            android:text="@{prdlist.prdName}"
+                            android:textColor="@color/egray80"
+                            android:textSize="@dimen/dp_12" />
+
+                    </LinearLayout>
+
+                    //규격
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_28"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:background="@drawable/bottomline"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="4"
+                            android:fontFamily="@font/lexend_deca"
+                            android:text="규격"
+                            android:textColor="@color/egray50"
+                            android:textSize="@dimen/dp_12" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="6"
+                            android:fontFamily="@font/nanum_barun_gothic"
+                            android:gravity="right"
+                            android:text="@{prdlist.substSpec}"
+                            android:textColor="@color/egray80"
+                            android:textSize="@dimen/dp_12" />
+
+                    </LinearLayout>
+
+
+                    //두께
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_28"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:background="@drawable/bottomline"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="4"
+                            android:fontFamily="@font/lexend_deca"
+                            android:text="두께"
+                            android:textColor="@color/egray50"
+                            android:textSize="@dimen/dp_12" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="6"
+                            android:fontFamily="@font/nanum_barun_gothic"
+                            android:gravity="right"
+                            android:text="@{prdlist.prdThk.toString()}"
+                            android:textColor="@color/egray80"
+                            android:textSize="@dimen/dp_12" />
+
+                    </LinearLayout>
+
+                    //폭
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_28"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:background="@drawable/bottomline"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="4"
+                            android:fontFamily="@font/lexend_deca"
+                            android:text="폭"
+                            android:textColor="@color/egray50"
+                            android:textSize="@dimen/dp_12" />
+
+                        <TextView
+                            android:id="@+id/prdPrdwth"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="6"
+                            android:fontFamily="@font/nanum_barun_gothic"
+                            android:gravity="right"
+                            android:textColor="@color/egray80"
+                            android:textSize="@dimen/dp_12" />
+
+                    </LinearLayout>
+
+                    //무게
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_28"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:background="@drawable/bottomline"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="4"
+                            android:fontFamily="@font/lexend_deca"
+                            android:text="무게"
+                            android:textColor="@color/egray50"
+                            android:textSize="@dimen/dp_12" />
+
+                        <TextView
+                            android:id="@+id/prdPrdwgt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="6"
+                            android:fontFamily="@font/nanum_barun_gothic"
+                            android:gravity="right"
+                            android:textColor="@color/egray80"
+                            android:textSize="@dimen/dp_12" />
+
+                    </LinearLayout>
+
+                    //생산지
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_28"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:background="@drawable/bottomline"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="4"
+                            android:fontFamily="@font/lexend_deca"
+                            android:text="생산지"
+                            android:textColor="@color/egray50"
+                            android:textSize="@dimen/dp_12" />
+
+                        <TextView
+                            android:id="@+id/works"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="6"
+                            android:fontFamily="@font/nanum_barun_gothic"
+                            android:gravity="right"
+                            android:textColor="@color/egray80"
+                            android:textSize="@dimen/dp_12" />
+
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/title_txt"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_height="@dimen/dp_100"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:orientation="vertical">
+                app:layout_constraintEnd_toEndOf="parent"
+                android:fitsSystemWindows="true"
+                app:layout_constraintStart_toStartOf="parent">
 
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/input_bid_lay"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="250dp"
+                    android:layout_height="55dp"
+                    android:layout_marginLeft="@dimen/dp_40"
+                    android:layout_marginBottom="@dimen/dp_28"
+                    android:textColorHint="@color/egray40"
+                    android:theme="@style/ThemeOverlay.TextInputLayout.TextView"
+                    app:counterMaxLength="10"
+                    app:errorEnabled="false"
+                    app:hintAnimationEnabled="true"
+                    app:hintEnabled="false"
 
-                //제품번호
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_28"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:background="@drawable/bottomline"
-                    android:orientation="horizontal"
+                    app:hintTextColor="@color/lblue30">
 
-                    android:gravity="center_vertical">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/input_bid"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:autoSizeTextType="uniform"
+                        android:fontFamily="@font/lexend_deca"
+                        android:hint="직접 입찰해 보세요!"
+                        android:inputType="number"
+                        android:singleLine="true" />
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/nanum_barun_gothic"
-                        android:textSize="@dimen/dp_10"
-                        android:textColor="@color/egray50"
-                        android:text="제품 번호"/>
+                </com.google.android.material.textfield.TextInputLayout>
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="right"
-                        android:fontFamily="@font/nanum_barun_gothic"
-                        android:textSize="@dimen/dp_12"
-                        android:textColor="@color/egray70"
-                        android:text="@{prdlist.prdNo}"/>
-
-                </LinearLayout>
-
-
-                //제품Id
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_28"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:background="@drawable/bottomline"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="4"
-                        android:fontFamily="@font/nanum_barun_gothic"
-                        android:textSize="@dimen/dp_10"
-                        android:textColor="@color/egray50"
-                        android:text="제품 ID"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="6"
-                        android:gravity="right"
-                        android:fontFamily="@font/nanum_barun_gothic"
-                        android:textSize="@dimen/dp_12"
-                        android:textColor="@color/egray70"
-                        android:text="@{prdlist.prdId}"/>
-
-                </LinearLayout>
-
-
-                //품명
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_28"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:background="@drawable/bottomline"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/nanum_barun_gothic"
-                        android:textSize="@dimen/dp_10"
-                        android:textColor="@color/egray50"
-                        android:text="품명"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="right"
-                        android:fontFamily="@font/nanum_barun_gothic"
-                        android:textSize="@dimen/dp_12"
-                        android:textColor="@color/egray70"
-                        android:text="@{prdlist.prdName}"/>
-
-                </LinearLayout>
-
-                //규격
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_28"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:background="@drawable/bottomline"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="4"
-                        android:fontFamily="@font/nanum_barun_gothic"
-                        android:textSize="@dimen/dp_10"
-                        android:textColor="@color/egray50"
-                        android:text="규격"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="6"
-                        android:gravity="right"
-                        android:fontFamily="@font/nanum_barun_gothic"
-                        android:textSize="@dimen/dp_12"
-                        android:textColor="@color/egray70"
-                        android:text="@{prdlist.substSpec}"/>
-
-                </LinearLayout>
-
-
-                //두께
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_28"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:background="@drawable/bottomline"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="4"
-                        android:fontFamily="@font/nanum_barun_gothic"
-                        android:textSize="@dimen/dp_10"
-                        android:textColor="@color/egray50"
-                        android:text="두께"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="6"
-                        android:gravity="right"
-                        android:fontFamily="@font/nanum_barun_gothic"
-                        android:textSize="@dimen/dp_12"
-                        android:textColor="@color/egray70"
-                        android:text="@{prdlist.prdThk.toString()}"/>
-
-                </LinearLayout>
-
-                //폭
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_28"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:background="@drawable/bottomline"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="4"
-                        android:fontFamily="@font/nanum_barun_gothic"
-                        android:textSize="@dimen/dp_10"
-                        android:textColor="@color/egray50"
-                        android:text="폭"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="6"
-                        android:gravity="right"
-                        android:fontFamily="@font/nanum_barun_gothic"
-                        android:textSize="@dimen/dp_12"
-                        android:textColor="@color/egray70"
-                        android:text="@{prdlist.prdWth.toString()}"/>
-
-                </LinearLayout>
-
-                //무게
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_28"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:background="@drawable/bottomline"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="4"
-                        android:fontFamily="@font/nanum_barun_gothic"
-                        android:textSize="@dimen/dp_10"
-                        android:textColor="@color/egray50"
-                        android:text="무게"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="6"
-                        android:gravity="right"
-                        android:fontFamily="@font/nanum_barun_gothic"
-                        android:textSize="@dimen/dp_12"
-                        android:textColor="@color/egray70"
-                        android:text="@{prdlist.prdWgt.toString()}"/>
-
-                </LinearLayout>
-
-                //생산지
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_28"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:background="@drawable/bottomline"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="4"
-                        android:fontFamily="@font/nanum_barun_gothic"
-                        android:textSize="@dimen/dp_10"
-                        android:textColor="@color/egray50"
-                        android:text="생산지"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="6"
-                        android:gravity="right"
-                        android:fontFamily="@font/nanum_barun_gothic"
-                        android:textSize="@dimen/dp_12"
-                        android:textColor="@color/egray70"
-                        android:text="@{prdlist.worksCode}"/>
-
-                </LinearLayout>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/bid_button"
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="55dp"
+                    android:layout_marginBottom="@dimen/dp_28"
+                    android:backgroundTint="@color/lblue60"
+                    android:fontFamily="@font/lexend_deca"
+                    android:gravity="center"
+                    android:insetTop="1dp"
+                    android:insetBottom="0dp"
+                    android:text="Confirm"
+                    android:textAllCaps="false"
+                    android:textColor="@color/egray30"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/guideline_right" />
             </LinearLayout>
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/input_bid_lay"
-        app:counterMaxLength="10"
-        style="@style/OutlinedRoundedBox"
-        android:theme="@style/ThemeOverlay.TextInputLayout.TextView"
-
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:hintAnimationEnabled="true"
-        app:errorEnabled="false"
-        android:textColorHint="@color/egray40"
-        app:hintEnabled="false"
-        app:hintTextColor="@color/lblue30"
-        app:layout_constraintTop_toTopOf="@id/bid_button"
-        app:layout_constraintStart_toStartOf="@id/guideline_left"
-        app:layout_constraintEnd_toStartOf="@id/bid_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-
-        android:layout_marginBottom="@dimen/dp_28"
-        >
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/input_bid"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fontFamily="@font/noto_sans"
-            android:hint="직접 입찰해 보세요!"
-            android:autoSizeTextType="uniform"
-            android:inputType="number"
-            android:singleLine="true" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/bid_button"
-        android:layout_height="wrap_content"
-        android:layout_width="@dimen/dp_100"
-        android:text="Confirm"
-        android:fontFamily="@font/lexend_deca"
-        android:textStyle="bold"
-        android:textColor="@color/egray30"
-        style="@style/MyButtonShapeRounded"
-        app:cornerRadius="13dp"
-        android:insetBottom="0dp"
-        android:insetTop="1dp"
-        android:textAllCaps="false"
-        android:backgroundTint="@color/lblue60"
-        android:layout_marginBottom="@dimen/dp_28"
-        android:gravity="center"
-        app:layout_constraintEnd_toEndOf="@id/guideline_right"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>

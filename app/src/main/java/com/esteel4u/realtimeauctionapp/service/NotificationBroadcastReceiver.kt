@@ -7,7 +7,7 @@ import android.util.Log
 import androidx.work.Data
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
-import com.esteel4u.realtimeauctionapp.data.model.ProductData
+import com.esteel4u.realtimeauctionapp.model.data.ProductData
 import com.esteel4u.realtimeauctionapp.service.ScheduledWorker.Companion.NOTIFICATION_MESSAGE
 import com.esteel4u.realtimeauctionapp.service.ScheduledWorker.Companion.NOTIFICATION_TITLE
 import com.google.firebase.firestore.ktx.firestore

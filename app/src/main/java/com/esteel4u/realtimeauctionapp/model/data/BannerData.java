@@ -1,4 +1,4 @@
-package com.esteel4u.realtimeauctionapp.data.model;
+package com.esteel4u.realtimeauctionapp.model.data;
 
 import androidx.annotation.DrawableRes;
 

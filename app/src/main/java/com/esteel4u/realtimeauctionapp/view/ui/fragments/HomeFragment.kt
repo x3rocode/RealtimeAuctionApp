@@ -20,7 +20,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.esteel4u.realtimeauctionapp.R
-import com.esteel4u.realtimeauctionapp.data.model.ProductData
+import com.esteel4u.realtimeauctionapp.model.data.ProductData
 import com.esteel4u.realtimeauctionapp.databinding.FragmentHomeBinding
 import com.esteel4u.realtimeauctionapp.service.AlarmService
 import com.esteel4u.realtimeauctionapp.service.ScheduledWorker

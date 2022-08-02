@@ -5,7 +5,7 @@
     <data>
         <variable
             name="prdlist"
-            type="com.esteel4u.realtimeauctionapp.data.model.ProductData"/>
+            type="com.esteel4u.realtimeauctionapp.model.data.ProductData"/>
     </data>
 
     <androidx.cardview.widget.CardView

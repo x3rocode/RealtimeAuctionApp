@@ -1,21 +1,20 @@
-package com.esteel4u.realtimeauctionapp.data.repository
+package com.esteel4u.realtimeauctionapp.model.repository
 
 import android.content.ContentValues
 import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.esteel4u.realtimeauctionapp.data.model.AuctionData
-import com.esteel4u.realtimeauctionapp.data.model.BidUserList
-import com.esteel4u.realtimeauctionapp.data.model.ProductData
-import com.google.api.ResourceProto.resource
+import com.esteel4u.realtimeauctionapp.model.data.ProductData
+import com.esteel4u.realtimeauctionapp.model.data.UserData
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
 import com.ptrbrynt.firestorelivedata.FirestoreResource
 import com.ptrbrynt.firestorelivedata.asLiveData
-import com.ptrbrynt.firestorelivedata.observe
 import org.joda.time.DateTime
 import java.text.SimpleDateFormat
 import java.time.LocalDate
@@ -111,7 +110,7 @@ class ProductRepository(val lifecycleOwner: LifecycleOwner) {
         val format = SimpleDateFormat("yyyyMMdd")
         var a = format.format(dateTime.toDate())
 
-        val myQuery = db.collection("products").orderBy("auctionProgressStatus") .asLiveData<ProductData>()
+        val myQuery = db.collection("products").orderBy("startDate") .asLiveData<ProductData>()
         myQuery.observe(lifecycleOwner, Observer { resource: FirestoreResource<List<ProductData>> ->
             if(resource.data !== null){
                 productListByDate.postValue(resource.data!!.filter { productData :ProductData  ->
@@ -239,34 +238,23 @@ class ProductRepository(val lifecycleOwner: LifecycleOwner) {
     fun getUserBidPrdList(): MutableLiveData<List<ProductData>> {
 
 
-        val myPrdQuery = db.collection("products").asLiveData<ProductData>()
+        val myPrdQuery = db.collection("products").orderBy("endDate", Query.Direction.DESCENDING).asLiveData<ProductData>()
         myPrdQuery.observe(lifecycleOwner, Observer{ resource: FirestoreResource<List<ProductData>> ->
             if(resource.data !== null) {
-                var prddata: MutableList<ProductData>? = resource.data!!.toMutableList()
+                var prddata: MutableList<ProductData> = resource.data!!.toMutableList()
+                val userDoc = db.collection("users").document(auth.uid!!).asLiveData<UserData>()
+                userDoc.observe(lifecycleOwner, Observer{ udata: FirestoreResource<UserData> ->
+                    if(udata.data !== null){
+                        if(udata.data!!.attendAuctionList !== null){
 
-                productUserBidList.postValue(prddata!!)
-//                resource.data?.forEach { prd: ProductData ->
-//
-//                    val myQuery = db.collection("auctions")
-//                        .document(prd.prdId!!)
-//                        .collection("bidUserList")
-//                        .asLiveData<BidUserList>()
-//                    myQuery.observe(lifecycleOwner, Observer { bidlist: FirestoreResource<List<BidUserList>> ->
-//                        if(!bidlist.data.isNullOrEmpty()){
-////                            var a= bidlist!!.data!!.filter {
-////                                it.bidUserId == auth.uid
-////                            }
-////                            if(a.isEmpty()){
-////                                prddata!!.remove(prd)
-////                                Log.d("sibal inseng feel like jot", prd!!.prdId.toString())
-////                            }
-//
-//
-//                        }
-//
-//                    })
-//
-//                }
+                            productUserBidList.postValue(prddata.filter {
+                                udata.data!!.attendAuctionList!!.contains(it.prdId)
+                            })
+                        }
+                    }
+                })
+
+
 
             }
         })

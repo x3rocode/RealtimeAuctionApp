@@ -1,44 +1,22 @@
 package com.esteel4u.realtimeauctionapp.view.ui.activities
 
-import android.content.ContentValues
 import android.content.Context
-import android.content.Intent
 import android.graphics.Rect
-import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelStoreOwner
 import cn.pedant.SweetAlert.SweetAlertDialog
-import com.esteel4u.realtimeauctionapp.R
-import com.esteel4u.realtimeauctionapp.data.model.ProductData
-import com.esteel4u.realtimeauctionapp.data.model.UserData
-import com.esteel4u.realtimeauctionapp.data.repository.UserRepository
 import com.esteel4u.realtimeauctionapp.databinding.ActivityBidBinding
-import com.esteel4u.realtimeauctionapp.utils.AuthUtil
-import com.esteel4u.realtimeauctionapp.view.adapter.MainViewPagerAdapter
-import com.esteel4u.realtimeauctionapp.view.adapter.OnboardingViewPagerAdapter
-import com.esteel4u.realtimeauctionapp.view.utils.Animatoo
 import com.esteel4u.realtimeauctionapp.viewmodel.AuctionViewModel
 import com.esteel4u.realtimeauctionapp.viewmodel.ProductViewModel
-import com.gauravk.bubblenavigation.BubbleNavigationConstraintView
-import com.gauravk.bubblenavigation.BubbleNavigationLinearView
-import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.auth.User
-import com.ptrbrynt.firestorelivedata.FirestoreResource
-import com.ptrbrynt.firestorelivedata.asLiveData
-import com.ptrbrynt.firestorelivedata.currentUserLiveData
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_onboarding.*
+import java.text.DecimalFormat
 import java.util.*
 
 class BidActivity: AppCompatActivity() {
@@ -56,6 +34,8 @@ class BidActivity: AppCompatActivity() {
 
         var pid = intent.getStringExtra("prddata")
         Log.d("d", "aaaaaaaaaaaaaaaaa" + pid!!)
+        
+
 
         binding.timmer.setOnCountdownEndListener {
             val sd = SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
@@ -77,6 +57,18 @@ class BidActivity: AppCompatActivity() {
             binding.timmer.start(it!!.endDate!!.toDate().time - Date().time)
 
             binding.prdlist = it
+
+            when(binding.prdlist!!.worksCode){
+                "K" -> binding.works.text = "광양"
+                "P" -> binding.works.text = "포항"
+            }
+
+            val myFormatter = DecimalFormat("###,###")
+            val formattedWgt: String = myFormatter.format(binding.prdlist!!.prdWgt) + "Kg"
+            val formattedWth: String = myFormatter.format(binding.prdlist!!.prdWth)
+
+            binding.prdPrdwth.text = formattedWth
+            binding.prdPrdwgt.text = formattedWgt
         })
 
         auctionViewModel!!.getAuctionInfo(pid!!).observe(this, Observer{
@@ -134,6 +126,8 @@ class BidActivity: AppCompatActivity() {
         binding.prevBtn.setOnClickListener{
             finish()
         }
+
+
     }
 
     //화면 터치 시 키보드 내려감

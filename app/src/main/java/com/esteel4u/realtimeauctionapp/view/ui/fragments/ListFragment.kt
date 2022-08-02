@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.esteel4u.realtimeauctionapp.R
-import com.esteel4u.realtimeauctionapp.data.model.ProductData
+import com.esteel4u.realtimeauctionapp.model.data.ProductData
 import com.esteel4u.realtimeauctionapp.databinding.FragmentListBinding
 import com.esteel4u.realtimeauctionapp.view.adapter.ProductListAdapter
 import com.esteel4u.realtimeauctionapp.view.ui.activities.BidActivity

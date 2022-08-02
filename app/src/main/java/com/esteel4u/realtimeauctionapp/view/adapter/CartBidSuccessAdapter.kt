@@ -1,44 +1,19 @@
 package com.esteel4u.realtimeauctionapp.view.adapter
 
-import android.animation.ValueAnimator
-import android.content.ContentValues
 import android.content.Context
-import android.opengl.Visibility
-import android.service.autofill.Validators.not
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AccelerateDecelerateInterpolator
-import android.widget.ImageView
-import androidx.core.animation.doOnEnd
-import androidx.core.animation.doOnStart
-import androidx.core.view.doOnLayout
-import androidx.core.view.doOnPreDraw
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.esteel4u.realtimeauctionapp.R
-import com.esteel4u.realtimeauctionapp.data.model.AuctionData
-import com.esteel4u.realtimeauctionapp.data.model.ProductData
-import com.esteel4u.realtimeauctionapp.data.model.UserData
+import com.esteel4u.realtimeauctionapp.model.data.ProductData
 import com.esteel4u.realtimeauctionapp.databinding.ItemCartBidSuccessListBinding
-import com.esteel4u.realtimeauctionapp.databinding.ItemCartListBinding
-import com.esteel4u.realtimeauctionapp.view.ui.fragments.HomeFragment
 import com.esteel4u.realtimeauctionapp.view.utils.*
-import com.google.firebase.firestore.DocumentSnapshot
-import com.google.firebase.firestore.auth.User
 import com.returnz3ro.messystem.service.model.datastore.DataStoreModule
-import com.returnz3ro.messystem.service.model.datastore.DataStoreModule.Companion.uid
-import com.returnz3ro.messystem.service.model.datastore.DataStoreModule.Companion.userId
-import com.returnz3ro.messystem.service.model.datastore.DataStoreModule.Companion.userName
-import com.varunest.sparkbutton.SparkButton
-import com.varunest.sparkbutton.SparkEventListener
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.lang.Math.log
 
 
 class CartBidSuccessAdapter(

@@ -1,13 +1,8 @@
 package com.esteel4u.realtimeauctionapp.viewmodel
 
-import android.content.ContentValues
-import android.content.Context
-import android.util.Log
 import androidx.lifecycle.*
-import com.esteel4u.realtimeauctionapp.data.model.ProductData
-import com.esteel4u.realtimeauctionapp.data.model.UserData
-import com.esteel4u.realtimeauctionapp.data.repository.ProductRepository
-import com.esteel4u.realtimeauctionapp.data.repository.UserRepository
+import com.esteel4u.realtimeauctionapp.model.data.ProductData
+import com.esteel4u.realtimeauctionapp.model.repository.ProductRepository
 import org.joda.time.DateTime
 
 

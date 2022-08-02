@@ -5,7 +5,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.util.Log
-import com.esteel4u.realtimeauctionapp.data.model.ProductData
+import com.esteel4u.realtimeauctionapp.model.data.ProductData
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.ptrbrynt.firestorelivedata.asLiveData

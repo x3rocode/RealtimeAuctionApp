@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.esteel4u.realtimeauctionapp.R
-import com.esteel4u.realtimeauctionapp.data.model.ProductData
+import com.esteel4u.realtimeauctionapp.model.data.ProductData
 import com.esteel4u.realtimeauctionapp.databinding.ItemProductListBinding
 import com.esteel4u.realtimeauctionapp.view.utils.*
 import com.returnz3ro.messystem.service.model.datastore.DataStoreModule
@@ -100,11 +100,14 @@ class ProductListAdapter(
         holder.bind(productList[position])
 
         when (holder.binding.prdlist?.auctionProgressStatus){
-            1 -> {holder.binding.prdStatus.text = "진행중"
+            1 -> {holder.binding.prdStatus.visibility = View.INVISIBLE
+                holder.binding.lottieLive.visibility = View.VISIBLE
                 holder.binding.bidButton.visibility = View.VISIBLE}
             2 -> {holder.binding.prdStatus.text = "진행 예정"
+                holder.binding.lottieLive.visibility = View.INVISIBLE
                 holder.binding.bidButton.visibility = View.INVISIBLE}
             3 -> {holder.binding.prdStatus.text = "종료"
+                holder.binding.lottieLive.visibility = View.INVISIBLE
                 holder.binding.bidButton.visibility = View.INVISIBLE}
         }
 

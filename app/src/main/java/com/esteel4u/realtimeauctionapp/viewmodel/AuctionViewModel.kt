@@ -1,15 +1,8 @@
 package com.esteel4u.realtimeauctionapp.viewmodel
 
-import android.content.ContentValues
-import android.content.Context
-import android.util.Log
 import androidx.lifecycle.*
-import com.esteel4u.realtimeauctionapp.data.model.AuctionData
-import com.esteel4u.realtimeauctionapp.data.model.ProductData
-import com.esteel4u.realtimeauctionapp.data.model.UserData
-import com.esteel4u.realtimeauctionapp.data.repository.AuctionRepository
-import com.esteel4u.realtimeauctionapp.data.repository.ProductRepository
-import com.esteel4u.realtimeauctionapp.data.repository.UserRepository
+import com.esteel4u.realtimeauctionapp.model.data.AuctionData
+import com.esteel4u.realtimeauctionapp.model.repository.AuctionRepository
 
 class AuctionViewModel (val lifecycleOwner: LifecycleOwner): ViewModel() {
     private val repository = AuctionRepository(lifecycleOwner)
@@ -28,6 +21,12 @@ class AuctionViewModel (val lifecycleOwner: LifecycleOwner): ViewModel() {
         return repository.getAuctionInfo(prdId)
     }
 
+    fun getAllAuctionList():MutableLiveData<List<AuctionData>> {
+        return repository.getAllAuctionList()
+    }
+    fun getUserAttendAuctionList() :MutableLiveData<List<AuctionData>> {
+        return repository.getUserAttendAuctionList()
+    }
 
     class Factory(val lifecycleOwner: LifecycleOwner) : ViewModelProvider.NewInstanceFactory() {
 

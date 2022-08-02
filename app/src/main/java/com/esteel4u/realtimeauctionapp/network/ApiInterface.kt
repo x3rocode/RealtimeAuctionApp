@@ -1,11 +1,10 @@
 package com.esteel4u.realtimeauctionapp.network
 
-import com.esteel4u.realtimeauctionapp.data.model.PushNotificationData
+import com.esteel4u.realtimeauctionapp.model.data.PushNotificationData
 import com.esteel4u.realtimeauctionapp.network.ApiClient.CONTENT_TYPE
 import com.esteel4u.realtimeauctionapp.network.ApiClient.SERVER_KEY
 import okhttp3.ResponseBody
 import retrofit2.Call
-import retrofit2.Response
 
 
 import retrofit2.http.*

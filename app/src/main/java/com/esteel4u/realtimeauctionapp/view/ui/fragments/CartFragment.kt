@@ -1,6 +1,8 @@
 package com.esteel4u.realtimeauctionapp.view.ui.fragments
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,18 +10,20 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.esteel4u.realtimeauctionapp.data.model.ProductData
+import com.esteel4u.realtimeauctionapp.model.data.ProductData
 import com.esteel4u.realtimeauctionapp.databinding.FragmentCartBinding
+import com.esteel4u.realtimeauctionapp.model.data.AuctionData
 import com.esteel4u.realtimeauctionapp.view.adapter.CartBidSuccessAdapter
 import com.esteel4u.realtimeauctionapp.view.adapter.CartListAdapter
-import com.esteel4u.realtimeauctionapp.view.adapter.ProductListAdapter
+import com.esteel4u.realtimeauctionapp.view.ui.activities.BidActivity
+import com.esteel4u.realtimeauctionapp.viewmodel.AuctionViewModel
 import com.esteel4u.realtimeauctionapp.viewmodel.ProductViewModel
-import com.returnz3ro.messystem.service.model.datastore.DataStoreModule
 import kotlinx.android.synthetic.main.fragment_cart.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_like.*
 
-class CartFragment: Fragment() {
+class CartFragment: Fragment(),
+CartListAdapter.Interaction{
     companion object {
         fun newInstance(position: Int): CartFragment {
             val instance =
@@ -31,6 +35,7 @@ class CartFragment: Fragment() {
         }
     }
     private val viewModel: ProductViewModel by activityViewModels { ProductViewModel.Factory(viewLifecycleOwner) }
+    private val auctionViewModel: AuctionViewModel by activityViewModels { AuctionViewModel.Factory(viewLifecycleOwner) }
     private var _binding : FragmentCartBinding? = null
     private val binding get() = _binding!!
 
@@ -38,6 +43,7 @@ class CartFragment: Fragment() {
     private lateinit var cartAdapter: CartListAdapter
     lateinit var prdList: List<ProductData>
     lateinit var prdList1: List<ProductData>
+    lateinit var aucList: List<AuctionData>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,6 +52,7 @@ class CartFragment: Fragment() {
     ): View? {
         prdList = arrayListOf()
         prdList1 = arrayListOf()
+        aucList = arrayListOf()
         _binding = FragmentCartBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -56,8 +63,9 @@ class CartFragment: Fragment() {
         initRecyclerView()
 
         viewModel.getPurchasePrdList().observe(viewLifecycleOwner, Observer {
+            madapter.setData(it!!)
             if(it.isNotEmpty()) {
-                madapter.setData(it!!)
+
 //                cartAdapter.setData(it!!)
 //                sad_txt.visibility = View.GONE
 //                lottie_img.visibility = View.GONE
@@ -81,7 +89,13 @@ class CartFragment: Fragment() {
         })
 
         viewModel.getUserBidPrdList().observe(viewLifecycleOwner, Observer {
+            Log.d("assvsdvsdv", it.size.toString())
+            //cartAdapter.productList = it.toMutableList()
             cartAdapter.setData(it)
+        })
+        auctionViewModel.getAllAuctionList().observe(viewLifecycleOwner, Observer{
+            Log.d("assvsdvsdv22", it.toString())
+            cartAdapter.setAuctionData(it)
         })
     }
 
@@ -99,6 +113,8 @@ class CartFragment: Fragment() {
         binding.cartRecyclerView.apply {
             cartAdapter = CartListAdapter(
                 prdList1,
+                aucList,
+                this@CartFragment,
                 this.context
             )
             layoutManager = LinearLayoutManager( this@CartFragment.context)
@@ -106,5 +122,9 @@ class CartFragment: Fragment() {
         }
     }
 
-
+    override fun OnBidButtonClickListener(v: View, p: ProductData) {
+        val intent = Intent(activity, BidActivity::class.java)
+        intent.putExtra("prddata", p.prdId)
+        startActivity(intent)
+    }
 }

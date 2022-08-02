@@ -1,9 +1,6 @@
-package com.esteel4u.realtimeauctionapp.data.model
+package com.esteel4u.realtimeauctionapp.model.data
 
 import com.ptrbrynt.firestorelivedata.FirestoreModel
-import com.returnz3ro.messystem.service.model.datastore.DataStoreModule.Companion.gcsCompCode
-import com.returnz3ro.messystem.service.model.datastore.DataStoreModule.Companion.uid
-import com.returnz3ro.messystem.service.model.datastore.DataStoreModule.Companion.userId
 import lombok.Data
 import javax.inject.Singleton
 
@@ -13,7 +10,8 @@ data class UserData(
     var uid: String? = null,
     var userId: String? = null,
     var gcsCompCode: String? = null,
-    var userName: String? = null
+    var userName: String? = null,
+    var attendAuctionList: List<String>?  = null
 ): FirestoreModel(){
 //    companion object {
 //        @Volatile
