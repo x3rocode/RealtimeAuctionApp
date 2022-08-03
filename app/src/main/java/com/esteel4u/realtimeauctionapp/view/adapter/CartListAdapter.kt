@@ -27,6 +27,7 @@ import kotlinx.android.synthetic.main.activity_login.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.joda.time.field.PreciseDurationDateTimeField
 import java.text.DecimalFormat
 
 
@@ -104,11 +105,20 @@ class CartListAdapter(
         val product = productList[position]
         holder.bind(productList[position])
 
+        val clone = auctionList.toMutableList()
+
+        //sort
         auctionList.find {
             it.productId.equals(product.prdId)
         }?.let {
+            clone[productList.indexOf(product)] = it
+        }
+
+        //set holder
+        clone.find{
+            it.productId.equals(product.prdId)
+        }?.let {
             holder.bindauc(it)
-            Log.d("zzzzzzzzzzzzzzzzzzzzzz", it.productId.toString() + "  // " + product.prdId + "  //  " + auctionList.indexOf(it))
         }
 
         when (holder.binding.prdlist?.auctionProgressStatus){
@@ -116,8 +126,6 @@ class CartListAdapter(
             2 -> holder.binding.bidButton.visibility = View.INVISIBLE
             3 -> holder.binding.bidButton.visibility = View.INVISIBLE
         }
-
-        holder.binding.aucBid.text = holder.binding.auctiondata?.bidPrice.toString()
 
         //최고입찰자가 나야
         if(holder.binding.auctiondata!!.highestBuyUserId == auth.uid){
@@ -137,14 +145,22 @@ class CartListAdapter(
             3 -> holder.binding.prdAuctionType.text = "아울렛"
             4 -> holder.binding.prdAuctionType.text = "패키지"
         }
+
+        when(holder.binding.prdlist?.worksCode){
+            "K" -> holder.binding.prdWorkscode.text = "광양"
+            "P" -> holder.binding.prdWorkscode.text = "포항"
+        }
+
+
         val myFormatter = DecimalFormat("###,###")
         val formattedWgt: String = myFormatter.format(holder.binding.prdlist!!.prdWgt) + "Kg"
         val formattedWth: String = myFormatter.format(holder.binding.prdlist!!.prdWth)
+        val formattedPrice: String = myFormatter.format(holder.binding.auctiondata!!.bidPrice)
 
         holder.binding.prdPrdwth.text = formattedWth
         holder.binding.prdPrdwgt.text = formattedWgt
 
-        //holder.binding.aucBid.text = "₩" + holder.binding.prdlist?.bidPrice!!
+        holder.binding.aucBid.text = "₩$formattedPrice"
 
         expandItem(holder, product == expandedModel, animate = false)
         scaleDownItem(holder, position, isScaledDown)

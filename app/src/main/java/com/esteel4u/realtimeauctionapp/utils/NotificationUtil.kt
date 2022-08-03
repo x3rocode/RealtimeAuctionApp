@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.media.RingtoneManager
 import android.os.Build
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import com.esteel4u.realtimeauctionapp.R
@@ -26,7 +27,8 @@ class NotificationUtil(private val context: Context) {
 
         }else if(tag == "end"){
             intent = Intent(context, MainActivity::class.java)
-            if(id.isNotEmpty()) intent.putExtra("buyuserid", id)
+            Log.d("22222222222222222", id.toString())
+            intent.putExtra("buyuserid", id)
         }else if(tag == "loser"){
             intent = Intent(context, BidActivity::class.java)
             if(id.isNotEmpty()) intent.putExtra("prddata", id)

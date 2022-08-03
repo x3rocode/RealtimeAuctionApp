@@ -8,21 +8,15 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
-import android.view.ViewGroup
-import android.view.WindowManager
-import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.graphics.drawable.DrawerArrowDrawable
+import androidx.core.view.GravityCompat
 import cn.pedant.SweetAlert.SweetAlertDialog
-import com.airbnb.lottie.LottieAnimationView
-import com.esteel4u.realtimeauctionapp.R
-import com.esteel4u.realtimeauctionapp.databinding.ActivityFullAnimBinding
 import com.esteel4u.realtimeauctionapp.databinding.ActivityMainBinding
 import com.esteel4u.realtimeauctionapp.view.adapter.MainViewPagerAdapter
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.activity_full_anim.*
 import kotlinx.android.synthetic.main.activity_main.*
-import org.checkerframework.checker.units.qual.s
 
 
 @SuppressLint("MissingPermission")
@@ -31,6 +25,8 @@ class MainActivity : AppCompatActivity() {
     private var auth = Firebase.auth
     private lateinit var binding: ActivityMainBinding
     private lateinit var sd: SweetAlertDialog
+    private lateinit var drawerArrow: DrawerArrowDrawable
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,29 +43,41 @@ class MainActivity : AppCompatActivity() {
         view_pager.offscreenPageLimit = 3
         bottom_bar.setupWithViewPager2(view_pager)
 
+
+        drawerArrow = DrawerArrowDrawable(this)
+        menu_btn.setOnClickListener{
+            drawer_layout.openDrawer(GravityCompat.START)
+        }
+
+
         val extras = intent.extras
         if (extras != null) {
             val tag = extras.getString("tag")
-            reciveInput(tag!!)
+            val id = extras.getString("buyuserid")
+            Log.d("idiiiiiiiiiiiiiiiiii", "11")
+            Log.d("idiiiiiiiiiiiiiiiiii", tag.toString())
+            reciveInput(tag!!, id!!)
         }
+
     }
 
     override fun onNewIntent(intent: Intent?) {
         val tag = intent!!.getStringExtra("tag")
-        reciveInput(tag!!)
+        val id = intent!!.getStringExtra("buyuserid")
+        Log.d("idiiiiiiiiiiiiiiiiii", "22")
+        Log.d("idiiiiiiiiiiiiiiiiii", tag.toString())
+        reciveInput(tag!!, id!!)
         super.onNewIntent(intent)
     }
 
 
     @SuppressLint("ResourceType")
-    private fun reciveInput(tag: String) {
+    private fun reciveInput(tag: String, id: String) {
         when (tag) {
             "start" -> {}
             "end" -> {
-                val id = intent!!.getStringExtra("buyuserid")
-
-                val dialog = Dialog(this, R.layout.activity_full_anim)
-                val dialogBinding = ActivityFullAnimBinding.inflate(dialog.layoutInflater)
+                val dialog = Dialog(this, com.esteel4u.realtimeauctionapp.R.layout.activity_full_anim)
+                val dialogBinding = com.esteel4u.realtimeauctionapp.databinding.ActivityFullAnimBinding.inflate(dialog.layoutInflater)
                 dialog.setContentView(dialogBinding.root)
                 dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
 
@@ -89,6 +97,7 @@ class MainActivity : AppCompatActivity() {
                         return false;
                     }
                 })
+
                 if (id == auth.uid) {
                     sd = SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
                     sd.setTitleText("Congratulation!")
@@ -97,18 +106,18 @@ class MainActivity : AppCompatActivity() {
                     sd.setConfirmText("OK")
                     sd.setCanceledOnTouchOutside(true)
 
-                    dialogBinding.lottieView.setAnimation(R.raw.lottie_congratulation)
+                    dialogBinding.lottieView.setAnimation(com.esteel4u.realtimeauctionapp.R.raw.lottie_congratulation)
 
                 } else {
                     sd = SweetAlertDialog(this, SweetAlertDialog.CUSTOM_IMAGE_TYPE)
                     sd.setTitleText("Oh..")
-                    sd.setCustomImage(R.drawable.sad2)
+                    sd.setCustomImage(com.esteel4u.realtimeauctionapp.R.drawable.sad2)
                     sd.setContentText("구매 실패했어요")
                     sd.setCancelable(true)
                     sd.setConfirmText("다른 제품 보러가기")
                     sd.setCanceledOnTouchOutside(true);
 
-                    dialogBinding.lottieView.setAnimation(R.raw.lottie_falling)
+                    dialogBinding.lottieView.setAnimation(com.esteel4u.realtimeauctionapp.R.raw.lottie_falling)
                 }
                 sd.show()
                 dialog.show()

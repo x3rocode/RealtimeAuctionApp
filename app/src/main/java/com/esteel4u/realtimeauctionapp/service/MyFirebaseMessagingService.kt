@@ -43,7 +43,9 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                     scheduleAlarm(scheduledTime, title, message)
                 }
                 "end" -> {
+
                     val id = remoteMessage.data["buyuserid"]
+                    Log.d("ffffffffffffffffffffffff", id.toString())
                     showNotification(title!!, message!!, id!!, tag)
                 }
                 "loser" -> {

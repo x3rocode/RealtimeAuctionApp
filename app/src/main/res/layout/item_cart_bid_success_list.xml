@@ -9,13 +9,14 @@
     </data>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/backcard"
         android:orientation="horizontal"
-        android:layout_width="@dimen/dp_150"
+        android:layout_width="@dimen/dp_130"
         android:layout_height="@dimen/dp_180"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         app:cardCornerRadius="@dimen/dp_10"
         app:cardElevation="@dimen/dp_2"
+        app:cardBackgroundColor="@color/lblue10"
+        app:contentPadding="@dimen/dp_3"
         app:cardUseCompatPadding="true"
         >
 
@@ -31,44 +32,122 @@
                 app:layout_constraintGuide_percent=".7"/>
 
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
+
+
+            <TextView
+                android:id="@+id/prd_auction_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_7"
+                android:layout_marginLeft="@dimen/dp_7"
+                android:text="프리미엄"
+                android:gravity="center"
+                android:textSize="@dimen/dp_12"
+                android:autoSizeMaxTextSize="@dimen/dp_8"
+                android:autoSizeMinTextSize="@dimen/dp_5"
+                android:textColor="@color/egray80"
+                android:fontFamily="@font/lexend_deca"
+                android:textStyle="bold"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/guideline_bottom"
-                android:background="@color/lblue60"
+                app:layout_constraintStart_toStartOf="parent"
                 />
 
             <TextView
-                android:id="@+id/auc_bid_txt"
+                android:id="@+id/prd_totseqNm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_5"
-                android:layout_marginLeft="@dimen/dp_7"
-                android:text="낙찰가"
-                android:gravity="left"
-                android:textSize="@dimen/dp_10"
+                android:text="주문외"
+                android:gravity="center"
+                android:textSize="@dimen/dp_8"
                 android:autoSizeMaxTextSize="@dimen/dp_8"
                 android:autoSizeMinTextSize="@dimen/dp_5"
                 android:textColor="@color/egray70"
-                app:layout_constraintTop_toBottomOf="@id/guideline_bottom"
-                app:layout_constraintBottom_toTopOf="@id/auc_bid"
-                app:layout_constraintStart_toStartOf="parent"
+                android:fontFamily="@font/lexend_deca"
+                app:layout_constraintStart_toStartOf="@id/prd_auction_type"
+                app:layout_constraintTop_toBottomOf="@id/prd_auction_type"
                 />
 
             <TextView
-                android:id="@+id/auc_bid"
+                android:id="@+id/line"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/nanum_barun_gothic"
-                app:layout_constraintTop_toBottomOf="@id/auc_bid_txt"
+                android:text=" | "
+                android:gravity="center"
+                android:textSize="@dimen/dp_8"
+                android:autoSizeMaxTextSize="@dimen/dp_8"
+                android:autoSizeMinTextSize="@dimen/dp_5"
+                android:textColor="@color/egray70"
+                android:fontFamily="@font/lexend_deca"
+                app:layout_constraintStart_toEndOf="@id/prd_totseqNm"
+                app:layout_constraintTop_toTopOf="@id/prd_totseqNm"
+                />
+
+            <TextView
+                android:id="@+id/prd_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{prdlist.prdNo.toString()}"
+                android:gravity="center"
+                android:textSize="@dimen/dp_8"
+                android:autoSizeMaxTextSize="@dimen/dp_8"
+                android:autoSizeMinTextSize="@dimen/dp_5"
+                android:textColor="@color/egray70"
+                android:fontFamily="@font/lexend_deca"
+                app:layout_constraintTop_toTopOf="@id/prd_totseqNm"
+                app:layout_constraintStart_toEndOf="@id/line"
+                />
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/amountcard"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:cardCornerRadius="@dimen/dp_5"
+                app:layout_constraintTop_toBottomOf="@id/guideline_bottom"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginLeft="@dimen/dp_7"
-                android:layout_marginBottom="@dimen/dp_5"
-                android:text="10000원"
-                android:textSize="@dimen/dp_15"
-                android:textColor="@color/egray90"/>
+                app:contentPadding="@dimen/dp_7"
+                app:cardUseCompatPadding="true"
+                app:cardElevation="@dimen/dp_0"
+                app:cardBackgroundColor="@color/lblue20"
+                app:layout_constraintCircleRadius="@dimen/dp_10">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent">
+
+
+                    <TextView
+                        android:id="@+id/auc_bid_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="결제 예정 금액"
+                        android:gravity="left"
+                        android:textSize="@dimen/dp_6"
+                        android:autoSizeMaxTextSize="@dimen/dp_8"
+                        android:autoSizeMinTextSize="@dimen/dp_5"
+                        android:textColor="@color/egray80"
+                        android:fontFamily="@font/lexend_deca"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        />
+
+                    <TextView
+                        android:id="@+id/auc_bid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lexend_deca"
+                        android:text="10000원"
+                        android:textSize="@dimen/dp_15"
+                        android:textColor="@color/egray90"
+                        app:layout_constraintTop_toBottomOf="@id/auc_bid_txt"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

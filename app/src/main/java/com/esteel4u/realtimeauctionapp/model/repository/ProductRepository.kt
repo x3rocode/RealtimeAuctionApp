@@ -215,7 +215,7 @@ class ProductRepository(val lifecycleOwner: LifecycleOwner) {
 
     fun getPurchasePrdList(): MutableLiveData<List<ProductData>> {
 
-        val myQuery = db.collection("products").orderBy("auctionProgressStatus") .asLiveData<ProductData>()
+        val myQuery = db.collection("products").orderBy("endDate", Query.Direction.DESCENDING) .asLiveData<ProductData>()
         myQuery.observe(lifecycleOwner, Observer { resource: FirestoreResource<List<ProductData>> ->
             if(resource.data !== null) {
                 val data: MutableList<ProductData>? = resource.data!!.toMutableList()
@@ -238,7 +238,7 @@ class ProductRepository(val lifecycleOwner: LifecycleOwner) {
     fun getUserBidPrdList(): MutableLiveData<List<ProductData>> {
 
 
-        val myPrdQuery = db.collection("products").orderBy("endDate", Query.Direction.DESCENDING).asLiveData<ProductData>()
+        val myPrdQuery = db.collection("products").asLiveData<ProductData>()
         myPrdQuery.observe(lifecycleOwner, Observer{ resource: FirestoreResource<List<ProductData>> ->
             if(resource.data !== null) {
                 var prddata: MutableList<ProductData> = resource.data!!.toMutableList()

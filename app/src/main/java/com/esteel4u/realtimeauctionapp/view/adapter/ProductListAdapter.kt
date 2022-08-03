@@ -122,6 +122,11 @@ class ProductListAdapter(
             3 -> holder.binding.prdAuctionType.text = "아울렛"
             4 -> holder.binding.prdAuctionType.text = "패키지"
         }
+        when(holder.binding.prdlist?.worksCode){
+            "K" -> holder.binding.prdWorkscode.text = "광양"
+            "P" -> holder.binding.prdWorkscode.text = "포항"
+        }
+
 
         val myFormatter = DecimalFormat("###,###")
         val formattedWgt: String = myFormatter.format(holder.binding.prdlist!!.prdWgt) + "Kg"

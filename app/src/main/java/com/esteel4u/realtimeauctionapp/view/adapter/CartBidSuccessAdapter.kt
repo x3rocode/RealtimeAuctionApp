@@ -3,6 +3,9 @@ package com.esteel4u.realtimeauctionapp.view.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.ColorRes
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,6 +17,7 @@ import com.returnz3ro.messystem.service.model.datastore.DataStoreModule
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.text.DecimalFormat
 
 
 class CartBidSuccessAdapter(
@@ -29,7 +33,7 @@ class CartBidSuccessAdapter(
 
     private val originalBg: Int by bindColor(context, R.color.white)
     private val expandedBg: Int by bindColor(context, R.color.white)
-
+    private val context = context
 
     private val listItemHorizontalPadding: Float by bindDimen(context, R.dimen.list_item_vertical_padding)
     private val listItemVerticalPadding: Float by bindDimen(context, R.dimen.list_item_vertical_padding)
@@ -72,26 +76,45 @@ class CartBidSuccessAdapter(
     }
 
 
+    @ColorRes
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
         val product = productList[position]
         holder.bind(productList[position])
 
 
-//        when (holder.binding.prdlist?.prdTotClsSeqNm){
-//            1 -> holder.binding.prdTotseqNm?.text = "주문외 1급"
-//            2 -> holder.binding.prdTotseqNm?.text = "주문외 2급"
-//        }
-//
-//        when(holder.binding.prdlist?.auctionType){
-//            1 -> holder.binding.prdAuctionType.text = "프리미엄"
-//            2 -> holder.binding.prdAuctionType.text = "옥션"
-//            3 -> holder.binding.prdAuctionType.text = "아울렛"
-//            4 -> holder.binding.prdAuctionType.text = "패키지"
-//        }
+        when (holder.binding.prdlist?.prdTotClsSeqNm){
+            1 -> holder.binding.prdTotseqNm?.text = "주문외 1급"
+            2 -> holder.binding.prdTotseqNm?.text = "주문외 2급"
+        }
 
+        when(holder.binding.prdlist?.auctionType){
+            1 -> {
+                holder.binding.prdAuctionType.text = "프리미엄"
+                holder.binding.backcard.setCardBackgroundColor(getColor(context, R.color.eyellow10))
+                holder.binding.amountcard.setCardBackgroundColor(getColor(context, R.color.eyellow20))
+            }
+            2 -> {
+                holder.binding.prdAuctionType.text = "옥션"
+                holder.binding.backcard.setCardBackgroundColor(getColor(context, R.color.ered10))
+                holder.binding.amountcard.setCardBackgroundColor(getColor(context, R.color.ered20))
+            }
+            3 -> {
+                holder.binding.prdAuctionType.text = "아울렛"
+                holder.binding.backcard.setCardBackgroundColor(getColor(context, R.color.epurple10))
+                holder.binding.amountcard.setCardBackgroundColor(getColor(context, R.color.epurple20))
+            }
+            4 -> {
+                holder.binding.prdAuctionType.text = "패키지"
+                holder.binding.backcard.setCardBackgroundColor(getColor(context, R.color.lblue10))
+                holder.binding.amountcard.setCardBackgroundColor(getColor(context, R.color.lblue20))
+            }
+        }
+
+        val myFormatter = DecimalFormat("###,###")
         var price = holder.binding.prdlist?.bidPrice!! * holder.binding.prdlist?.prdWgt!!
-        holder.binding.aucBid.text = "₩$price"
+        val formattedPrice: String = myFormatter.format(price)
+        holder.binding.aucBid.text = "₩$formattedPrice"
 
 //        expandItem(holder, product == expandedModel, animate = false)
 //        scaleDownItem(holder, position, isScaledDown)

@@ -3,6 +3,7 @@ package com.esteel4u.realtimeauctionapp.view.ui.fragments
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,14 +11,15 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.esteel4u.realtimeauctionapp.model.data.ProductData
 import com.esteel4u.realtimeauctionapp.databinding.FragmentCartBinding
+import com.esteel4u.realtimeauctionapp.model.data.ProductData
 import com.esteel4u.realtimeauctionapp.model.data.AuctionData
 import com.esteel4u.realtimeauctionapp.view.adapter.CartBidSuccessAdapter
 import com.esteel4u.realtimeauctionapp.view.adapter.CartListAdapter
 import com.esteel4u.realtimeauctionapp.view.ui.activities.BidActivity
 import com.esteel4u.realtimeauctionapp.viewmodel.AuctionViewModel
 import com.esteel4u.realtimeauctionapp.viewmodel.ProductViewModel
+import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper
 import kotlinx.android.synthetic.main.fragment_cart.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_like.*
@@ -63,38 +65,71 @@ CartListAdapter.Interaction{
         initRecyclerView()
 
         viewModel.getPurchasePrdList().observe(viewLifecycleOwner, Observer {
-            madapter.setData(it!!)
-            if(it.isNotEmpty()) {
 
-//                cartAdapter.setData(it!!)
-//                sad_txt.visibility = View.GONE
-//                lottie_img.visibility = View.GONE
-//                cart_recycler_view.visibility = View.VISIBLE
-//                bid_success_recview.visibility = View.VISIBLE
-//                my_bid_txt.visibility = View.VISIBLE
-//                bid_txt_desc.visibility = View.VISIBLE
-//                my_cart_txt.visibility = View.VISIBLE
-//                cart_txt_desc.visibility = View.VISIBLE
+            if(it.isNotEmpty()) {
+                madapter.setData(it!!)
+                prdList = it
+                no_success_bid_lottie.visibility = View.INVISIBLE
+                bid_success_recview.visibility = View.VISIBLE
+                binding.sadTxt.visibility = View.GONE
+                binding.lottieImg.visibility = View.GONE
+                binding.content.visibility = View.VISIBLE
+                cart_recycler_view.visibility = View.VISIBLE
+                my_bid_txt.visibility = View.VISIBLE
+                bid_txt_desc.visibility = View.VISIBLE
+                my_buy_txt.visibility = View.VISIBLE
+                buy_txt_desc.visibility = View.VISIBLE
 
             }else{
-//                sad_txt.visibility = View.VISIBLE
-//                lottie_img.visibility = View.VISIBLE
-//                cart_recycler_view.visibility = View.GONE
-//                bid_success_recview.visibility = View.GONE
-//                my_bid_txt.visibility = View.GONE
-//                bid_txt_desc.visibility = View.GONE
-//                my_cart_txt.visibility = View.GONE
-//                cart_txt_desc.visibility = View.GONE
+                no_success_bid_lottie.visibility = View.VISIBLE
+                bid_success_recview.visibility = View.GONE
+                binding.sadTxt.visibility = View.VISIBLE
+                binding.lottieImg.visibility = View.VISIBLE
+                binding.content.visibility = View.VISIBLE
+                cart_recycler_view.visibility = View.VISIBLE
+                my_bid_txt.visibility = View.VISIBLE
+                bid_txt_desc.visibility = View.VISIBLE
+                my_buy_txt.visibility = View.VISIBLE
+                buy_txt_desc.visibility = View.VISIBLE
             }
         })
 
         viewModel.getUserBidPrdList().observe(viewLifecycleOwner, Observer {
-            Log.d("assvsdvsdv", it.size.toString())
-            //cartAdapter.productList = it.toMutableList()
-            cartAdapter.setData(it)
+            if(it.isNotEmpty()) {
+                cartAdapter.setData(it)
+                if(prdList.isEmpty()){
+                    binding.noSuccessBidLottie.visibility = View.VISIBLE
+                }else{
+                    binding.noSuccessBidLottie.visibility = View.INVISIBLE
+                }
+
+                binding.sadTxt.visibility = View.GONE
+                binding.lottieImg.visibility = View.GONE
+                binding.content.visibility = View.VISIBLE
+                cart_recycler_view.visibility = View.VISIBLE
+                bid_success_recview.visibility = View.VISIBLE
+                my_bid_txt.visibility = View.VISIBLE
+                bid_txt_desc.visibility = View.VISIBLE
+                my_buy_txt.visibility = View.VISIBLE
+                buy_txt_desc.visibility = View.VISIBLE
+
+            }else{
+                binding.noSuccessBidLottie.visibility = View.GONE
+                binding.sadTxt.visibility = View.VISIBLE
+                binding.lottieImg.visibility = View.VISIBLE
+                binding.content.visibility = View.GONE
+                cart_recycler_view.visibility = View.GONE
+                bid_success_recview.visibility = View.GONE
+                my_bid_txt.visibility = View.GONE
+                bid_txt_desc.visibility = View.GONE
+                my_buy_txt.visibility = View.GONE
+                buy_txt_desc.visibility = View.GONE
+            }
+
+
         })
         auctionViewModel.getAllAuctionList().observe(viewLifecycleOwner, Observer{
-            Log.d("assvsdvsdv22", it.toString())
+
             cartAdapter.setAuctionData(it)
         })
     }
@@ -120,6 +155,9 @@ CartListAdapter.Interaction{
             layoutManager = LinearLayoutManager( this@CartFragment.context)
             adapter = cartAdapter
         }
+
+        val snapHelper = GravitySnapHelper(Gravity.START)
+        snapHelper.attachToRecyclerView(binding.bidSuccessRecview)
     }
 
     override fun OnBidButtonClickListener(v: View, p: ProductData) {

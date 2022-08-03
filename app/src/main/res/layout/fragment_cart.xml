@@ -27,6 +27,7 @@
             app:layout_constraintGuide_percent=".9" />
 
 
+
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/my_cart_txt"
             android:layout_width="0dp"
@@ -61,39 +62,23 @@
             app:layout_constraintStart_toStartOf="@id/guideline_left"
             app:layout_constraintTop_toBottomOf="@id/my_cart_txt" />
 
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/content"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_150"
+            android:layout_marginTop="@dimen/dp_20"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toTopOf="@id/my_buy_txt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cart_txt_desc"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/lottie_present" />
 
-<!--        <com.airbnb.lottie.LottieAnimationView-->
-<!--            android:id="@+id/lottie_img"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-
-<!--            android:scaleType="fitCenter"-->
-<!--            app:layout_constraintBottom_toTopOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="@id/guideline_right"-->
-
-<!--            app:layout_constraintStart_toStartOf="@id/guideline_left"-->
-<!--            app:layout_constraintTop_toBottomOf="parent"-->
-<!--            app:lottie_autoPlay="true"-->
-<!--            app:lottie_loop="true"-->
-<!--            app:lottie_rawRes="@raw/lottie_card_presents" />-->
 
 
-<!--        <androidx.appcompat.widget.AppCompatTextView-->
-<!--            android:id="@+id/sad_txt"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="@dimen/dp_5"-->
-<!--            android:fontFamily="@font/nanum_barun_gothic"-->
-<!--            android:text="장바구니가 텅 비었어요.."-->
-<!--            android:textAlignment="center"-->
-<!--            android:textColor="@color/egray60"-->
-<!--            android:textSize="@dimen/dp_15"-->
-<!--            app:autoSizeMaxTextSize="20sp"-->
-<!--            app:autoSizeMinTextSize="12sp"-->
-<!--            app:autoSizeTextType="uniform"-->
-<!--            app:layout_constraintEnd_toEndOf="@id/guideline_right"-->
-<!--            app:layout_constraintStart_toStartOf="@id/guideline_left"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/lottie_img" />-->
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/my_buy_txt"
@@ -110,7 +95,7 @@
             app:autoSizeTextType="uniform"
             app:layout_constraintEnd_toEndOf="@id/guideline_right"
             app:layout_constraintStart_toStartOf="@id/guideline_left"
-            app:layout_constraintTop_toBottomOf="@id/cart_txt_desc" />
+            app:layout_constraintTop_toBottomOf="@id/content" />
 
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -129,14 +114,31 @@
             app:layout_constraintStart_toStartOf="@id/guideline_left"
             app:layout_constraintTop_toBottomOf="@id/my_buy_txt" />
 
-        <com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView
-            android:id="@+id/bid_success_recview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="@dimen/dp_10"
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/no_success_bid_lottie"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_180"
+            android:layout_marginTop="@dimen/dp_20"
+            android:adjustViewBounds="true"
+            android:scaleType="centerInside"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/buy_txt_desc"
-            app:msrv_gravity="start"
-            app:msrv_interval="2" />
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/lottie_emptyspace"/>
+
+        <com.github.rubensousa.gravitysnaphelper.GravitySnapRecyclerView
+            android:id="@+id/bid_success_recview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/dp_20"
+            android:paddingTop="@dimen/dp_10"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/buy_txt_desc"
+            app:snapGravity="start"/>
+
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/my_bid_txt"
@@ -153,7 +155,7 @@
             app:autoSizeTextType="uniform"
             app:layout_constraintEnd_toEndOf="@id/guideline_right"
             app:layout_constraintStart_toStartOf="@id/guideline_left"
-            app:layout_constraintTop_toBottomOf="@id/bid_success_recview" />
+            app:layout_constraintTop_toBottomOf="@id/no_success_bid_lottie" />
 
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -185,6 +187,38 @@
             app:layout_constraintTop_toBottomOf="@id/bid_txt_desc"
             tools:listitem="@layout/item_cart_list" />
 
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie_img"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:scaleType="fitCenter"
+            app:layout_constraintEnd_toEndOf="@id/guideline_right"
+            app:layout_constraintStart_toStartOf="@id/guideline_left"
+            app:layout_constraintTop_toBottomOf="@id/cart_txt_desc"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/lottie_card_presents" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/sad_txt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_5"
+            android:fontFamily="@font/lexend_deca"
+            android:text="장바구니가 텅 비었어요.."
+            android:textAlignment="center"
+            android:textColor="@color/egray60"
+            android:textSize="@dimen/dp_15"
+            app:autoSizeMaxTextSize="20sp"
+            app:autoSizeMinTextSize="12sp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintEnd_toEndOf="@id/guideline_right"
+            app:layout_constraintStart_toStartOf="@id/guideline_left"
+            app:layout_constraintTop_toBottomOf="@id/lottie_img" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

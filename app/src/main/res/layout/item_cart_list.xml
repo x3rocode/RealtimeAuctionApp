@@ -92,7 +92,7 @@ too. layout_gravity="center_horizontal" is a lot simpler.
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dp_10"
                         android:layout_toRightOf="@id/status_img"
-                        android:fontFamily="@font/nanum_barun_gothic"
+                        android:fontFamily="@font/lexend_deca"
                         android:text="프리미엄"
                         android:textColor="@color/egray80"
                         android:textSize="15dp"
@@ -107,7 +107,7 @@ too. layout_gravity="center_horizontal" is a lot simpler.
                         android:layout_marginLeft="@dimen/dp_10"
                         android:layout_marginTop="5dp"
                         android:layout_toRightOf="@id/status_img"
-                        android:fontFamily="@font/nanum_barun_gothic"
+                        android:fontFamily="@font/lexend_deca"
                         android:text="주문외 2급"
                         android:textSize="10dp" />
 
@@ -118,7 +118,7 @@ too. layout_gravity="center_horizontal" is a lot simpler.
                         android:layout_below="@id/prd_auction_type"
                         android:layout_marginTop="5dp"
                         android:layout_toRightOf="@id/prd_totseqNm"
-                        android:fontFamily="@font/nanum_barun_gothic"
+                        android:fontFamily="@font/lexend_deca"
                         android:text=" | "
                         android:textSize="10dp" />
 
@@ -129,7 +129,7 @@ too. layout_gravity="center_horizontal" is a lot simpler.
                         android:layout_below="@id/prd_auction_type"
                         android:layout_marginTop="5dp"
                         android:layout_toRightOf="@id/line"
-                        android:fontFamily="@font/nanum_barun_gothic"
+                        android:fontFamily="@font/lexend_deca"
                         android:text="@{prdlist.prdNo.toString()}"
                         android:textSize="10dp" />
 
@@ -140,7 +140,7 @@ too. layout_gravity="center_horizontal" is a lot simpler.
                         android:layout_alignTop="@+id/prd_auction_type"
                         android:layout_alignRight="@id/auc_bid"
                         android:layout_alignParentRight="true"
-                        android:fontFamily="@font/nanum_barun_gothic"
+                        android:fontFamily="@font/lexend_deca"
                         android:text="현재 최고 입찰가"
                         android:textSize="10dp" />
 
@@ -170,9 +170,62 @@ too. layout_gravity="center_horizontal" is a lot simpler.
                         android:showDividers="middle">
 
 
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="14dp">
 
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="horizontal">
 
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/nanum_barun_gothic"
 
+                                    android:text="제품 번호 : "
+                                    android:textSize="12dp" />
+
+                                <TextView
+                                    android:id="@+id/material_lotno"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/egray80"
+                                    android:fontFamily="@font/nanum_barun_gothic"
+                                    android:text="@{prdlist.prdNo}"
+                                    android:textSize="12dp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/nanum_barun_gothic"
+                                    android:text="소 : "
+                                    android:textSize="12dp" />
+
+                                <TextView
+                                    android:id="@+id/prd_workscode"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/egray80"
+                                    android:fontFamily="@font/nanum_barun_gothic"
+                                    android:text=""
+                                    android:textSize="12dp" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
 
 
                         <LinearLayout
@@ -198,6 +251,7 @@ too. layout_gravity="center_horizontal" is a lot simpler.
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/nanum_barun_gothic"
+                                    android:textColor="@color/egray80"
                                     android:text="@{prdlist.prdName}"
                                     android:textSize="12dp" />
 
@@ -220,6 +274,7 @@ too. layout_gravity="center_horizontal" is a lot simpler.
                                     android:id="@+id/prd_substspec"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textColor="@color/egray80"
                                     android:fontFamily="@font/nanum_barun_gothic"
                                     android:text="@{prdlist.substSpec}"
                                     android:textSize="12dp" />
@@ -251,6 +306,7 @@ too. layout_gravity="center_horizontal" is a lot simpler.
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/nanum_barun_gothic"
+                                    android:textColor="@color/egray80"
                                     android:text="@{prdlist.prdThk.toString()}"
                                     android:textSize="12dp" />
 
@@ -273,6 +329,7 @@ too. layout_gravity="center_horizontal" is a lot simpler.
                                     android:id="@+id/prd_prdwth"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textColor="@color/egray80"
                                     android:fontFamily="@font/nanum_barun_gothic"
                                     android:textSize="12dp" />
                             </LinearLayout>
@@ -294,6 +351,7 @@ too. layout_gravity="center_horizontal" is a lot simpler.
                                     android:id="@+id/prd_prdwgt"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:textColor="@color/egray80"
                                     android:fontFamily="@font/nanum_barun_gothic"
                                     android:textSize="12dp" />
                             </LinearLayout>
@@ -308,27 +366,27 @@ too. layout_gravity="center_horizontal" is a lot simpler.
 
 
                             <LinearLayout
-                                android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:gravity="center">
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="horizontal">
 
                                 <com.google.android.material.button.MaterialButton
                                     android:id="@+id/bid_button"
-                                    android:layout_height="wrap_content"
-                                    android:layout_width="@dimen/dp_250"
-                                    android:text="Place a Bid"
-                                    android:fontFamily="@font/lexend_deca"
-                                    android:textStyle="bold"
-                                    android:textColor="@color/white"
                                     style="@style/MyButtonShapeRounded"
-                                    app:cornerRadius="30dp"
-                                    android:insetBottom="2dp"
-                                    android:insetTop="3dp"
-                                    android:textAllCaps="false"
+                                    android:layout_width="@dimen/dp_250"
+                                    android:layout_height="wrap_content"
                                     android:backgroundTint="@color/lblue60"
-                                    android:gravity="center"/>
+                                    android:fontFamily="@font/lexend_deca"
+                                    android:gravity="center"
+                                    android:insetTop="3dp"
+                                    android:insetBottom="2dp"
+                                    android:text="Place a Bid"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/white"
+                                    android:textStyle="bold"
+                                    app:cornerRadius="30dp" />
 
                             </LinearLayout>
                         </LinearLayout>

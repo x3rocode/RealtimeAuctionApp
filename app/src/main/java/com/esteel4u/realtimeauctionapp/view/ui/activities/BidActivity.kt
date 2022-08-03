@@ -33,9 +33,6 @@ class BidActivity: AppCompatActivity() {
         auctionViewModel = ViewModelProvider(this, AuctionViewModel.Factory(this)).get(AuctionViewModel::class.java)
 
         var pid = intent.getStringExtra("prddata")
-        Log.d("d", "aaaaaaaaaaaaaaaaa" + pid!!)
-        
-
 
         binding.timmer.setOnCountdownEndListener {
             val sd = SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
@@ -95,7 +92,7 @@ class BidActivity: AppCompatActivity() {
                 if(binding.bidinfo!!.highestBuyUserId!! == FirebaseAuth.getInstance().uid){
                     val sd = SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
                     sd.setTitleText("Oops...")
-                    sd.setContentText("현재 최고가 입찰자는 you")
+                    sd.setContentText("내가 현재 최고가 입찰자에요!")
                     sd.setCancelable(true)
                     sd.setConfirmText("Retry")
 
@@ -114,7 +111,6 @@ class BidActivity: AppCompatActivity() {
                         sd.setContentText("입찰 금액은 현재 금액보다 커야합니다.")
                         sd.setCancelable(true)
                         sd.setConfirmText("Retry")
-
                         sd.setCanceledOnTouchOutside(true);
                         sd.show()
                     }

@@ -34,10 +34,18 @@
 
     <color name="lgray10">#EFF5FF</color>
     <color name="lgray20">#A8A5C0</color>
-
     <color name="lgray30">#EBEBEB</color>
 
     <color name="bgray">#F7F7F7</color>
+
+    <color name="eyellow10">#FEF7DB</color>
+    <color name="eyellow20">#FFEAA6</color>
+    <color name="epurple10">#DADDFC</color>
+    <color name="epurple20">#BAB8E3</color>
+    <color name="ered10">#FCDCDC</color>
+    <color name="ered20">#F9BAB9</color>
+
+
 
 
     <color name="bg">#f5f5f5</color>
