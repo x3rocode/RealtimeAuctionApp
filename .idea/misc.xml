@@ -76,7 +76,7 @@
         <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/drawable/tab_badge.xml" value="0.17" />
         <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/activity_bid.xml" value="0.1" />
         <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/activity_login.xml" value="0.17" />
-        <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/activity_main.xml" value="0.18" />
+        <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/activity_main.xml" value="0.17592592592592593" />
         <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/calendar_item.xml" value="0.25" />
         <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/filter_layout_1.xml" value="0.140625" />
         <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/filter_layout_3.xml" value="0.140625" />
@@ -94,6 +94,7 @@
         <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/item_cart_list.xml" value="0.33" />
         <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/item_filter_tab.xml" value="0.140625" />
         <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/item_product_list.xml" value="0.33" />
+        <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/layout_blur.xml" value="0.17806484295845998" />
         <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/second_special_calendar_item.xml" value="0.19900271985494106" />
         <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/second_special_selected_calendar_item.xml" value="0.19900271985494106" />
         <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/selected_calendar_item.xml" value="0.19900271985494106" />
@@ -103,7 +104,7 @@
     </option>
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" project-jdk-name="11" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_14" project-jdk-name="11" project-jdk-type="JavaSDK" />
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>

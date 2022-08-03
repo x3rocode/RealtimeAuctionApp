@@ -4,28 +4,33 @@ import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.ContentValues
 import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.graphics.drawable.DrawerArrowDrawable
-import androidx.core.view.GravityCompat
 import cn.pedant.SweetAlert.SweetAlertDialog
+import com.esteel4u.realtimeauctionapp.R
 import com.esteel4u.realtimeauctionapp.databinding.ActivityMainBinding
 import com.esteel4u.realtimeauctionapp.view.adapter.MainViewPagerAdapter
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.nineoldandroids.view.ViewHelper
 import kotlinx.android.synthetic.main.activity_main.*
 
 
 @SuppressLint("MissingPermission")
 class MainActivity : AppCompatActivity() {
+
+
     private val KEY_REPLY = "key_reply"
     private var auth = Firebase.auth
     private lateinit var binding: ActivityMainBinding
     private lateinit var sd: SweetAlertDialog
-    private lateinit var drawerArrow: DrawerArrowDrawable
+    private lateinit var barDrawerToggle: ActionBarDrawerToggle
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,10 +49,34 @@ class MainActivity : AppCompatActivity() {
         bottom_bar.setupWithViewPager2(view_pager)
 
 
-        drawerArrow = DrawerArrowDrawable(this)
-        menu_btn.setOnClickListener{
-            drawer_layout.openDrawer(GravityCompat.START)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_account_circle_24)
+        supportActionBar?.setTitle("")
+
+        barDrawerToggle = ActionBarDrawerToggle(this, drawer_layout, toolbar,
+            nl.joery.animatedbottombar.R.string.nav_app_bar_open_drawer_description,
+            nl.joery.animatedbottombar.R.string.mtrl_chip_close_icon_content_description)
+
+        barDrawerToggle = object : ActionBarDrawerToggle(
+            this,
+            drawer_layout, toolbar,
+            nl.joery.animatedbottombar.R.string.nav_app_bar_open_drawer_description,
+            nl.joery.animatedbottombar.R.string.mtrl_chip_close_icon_content_description
+        ) {
+            override fun onDrawerOpened(drawerView: View) {
+                super.onDrawerOpened(drawerView)
+                invalidateOptionsMenu()
+
+            }
+
+            override fun onDrawerClosed(drawerView: View) {
+                super.onDrawerClosed(drawerView)
+                invalidateOptionsMenu()
+
+            }
         }
+        drawer_layout.setScrimColor(getResources().getColor(R.color.lmint10))
 
 
         val extras = intent.extras
@@ -60,6 +89,9 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
+
+
 
     override fun onNewIntent(intent: Intent?) {
         val tag = intent!!.getStringExtra("tag")
@@ -124,4 +156,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+
 }
+
+
