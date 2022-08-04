@@ -1,23 +1,33 @@
 package com.esteel4u.realtimeauctionapp.view.ui.activities
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.Dialog
 import android.content.ContentValues
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.Color
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import android.widget.ImageView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.databinding.DataBindingUtil.setContentView
+import androidx.drawerlayout.widget.DrawerLayout
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.esteel4u.realtimeauctionapp.R
 import com.esteel4u.realtimeauctionapp.databinding.ActivityMainBinding
 import com.esteel4u.realtimeauctionapp.view.adapter.MainViewPagerAdapter
+import com.github.mmin18.widget.RealtimeBlurView
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.nineoldandroids.view.ViewHelper
+import jp.wasabeef.blurry.Blurry
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -54,29 +64,47 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_account_circle_24)
         supportActionBar?.setTitle("")
 
-        barDrawerToggle = ActionBarDrawerToggle(this, drawer_layout, toolbar,
-            nl.joery.animatedbottombar.R.string.nav_app_bar_open_drawer_description,
-            nl.joery.animatedbottombar.R.string.mtrl_chip_close_icon_content_description)
-
         barDrawerToggle = object : ActionBarDrawerToggle(
             this,
             drawer_layout, toolbar,
             nl.joery.animatedbottombar.R.string.nav_app_bar_open_drawer_description,
             nl.joery.animatedbottombar.R.string.mtrl_chip_close_icon_content_description
         ) {
-            override fun onDrawerOpened(drawerView: View) {
-                super.onDrawerOpened(drawerView)
-                invalidateOptionsMenu()
+            override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
+                super.onDrawerSlide(drawerView, slideOffset)
 
+                if (slideOffset > 0.0f) {
+                    setBlurAlpha(slideOffset)
+                } else {
+                    clearBlurImage()
+                }
+                invalidateOptionsMenu()
             }
 
             override fun onDrawerClosed(drawerView: View) {
                 super.onDrawerClosed(drawerView)
+                clearBlurImage()
                 invalidateOptionsMenu()
 
             }
+            fun setBlurAlpha(slideOffset: Float) {
+                ViewHelper.setAlpha(blur_view, slideOffset)
+                if (blur_view.getVisibility() !== View.VISIBLE) {
+                    setBlurImage()
+                }
+
+            }
+
+            fun setBlurImage() {
+                blur_view.visibility = View.VISIBLE
+            }
+
+            fun clearBlurImage() {
+                blur_view.visibility = View.GONE;
+            }
         }
-        drawer_layout.setScrimColor(getResources().getColor(R.color.lmint10))
+        drawer_layout.addDrawerListener(barDrawerToggle)
+       drawer_layout.setScrimColor(getResources().getColor(android.R.color.transparent))
 
 
         val extras = intent.extras
@@ -89,6 +117,8 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
+
 
 
 

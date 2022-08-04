@@ -59,11 +59,28 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <ImageView
+                android:id="@+id/blur_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:visibility="gone" />
+
+            <com.github.mmin18.widget.RealtimeBlurView
+                android:id="@+id/blur_view"
+                android:visibility="gone"
+                android:elevation="@dimen/dp_20"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:realtimeBlurRadius="8dp"
+                app:realtimeOverlayColor="#0fff"/>
+
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/view_pager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_above="@id/bottom_bar"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 
@@ -93,16 +110,12 @@
 
         </RelativeLayout>
 
-<!--        <com.ms_square.etsyblur.BlurringView-->
-<!--            android:id="@id/blurring_view"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent">-->
-<!--        </com.ms_square.etsyblur.BlurringView>-->
+
 
 
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/nav_view"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="match_parent"
             android:layout_gravity="start"
             android:fitsSystemWindows="true" />
