@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/alarm_set"
+        android:icon="@drawable/alarmic"
+        style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+        android:title="알림 설정"
+        />
+    <item
+        android:id="@+id/logout_set"
+        android:icon="@drawable/logoutic"
+        style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+        android:title="로그아웃"
+        />
+    <item
+        android:id="@+id/about_set"
+        android:icon="@drawable/infoic"
+        style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+        android:title="정보"
+        />
+
+</menu>

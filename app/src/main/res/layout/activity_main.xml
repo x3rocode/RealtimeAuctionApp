@@ -54,10 +54,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+<!--        <ImageView-->
+<!--            android:id="@+id/backgroundshape1"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="0dp"-->
+
+<!--            android:background="@drawable/roundedsquare"-->
+<!--            android:backgroundTint="@color/lgray10"-->
+<!--            android:rotation="-30"-->
+<!--            />-->
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
+
 
             <ImageView
                 android:id="@+id/blur_image"
@@ -94,7 +106,7 @@
                 app:abb_animationInterpolator="@android:anim/overshoot_interpolator"
                 app:abb_iconSize="20dp"
                 app:abb_indicatorAppearance="round"
-                app:abb_indicatorColor="@color/lblue60"
+                app:abb_indicatorColor="@color/lblue40"
                 app:abb_indicatorHeight="4dp"
                 app:abb_indicatorMargin="16dp"
                 app:abb_selectedIndex="1"
@@ -103,7 +115,7 @@
                 app:abb_tabAnimationSelected="slide"
                 app:abb_tabColor="@color/egray40"
                 app:abb_tabColorDisabled="@color/egray40"
-                app:abb_tabColorSelected="@color/lblue60"
+                app:abb_tabColorSelected="@color/lblue40"
                 app:abb_tabs="@menu/tabs"
                 app:abb_textAppearance="@style/BottomNavigationTextStyle"
                 app:abb_textSize="@dimen/dp_13" />
@@ -111,14 +123,17 @@
         </RelativeLayout>
 
 
-
-
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/nav_view"
-            android:layout_width="200dp"
+            android:layout_width="250dp"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            android:fitsSystemWindows="true" />
+            android:fitsSystemWindows="true"
+            app:menu="@menu/navi_menu"
+            app:headerLayout="@layout/drawer_header"
+            >
+
+        </com.google.android.material.navigation.NavigationView>
 
     </androidx.drawerlayout.widget.DrawerLayout>
 </LinearLayout>

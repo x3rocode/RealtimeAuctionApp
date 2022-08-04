@@ -29,6 +29,7 @@
     <color name="lblue40">#2E5EF4</color>
     <color name="lblue50">#0035C0</color>
     <color name="lblue60">#212E55</color>
+    <color name="lbluedie60">#70778A</color>
 
     <color name="lmint10">#52C4C0</color>
 
@@ -44,6 +45,8 @@
     <color name="epurple20">#BAB8E3</color>
     <color name="ered10">#FCDCDC</color>
     <color name="ered20">#F9BAB9</color>
+    <color name="egreen10">#FCDCDC</color>
+    <color name="egreen20">#F9BAB9</color>
 
 
 

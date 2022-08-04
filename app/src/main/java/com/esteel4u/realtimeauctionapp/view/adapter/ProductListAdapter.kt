@@ -102,13 +102,23 @@ class ProductListAdapter(
         when (holder.binding.prdlist?.auctionProgressStatus){
             1 -> {holder.binding.prdStatus.visibility = View.INVISIBLE
                 holder.binding.lottieLive.visibility = View.VISIBLE
-                holder.binding.bidButton.visibility = View.VISIBLE}
+                holder.binding.bidButton.visibility = View.VISIBLE
+                holder.binding.closedBtn.visibility = View.GONE
+                holder.binding.upcomingBtn.visibility = View.GONE
+            }
             2 -> {holder.binding.prdStatus.text = "진행 예정"
                 holder.binding.lottieLive.visibility = View.INVISIBLE
-                holder.binding.bidButton.visibility = View.INVISIBLE}
-            3 -> {holder.binding.prdStatus.text = "종료"
+                holder.binding.bidButton.visibility = View.GONE
+                holder.binding.closedBtn.visibility = View.GONE
+                holder.binding.upcomingBtn.visibility = View.VISIBLE
+            }
+            3 -> {
+                holder.binding.prdStatus.text = "종료"
                 holder.binding.lottieLive.visibility = View.INVISIBLE
-                holder.binding.bidButton.visibility = View.INVISIBLE}
+                holder.binding.bidButton.visibility = View.GONE
+                holder.binding.closedBtn.visibility = View.VISIBLE
+                holder.binding.upcomingBtn.visibility = View.GONE
+            }
         }
 
         when (holder.binding.prdlist?.prdTotClsSeqNm){

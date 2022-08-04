@@ -128,6 +128,23 @@
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/lottie_emptyspace"/>
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/no_success_bid_txt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_5"
+            android:fontFamily="@font/lexend_deca"
+            android:text="아직 구매 성공한 제품이 없어요.."
+            android:textAlignment="center"
+            android:textColor="@color/egray60"
+            android:textSize="@dimen/dp_15"
+            app:autoSizeMaxTextSize="20sp"
+            app:autoSizeMinTextSize="12sp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintEnd_toEndOf="@id/guideline_right"
+            app:layout_constraintStart_toStartOf="@id/guideline_left"
+            app:layout_constraintTop_toBottomOf="@id/no_success_bid_lottie" />
+
         <com.github.rubensousa.gravitysnaphelper.GravitySnapRecyclerView
             android:id="@+id/bid_success_recview"
             android:layout_width="0dp"
@@ -155,7 +172,7 @@
             app:autoSizeTextType="uniform"
             app:layout_constraintEnd_toEndOf="@id/guideline_right"
             app:layout_constraintStart_toStartOf="@id/guideline_left"
-            app:layout_constraintTop_toBottomOf="@id/no_success_bid_lottie" />
+            app:layout_constraintTop_toBottomOf="@id/no_success_bid_txt" />
 
 
         <androidx.appcompat.widget.AppCompatTextView

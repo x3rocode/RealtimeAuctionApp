@@ -51,7 +51,10 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.ui.activities.BidActivity" android:launchMode="singleTask"  android:windowSoftInputMode="stateVisible|adjustResize"/>
+        <activity android:name=".view.ui.activities.BidActivity"
+             android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustResize"
+            />
 
         <service
             android:name=".service.MyFirebaseMessagingService"

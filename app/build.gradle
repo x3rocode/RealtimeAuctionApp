@@ -77,6 +77,8 @@ dependencies {
     implementation 'com.github.rubensousa:gravitysnaphelper:2.2.2'
     implementation 'com.github.mmin18:realtimeblurview:1.2.1'
     implementation 'jp.wasabeef:blurry:4.0.1'
+    implementation 'com.balysv.materialmenu:material-menu:2.0.0'
+    implementation 'io.github.bitvale:switcher:1.1.2'
 
     //holy fucking firebase
     implementation platform('com.google.firebase:firebase-bom:30.1.0')

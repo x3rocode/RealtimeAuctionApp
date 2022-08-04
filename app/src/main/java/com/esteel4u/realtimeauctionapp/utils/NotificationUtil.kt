@@ -21,13 +21,12 @@ class NotificationUtil(private val context: Context) {
     fun showNotification(title: String, message: String, id: String, tag: String) {
         lateinit var  intent : Intent;
 
-        //TODO : 여기서 조건써서 인텐트 비드 ㅇ.ㅇ..
         if(tag == "start"){
             intent = Intent(context, MainActivity::class.java)
 
         }else if(tag == "end"){
             intent = Intent(context, MainActivity::class.java)
-            Log.d("22222222222222222", id.toString())
+            Log.d("22222222222222222", id)
             intent.putExtra("buyuserid", id)
         }else if(tag == "loser"){
             intent = Intent(context, BidActivity::class.java)
@@ -45,7 +44,7 @@ class NotificationUtil(private val context: Context) {
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val notificationBuilder = NotificationCompat.Builder(context, channelId)
             .setColor(ContextCompat.getColor(context, android.R.color.black))
-            .setSmallIcon(R.drawable.logon)
+            .setSmallIcon(R.drawable.android_icon)
             .setContentTitle(title)
             .setContentText(message)
             .setAutoCancel(true)

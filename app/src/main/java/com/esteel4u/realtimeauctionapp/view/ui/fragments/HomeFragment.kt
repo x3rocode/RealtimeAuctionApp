@@ -85,13 +85,6 @@ class HomeFragment  : Fragment(),
         setBanner()
         initRecyclerView()
 
-        dataStore = DataStoreModule(view.context)
-        CoroutineScope(Dispatchers.Main).launch {
-            dataStore.user.collect{
-               // hello_txt.setText("Hi, "+ it.userName)
-            }
-        }
-
 
         viewModel.getTodayPrdList().observe(viewLifecycleOwner, Observer{
             prdList = it
@@ -101,10 +94,6 @@ class HomeFragment  : Fragment(),
                 addAlarm(it.endDate!!.toDate(), it.prdId!!, "e")
             }
         })
-
-
-
-
 
 
         binding.buttongroup.setOnSelectListener { button: ThemedButton ->

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.core.animation.doOnEnd
 import androidx.core.animation.doOnStart
+import androidx.core.content.ContextCompat
 import androidx.core.view.doOnLayout
 import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
@@ -16,8 +17,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.esteel4u.realtimeauctionapp.R
-import com.esteel4u.realtimeauctionapp.model.data.ProductData
 import com.esteel4u.realtimeauctionapp.databinding.ItemCartListBinding
+import com.esteel4u.realtimeauctionapp.model.data.ProductData
 import com.esteel4u.realtimeauctionapp.model.data.AuctionData
 import com.esteel4u.realtimeauctionapp.view.utils.*
 import com.google.firebase.auth.ktx.auth
@@ -60,6 +61,7 @@ class CartListAdapter(
     private var expandedModel: ProductData? = null
     private var isScaledDown = false
     private var auth = Firebase.auth
+    private var context = context
 
     private lateinit var dataStore: DataStoreModule
     private var userId: String = ""
@@ -68,7 +70,7 @@ class CartListAdapter(
 
     // Method #5
     class MyViewHolder(
-        val binding: ItemCartListBinding,
+        val binding: com.esteel4u.realtimeauctionapp.databinding.ItemCartListBinding,
         private val interaction: Interaction?
     ) : RecyclerView.ViewHolder(binding.root) {
 
@@ -121,12 +123,6 @@ class CartListAdapter(
             holder.bindauc(it)
         }
 
-        when (holder.binding.prdlist?.auctionProgressStatus){
-            1 -> holder.binding.bidButton.visibility = View.VISIBLE
-            2 -> holder.binding.bidButton.visibility = View.INVISIBLE
-            3 -> holder.binding.bidButton.visibility = View.INVISIBLE
-        }
-
         //최고입찰자가 나야
         if(holder.binding.auctiondata!!.highestBuyUserId == auth.uid){
             holder.binding.statusImg.setAnimation(R.raw.lottie_hearteyeface)
@@ -149,6 +145,28 @@ class CartListAdapter(
         when(holder.binding.prdlist?.worksCode){
             "K" -> holder.binding.prdWorkscode.text = "광양"
             "P" -> holder.binding.prdWorkscode.text = "포항"
+        }
+
+        when(holder.binding.prdlist?.auctionProgressStatus){
+            //진행중
+            1 -> {
+                holder.binding.bidButton.visibility = View.VISIBLE
+                holder.binding.closedBtn.visibility = View.GONE
+                holder.binding.upcomingBtn.visibility = View.GONE
+
+            }
+            2 -> {
+                //예정
+                holder.binding.bidButton.visibility = View.GONE
+                holder.binding.closedBtn.visibility = View.GONE
+                holder.binding.upcomingBtn.visibility = View.VISIBLE
+            }
+            3 -> {
+                //종료
+                holder.binding.bidButton.visibility = View.GONE
+                holder.binding.closedBtn.visibility = View.VISIBLE
+                holder.binding.upcomingBtn.visibility = View.GONE
+            }
         }
 
 

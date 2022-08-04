@@ -91,23 +91,23 @@ class CartBidSuccessAdapter(
         when(holder.binding.prdlist?.auctionType){
             1 -> {
                 holder.binding.prdAuctionType.text = "프리미엄"
-                holder.binding.backcard.setCardBackgroundColor(getColor(context, R.color.eyellow10))
-                holder.binding.amountcard.setCardBackgroundColor(getColor(context, R.color.eyellow20))
+//                holder.binding.backcard.setCardBackgroundColor(getColor(context, R.color.lblue10))
+//                holder.binding.amountcard.setCardBackgroundColor(getColor(context, R.color.lblue20))
             }
             2 -> {
                 holder.binding.prdAuctionType.text = "옥션"
-                holder.binding.backcard.setCardBackgroundColor(getColor(context, R.color.ered10))
-                holder.binding.amountcard.setCardBackgroundColor(getColor(context, R.color.ered20))
+//                holder.binding.backcard.setCardBackgroundColor(getColor(context, R.color.ered10))
+//                holder.binding.amountcard.setCardBackgroundColor(getColor(context, R.color.ered20))
             }
             3 -> {
                 holder.binding.prdAuctionType.text = "아울렛"
-                holder.binding.backcard.setCardBackgroundColor(getColor(context, R.color.epurple10))
-                holder.binding.amountcard.setCardBackgroundColor(getColor(context, R.color.epurple20))
+//                holder.binding.backcard.setCardBackgroundColor(getColor(context, R.color.epurple10))
+//                holder.binding.amountcard.setCardBackgroundColor(getColor(context, R.color.epurple20))
             }
             4 -> {
                 holder.binding.prdAuctionType.text = "패키지"
-                holder.binding.backcard.setCardBackgroundColor(getColor(context, R.color.lblue10))
-                holder.binding.amountcard.setCardBackgroundColor(getColor(context, R.color.lblue20))
+//                holder.binding.backcard.setCardBackgroundColor(getColor(context, R.color.lblue10))
+//                holder.binding.amountcard.setCardBackgroundColor(getColor(context, R.color.lblue20))
             }
         }
 

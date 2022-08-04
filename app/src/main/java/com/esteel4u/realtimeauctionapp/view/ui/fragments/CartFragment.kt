@@ -70,6 +70,7 @@ CartListAdapter.Interaction{
                 madapter.setData(it!!)
                 prdList = it
                 no_success_bid_lottie.visibility = View.INVISIBLE
+                no_success_bid_txt.visibility = View.INVISIBLE
                 bid_success_recview.visibility = View.VISIBLE
                 binding.sadTxt.visibility = View.GONE
                 binding.lottieImg.visibility = View.GONE
@@ -82,6 +83,7 @@ CartListAdapter.Interaction{
 
             }else{
                 no_success_bid_lottie.visibility = View.VISIBLE
+                no_success_bid_txt.visibility = View.VISIBLE
                 bid_success_recview.visibility = View.GONE
                 binding.sadTxt.visibility = View.VISIBLE
                 binding.lottieImg.visibility = View.VISIBLE
@@ -99,8 +101,10 @@ CartListAdapter.Interaction{
                 cartAdapter.setData(it)
                 if(prdList.isEmpty()){
                     binding.noSuccessBidLottie.visibility = View.VISIBLE
+                    binding.noSuccessBidTxt.visibility = View.VISIBLE
                 }else{
                     binding.noSuccessBidLottie.visibility = View.INVISIBLE
+                    binding.noSuccessBidTxt.visibility = View.INVISIBLE
                 }
 
                 binding.sadTxt.visibility = View.GONE

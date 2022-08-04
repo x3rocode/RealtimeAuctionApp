@@ -384,8 +384,42 @@ too. layout_gravity="center_horizontal" is a lot simpler.
                                     android:insetBottom="2dp"
                                     android:insetTop="3dp"
                                     android:textAllCaps="false"
-                                    android:backgroundTint="@color/lblue60"
+                                    android:backgroundTint="@color/lblue40"
                                     android:gravity="center"/>
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/closed_btn"
+                                    style="@style/MyButtonShapeRounded"
+                                    android:layout_width="@dimen/dp_250"
+                                    android:layout_height="wrap_content"
+                                    android:backgroundTint="@color/egray30"
+                                    android:fontFamily="@font/lexend_deca"
+                                    android:gravity="center"
+                                    android:insetTop="3dp"
+                                    android:insetBottom="2dp"
+                                    android:text="Closed"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/egray50"
+                                    android:textStyle="bold"
+                                    app:cornerRadius="30dp"
+                                    android:visibility="gone"/>
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/upcoming_btn"
+                                    style="@style/MyButtonShapeRounded"
+                                    android:layout_width="@dimen/dp_250"
+                                    android:layout_height="wrap_content"
+                                    android:backgroundTint="@color/egray30"
+                                    android:fontFamily="@font/lexend_deca"
+                                    android:gravity="center"
+                                    android:insetTop="3dp"
+                                    android:insetBottom="2dp"
+                                    android:text="Coming Soon!"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/egray50"
+                                    android:textStyle="bold"
+                                    app:cornerRadius="30dp"
+                                    android:visibility="gone"/>
 
                             </LinearLayout>
                         </LinearLayout>

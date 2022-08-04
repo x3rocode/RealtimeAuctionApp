@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="130dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_top"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent=".5" />
+
+        <ImageView
+            android:id="@+id/profile_img"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/dp_10"
+            android:src="@drawable/profileic"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/guideline_top"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:adjustViewBounds="true"
+            />
+
+        <TextView
+            android:id="@+id/drawer_name"
+            android:text="안녕하세요, 관리자1 님!"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:textColor="@color/egray80"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            app:layout_constraintTop_toBottomOf="@id/profile_img"/>
+
+
+        <TextView
+            android:id="@+id/drawer_sys"
+            android:text="sys00"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:textColor="@color/egray80"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            app:layout_constraintTop_toBottomOf="@id/drawer_name"/>
+
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0_1"
+            app:dividerColor="@color/egray60"
+            android:layout_alignParentBottom="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</RelativeLayout>
