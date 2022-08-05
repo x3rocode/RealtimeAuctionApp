@@ -35,43 +35,43 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             }
         }
         Log.d("ooooooooooooooooooooo", isAlarmOn.toString())
-        remoteMessage.data.isNotEmpty().let {
-            Log.d(TAG, "Message data payload: ${remoteMessage.data}")
-            if(remoteMessage.notification != null){
-                Log.d(TAG, "ssssssss: ${remoteMessage.notification!!.title}")
-                Log.d(TAG, "ssssssss: ${remoteMessage.notification!!.body}")
-            }
-
-            val title = remoteMessage.data["title"]
-            val message = remoteMessage.data["message"]
-            val tag = remoteMessage.data["tag"]
-
-            if (!isTimeAutomatic(applicationContext)) {
-                Log.d(TAG, "`Automatic Date and Time` is not enabled")
-                return
-            }
-
-            when(tag){
-                "start" -> {
-                    val isScheduled = remoteMessage.data["isScheduled"]?.toBoolean()
-                    val scheduledTime = remoteMessage.data["scheduledTime"]
-                    scheduleAlarm(scheduledTime, title, message)
-                }
-                "end" -> {
-
-                    val id = remoteMessage.data["buyuserid"]
-                    Log.d("ffffffffffffffffffffffff", id.toString())
-                    showNotification(title!!, message!!, id!!, tag)
-                }
-                "loser" -> {
-                    val id = remoteMessage.data["prdId"]
-                    showNotification(title!!, message!!, id!!, tag)
-                }
-            }
-        }
         if(isAlarmOn){
+            remoteMessage.data.isNotEmpty().let {
+                Log.d(TAG, "Message data payload: ${remoteMessage.data}")
+                if(remoteMessage.notification != null){
+                    Log.d(TAG, "ssssssss: ${remoteMessage.notification!!.title}")
+                    Log.d(TAG, "ssssssss: ${remoteMessage.notification!!.body}")
+                }
 
+                val title = remoteMessage.data["title"]
+                val message = remoteMessage.data["message"]
+                val tag = remoteMessage.data["tag"]
+
+                if (!isTimeAutomatic(applicationContext)) {
+                    Log.d(TAG, "`Automatic Date and Time` is not enabled")
+                    return
+                }
+
+                when(tag){
+                    "start" -> {
+                        val isScheduled = remoteMessage.data["isScheduled"]?.toBoolean()
+                        val scheduledTime = remoteMessage.data["scheduledTime"]
+                        showNotification(title!!, message!!, "start"!!, tag)
+                    }
+                    "end" -> {
+
+                        val id = remoteMessage.data["buyuserid"]
+                        Log.d("ffffffffffffffffffffffff", id.toString())
+                        showNotification(title!!, message!!, id!!, tag)
+                    }
+                    "loser" -> {
+                        val id = remoteMessage.data["prdId"]
+                        showNotification(title!!, message!!, id!!, tag)
+                    }
+                }
+            }
         }
+
 
     }
 

@@ -69,7 +69,7 @@ class ListFragment : Fragment() , DatePickerListener
         picker =  binding.calendarView
         picker
             .setListener(this)
-            .setDateSelectedColor(getColor(R.color.lblue30))
+            .setDateSelectedColor(getColor(R.color.lblue60))
             .setDateSelectedTextColor(Color.WHITE)
             .setMonthAndYearTextColor(Color.DKGRAY)
             .setTodayButtonTextColor(getColor(R.color.egray70))

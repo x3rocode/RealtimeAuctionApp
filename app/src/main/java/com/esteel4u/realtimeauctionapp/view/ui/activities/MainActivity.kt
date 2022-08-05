@@ -320,7 +320,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 var a : UserData
                 dataStore.user.collect{
                     it.setAlarm = checked.toString()
-                    dataStore.setUserData(it)
+
                 }
 
             }

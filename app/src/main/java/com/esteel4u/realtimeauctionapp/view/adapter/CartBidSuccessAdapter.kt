@@ -74,7 +74,6 @@ class CartBidSuccessAdapter(
     }
 
 
-    @ColorRes
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
         val product = productList[position]
@@ -110,8 +109,14 @@ class CartBidSuccessAdapter(
         }
 
         val myFormatter = DecimalFormat("###,###")
+
         var price = holder.binding.prdlist?.bidPrice!! * holder.binding.prdlist?.prdWgt!!
+        val formattedWgt: String = myFormatter.format(holder.binding.prdlist!!.prdWgt) + "Kg"
+        val formattedhighPrice: String = myFormatter.format(holder.binding.prdlist!!.bidPrice)
         val formattedPrice: String = myFormatter.format(price)
+        holder.binding.prdBid.text = "₩$formattedhighPrice"
+        holder.binding.prdPrdwgt.text = formattedWgt
+
         holder.binding.aucBid.text = "₩$formattedPrice"
 
 //        expandItem(holder, product == expandedModel, animate = false)

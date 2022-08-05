@@ -26,7 +26,7 @@ class MainViewPagerAdapter(
             3 -> return LikeFragment.newInstance(position)
         }
 
-        return MyPageFragment()
+        return HomeFragment()
     }
 
 }

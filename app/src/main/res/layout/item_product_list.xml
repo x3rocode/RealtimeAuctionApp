@@ -28,8 +28,7 @@ too. layout_gravity="center_horizontal" is a lot simpler.
             android:layout_gravity="center_horizontal"
             android:orientation="vertical"
             app:cardCornerRadius="10dp"
-            app:cardElevation=".5dp"
-            app:cardMaxElevation="5dp"
+            app:cardElevation="2dp"
             app:cardBackgroundColor="@android:color/white"
             tools:layout_marginLeft="20dp"
             tools:layout_marginRight="20dp"
@@ -384,7 +383,7 @@ too. layout_gravity="center_horizontal" is a lot simpler.
                                     android:insetBottom="2dp"
                                     android:insetTop="3dp"
                                     android:textAllCaps="false"
-                                    android:backgroundTint="@color/lblue40"
+                                    android:backgroundTint="@color/lblue60"
                                     android:gravity="center"/>
 
                                 <com.google.android.material.button.MaterialButton
