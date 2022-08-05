@@ -84,6 +84,8 @@ class AuctionRepository(val lifecycleOwner: LifecycleOwner) {
             myDocu.update(mapOf(Pair("highestBuyUserId", auth.uid!!), Pair("bidPrice", price), Pair("buyUserToken", token!!)))
         })
 
+        FirebaseMessaging.getInstance().subscribeToTopic(prdId!! + "bid")
+
         //add user attend auction list array
         val userDoc = db.collection("users").document(auth.uid!!).asLiveData<UserData>()
         userDoc.update("attendAuctionList", FieldValue.arrayUnion(prdId))
@@ -131,6 +133,7 @@ class AuctionRepository(val lifecycleOwner: LifecycleOwner) {
                                     if(it.productId !== prdid){
                                         auctiondata!!.remove(it)
                                     }
+
                                 }
                                 Log.d("aaaaaaaa", auctiondata.toString())
                                 userAttendAuctionList.postValue(auctiondata)

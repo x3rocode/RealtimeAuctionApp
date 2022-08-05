@@ -2,14 +2,12 @@ package com.esteel4u.realtimeauctionapp.view.adapter
 
 import android.animation.ValueAnimator
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.core.animation.doOnEnd
 import androidx.core.animation.doOnStart
-import androidx.core.content.ContextCompat
 import androidx.core.view.doOnLayout
 import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
@@ -23,12 +21,10 @@ import com.esteel4u.realtimeauctionapp.model.data.AuctionData
 import com.esteel4u.realtimeauctionapp.view.utils.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.returnz3ro.messystem.service.model.datastore.DataStoreModule
-import kotlinx.android.synthetic.main.activity_login.view.*
+import com.esteel4u.realtimeauctionapp.model.datastore.DataStoreModule
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.joda.time.field.PreciseDurationDateTimeField
 import java.text.DecimalFormat
 
 

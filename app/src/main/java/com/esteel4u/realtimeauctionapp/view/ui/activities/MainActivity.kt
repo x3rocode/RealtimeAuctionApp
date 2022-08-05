@@ -8,29 +8,33 @@ import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
-import android.view.MotionEvent
 import android.view.View
-import android.widget.Toast
+import android.widget.LinearLayout
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.ViewModelProvider
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.balysv.materialmenu.MaterialMenuDrawable
+import com.bitvale.switcher.SwitcherX
 import com.esteel4u.realtimeauctionapp.R
 import com.esteel4u.realtimeauctionapp.databinding.ActivityFullAnimBinding
 import com.esteel4u.realtimeauctionapp.databinding.ActivityMainBinding
+import com.esteel4u.realtimeauctionapp.model.data.UserData
 import com.esteel4u.realtimeauctionapp.view.adapter.MainViewPagerAdapter
+import com.esteel4u.realtimeauctionapp.viewmodel.LoginViewModel
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.nineoldandroids.view.ViewHelper
-import com.returnz3ro.messystem.service.model.datastore.DataStoreModule
-import com.returnz3ro.messystem.service.model.datastore.DataStoreModule.Companion.userName
+import com.esteel4u.realtimeauctionapp.model.datastore.DataStoreModule
+import com.esteel4u.realtimeauctionapp.model.datastore.DataStoreModule.Companion.setAlarm
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.drawer_header.*
+import kotlinx.android.synthetic.main.drawer_switch.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.jetbrains.annotations.NotNull
 
 
 @SuppressLint("MissingPermission")
@@ -38,32 +42,42 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private var auth = Firebase.auth
     private lateinit var binding: ActivityMainBinding
+    private lateinit var viewModel: LoginViewModel
     private lateinit var sd: SweetAlertDialog
     private lateinit var barDrawerToggle: ActionBarDrawerToggle
     private lateinit var materialMenu: MaterialMenuDrawable
     private var isDrawerOpened = false
     private lateinit var dataStore: DataStoreModule
+    private lateinit var switch: SwitcherX
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+        viewModel = ViewModelProvider(this, LoginViewModel.Factory(this, this)).get(LoginViewModel::class.java)
 
         Log.d(ContentValues.TAG, "*********mainactivity create***********")
         setContentView(binding.root)
 
+
         setViewPager()
         setNavigation()
-        checkIsIntented()
         getUserInfo()
+        initializeDefaultFragment(savedInstanceState,0);
+        setAlarmOnOffSwitch()
+
+        checkIsIntented()
     }
 
     private fun getUserInfo(){
         // get userinfo from data store
-        dataStore = DataStoreModule(this)
+        dataStore = DataStoreModule(applicationContext)
         CoroutineScope(Dispatchers.Main).launch {
             dataStore.user.collect{
+                Log.d("ddddddddddddddd", it.toString())
                 drawer_name.text = "안녕하세요, " + it.userName + "님!"
                 drawer_sys.text = it.gcsCompCode
+                alarm_switcher.setChecked(it.setAlarm!!.toBoolean())
             }
         }
     }
@@ -136,28 +150,54 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawer_layout.setScrimColor(android.R.color.transparent)
 
         nav_view.setNavigationItemSelectedListener(this)
-
-
+         var a = nav_view.menu.findItem(R.id.alarm_set).actionView as LinearLayout
+        switch = a.getChildAt(0) as SwitcherX
+    }
+    private fun initializeDefaultFragment(savedInstanceState: Bundle?, itemIndex: Int) {
+        if (savedInstanceState == null) {
+            val menuItem: MenuItem = nav_view.getMenu().getItem(itemIndex).setChecked(true)
+            onNavigationItemSelected(menuItem)
+        }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
+            R.id.frg_home -> {
+                view_pager.currentItem = 0
+                view_pager.setCurrentItem(0, true)
+                bottom_bar.selectTabAt(0, true)
+            }
+            R.id.frg_list -> {
+                view_pager.currentItem = 1
+                view_pager.setCurrentItem(1, true)
+                bottom_bar.selectTabAt(1, true)
+            }
+            R.id.frg_cart -> {
+                view_pager.currentItem = 2
+                view_pager.setCurrentItem(2, true)
+                bottom_bar.selectTabAt(2, true)
+            }
+            R.id.frg_like -> {
+                view_pager.currentItem = 3
+                view_pager.setCurrentItem(3, true)
+                bottom_bar.selectTabAt(3, true)
+            }
+
             R.id.alarm_set -> {
 
             }
             R.id.logout_set -> {
-                auth.signOut()
                 CoroutineScope(Dispatchers.Main).launch {
                     dataStore.clearData()
                 }
-                startActivity(Intent(this, LoginActivity::class.java))
+                viewModel.logout()
                 finish()
             }
             R.id.about_set -> {
                 reciveInput("about", "")
             }
         }
-        return false
+        return true
     }
 
     private fun setViewPager(){
@@ -168,15 +208,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             )
         view_pager.offscreenPageLimit = 3
         bottom_bar.setupWithViewPager2(view_pager)
+        view_pager.setOnScrollChangeListener { view, i, i2, i3, i4 ->
+
+            val menuItem: MenuItem = nav_view.getMenu().getItem(view_pager.currentItem).setChecked(true)
+            onNavigationItemSelected(menuItem)
+        }
     }
 
     override fun onNewIntent(intent: Intent?) {
-
         val tag = intent!!.getStringExtra("tag")
         val id = intent!!.getStringExtra("buyuserid")
         Log.d("idiiiiiiiiiiiiiiiiii", "22")
         Log.d("idiiiiiiiiiiiiiiiiii", tag.toString())
-        reciveInput(tag!!, id!!)
+        if(tag != "start")
+            reciveInput(tag!!, id!!)
         super.onNewIntent(intent)
     }
 
@@ -264,6 +309,24 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 dialog.show()
             }
         }
+    }
+
+
+    private fun setAlarmOnOffSwitch() {
+
+        switch.setOnCheckedChangeListener { checked ->
+            viewModel.setAlarmOnOff(checked.toString())
+            CoroutineScope(Dispatchers.Main).launch {
+                var a : UserData
+                dataStore.user.collect{
+                    it.setAlarm = checked.toString()
+                    dataStore.setUserData(it)
+                }
+
+            }
+        }
+
+
     }
 
 

@@ -4,8 +4,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.ColorRes
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,7 +11,7 @@ import com.esteel4u.realtimeauctionapp.R
 import com.esteel4u.realtimeauctionapp.model.data.ProductData
 import com.esteel4u.realtimeauctionapp.databinding.ItemCartBidSuccessListBinding
 import com.esteel4u.realtimeauctionapp.view.utils.*
-import com.returnz3ro.messystem.service.model.datastore.DataStoreModule
+import com.esteel4u.realtimeauctionapp.model.datastore.DataStoreModule
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

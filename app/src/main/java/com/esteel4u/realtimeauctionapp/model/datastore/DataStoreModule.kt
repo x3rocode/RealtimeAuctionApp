@@ -1,4 +1,4 @@
-package com.returnz3ro.messystem.service.model.datastore
+package com.esteel4u.realtimeauctionapp.model.datastore
 
 import android.content.Context
 import androidx.datastore.preferences.core.edit
@@ -20,6 +20,7 @@ class DataStoreModule (private val context : Context){
         val userId = stringPreferencesKey("userId")
         val gcsCompCode = stringPreferencesKey("gcsCompCode")
         val userName = stringPreferencesKey("userName")
+        val setAlarm = stringPreferencesKey("setAlarm")
     }
     // stringKey 키 값과 대응되는 값 반환
     val user : Flow<UserData> = context.dataStore.data
@@ -36,6 +37,7 @@ class DataStoreModule (private val context : Context){
                 preferences[userId] ?:"",
                 preferences[gcsCompCode] ?:"",
                 preferences[userName] ?:"",
+                preferences[setAlarm] ?: ""
             )
 
 
@@ -48,6 +50,7 @@ class DataStoreModule (private val context : Context){
             preferences[userId] = user.userId!!
             preferences[gcsCompCode] = user.gcsCompCode!!
             preferences[userName] = user.userName!!
+            preferences[setAlarm] = user.setAlarm!!
         }
     }
 
@@ -56,4 +59,5 @@ class DataStoreModule (private val context : Context){
             it.clear()
         }
     }
+
 }

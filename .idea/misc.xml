@@ -10,6 +10,8 @@
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/drawable/bg_card2.xml" value="0.225" />
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/drawable/bottomline.xml" value="0.1955" />
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/drawable/default_background_rounded_rect.xml" value="0.2555" />
+        <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/drawable/drawer_selector.xml" value="0.228" />
+        <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/drawable/drawer_text_color_selector.xml" value="0.228" />
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/drawable/login_rounded_shape.xml" value="0.2555" />
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/drawable/main_gradient_background.xml" value="0.2555" />
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/drawable/roundedsquare.xml" value="0.2555" />
@@ -21,6 +23,7 @@
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/activity_onboarding.xml" value="0.2" />
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/calendar_item.xml" value="0.1042611060743427" />
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/drawer_header.xml" value="0.5" />
+        <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/drawer_switch.xml" value="0.5" />
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/first_special_selected_calendar_item.xml" value="0.1042611060743427" />
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/fragment_cart.xml" value="0.14280047600158668" />
         <entry key="..\:/Users/ICTUSER/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/fragment_home.xml" value="0.22" />
@@ -105,7 +108,7 @@
     </option>
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" project-jdk-name="11" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_16" project-jdk-name="11" project-jdk-type="JavaSDK" />
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>

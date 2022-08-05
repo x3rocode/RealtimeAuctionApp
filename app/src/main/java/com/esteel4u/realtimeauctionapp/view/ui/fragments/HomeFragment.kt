@@ -29,7 +29,7 @@ import com.esteel4u.realtimeauctionapp.view.adapter.ViewBindingSampleAdapter
 import com.esteel4u.realtimeauctionapp.view.adapter.animationPlaybackSpeed
 import com.esteel4u.realtimeauctionapp.view.ui.activities.BidActivity
 import com.esteel4u.realtimeauctionapp.viewmodel.ProductViewModel
-import com.returnz3ro.messystem.service.model.datastore.DataStoreModule
+import com.esteel4u.realtimeauctionapp.model.datastore.DataStoreModule
 import com.zhpan.bannerview.constants.PageStyle
 import com.zhpan.bannerview.utils.BannerUtils
 import com.zhpan.indicator.enums.IndicatorStyle

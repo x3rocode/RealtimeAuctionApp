@@ -6,11 +6,13 @@ import javax.inject.Singleton
 
 @Data
 @Singleton
+
 data class UserData(
     var uid: String? = null,
     var userId: String? = null,
     var gcsCompCode: String? = null,
     var userName: String? = null,
+    var setAlarm: String? = null,
     var attendAuctionList: List<String>?  = null
 ): FirestoreModel(){
 //    companion object {

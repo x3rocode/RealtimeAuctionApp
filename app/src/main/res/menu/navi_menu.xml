@@ -1,22 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/alarm_set"
-        android:icon="@drawable/alarmic"
-        style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
-        android:title="알림 설정"
-        />
-    <item
-        android:id="@+id/logout_set"
-        android:icon="@drawable/logoutic"
-        style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
-        android:title="로그아웃"
-        />
-    <item
-        android:id="@+id/about_set"
-        android:icon="@drawable/infoic"
-        style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
-        android:title="정보"
-        />
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/frg_home"
+            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            android:icon="@drawable/homeic"
+            android:title="홈" />
+        <item
+            android:id="@+id/frg_list"
+            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            android:icon="@drawable/calendaric"
+            android:title="경매 일정" />
+        <item
+            android:id="@+id/frg_cart"
+            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            android:icon="@drawable/shoppingic"
+            android:title="장바구니" />
+        <item
+            android:id="@+id/frg_like"
+            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            android:icon="@drawable/heartic"
+            android:title="위시리스트" />
+
+    </group>
+
+    <item android:title="Setting">
+        <menu>
+            <item
+                android:id="@+id/alarm_set"
+                style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+                android:icon="@drawable/alarmic"
+                app:actionLayout="@layout/drawer_switch"
+                android:title="알림 설정" />
+            <item
+                android:id="@+id/logout_set"
+                style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+                android:icon="@drawable/logoutic"
+                android:title="로그아웃" />
+            <item
+                android:id="@+id/about_set"
+                style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+                android:icon="@drawable/questionic"
+                android:title="정보" />
+
+        </menu>
+    </item>
 
 </menu>

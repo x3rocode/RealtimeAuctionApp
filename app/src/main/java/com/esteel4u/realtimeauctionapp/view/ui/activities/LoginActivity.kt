@@ -12,11 +12,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.esteel4u.realtimeauctionapp.databinding.ActivityLoginBinding
+import com.esteel4u.realtimeauctionapp.model.data.UserData
 import com.esteel4u.realtimeauctionapp.viewmodel.LoginViewModel
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.returnz3ro.messystem.service.model.datastore.DataStoreModule
+import com.esteel4u.realtimeauctionapp.model.datastore.DataStoreModule
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -24,19 +25,26 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var activityLoginBinding: ActivityLoginBinding
     private lateinit var viewModel: LoginViewModel
     private lateinit var datastore: DataStoreModule
+    private var user: UserData = UserData()
     private var auth = Firebase.auth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activityLoginBinding = DataBindingUtil.setContentView(this, com.esteel4u.realtimeauctionapp.R.layout.activity_login)
         setupWindowAnimations()
-        datastore = DataStoreModule(this)
+        datastore = DataStoreModule(applicationContext)
+
         // Setting viewmodel
-        viewModel = ViewModelProvider(this, LoginViewModel.Factory(this)).get(LoginViewModel::class.java)
+        viewModel = ViewModelProvider(this, LoginViewModel.Factory(applicationContext, this)).get(LoginViewModel::class.java)
         activityLoginBinding.lifecycleOwner = this
 
         viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
 
+//        if(user.uid == null){
+//            val intent = Intent(this, MainActivity::class.java)
+//            startActivity(intent)
+//            finish()
+//        }
         viewModel.isSignIn.observe(this, Observer{
             if (it) {
                 viewModel.getLoggedInUserInfo().observe(this, Observer{ userInfo ->
@@ -58,6 +66,8 @@ class LoginActivity : AppCompatActivity() {
                 sd.show()
             }
         })
+
+
         activityLoginBinding.loginBtn.setOnClickListener{
             login(activityLoginBinding.inputId.text.toString(), activityLoginBinding.inputPw.text.toString())
         }

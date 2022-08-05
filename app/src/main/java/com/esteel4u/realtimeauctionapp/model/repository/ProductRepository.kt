@@ -247,6 +247,9 @@ class ProductRepository(val lifecycleOwner: LifecycleOwner) {
                     if(udata.data !== null){
                         if(udata.data!!.attendAuctionList !== null){
 
+                            udata.data!!.attendAuctionList!!.forEach {
+                                FirebaseMessaging.getInstance().subscribeToTopic(it+"bid")
+                            }
                             productUserBidList.postValue(prddata.filter {
                                 udata.data!!.attendAuctionList!!.contains(it.prdId)
                             })

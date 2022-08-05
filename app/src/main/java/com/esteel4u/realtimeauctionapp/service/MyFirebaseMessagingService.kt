@@ -5,21 +5,36 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.util.Log
+import com.esteel4u.realtimeauctionapp.model.datastore.DataStoreModule
 import com.esteel4u.realtimeauctionapp.service.ScheduledWorker.Companion.NOTIFICATION_MESSAGE
 import com.esteel4u.realtimeauctionapp.service.ScheduledWorker.Companion.NOTIFICATION_TITLE
 import com.esteel4u.realtimeauctionapp.utils.NotificationUtil
 import com.esteel4u.realtimeauctionapp.utils.isTimeAutomatic
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import kotlinx.android.synthetic.main.drawer_header.*
+import kotlinx.android.synthetic.main.drawer_switch.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.properties.Delegates
 
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
+    private lateinit var dataStore: DataStoreModule
+    private var isAlarmOn = true
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         // Check if message contains a data payload.
-
+        dataStore = DataStoreModule(applicationContext)
+        CoroutineScope(Dispatchers.Main).launch {
+            dataStore.user.collect{
+                isAlarmOn = it.setAlarm.toBoolean()
+            }
+        }
+        Log.d("ooooooooooooooooooooo", isAlarmOn.toString())
         remoteMessage.data.isNotEmpty().let {
             Log.d(TAG, "Message data payload: ${remoteMessage.data}")
             if(remoteMessage.notification != null){
@@ -54,6 +69,10 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                 }
             }
         }
+        if(isAlarmOn){
+
+        }
+
     }
 
     private fun scheduleAlarm(
