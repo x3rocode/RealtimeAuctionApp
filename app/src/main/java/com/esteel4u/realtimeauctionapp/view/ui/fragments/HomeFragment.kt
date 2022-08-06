@@ -85,7 +85,6 @@ class HomeFragment  : Fragment(),
         setBanner()
         initRecyclerView()
 
-
         viewModel.getTodayPrdList().observe(viewLifecycleOwner, Observer{
             prdList = it
             todayAdapter.setData(prdList!!)

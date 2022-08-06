@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
@@ -16,487 +15,137 @@
             type="com.esteel4u.realtimeauctionapp.model.data.AuctionData" />
     </data>
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:backgroundTint="@color/white"
+    android:orientation="vertical">
 
-    <com.esteel4u.realtimeauctionapp.view.utils.CustomRelativeLayout
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
+        android:layout_height="wrap_content">
 
-        <androidx.core.widget.NestedScrollView
-            android:id="@+id/nsScroll"
-            android:layout_width="match_parent"
-            android:layout_alignParentBottom="true"
-            android:layout_height="match_parent">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignParentBottom="true"
-                android:isScrollContainer="true">
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guideline_top"
-                    android:layout_width="wrap_content"
-                    android:layout_height="1dp"
-                    android:orientation="horizontal"
-                    app:layout_constraintGuide_percent=".1" />
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guideline_bottom"
-                    android:layout_width="wrap_content"
-                    android:layout_height="1dp"
-                    android:orientation="horizontal"
-                    app:layout_constraintGuide_percent=".9" />
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guideline_right"
-                    android:layout_width="wrap_content"
-                    android:layout_height="1dp"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_percent=".9" />
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guideline_left"
-                    android:layout_width="wrap_content"
-                    android:layout_height="1dp"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_percent=".1" />
-
-
-                <ImageButton
-                    android:id="@+id/prev_btn"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-
-                    android:adjustViewBounds="true"
-                    android:backgroundTint="@android:color/transparent"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ic_round_keyboard_arrow_left_24"
-
-                    app:layout_constraintBottom_toTopOf="@id/guideline_top"
-                    app:layout_constraintEnd_toEndOf="parent"
-
-                    app:layout_constraintHeight_percent=".07"
-                    app:layout_constraintHorizontal_bias="0.02"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias=".8"
-                    app:layout_constraintWidth_percent=".15"
-                    app:tint="@color/lblue60" />
-
-                <TextView
-                    android:id="@+id/detail_txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lexend_deca"
-                    android:text="입찰하기"
-                    android:textColor="@color/egray80"
-                    android:textSize="@dimen/dp_25"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@id/guideline_top"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/prev_btn" />
-
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/logoimg"
-                    android:layout_width="@dimen/dp_300"
-                    android:layout_height="@dimen/dp_150"
-                    android:layout_marginStart="4dp"
-                    android:backgroundTint="@color/egray20"
-                    app:cardCornerRadius="15dp"
-                    app:cardElevation="3dp"
-                    app:cardPreventCornerOverlap="true"
-                    app:cardUseCompatPadding="true"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/guideline_top">
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:fontFamily="@font/lexend_deca"
-                        android:text="@{bidinfo.bidPrice + `₩ / KG`}"
-                        android:textColor="@color/egray80"
-                        android:textSize="@dimen/dp_30"
-                        android:textStyle="bold" />
-                    <!--        <ImageView-->
-                    <!--            android:id="@+id/premium_img"-->
-                    <!--            android:layout_width="match_parent"-->
-                    <!--            android:layout_height="match_parent"-->
-                    <!--            android:adjustViewBounds="true"-->
-                    <!--            android:scaleType="centerCrop"-->
-                    <!--            android:src="@drawable/premiumbg" />-->
-
-                </androidx.cardview.widget.CardView>
-
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/time_card"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/dp_30"
-                    android:layout_marginTop="@dimen/dp_m_30"
-                    app:cardCornerRadius="@dimen/dp_28"
-                    app:cardElevation="@dimen/dp_3"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/logoimg">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingHorizontal="@dimen/dp_20">
-
-                        <com.airbnb.lottie.LottieAnimationView
-                            android:layout_width="@dimen/dp_20"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginRight="@dimen/dp_8"
-                            android:clipToOutline="false"
-                            android:scaleType="centerCrop"
-                            app:lottie_autoPlay="true"
-                            app:lottie_loop="true"
-                            app:lottie_rawRes="@raw/lottie_hourglass" />
-
-                        <cn.iwgang.countdownview.CountdownView
-                            android:id="@+id/timmer"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            app:isHideTimeBackground="true"
-                            app:isShowHour="true"
-                            app:isShowMinute="true"
-                            app:isShowSecond="true"
-                            app:timeTextSize="@dimen/dp_15"
-
-                            />
-
-                    </LinearLayout>
-
-
-                </androidx.cardview.widget.CardView>
-
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/product_info"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_20"
-                    android:backgroundTint="@color/egray20"
-                    app:cardCornerRadius="@dimen/dp_28"
-                    app:cardElevation="0dp"
-                    app:contentPadding="@dimen/dp_20"
-                    app:layout_constraintEnd_toEndOf="@id/guideline_right"
-                    app:layout_constraintStart_toStartOf="@id/guideline_left"
-                    app:layout_constraintTop_toBottomOf="@id/time_card">
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/title_txt"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/lexend_deca"
-                            android:text="상세 정보"
-                            android:textColor="@color/egray80"
-                            android:textSize="@dimen/dp_25"
-                            android:textStyle="bold" />
-
-                        //제품번호
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/dp_28"
-                            android:layout_marginTop="@dimen/dp_10"
-                            android:background="@drawable/bottomline"
-                            android:gravity="center_vertical"
-
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:fontFamily="@font/lexend_deca"
-                                android:text="제품 번호"
-                                android:textColor="@color/egray50"
-                                android:textSize="@dimen/dp_12" />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:fontFamily="@font/nanum_barun_gothic"
-                                android:gravity="right"
-                                android:text="@{prdlist.prdNo}"
-                                android:textColor="@color/egray80"
-                                android:textSize="@dimen/dp_12" />
-
-                        </LinearLayout>
-
-
-                        //제품Id
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/dp_28"
-                            android:layout_marginTop="@dimen/dp_10"
-                            android:background="@drawable/bottomline"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="4"
-                                android:fontFamily="@font/lexend_deca"
-                                android:text="제품 ID"
-                                android:textColor="@color/egray50"
-                                android:textSize="@dimen/dp_12" />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="6"
-                                android:fontFamily="@font/nanum_barun_gothic"
-                                android:gravity="right"
-                                android:text="@{prdlist.prdId}"
-                                android:textColor="@color/egray80"
-                                android:textSize="@dimen/dp_12" />
-
-                        </LinearLayout>
-
-
-                        //품명
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/dp_28"
-                            android:layout_marginTop="@dimen/dp_10"
-                            android:background="@drawable/bottomline"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:fontFamily="@font/lexend_deca"
-                                android:text="품명"
-                                android:textColor="@color/egray50"
-                                android:textSize="@dimen/dp_12" />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:fontFamily="@font/nanum_barun_gothic"
-                                android:gravity="right"
-                                android:text="@{prdlist.prdName}"
-                                android:textColor="@color/egray80"
-                                android:textSize="@dimen/dp_12" />
-
-                        </LinearLayout>
-
-                        //규격
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/dp_28"
-                            android:layout_marginTop="@dimen/dp_10"
-                            android:background="@drawable/bottomline"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="4"
-                                android:fontFamily="@font/lexend_deca"
-                                android:text="규격"
-                                android:textColor="@color/egray50"
-                                android:textSize="@dimen/dp_12" />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="6"
-                                android:fontFamily="@font/nanum_barun_gothic"
-                                android:gravity="right"
-                                android:text="@{prdlist.substSpec}"
-                                android:textColor="@color/egray80"
-                                android:textSize="@dimen/dp_12" />
-
-                        </LinearLayout>
-
-
-                        //두께
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/dp_28"
-                            android:layout_marginTop="@dimen/dp_10"
-                            android:background="@drawable/bottomline"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="4"
-                                android:fontFamily="@font/lexend_deca"
-                                android:text="두께"
-                                android:textColor="@color/egray50"
-                                android:textSize="@dimen/dp_12" />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="6"
-                                android:fontFamily="@font/nanum_barun_gothic"
-                                android:gravity="right"
-                                android:text="@{prdlist.prdThk.toString()}"
-                                android:textColor="@color/egray80"
-                                android:textSize="@dimen/dp_12" />
-
-                        </LinearLayout>
-
-                        //폭
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/dp_28"
-                            android:layout_marginTop="@dimen/dp_10"
-                            android:background="@drawable/bottomline"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="4"
-                                android:fontFamily="@font/lexend_deca"
-                                android:text="폭"
-                                android:textColor="@color/egray50"
-                                android:textSize="@dimen/dp_12" />
-
-                            <TextView
-                                android:id="@+id/prdPrdwth"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="6"
-                                android:fontFamily="@font/nanum_barun_gothic"
-                                android:gravity="right"
-                                android:textColor="@color/egray80"
-                                android:textSize="@dimen/dp_12" />
-
-                        </LinearLayout>
-
-                        //무게
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/dp_28"
-                            android:layout_marginTop="@dimen/dp_10"
-                            android:background="@drawable/bottomline"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="4"
-                                android:fontFamily="@font/lexend_deca"
-                                android:text="무게"
-                                android:textColor="@color/egray50"
-                                android:textSize="@dimen/dp_12" />
-
-                            <TextView
-                                android:id="@+id/prdPrdwgt"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="6"
-                                android:fontFamily="@font/nanum_barun_gothic"
-                                android:gravity="right"
-                                android:textColor="@color/egray80"
-                                android:textSize="@dimen/dp_12" />
-
-                        </LinearLayout>
-
-                        //생산지
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/dp_28"
-                            android:layout_marginTop="@dimen/dp_10"
-                            android:background="@drawable/bottomline"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="4"
-                                android:fontFamily="@font/lexend_deca"
-                                android:text="생산지"
-                                android:textColor="@color/egray50"
-                                android:textSize="@dimen/dp_12" />
-
-                            <TextView
-                                android:id="@+id/works"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="6"
-                                android:fontFamily="@font/nanum_barun_gothic"
-                                android:gravity="right"
-                                android:textColor="@color/egray80"
-                                android:textSize="@dimen/dp_12" />
-
-                        </LinearLayout>
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.core.widget.NestedScrollView>
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/input_bid_lay"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        <com.andrefrsousa.supertoolbar.SuperToolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/egray40"
-            android:theme="@style/ThemeOverlay.TextInputLayout.TextView"
-            app:boxBackgroundColor="@color/egray20"
-            app:counterMaxLength="10"
-            app:errorEnabled="false"
-            android:layout_alignParentBottom="true"
-            app:hintAnimationEnabled="true"
-            app:hintEnabled="false"
-            app:hintTextColor="@color/lblue30">
+            android:background="@android:color/white"
+            android:minHeight="?attr/actionBarSize"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:superToolbar_centerTitle="true"
+            app:superToolbar_useLightFont="true">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/input_bid"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:autoSizeTextType="uniform"
+            <ImageButton
+                android:id="@+id/prev_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_gravity="left"
+                android:adjustViewBounds="true"
+                android:backgroundTint="@android:color/transparent"
+                android:src="@drawable/ic_round_keyboard_arrow_left_24"
+                app:tint="@color/lblue60" />
+
+
+            <TextView
+                android:id="@+id/detail_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:fontFamily="@font/lexend_deca"
-                android:hint="직접 입찰해 보세요!"
-                android:inputType="phone"
-                android:singleLine="true" />
+                android:text="입찰하기"
+                android:textColor="@color/egray80"
+                android:textSize="@dimen/dp_25"
+                android:textStyle="bold" />
 
-        </com.google.android.material.textfield.TextInputLayout>
-    </com.esteel4u.realtimeauctionapp.view.utils.CustomRelativeLayout>
+        </com.andrefrsousa.supertoolbar.SuperToolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
 
 
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/backgroundshape1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/backgroundpattern"
+            />
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/bidfragment"
+            class="com.esteel4u.realtimeauctionapp.view.ui.fragments.BidFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+        <LinearLayout
+            android:id="@+id/bottom_bid_lay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/white"
+            android:elevation="@dimen/dp_20"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/dp_25"
+            android:paddingTop="@dimen/dp_10"
+            android:paddingBottom="@dimen/dp_30">
+
+
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_bid_lay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/dp_5"
+                android:layout_weight=".7"
+                android:textColorHint="@color/egray40"
+                app:counterMaxLength="10"
+                app:errorEnabled="false">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_bid"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:autoSizeTextType="uniform"
+                    android:hint="직접 입찰해 보세요!"
+                    android:typeface="serif"
+                    android:inputType="numberPassword"
+                    android:backgroundTint="@android:color/transparent"
+                    android:fontFamily="@font/lexend_deca" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/bid_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".2"
+                android:insetLeft="0dp"
+                android:insetTop="0dp"
+                android:insetRight="0dp"
+                android:insetBottom="0dp"
+                android:padding="0dp"
+                android:text="확인"
+                app:cb_color="@color/lblue60"
+                app:cb_pressedRingWidth="1dp"
+                app:iconPadding="0dp"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Circle"
+
+                app:strokeWidth="@dimen/dp_0_5" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>
 </layout>

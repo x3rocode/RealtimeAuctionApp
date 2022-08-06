@@ -1,26 +1,33 @@
 package com.esteel4u.realtimeauctionapp.view.ui.activities
 
+import android.graphics.Rect
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
-import android.view.View
-import android.view.Window
-import android.view.WindowManager
+import android.view.MotionEvent
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import cn.pedant.SweetAlert.SweetAlertDialog
+import com.esteel4u.realtimeauctionapp.R
 import com.esteel4u.realtimeauctionapp.databinding.ActivityBidBinding
+import com.esteel4u.realtimeauctionapp.view.ui.fragments.BidFragment
 import com.esteel4u.realtimeauctionapp.viewmodel.AuctionViewModel
 import com.esteel4u.realtimeauctionapp.viewmodel.ProductViewModel
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.activity_bid.*
 import java.text.DecimalFormat
 import java.util.*
+
 
 class BidActivity: AppCompatActivity() {
 
     private lateinit var binding: ActivityBidBinding
     private var viewModel: ProductViewModel? = null
     private var auctionViewModel: AuctionViewModel? = null
+    private lateinit var fm : FragmentManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,40 +38,21 @@ class BidActivity: AppCompatActivity() {
 
 
 
+
         var pid = intent.getStringExtra("prddata")
+        Log.d("ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ", pid!!)
+        val newFragment = BidFragment.newInstance(pid!!)
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.bidfragment, newFragment, "myTag")
+        transaction.addToBackStack(null)
+        transaction.commit()
 
-        binding.timmer.setOnCountdownEndListener {
-            val sd = SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
-            sd.setTitleText("Oops...")
-            sd.setContentText("경매가 종료되었어요")
-            sd.setCancelable(false)
-            sd.setConfirmText("OK")
-            sd.setCanceledOnTouchOutside(false)
-            sd.setConfirmClickListener {
+        input_bid.transformationMethod = null
 
-                viewModel!!.setBidPrice(binding.bidinfo!!.bidPrice!!, pid!!)
-                viewModel!!.setBuyUser(pid!!)
-
-                finish()
-            }
-            sd.show()
-        }
         viewModel!!.getPrdDataByPid(pid!!).observe(this, Observer{
-            binding.timmer.start(it!!.endDate!!.toDate().time - Date().time)
 
             binding.prdlist = it
 
-            when(binding.prdlist!!.worksCode){
-                "K" -> binding.works.text = "광양"
-                "P" -> binding.works.text = "포항"
-            }
-
-            val myFormatter = DecimalFormat("###,###")
-            val formattedWgt: String = myFormatter.format(binding.prdlist!!.prdWgt) + "Kg"
-            val formattedWth: String = myFormatter.format(binding.prdlist!!.prdWth)
-
-            binding.prdPrdwth.text = formattedWth
-            binding.prdPrdwgt.text = formattedWgt
         })
 
         auctionViewModel!!.getAuctionInfo(pid!!).observe(this, Observer{
@@ -75,49 +63,22 @@ class BidActivity: AppCompatActivity() {
 
         })
 
-
-        binding.inputBid.setOnKeyListener { view, i, keyEvent ->
+        input_bid.setOnKeyListener { view, i, keyEvent ->
             when(i){
                 KeyEvent.KEYCODE_ENTER -> {
                     if(keyEvent.action == KeyEvent.ACTION_DOWN){
-                        if(binding.bidinfo!!.highestBuyUserId?.isEmpty() == true){
-                            //내가 첫 입찰자
-                            auctionViewModel!!.setBidFirst(binding.inputBid.text.toString().toInt(), pid)
-                        }else{
+                        bid(pid)
 
-                            //이전에 입찰햇던 살람이 나야
-                            if(binding.bidinfo!!.highestBuyUserId!! == FirebaseAuth.getInstance().uid){
-                                val sd = SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
-                                sd.setTitleText("Oops...")
-                                sd.setContentText("내가 현재 최고가 입찰자에요!")
-                                sd.setCancelable(true)
-                                sd.setConfirmText("Retry")
-
-                                sd.setCanceledOnTouchOutside(true);
-                                sd.show()
-                            } else {
-                                //이전에 입찰햇던 살람이 나가 아니야
-                                //입력한 값이 더 클경우
-                                if(binding.inputBid.text.toString().toInt() >= binding.bidinfo!!.bidPrice!!){
-                                    auctionViewModel!!.setBid(binding.inputBid.text.toString().toInt(), pid, binding.bidinfo!!.buyUserToken!!)
-                                    //viewModel!!.setBidPrice(binding.bidinfo!!.bidPrice!!, pid!!)
-                                    //viewModel!!.setBuyUser(pid!!)
-                                } else {
-                                    val sd = SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
-                                    sd.setTitleText("Oops...")
-                                    sd.setContentText("입찰 금액은 현재 금액보다 커야합니다.")
-                                    sd.setCancelable(true)
-                                    sd.setConfirmText("Retry")
-                                    sd.setCanceledOnTouchOutside(true);
-                                    sd.show()
-                                }
-                            }
-                        }
                     }
-                    binding.inputBid.text!!.clear()
+
+
                 }
             }
-            true
+            false
+        }
+
+        binding.bidButton.setOnClickListener {
+            bid(pid)
         }
 
         binding.prevBtn.setOnClickListener{
@@ -126,22 +87,42 @@ class BidActivity: AppCompatActivity() {
 
     }
 
+    private fun bid(pid: String){
+        if(binding.bidinfo!!.highestBuyUserId?.isEmpty() == true){
+            //내가 첫 입찰자
+            auctionViewModel!!.setBidFirst(binding.inputBid.text.toString().toInt(), pid!!)
+        }else{
 
-//    //화면 터치 시 키보드 내려감
-//    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
-//        val focusView = currentFocus
-//        if (focusView != null) {
-//            val rect = Rect()
-//            focusView.getGlobalVisibleRect(rect)
-//            val x = ev.x.toInt()
-//            val y = ev.y.toInt()
-//            if (!rect.contains(x, y)) {
-//                val imm: InputMethodManager =
-//                    getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-//                if (imm != null) imm.hideSoftInputFromWindow(focusView.windowToken, 0)
-//                focusView.clearFocus()
-//            }
-//        }
-//        return super.dispatchTouchEvent(ev)
-//    }
+            //이전에 입찰햇던 살람이 나야
+            if(binding.bidinfo!!.highestBuyUserId!! == FirebaseAuth.getInstance().uid){
+                val sd = SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                sd.setTitleText("Oops...")
+                sd.setContentText("내가 현재 최고가 입찰자에요!")
+                sd.setCancelable(true)
+                sd.setConfirmText("Retry")
+
+                sd.setCanceledOnTouchOutside(true);
+                sd.show()
+            } else {
+                //이전에 입찰햇던 살람이 나가 아니야
+                //입력한 값이 더 클경우
+                if(input_bid.text.toString().toInt() >= binding.bidinfo!!.bidPrice!!){
+                    auctionViewModel!!.setBid(binding.inputBid.text.toString().toInt(), pid!!, binding.bidinfo!!.buyUserToken!!)
+                    //viewModel!!.setBidPrice(binding.bidinfo!!.bidPrice!!, pid!!)
+                    //viewModel!!.setBuyUser(pid!!)
+                } else {
+                    val sd = SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                    sd.setTitleText("Oops...")
+                    sd.setContentText("입찰 금액은 현재 금액보다 커야합니다.")
+                    sd.setCancelable(true)
+                    sd.setConfirmText("Retry")
+                    sd.setCanceledOnTouchOutside(true);
+                    sd.show()
+                }
+            }
+        }
+        binding.inputBid.text!!.clear()
+    }
+
+
 }

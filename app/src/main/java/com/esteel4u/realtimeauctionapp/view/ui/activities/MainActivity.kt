@@ -19,6 +19,7 @@ import com.bitvale.switcher.SwitcherX
 import com.esteel4u.realtimeauctionapp.R
 import com.esteel4u.realtimeauctionapp.databinding.ActivityFullAnimBinding
 import com.esteel4u.realtimeauctionapp.databinding.ActivityMainBinding
+
 import com.esteel4u.realtimeauctionapp.model.data.UserData
 import com.esteel4u.realtimeauctionapp.view.adapter.MainViewPagerAdapter
 import com.esteel4u.realtimeauctionapp.viewmodel.LoginViewModel
@@ -93,6 +94,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
 
+    @SuppressLint("ResourceAsColor")
     private fun setNavigation(){
         setSupportActionBar(toolbar)
         materialMenu = MaterialMenuDrawable(this, Color.BLACK, MaterialMenuDrawable.Stroke.THIN)
