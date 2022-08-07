@@ -70,7 +70,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:fontFamily="@font/lexend_deca"
-                        android:text="@{bidinfo.bidPrice + `₩ / KG`}"
+                        android:text="@{prdlist.bidPrice + `₩ / KG`}"
                         android:textColor="@color/egray80"
                         android:textSize="@dimen/dp_30"
                         android:textStyle="bold" />

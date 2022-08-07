@@ -45,6 +45,9 @@ class AuctionRepository(val lifecycleOwner: LifecycleOwner) {
         val userListDoc = db.collection("auctions").document(prdId!!).collection("bidUserList").asLiveData<BidUserList>()
         userListDoc.add(BidUserList(price, auth.uid))
 
+        val prdDoc = db.collection("products").document(prdId).asLiveData<ProductData>()
+        prdDoc.update(mapOf(Pair("highestBuyUserId", auth.uid!!), Pair("bidPrice", price)))
+
         //check user doc
         val userDoc = db.collection("users").document(auth.uid!!).asLiveData<UserData>()
         userDoc.observe(lifecycleOwner, Observer{
@@ -89,6 +92,9 @@ class AuctionRepository(val lifecycleOwner: LifecycleOwner) {
         //add user attend auction list array
         val userDoc = db.collection("users").document(auth.uid!!).asLiveData<UserData>()
         userDoc.update("attendAuctionList", FieldValue.arrayUnion(prdId))
+
+        val prdDoc = db.collection("products").document(prdId).asLiveData<ProductData>()
+        prdDoc.update("bidPrice", price)
 
         //add in list
         val userListDoc = db.collection("auctions").document(prdId!!).collection("bidUserList").asLiveData<BidUserList>()
@@ -136,7 +142,7 @@ class AuctionRepository(val lifecycleOwner: LifecycleOwner) {
 
                                 }
                                 Log.d("aaaaaaaa", auctiondata.toString())
-                                userAttendAuctionList.postValue(auctiondata)
+                                userAttendAuctionList.postValue(auctiondata!!)
                             }
                         }
                     })

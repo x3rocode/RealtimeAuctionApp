@@ -87,10 +87,10 @@ class BidFragment:  Fragment() {
                     "P" -> binding.works.text = "포항"
                 }
 
+
                 val myFormatter = DecimalFormat("###,###")
                 val formattedWgt: String = myFormatter.format(binding.prdlist!!.prdWgt) + "Kg"
                 val formattedWth: String = myFormatter.format(binding.prdlist!!.prdWth)
-
                 binding.prdPrdwth.text = formattedWth
                 binding.prdPrdwgt.text = formattedWgt
             })

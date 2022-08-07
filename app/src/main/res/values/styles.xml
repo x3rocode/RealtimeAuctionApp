@@ -92,4 +92,18 @@
         <item name="android:textStyle">normal</item>
     </style>
 
+    <style name="Maestro">
+        <item name="cardFrontBackground">@color/lblue30</item>
+        <item name="cardTextColor">#ffffff</item>
+    </style>
+
+
+    <style name="DefaultVisa">
+        <item name="cardFrontBackground">@drawable/card_bg</item>
+        <item name="cardBackBackground">@drawable/card_bg</item>
+        <item name="cardBackLogo">@drawable/logo_white_notxt</item>
+        <item name="cardFrontLogo">@drawable/logo_white_notxt</item>
+    </style>
+
+
 </resources>

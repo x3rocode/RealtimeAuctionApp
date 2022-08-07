@@ -9,14 +9,15 @@
     <string name="channel_name">channel</string>
     <string name="channel_description">description</string>
 
-    <string name="title_onboarding_1">Welcome to Realtime Auction App!</string>
-    <string name="description_onboarding_1">Here is an open-source project which shows sweet &amp; original onboarding ViewPagers that follows Material Design Guidelines</string>
 
-    <string name="title_onboarding_2">Welcome to Realtime Auction App!</string>
-    <string name="description_onboarding_2">We use Lottie Animations on our Intro to make it interactive &amp; pleasant. Did you already tried it ? If no, let\'s start now. It\'s just awesome</string>
+    <string name="title_onboarding_1">내 손안의 \n철강 전자상거래!</string>
+    <string name="description_onboarding_1">No 1. Quality 철강 e-Marketplace 거래로 시작하세요</string>
 
-    <string name="title_onboarding_3">Welcome to Realtime Auction App!</string>
-    <string name="description_onboarding_3">Our mission is to make useful &amp; subtle apps. We love help people to save time with open-source stuffs, but we also make life easier by creating new things. Good Coding!</string>
+    <string name="title_onboarding_2">언제 어디서나\n실시간 경매 참여!</string>
+    <string name="description_onboarding_2">실시간으로 진행되고 있는 철강 경매 현황을 한 눈에 확인해보세요.</string>
+
+    <string name="title_onboarding_3">관심있는 제품을 \n놓치지 마세요!</string>
+    <string name="description_onboarding_3">관심 제품에 등록해 놓으면 경매 시작 시 알림을 받을 수 있어요.</string>
 
     <string name="start_text_advice">By continuing on this application you agree to our Terms of Use and Privacy Policy</string>
 

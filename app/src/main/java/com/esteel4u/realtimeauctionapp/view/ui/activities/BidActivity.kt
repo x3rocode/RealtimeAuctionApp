@@ -37,10 +37,7 @@ class BidActivity: AppCompatActivity() {
         auctionViewModel = ViewModelProvider(this, AuctionViewModel.Factory(this)).get(AuctionViewModel::class.java)
 
 
-
-
         var pid = intent.getStringExtra("prddata")
-        Log.d("ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ", pid!!)
         val newFragment = BidFragment.newInstance(pid!!)
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.bidfragment, newFragment, "myTag")

@@ -62,20 +62,30 @@
             app:layout_constraintStart_toStartOf="@id/guideline_left"
             app:layout_constraintTop_toBottomOf="@id/my_cart_txt" />
 
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/content"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/dp_150"
+        <com.maxpilotto.creditcardview.CreditCardView
+            android:id="@+id/card"
+            android:layout_width="300dp"
+            android:layout_height="180dp"
             android:layout_marginTop="@dimen/dp_20"
-            android:adjustViewBounds="true"
-            android:scaleType="fitCenter"
+
+            app:cardCvv="123"
+            app:cardExpiry="1234"
+            app:cardHolder="HYERIN JIN"
+            app:cardNumber="4401284799337668"
+
+            app:cardHintColor="@color/white"
+            app:cardNumberFormat="%s4"
+            app:cardHolderLabel="Holder"
+            app:cardExpiryLabel="Valid Thru"
+            app:cardIsFlipped="false"
+            android:elevation="@dimen/dp_20"
+            app:cardFrontBackground="@drawable/logo_txt"
+            app:visaStyle="@style/DefaultVisa"
+
             app:layout_constraintBottom_toTopOf="@id/my_buy_txt"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cart_txt_desc"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:lottie_rawRes="@raw/lottie_present" />
+            app:layout_constraintEnd_toEndOf="@id/guideline_right"
+            app:layout_constraintStart_toStartOf="@id/guideline_left"
+            app:layout_constraintTop_toBottomOf="@id/cart_txt_desc" />
 
 
 
@@ -95,7 +105,7 @@
             app:autoSizeTextType="uniform"
             app:layout_constraintEnd_toEndOf="@id/guideline_right"
             app:layout_constraintStart_toStartOf="@id/guideline_left"
-            app:layout_constraintTop_toBottomOf="@id/content" />
+            app:layout_constraintTop_toBottomOf="@id/card" />
 
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -161,7 +171,7 @@
             android:id="@+id/my_bid_txt"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_10"
             android:fontFamily="@font/lexend_deca"
             android:text="경매 참여 내역"
             android:textColor="@color/egray80"

@@ -30,22 +30,23 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
+            android:paddingTop="@dimen/dp_28"
             android:background="@android:color/white"
             android:minHeight="?attr/actionBarSize"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:superToolbar_centerTitle="true"
-            app:superToolbar_useLightFont="true">
+            app:superToolbar_useLightFont="false">
 
             <ImageButton
                 android:id="@+id/prev_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
+                android:layout_width="@dimen/dp_40"
+                android:layout_height="@dimen/dp_40"
                 android:layout_gravity="left"
-                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
                 android:backgroundTint="@android:color/transparent"
-                android:src="@drawable/ic_round_keyboard_arrow_left_24"
+                android:src="@drawable/left_arraow"
                 app:tint="@color/lblue60" />
 
 
@@ -99,9 +100,7 @@
             android:orientation="horizontal"
             android:paddingHorizontal="@dimen/dp_25"
             android:paddingTop="@dimen/dp_10"
-            android:paddingBottom="@dimen/dp_30">
-
-
+            android:paddingBottom="@dimen/dp_10">
 
 
             <com.google.android.material.textfield.TextInputLayout
@@ -119,11 +118,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:autoSizeTextType="uniform"
-                    android:hint="직접 입찰해 보세요!"
-                    android:typeface="serif"
-                    android:inputType="numberPassword"
                     android:backgroundTint="@android:color/transparent"
-                    android:fontFamily="@font/lexend_deca" />
+                    android:fontFamily="@font/lexend_deca"
+                    android:hint="직접 입찰해 보세요!"
+                    android:inputType="numberPassword"
+                    android:typeface="serif" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

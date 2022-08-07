@@ -20,6 +20,8 @@ import com.esteel4u.realtimeauctionapp.view.ui.activities.BidActivity
 import com.esteel4u.realtimeauctionapp.viewmodel.AuctionViewModel
 import com.esteel4u.realtimeauctionapp.viewmodel.ProductViewModel
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper
+import com.maxpilotto.creditcardview.animations.RotationAnimation
+import com.maxpilotto.creditcardview.models.CardArea
 import kotlinx.android.synthetic.main.fragment_cart.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_like.*
@@ -64,6 +66,20 @@ CartListAdapter.Interaction{
 
         initRecyclerView()
 
+        card.flipOnEdit = true
+        card.flipOnEditAnimation = RotationAnimation()
+        card.setAreaClickListener { card, area ->
+            if (area == CardArea.LEFT) {
+                card.flip(
+                    RotationAnimation(RotationAnimation.LEFT)
+                )
+            } else if (area == CardArea.RIGHT) {
+                card.flip(
+                    RotationAnimation(RotationAnimation.RIGHT)
+                )
+            }
+        }
+
         viewModel.getPurchasePrdList().observe(viewLifecycleOwner, Observer {
 
             if(it.isNotEmpty()) {
@@ -74,7 +90,7 @@ CartListAdapter.Interaction{
                 bid_success_recview.visibility = View.VISIBLE
                 binding.sadTxt.visibility = View.GONE
                 binding.lottieImg.visibility = View.GONE
-                binding.content.visibility = View.VISIBLE
+                binding.card.visibility = View.VISIBLE
                 cart_recycler_view.visibility = View.VISIBLE
                 my_bid_txt.visibility = View.VISIBLE
                 bid_txt_desc.visibility = View.VISIBLE
@@ -83,11 +99,11 @@ CartListAdapter.Interaction{
 
             }else{
                 no_success_bid_lottie.visibility = View.VISIBLE
-                no_success_bid_txt.visibility = View.VISIBLE
+                no_success_bid_txt.visibility = View.INVISIBLE
                 bid_success_recview.visibility = View.GONE
                 binding.sadTxt.visibility = View.VISIBLE
                 binding.lottieImg.visibility = View.VISIBLE
-                binding.content.visibility = View.VISIBLE
+                binding.card.visibility = View.VISIBLE
                 cart_recycler_view.visibility = View.VISIBLE
                 my_bid_txt.visibility = View.VISIBLE
                 bid_txt_desc.visibility = View.VISIBLE
@@ -109,7 +125,7 @@ CartListAdapter.Interaction{
 
                 binding.sadTxt.visibility = View.GONE
                 binding.lottieImg.visibility = View.GONE
-                binding.content.visibility = View.VISIBLE
+                binding.card.visibility = View.VISIBLE
                 cart_recycler_view.visibility = View.VISIBLE
                 bid_success_recview.visibility = View.VISIBLE
                 my_bid_txt.visibility = View.VISIBLE
@@ -121,7 +137,7 @@ CartListAdapter.Interaction{
                 binding.noSuccessBidLottie.visibility = View.GONE
                 binding.sadTxt.visibility = View.VISIBLE
                 binding.lottieImg.visibility = View.VISIBLE
-                binding.content.visibility = View.GONE
+                binding.card.visibility = View.GONE
                 cart_recycler_view.visibility = View.GONE
                 bid_success_recview.visibility = View.GONE
                 my_bid_txt.visibility = View.GONE

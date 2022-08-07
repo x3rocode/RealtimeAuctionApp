@@ -71,12 +71,11 @@
         android:layout_height="0dp"
 
         android:autoSizeMaxTextSize="80sp"
-        android:autoSizeTextType="uniform"
-        android:fontFamily="@font/lexend_deca"
+        android:textSize="@dimen/dp_40"
+        android:fontFamily="@font/black_sans"
         android:gravity="center_vertical"
-        android:text="@string/title_onboarding_1"
+        android:text="@string/title_onboarding_2"
         android:textColor="@color/lblue60"
-        android:textStyle="bold"
 
         app:layout_constraintBottom_toBottomOf="@id/guideline_bottom1"
         app:layout_constraintEnd_toEndOf="@id/guideline_right2"
@@ -90,11 +89,11 @@
         android:paddingTop="10dp"
 
         android:text="@string/description_onboarding_1"
-        android:autoSizeTextType="uniform"
+        android:textSize="@dimen/dp_15"
         android:autoSizeMaxTextSize="17sp"
         android:autoSizeMinTextSize="10sp"
         android:textColor="@color/egray40"
-        android:fontFamily="@font/lexend_deca"
+        android:fontFamily="@font/nanum_barun_gothic"
         android:gravity="top"
 
         app:layout_constraintTop_toBottomOf="@id/text_onboarding_title"

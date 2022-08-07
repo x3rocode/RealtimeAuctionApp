@@ -107,12 +107,14 @@ class ProductListAdapter(
                 holder.binding.upcomingBtn.visibility = View.GONE
             }
             2 -> {holder.binding.prdStatus.text = "진행 예정"
+                holder.binding.prdStatus.visibility = View.VISIBLE
                 holder.binding.lottieLive.visibility = View.INVISIBLE
                 holder.binding.bidButton.visibility = View.GONE
                 holder.binding.closedBtn.visibility = View.GONE
                 holder.binding.upcomingBtn.visibility = View.VISIBLE
             }
             3 -> {
+                holder.binding.prdStatus.visibility = View.VISIBLE
                 holder.binding.prdStatus.text = "종료"
                 holder.binding.lottieLive.visibility = View.INVISIBLE
                 holder.binding.bidButton.visibility = View.GONE
@@ -146,7 +148,7 @@ class ProductListAdapter(
         holder.binding.prdPrdwgt.text = formattedWgt
 
 
-        var dateFormat = SimpleDateFormat("HH:mm")
+        var dateFormat = SimpleDateFormat("hh:mm")
 
         var startTime = dateFormat.format(holder.binding.prdlist?.startDate?.toDate())
         var endTime = dateFormat.format(holder.binding.prdlist?.endDate?.toDate())

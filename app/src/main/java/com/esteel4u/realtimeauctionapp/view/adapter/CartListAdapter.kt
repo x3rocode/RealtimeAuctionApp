@@ -120,7 +120,7 @@ class CartListAdapter(
         }
 
         //최고입찰자가 나야
-        if(holder.binding.auctiondata!!.highestBuyUserId == auth.uid){
+        if(holder.binding.prdlist!!.highestBuyUserId == auth.uid){
             holder.binding.statusImg.setAnimation(R.raw.lottie_hearteyeface)
         }else{
             holder.binding.statusImg.setAnimation(R.raw.lottie_cryingface)
@@ -149,7 +149,8 @@ class CartListAdapter(
                 holder.binding.bidButton.visibility = View.VISIBLE
                 holder.binding.closedBtn.visibility = View.GONE
                 holder.binding.upcomingBtn.visibility = View.GONE
-
+                holder.binding.aucBidTxt.text = "현재 최고 입찰가"
+                
             }
             2 -> {
                 //예정
@@ -162,6 +163,7 @@ class CartListAdapter(
                 holder.binding.bidButton.visibility = View.GONE
                 holder.binding.closedBtn.visibility = View.VISIBLE
                 holder.binding.upcomingBtn.visibility = View.GONE
+                holder.binding.aucBidTxt.text = "낙찰가"
             }
         }
 
@@ -169,7 +171,7 @@ class CartListAdapter(
         val myFormatter = DecimalFormat("###,###")
         val formattedWgt: String = myFormatter.format(holder.binding.prdlist!!.prdWgt) + "Kg"
         val formattedWth: String = myFormatter.format(holder.binding.prdlist!!.prdWth)
-        val formattedPrice: String = myFormatter.format(holder.binding.auctiondata!!.bidPrice)
+        val formattedPrice: String = myFormatter.format(holder.binding.prdlist!!.bidPrice)
 
         holder.binding.prdPrdwth.text = formattedWth
         holder.binding.prdPrdwgt.text = formattedWgt

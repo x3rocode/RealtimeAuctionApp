@@ -66,6 +66,7 @@
         <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/drawable-v24/ic_arrow_left_24dp.xml" value="0.211" />
         <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/drawable-v24/selected_calendar_item_background.xml" value="0.211" />
         <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/drawable-v24/yellow_dot.xml" value="0.211" />
+        <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/drawable/card_bg.xml" value="0.33" />
         <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/drawable/cilrcle_btn_shape.xml" value="0.2385" />
         <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/drawable/close_icon_bg.xml" value="0.17" />
         <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/drawable/default_background_rounded_rect.xml" value="0.222" />
@@ -79,9 +80,9 @@
         <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/drawable/roundedsquare.xml" value="0.182" />
         <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/drawable/states_fab_button.xml" value="0.17" />
         <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/drawable/tab_badge.xml" value="0.17" />
-        <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/activity_bid.xml" value="0.22" />
+        <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/activity_bid.xml" value="0.33" />
         <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/activity_login.xml" value="0.17" />
-        <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/activity_main.xml" value="0.5" />
+        <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/activity_main.xml" value="0.21" />
         <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/activity_onboarding.xml" value="0.22" />
         <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/calendar_item.xml" value="0.25" />
         <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/filter_layout_1.xml" value="0.140625" />
@@ -90,15 +91,15 @@
         <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/first_special_calendar_item.xml" value="0.30055579307396324" />
         <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/first_special_selected_calendar_item.xml" value="0.19900271985494106" />
         <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/fragment_bid.xml" value="0.1875" />
-        <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/fragment_cart.xml" value="0.161328125" />
+        <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/fragment_cart.xml" value="0.25" />
         <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/fragment_home.xml" value="0.22" />
         <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/fragment_like.xml" value="0.22" />
         <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/fragment_list.xml" value="0.1" />
         <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/fragment_mypage.xml" value="0.1" />
-        <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/fragment_onboarding.xml" value="0.161328125" />
+        <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/fragment_onboarding.xml" value="0.25" />
         <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/ic_pill.xml" value="0.140625" />
         <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/item_cart_bid_success_list.xml" value="0.67" />
-        <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/item_cart_list.xml" value="0.25" />
+        <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/item_cart_list.xml" value="0.33" />
         <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/item_filter_tab.xml" value="0.140625" />
         <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/item_home_banner_model.xml" value="0.17046605876393112" />
         <entry key="..\:/Users/z3roc/Desktop/app/RealtimeAuctionApp/app/src/main/res/layout/item_home_type_slider_model.xml" value="0.17046605876393112" />

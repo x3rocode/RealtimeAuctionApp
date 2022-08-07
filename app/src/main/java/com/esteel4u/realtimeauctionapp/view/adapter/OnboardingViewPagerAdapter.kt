@@ -14,7 +14,7 @@ class OnboardingViewPagerAdapter(fragmentActivity: FragmentActivity, private val
             0 -> OnboardingFragment.newInstance(
                 context.resources.getString(R.string.title_onboarding_1),
                 context.resources.getString(R.string.description_onboarding_1),
-                R.raw.lottie_shopping
+                R.raw.lottie_card_presents
             )
             1 -> OnboardingFragment.newInstance(
                 context.resources.getString(R.string.title_onboarding_2),
@@ -24,7 +24,7 @@ class OnboardingViewPagerAdapter(fragmentActivity: FragmentActivity, private val
             else -> OnboardingFragment.newInstance(
                 context.resources.getString(R.string.title_onboarding_3),
                 context.resources.getString(R.string.description_onboarding_3),
-                R.raw.lottie_card_presents
+                R.raw.lottie_shopping
             )
         }
     }

@@ -224,6 +224,9 @@ class ProductRepository(val lifecycleOwner: LifecycleOwner) {
                     if(!it.highestBuyUserId!!.contains(auth.uid!!)){
                         data!!.remove(it)
                     }
+                    if(it.auctionProgressStatus != 3){
+                        data!!.remove(it)
+                    }
                 }
 
                 productUserPurchaseList.postValue(data!!.filter {
@@ -238,7 +241,7 @@ class ProductRepository(val lifecycleOwner: LifecycleOwner) {
     fun getUserBidPrdList(): MutableLiveData<List<ProductData>> {
 
 
-        val myPrdQuery = db.collection("products").asLiveData<ProductData>()
+        val myPrdQuery = db.collection("products").orderBy("endDate", Query.Direction.DESCENDING).asLiveData<ProductData>()
         myPrdQuery.observe(lifecycleOwner, Observer{ resource: FirestoreResource<List<ProductData>> ->
             if(resource.data !== null) {
                 var prddata: MutableList<ProductData> = resource.data!!.toMutableList()
