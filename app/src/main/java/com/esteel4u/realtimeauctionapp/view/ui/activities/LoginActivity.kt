@@ -88,6 +88,8 @@ class LoginActivity : AppCompatActivity() {
                     datastore.setUserData(userInfo)
                 }
             })
+
+
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }

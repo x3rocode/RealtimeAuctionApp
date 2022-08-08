@@ -22,7 +22,8 @@ class NotificationUtil(private val context: Context) {
         lateinit var  intent : Intent;
 
         if(tag == "start"){
-            intent = Intent(context, MainActivity::class.java)
+            intent = Intent(context, BidActivity::class.java)
+            if(id.isNotEmpty()) intent.putExtra("prddata", id)
 
         }else if(tag == "end"){
             intent = Intent(context, MainActivity::class.java)

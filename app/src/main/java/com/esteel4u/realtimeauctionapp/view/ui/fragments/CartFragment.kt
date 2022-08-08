@@ -81,10 +81,11 @@ CartListAdapter.Interaction{
         }
 
         viewModel.getPurchasePrdList().observe(viewLifecycleOwner, Observer {
-
+            Log.d("???????????????", it.toString())
+            prdList = it
             if(it.isNotEmpty()) {
                 madapter.setData(it!!)
-                prdList = it
+
                 no_success_bid_lottie.visibility = View.INVISIBLE
                 no_success_bid_txt.visibility = View.INVISIBLE
                 bid_success_recview.visibility = View.VISIBLE
@@ -113,33 +114,38 @@ CartListAdapter.Interaction{
         })
 
         viewModel.getUserBidPrdList().observe(viewLifecycleOwner, Observer {
+            if(prdList.isEmpty()){
+                binding.noSuccessBidLottie.visibility = View.VISIBLE
+                binding.noSuccessBidTxt.visibility = View.VISIBLE
+                bid_success_recview.visibility = View.GONE
+            }else{
+                binding.noSuccessBidLottie.visibility = View.INVISIBLE
+                binding.noSuccessBidTxt.visibility = View.INVISIBLE
+                bid_success_recview.visibility = View.VISIBLE
+            }
+
             if(it.isNotEmpty()) {
                 cartAdapter.setData(it)
-                if(prdList.isEmpty()){
-                    binding.noSuccessBidLottie.visibility = View.VISIBLE
-                    binding.noSuccessBidTxt.visibility = View.VISIBLE
-                }else{
-                    binding.noSuccessBidLottie.visibility = View.INVISIBLE
-                    binding.noSuccessBidTxt.visibility = View.INVISIBLE
-                }
+                Log.d("왜ㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐ", prdList.toString())
 
                 binding.sadTxt.visibility = View.GONE
                 binding.lottieImg.visibility = View.GONE
                 binding.card.visibility = View.VISIBLE
                 cart_recycler_view.visibility = View.VISIBLE
-                bid_success_recview.visibility = View.VISIBLE
+                //bid_success_recview.visibility = View.VISIBLE
                 my_bid_txt.visibility = View.VISIBLE
                 bid_txt_desc.visibility = View.VISIBLE
                 my_buy_txt.visibility = View.VISIBLE
                 buy_txt_desc.visibility = View.VISIBLE
 
             }else{
-                binding.noSuccessBidLottie.visibility = View.GONE
+                binding.noSuccessBidLottie.visibility = View.INVISIBLE
+                binding.noSuccessBidTxt.visibility = View.INVISIBLE
                 binding.sadTxt.visibility = View.VISIBLE
                 binding.lottieImg.visibility = View.VISIBLE
                 binding.card.visibility = View.GONE
                 cart_recycler_view.visibility = View.GONE
-                bid_success_recview.visibility = View.GONE
+                //bid_success_recview.visibility = View.GONE
                 my_bid_txt.visibility = View.GONE
                 bid_txt_desc.visibility = View.GONE
                 my_buy_txt.visibility = View.GONE

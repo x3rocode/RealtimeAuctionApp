@@ -3,7 +3,9 @@ package com.esteel4u.realtimeauctionapp.view.ui.activities
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.ContentValues
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -19,28 +21,26 @@ import com.bitvale.switcher.SwitcherX
 import com.esteel4u.realtimeauctionapp.R
 import com.esteel4u.realtimeauctionapp.databinding.ActivityFullAnimBinding
 import com.esteel4u.realtimeauctionapp.databinding.ActivityMainBinding
-
 import com.esteel4u.realtimeauctionapp.model.data.UserData
+import com.esteel4u.realtimeauctionapp.model.datastore.DataStoreModule
 import com.esteel4u.realtimeauctionapp.view.adapter.MainViewPagerAdapter
 import com.esteel4u.realtimeauctionapp.viewmodel.LoginViewModel
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.nineoldandroids.view.ViewHelper
-import com.esteel4u.realtimeauctionapp.model.datastore.DataStoreModule
-import com.esteel4u.realtimeauctionapp.model.datastore.DataStoreModule.Companion.setAlarm
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.drawer_header.*
 import kotlinx.android.synthetic.main.drawer_switch.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.jetbrains.annotations.NotNull
 
 
 @SuppressLint("MissingPermission")
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
+    var isCheckedAlarm = true
     private var auth = Firebase.auth
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: LoginViewModel
@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private var isDrawerOpened = false
     private lateinit var dataStore: DataStoreModule
     private lateinit var switch: SwitcherX
-
+    private var user: UserData? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,9 +65,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setNavigation()
         getUserInfo()
         initializeDefaultFragment(savedInstanceState,0);
-        setAlarmOnOffSwitch()
+
 
         checkIsIntented()
+        setAlarmOnOffSwitch()
     }
 
     private fun getUserInfo(){
@@ -75,12 +76,18 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         dataStore = DataStoreModule(applicationContext)
         CoroutineScope(Dispatchers.Main).launch {
             dataStore.user.collect{
-                Log.d("ddddddddddddddd", it.toString())
+                user = it
+
                 drawer_name.text = "안녕하세요, " + it.userName + "님!"
                 drawer_sys.text = it.gcsCompCode
                 alarm_switcher.setChecked(it.setAlarm!!.toBoolean())
             }
         }
+        val pref =  getSharedPreferences("SET",0)
+        val editor = pref.edit()
+        editor.putString("alarm", user?.setAlarm)
+        editor.commit()
+
     }
 
     private fun checkIsIntented(){
@@ -315,17 +322,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
     private fun setAlarmOnOffSwitch() {
-
+        getUserInfo()
         switch.setOnCheckedChangeListener { checked ->
             viewModel.setAlarmOnOff(checked.toString())
-            CoroutineScope(Dispatchers.Main).launch {
-                var a : UserData
-                dataStore.user.collect{
-                    it.setAlarm = checked.toString()
 
-                }
-
-            }
+            val pref =  getSharedPreferences("SET",0)
+            val editor = pref.edit()
+            editor.putString("alarm", checked.toString())
+            editor.commit()
+            Log.d("ddddddddddddddd", pref.getString("alarm", "").toString())
         }
 
 

@@ -85,39 +85,41 @@ class BidActivity: AppCompatActivity() {
     }
 
     private fun bid(pid: String){
-        if(binding.bidinfo!!.highestBuyUserId?.isEmpty() == true){
-            //내가 첫 입찰자
-            auctionViewModel!!.setBidFirst(binding.inputBid.text.toString().toInt(), pid!!)
-        }else{
+        //이전에 입찰햇던 살람이 나야
+        if(binding.bidinfo!!.highestBuyUserId!! == FirebaseAuth.getInstance().uid){
+            val sd = SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+            sd.setTitleText("Oops...")
+            sd.setContentText("내가 현재 최고가 입찰자에요!")
+            sd.setCancelable(true)
+            sd.setConfirmText("Retry")
 
-            //이전에 입찰햇던 살람이 나야
-            if(binding.bidinfo!!.highestBuyUserId!! == FirebaseAuth.getInstance().uid){
+            sd.setCanceledOnTouchOutside(true);
+            sd.show()
+        } else {
+            //이전에 입찰햇던 살람이 나가 아니야
+            //입력한 값이 더 클경우
+            if(input_bid.text.toString().toInt() >= binding.bidinfo!!.bidPrice!!){
+                auctionViewModel!!.setBid(binding.inputBid.text.toString().toInt(), pid!!, binding.bidinfo!!.buyUserToken!!)
+                //viewModel!!.setBidPrice(binding.bidinfo!!.bidPrice!!, pid!!)
+                //viewModel!!.setBuyUser(pid!!)
+            } else {
                 val sd = SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
                 sd.setTitleText("Oops...")
-                sd.setContentText("내가 현재 최고가 입찰자에요!")
+                sd.setContentText("입찰 금액은 현재 금액보다 커야합니다.")
                 sd.setCancelable(true)
                 sd.setConfirmText("Retry")
-
                 sd.setCanceledOnTouchOutside(true);
                 sd.show()
-            } else {
-                //이전에 입찰햇던 살람이 나가 아니야
-                //입력한 값이 더 클경우
-                if(input_bid.text.toString().toInt() >= binding.bidinfo!!.bidPrice!!){
-                    auctionViewModel!!.setBid(binding.inputBid.text.toString().toInt(), pid!!, binding.bidinfo!!.buyUserToken!!)
-                    //viewModel!!.setBidPrice(binding.bidinfo!!.bidPrice!!, pid!!)
-                    //viewModel!!.setBuyUser(pid!!)
-                } else {
-                    val sd = SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
-                    sd.setTitleText("Oops...")
-                    sd.setContentText("입찰 금액은 현재 금액보다 커야합니다.")
-                    sd.setCancelable(true)
-                    sd.setConfirmText("Retry")
-                    sd.setCanceledOnTouchOutside(true);
-                    sd.show()
-                }
             }
         }
+
+//        if(binding.bidinfo!!.highestBuyUserId?.isEmpty() == true){
+//            //내가 첫 입찰자
+//            auctionViewModel!!.setBidFirst(binding.inputBid.text.toString().toInt(), pid!!)
+//        }else{
+//
+//
+//        }
         binding.inputBid.text!!.clear()
     }
 

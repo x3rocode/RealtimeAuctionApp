@@ -54,6 +54,14 @@ class DataStoreModule (private val context : Context){
         }
     }
 
+    // String값을 stringKey 키 값에 저장
+    suspend fun updateAlarmUser(alarm : String){
+        context.dataStore.edit { preferences ->
+
+            preferences[setAlarm] =alarm
+        }
+    }
+
     suspend fun clearData(){
         context.dataStore.edit {
             it.clear()

@@ -49,6 +49,7 @@ class AuctionRepository(val lifecycleOwner: LifecycleOwner) {
         prdDoc.update(mapOf(Pair("highestBuyUserId", auth.uid!!), Pair("bidPrice", price)))
 
         //check user doc
+        Log.d("앵애ㅐㅐㅐㅐㅐㅐ", "ddddddddddddddddddddddd")
         val userDoc = db.collection("users").document(auth.uid!!).asLiveData<UserData>()
         userDoc.observe(lifecycleOwner, Observer{
             if(it.data !== null){
@@ -57,7 +58,7 @@ class AuctionRepository(val lifecycleOwner: LifecycleOwner) {
                         it == prdId
                     }
                     Log.d("앵애ㅐㅐㅐㅐㅐㅐ", data.toString())
-                    if(data == null){
+                    if(data.isEmpty()){
                         userDoc.update("attendAuctionList", FieldValue.arrayUnion(prdId))
                     }
                 }else{
@@ -66,6 +67,24 @@ class AuctionRepository(val lifecycleOwner: LifecycleOwner) {
 
             }
         })
+
+//        val userDoc = db.collection("users").document(auth.uid!!).asLiveData<UserData>()
+//        userDoc.observe(lifecycleOwner, Observer{
+//            if(it.data !== null){
+//                if(it.data!!.attendAuctionList !== null){
+//                    var data = it.data!!.attendAuctionList!!.filter {
+//                        it == prdId
+//                    }
+//                    Log.d("앵애ㅐㅐㅐㅐㅐㅐ", data.toString())
+//                    if(data == null){
+//                        userDoc.update("attendAuctionList", FieldValue.arrayUnion(prdId))
+//                    }
+//                }else{
+//                    userDoc.update("attendAuctionList", FieldValue.arrayUnion(prdId))
+//                }
+//
+//            }
+//        })
 
 
 

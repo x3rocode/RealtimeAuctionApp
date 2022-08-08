@@ -220,18 +220,23 @@ class ProductRepository(val lifecycleOwner: LifecycleOwner) {
             if(resource.data !== null) {
                 val data: MutableList<ProductData>? = resource.data!!.toMutableList()
 
-                resource.data?.forEach {
-                    if(!it.highestBuyUserId!!.contains(auth.uid!!)){
-                        data!!.remove(it)
-                    }
-                    if(it.auctionProgressStatus != 3){
-                        data!!.remove(it)
-                    }
-                }
-
-                productUserPurchaseList.postValue(data!!.filter {
+//                resource.data?.forEach {
+//                    if((!it.highestBuyUserId!!.contains(auth.uid!!)) || (it.auctionProgressStatus != 3)){
+//                        data!!.remove(it)
+//                    }
+////                    if(it.auctionProgressStatus != 3){
+////                        data!!.remove(it)
+////                    }
+//                }
+                var a = resource.data?.filter {
                     it.auctionProgressStatus == 3
-                })
+                }
+                var b = a?.filter {
+                   it.highestBuyUserId == auth.uid!!
+                }
+                Log.d("aaaaaaa", a.toString())
+                Log.d("bbbbbbb", b.toString())
+                productUserPurchaseList.postValue(b!!)
             }
         })
         return productUserPurchaseList

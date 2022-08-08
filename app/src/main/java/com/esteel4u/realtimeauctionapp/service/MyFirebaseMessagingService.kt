@@ -6,10 +6,12 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import com.esteel4u.realtimeauctionapp.model.datastore.DataStoreModule
+import com.esteel4u.realtimeauctionapp.service.ScheduledWorker.Companion.NOTIFICATION_ID
 import com.esteel4u.realtimeauctionapp.service.ScheduledWorker.Companion.NOTIFICATION_MESSAGE
 import com.esteel4u.realtimeauctionapp.service.ScheduledWorker.Companion.NOTIFICATION_TITLE
 import com.esteel4u.realtimeauctionapp.utils.NotificationUtil
 import com.esteel4u.realtimeauctionapp.utils.isTimeAutomatic
+import com.esteel4u.realtimeauctionapp.view.ui.activities.MainActivity
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import kotlinx.android.synthetic.main.drawer_header.*
@@ -28,14 +30,19 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         // Check if message contains a data payload.
-        dataStore = DataStoreModule(applicationContext)
-        CoroutineScope(Dispatchers.Main).launch {
-            dataStore.user.collect{
-                isAlarmOn = it.setAlarm.toBoolean()
-            }
-        }
-        Log.d("ooooooooooooooooooooo", isAlarmOn.toString())
-        if(isAlarmOn){
+//        dataStore = DataStoreModule(applicationContext)
+//        CoroutineScope(Dispatchers.Main).launch {
+//            dataStore.user.collect{
+//                isAlarmOn = it.setAlarm.toBoolean()
+//            }
+//        }
+
+        val pref =  getSharedPreferences("SET",0)
+        var ischeck = pref.getString("alarm", "")
+
+
+        Log.d("ooooooooooooooooooooo", ischeck.toString())
+        if(ischeck.toBoolean()){
             remoteMessage.data.isNotEmpty().let {
                 Log.d(TAG, "Message data payload: ${remoteMessage.data}")
                 if(remoteMessage.notification != null){
@@ -56,7 +63,9 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                     "start" -> {
                         val isScheduled = remoteMessage.data["isScheduled"]?.toBoolean()
                         val scheduledTime = remoteMessage.data["scheduledTime"]
-                        showNotification(title!!, message!!, "start"!!, tag)
+                        val id = remoteMessage.data["prdId"]
+                        scheduleAlarm(scheduledTime, title, message, id!!)
+                        //showNotification(title!!, message!!, "start"!!, tag)
                     }
                     "end" -> {
 
@@ -78,13 +87,15 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     private fun scheduleAlarm(
         scheduledTimeString: String?,
         title: String?,
-        message: String?
+        message: String?,
+        id: String?
     ) {
         val alarmMgr = applicationContext.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val alarmIntent =
             Intent(applicationContext, NotificationBroadcastReceiver::class.java).let { intent ->
                 intent.putExtra(NOTIFICATION_TITLE, title)
                 intent.putExtra(NOTIFICATION_MESSAGE, message)
+                intent.putExtra(NOTIFICATION_ID, id)
                 PendingIntent.getBroadcast(applicationContext, message.hashCode() , intent,
                     PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE)
             }
