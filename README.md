@@ -7,11 +7,8 @@ Use it with Realtime Auction Servier! -> https://github.com/fascinate98/Realtime
 
 
 ## Preview
-👉👉 https://youtu.be/yruR3B-TJcs 👈👈 <br>
+👉👉 You can see full viedo realtime auction! https://youtu.be/yruR3B-TJcs 👈👈 <br>
   <img src="https://user-images.githubusercontent.com/51151970/184061813-ab950354-87d8-46bc-a915-70265119e153.png">
-
-
-
 
 
 
@@ -84,7 +81,7 @@ Notice at the end of the auction at the exact time <br>
 <img src="https://user-images.githubusercontent.com/51151970/184061802-09296735-53e0-463f-8e98-ddfc82bb8f35.png" ><br>
 <img src="https://user-images.githubusercontent.com/51151970/184061807-e893af4d-9a4d-443e-9470-4eeb12fa4c45.png" ><br>
 
-
+----------
 
 
 If you click push notification when end of the auction, dialog and lotie work differently 🎉🎊🥳 or 🍂🥺💧 depending on the result  <br>
@@ -100,6 +97,10 @@ Create a payment list if the purchase is successful<br>
 ----------
 
 
+
+Background blur Drawer navigation with setting! alarm On/OFF<br>
+<img src="https://user-images.githubusercontent.com/51151970/184061812-3c01733d-60d0-4732-8120-1bde21b462a5.png" ><br>
+----------
 
 Any contributions, large or small, major features, bug fixes, are welcomed and appreciated
 but will be thoroughly reviewed .
