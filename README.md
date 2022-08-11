@@ -2,7 +2,7 @@
 
 # Realtime Auction App with firestore!...😎
 
-Use it with Realtime Auction Servier! -> https://github.com/fascinate98/RealtimeAuctionServer.git <br>
+Use it with Realtime Auction Server! -> https://github.com/fascinate98/RealtimeAuctionServer.git <br>
 
 
 
