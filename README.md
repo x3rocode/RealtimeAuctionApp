@@ -1,15 +1,10 @@
-
-
-# Realtime Auction App with firestore!...😎
+# RealtimeAuctionApp
+ <img src="https://user-images.githubusercontent.com/51151970/184061813-ab950354-87d8-46bc-a915-70265119e153.png"><br>
+## Realtime Auction App with firestore!...😎
 
 Use it with Realtime Auction Server! -> https://github.com/fascinate98/RealtimeAuctionServer.git <br>
-
-
-
-## Preview
 👉👉 You can see full viedo realtime auction! https://youtu.be/yruR3B-TJcs 👈👈 <br>
-  <img src="https://user-images.githubusercontent.com/51151970/184061813-ab950354-87d8-46bc-a915-70265119e153.png">
-
+ 
 
 
 ## Used technologies
@@ -26,7 +21,7 @@ Notification <br>
 With beautiful UI!🥳 <br>
 
 
-Features:<br>
+Screenshots & Features:<br>
 ----------
 ### Onboarding (Viewpager2, Lottie) <br>
   <img src="https://user-images.githubusercontent.com/51151970/184061792-c8255d8e-80e8-4cd1-bd21-5711c96c5b9f.png" ><br>
